@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor,hyperref,listings}
+\definecolor{ink}{HTML}{184C64}
+\hypersetup{colorlinks=true,linkcolor=ink,urlcolor=ink,citecolor=ink,
+ pdftitle={A seven-bit counterexample for most-informative quantization},pdfauthor={Leo Gao}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\F}{\mathbb F_2}
+\newcommand{\E}{\mathbb E}
+\newcommand{\wt}{\operatorname{wt}}
+\lstset{basicstyle=\ttfamily\footnotesize,columns=fullflexible,keepspaces=true,showstringspaces=false,upquote=true}
+\usepackage{textcomp}
+\title{A seven-bit counterexample for most-informative quantization}
+\author{Leo Gao}
+\date{26 November 2026 \quad$\cdot$\quad AI-assisted research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+When independent fair bits pass through a binary symmetric channel, can a seven-bit function of the input preserve more information about the output than seven input coordinates? We exhibit such a function on fourteen input bits. Its cells are the nearest-codeword regions of a shortened and punctured Nordstrom--Robinson code with deterministic tie breaking. A finite count gives a squared conditional-bias sum of $28747/4096>7$. Entropy subadditivity turns this count into a strict mutual-information inequality, for example at crossover probability $9/20$. This disproves the seven-bit threshold conjecture of Mahdavifar and Beirami. It leaves the exact threshold undetermined.
+\end{abstract}
+\section{The conjecture and the counterexample}
+Let $X$ be uniform on $\F^n$ and $Y=X\oplus Z$, where the coordinates of $Z$ are independent Bernoulli$(p)$ random variables independent of $X$. All information quantities are in bits. Write $h_2$ for binary entropy and $C(p)=1-h_2(p)$. For $k\le n$, revealing $k$ input coordinates gives exactly $kC(p)$ bits of information about $Y$.
+The question is whether any $k$-bit quantizer $U=f(X)$ does better.
+Chandar and Tchamkerten~\cite{ct} showed that the answer is yes at $k=11,12$ and asked for examples below eleven. Huleihel and Ordentlich~\cite{ho} proved that coordinate projection is optimal whenever $k=n-1$. The scalar Courtade--Kumar problem has also received affirmative proofs; see, for example,~\cite{cg}. These regimes do not cover small fixed $k>1$ and unrestricted $n$.
+
+Mahdavifar and Beirami~\cite{mb} gave an eight-bit counterexample and proposed that
+\[
+ I(f(X);Y)\le kC(p)\qquad
+ (2\le k\le7,\ n\ge k,\ 0\le p\le\tfrac12)
+\]
+for every $f:\F^n\to\F^k$ (Conjecture 13 in v2, Conjecture 18 in v1). Their best nontrivial seven-bit example in the shortened-Hamming family falls short by $1/64$ in the high-noise coefficient. A nonlinear binary code crosses that threshold.
+\begin{theorem}\label{thm}
+There exists a balanced map $f:\F^{14}\to\F^7$ such that
+$I(f(X);Y)>7C(p)$ whenever $0<1-2p\le 1/10$, in particular at $p=9/20$. The same strict inequality holds at $p=2/5$. Here balanced means that each output has exactly $128$ preimages.
+\end{theorem}
+\section{A certificate from the one-coordinate marginals}
+Set $\rho=1-2p$ and $\Phi(t)=1-h_2((1-t)/2)$. For each quantizer output $u$ of positive probability define
+\[
+ b_i(u)=\E[(-1)^{X_i}\mid U=u],\qquad
+ B(U)=\sum_{i=1}^n\E[b_i(U)^2].
+\]
+The second-order high-noise statistic $B$ appears in~\cite{mb}. We need only a nonasymptotic lower bound.
+\begin{lemma}\label{l}
+For $0<\rho<1$,
+\[
+ I(U;Y)-kC(p)\ \ge\
+ \frac{\rho^2}{2\ln 2}
+ \left(B(U)-k-\frac{k\rho^2}{6(1-\rho^2)}\right).
+\]
+\end{lemma}
+\begin{proof}
+The $Y_i$ are independent fair bits, while $\E[(-1)^{Y_i}\mid U=u]=\rho b_i(u)$. Subadditivity of conditional entropy gives
+\[
+ I(U;Y)=n-H(Y\mid U)\ge\sum_i (1-H(Y_i\mid U))
+ =\sum_i\E[\Phi(\rho b_i(U))].
+\]
+Integrating the power series for $\Phi'(t)=\operatorname{arctanh}(t)/\ln 2$ from $0$ to $t$ gives
+\[
+ \Phi(t)=\frac1{\ln2}\sum_{j\ge1}\frac{t^{2j}}{2j(2j-1)}
+ \quad(|t|<1).
+\]
+In particular $\Phi(t)\ge t^2/(2\ln2)$. The tail from $j=2$ onward is at most $t^4/[12(1-t^2)\ln2]$, since $2j(2j-1)\ge12$. Apply the lower bound on each marginal and the upper bound to the coordinate benchmark $kC(p)=k\Phi(\rho)$.
+\end{proof}
+
+\section{The code and its cell counts}
+For a row vector $u\in(\mathbb Z/4)^4$, put $v=(u,uA)$, reducing entries modulo four, where
+\[
+ A=\begin{pmatrix}
+ 2&3&3&3\\1&2&3&1\\1&1&2&3\\1&3&1&2
+ \end{pmatrix}.
+\]
+The Gray images of these octacode words form a Nordstrom--Robinson code~\cite{nr}. We specify all bit conventions because tie breaking matters. The symbols $0,1,2,3$ map to the two-bit integers $g(a)=0,1,3,2$, respectively. Define $w(u)=\sum_{j=0}^7 g(v_j)2^{2j}$. Keep $w(u)$ only when its least significant bit is zero, and discard its two least significant bits:
+\[
+ \mathcal C=\{\lfloor w(u)/4\rfloor : w(u)\equiv0\pmod2\}
+ \ \subset\ \{0,\ldots,2^{14}-1\}.
+\]
+This shortens one binary coordinate and punctures the other bit of that Gray pair. The resulting code has $128$ elements and minimum distance five. Assign $x$ to the unique $c\in\mathcal C$ minimizing the ordered pair
+\[
+ \bigl(\wt(x\mathbin{\oplus}c),\,x\mathbin{\oplus}c\bigr)
+\]
+in lexicographic order, with the second entry an unsigned integer. Report the index of $c$ among the sorted codewords. This is $f$.
+
+Write $D_c$ for the cell assigned to $c$, $m_c=|D_c|$, and $s_{ci}=\sum_{x\in D_c}(-1)^{x_i}$. The enumeration in the appendix gives the following complete histogram:
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$m_c$ & $\sum_{i=0}^{13}s_{ci}^2$ & Number of cells\\
+\midrule
+128 & 114980 & 64\\
+128 & 114996 & 64\\
+\bottomrule
+\end{tabular}
+\end{center}
+There is no sampling or numerical entropy evaluation in this certificate. By uniformity of $X$,
+\[
+ B(f(X))=2^{-14}\sum_c\frac{\sum_i s_{ci}^2}{m_c}
+ =\frac{114980+114996}{2\cdot128^2}
+ =\frac{28747}{4096}=7+\frac{75}{4096}.
+\]
+For $0<\rho\le 1/10$, one has $7\rho^2/[6(1-\rho^2)]\le 7/594<75/4096$. This proves the interval claim of Theorem~\ref{thm}. Appendix~\ref{full} verifies the additional noise level directly. The proof includes $p=9/20$, not $p=1/2$, where both information quantities vanish.
+
+\paragraph{Why this code works.}
+For the uniform input, the numbers of words at distances $0,1,2,3,4$ from $\mathcal C$ are respectively $128,1792,11648,2688,128$, giving mean distance $263/128$. That distance alone narrowly misses the target: replacing every conditional coordinate error rate by the common mean $263/(128\cdot14)$ gives a squared-bias sum of only $400689/57344<7$. The integer tie rule makes those errors uneven across coordinates. The gain from this variation, counted in the table, changes the sign of the inequality.
+
+\paragraph{Scope.}
+Appending $k-7$ independent input coordinates to the output maps the example to one with $k$ output bits and $k+7$ input bits; additivity contributes $(k-7)C(p)$ on both sides. The coordinate benchmark therefore fails for every $k\ge7$ in the stated high-noise interval. This does not settle $2\le k\le6$, find an optimal seven-bit map, or imply any failure of the one-bit theorem. The code and the statistic are classical or previously studied; the claim concerns the use of this explicit partition to violate the proposed threshold. We do not establish priority over unlocated or unpublished work.
+
+\paragraph{Research disclosure.} AI assistance was used to select the construction, derive the inequality, implement checks, and draft this note. The enumeration is independently reproducible; the draft has not been externally peer reviewed.
+
+\begin{thebibliography}{9}\small
+\bibitem{ct} V. Chandar and A. Tchamkerten, \href{https://perso.telecom-paristech.fr/tchamker/CTAT.pdf}{Most informative quantization functions}, ITA Workshop note, 2014.
+\bibitem{ho} W. Huleihel and O. Ordentlich, \href{https://arxiv.org/abs/1701.03119}{How to quantize $n$ outputs of a binary symmetric channel to $n-1$ bits?}, ISIT, 2017.
+\bibitem{cg} Z. Chen, A. Gohari, A. Javanmard, H. Lin, V. Mirrokni, C. Nair, and D. P. Woodruff, \href{https://arxiv.org/abs/2609.24931}{A proof of the most informative Boolean function conjecture}, 2026.
+\bibitem{mb} H. Mahdavifar and A. Beirami, \href{https://arxiv.org/abs/2609.26444v2}{The most informative bit and beyond: a proof of the Courtade--Kumar conjecture and multibit extensions}, arXiv:2609.26444v2, 2026.
+\bibitem{nr} G. D. Forney, N. J. A. Sloane, and M. D. Trott, \href{https://archive.dimacs.rutgers.edu/TechnicalReports/abstracts/1993/93-49.html}{The Nordstrom--Robinson code is the binary image of the octacode}, DIMACS TR 93-49, 1993.
+\end{thebibliography}
+\clearpage
+\appendix
+\section{Exact, standalone certificate}
+Python 3.10 or later; standard library only. For each of the $2^{14}$ words, the loop compares all $128$ centers. It assigns every word exactly once because distinct centers give distinct xor errors at fixed $x$. The second loop adds the sign of each input bit to the corresponding cell total, so its squared norm is precisely the quantity tabulated above. The final comparisons use rational arithmetic.
+\lstinputlisting{verify.py}
+\clearpage
+\section{A direct certificate at crossover probability $2/5$}\label{full}
+We give a second check that does not use Lemma~\ref{l} or the first moments of the cells. For each $c$, start with the $2^{14}$-entry indicator of $D_c$. For each coordinate $i=0,\ldots,13$, visit every pair of entries that differ in bit $i$, and replace its values $(a,b)$ simultaneously by
+\[
+ (3a+2b,\;2a+3b).
+\]
+Each step convolves one coordinate with the unnormalized channel kernel $(3,2)$. Thus the final entries $w_{c,y}$ are the numerators of $\Pr(Y=y\mid U=c)$ with common denominator $M=128\cdot5^{14}$. As an implementation check, every row sums to $M$. Define $h(w)$ as the number of pairs $(c,y)$ with $w_{c,y}=w$; there are $3955$ different values $w$. Since $U$ and $Y$ each have uniform marginals, the exact information in nats is
+\[
+ I(U;Y)\ln 2 = \frac{1}{128M}\sum_{w} h(w)w\ln(2^{14}w/M).
+\]
+The comparison value is $7[\ln 2+(2/5)\ln(2/5)+(3/5)\ln(3/5)]$. To enclose each logarithm, write its argument as $2^k a/b$, where $b\le a\le2b$. Set $z=(a-b)/(a+b)$, so $0\le z\le1/3$. Then
+\[
+ 0\le \ln(a/b)-2\sum_{j=0}^{15}\frac{z^{2j+1}}{2j+1}
+ \le \frac{2z^{33}}{33(1-z^2)}.
+\]
+The same formula encloses $\ln2$. In the companion script \texttt{verify-full.py} every lower term is rounded down and every upper term up to a multiple of $2^{-60}$. Terms are added with the interval endpoints interchanged whenever a coefficient is negative. Evaluating the two expressions above gives
+\[
+ \frac{16437}{10^9}
+ < \bigl[I(U;Y)-7C(2/5)\bigr]\ln 2
+ < \frac{16439}{10^9}.
+\]
+This completes the $p=2/5$ claim of Theorem~\ref{thm}. This second enumeration builds each cell by scanning error masks in increasing order of $(\wt(e),e)$ and assigning each still-unassigned word $x=c\oplus e$ to $c$. It gives the same quantizer because the first such mask is the one defining the nearest-center rule.
+\end{document}

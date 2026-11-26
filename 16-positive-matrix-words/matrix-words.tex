@@ -1,0 +1,131 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlist{itemsep=.2em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\title{Spectral and trace positivity for real powers of positive definite matrices}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+Consider a prescribed product of real powers of positive definite matrices, with the same matrix used at every occurrence of a letter. We prove that its spectrum is positive for every substitution in every dimension precisely when the cyclically reduced list of letters and exponents is a rotation of its reverse. This yields the standard-form classification conjectured by Hillar and Johnson for two letters, and works for any finite alphabet. If reversal symmetry fails, the unnormalized trace ranges over all of $\R$ on real inputs and all of $\C$ on complex inputs as the dimension varies. A sparse Gram matrix on the cyclic list distinguishes the two orientations even for negative, irrational, or repeated exponents. The ordinary-word classification was established by Garbe and Wei; we give a short alternative proof in that case.
+\end{abstract}
+
+\section{Problem and statements}
+
+For positive definite factors, reversal of a palindromic product is its adjoint. But does a combinatorial symmetry explain \emph{every} word whose spectrum is always positive? For arbitrary real powers this is the question of Hillar and Johnson~\cite{HJ2}. We give the dimension-free answer. Positive definiteness means Hermitian positive definiteness over $\C$ and symmetric positive definiteness over $\R$. All factors within one evaluation have a common finite size.
+
+A generalized word is a finite product $W=\prod_{j=1}^L H_{c_j}^{p_j}$ with real exponents, where powers use positive definite spectral calculus. Delete zero exponents and combine powers of the same letter when consecutive. Also do so cyclically, using a cyclic rotation before combining coincident end colors. Each combination is an exact identity and each rotation is a similarity on invertible substitutions: $YX=X^{-1}(XY)X$. Continue until the result is empty, a single syllable, or consecutive colors differ everywhere around the circle. We call the result a \emph{reduced cycle}. All statements below hold using any such reduction. An empty or one-syllable cycle is declared reversible; otherwise it is \emph{reversible} if its list of pairs $(c_j,p_j)$ is a cyclic rotation of its reverse. Reversal leaves the exponents unchanged.
+
+\begin{theorem}\label{t:general}
+For a generalized word as above:
+\begin{enumerate}[label=(\alph*)]
+\item If its reduced cycle is reversible, every complex Hermitian positive definite substitution gives a value similar to a positive definite matrix.
+\item Otherwise, if its reduced cycle has $L$ syllables, order $L$ suffices for a complex Hermitian positive definite substitution with nonreal trace. Over all finite dimensions its possible traces on real symmetric positive definite matrices form $\R$; on complex Hermitian positive definite matrices they form $\C$.
+\end{enumerate}
+\end{theorem}
+
+For two letters in Hillar and Johnson's standard form $A^{p_1}B^{q_1}\cdots A^{p_k}B^{q_k}$ with all $p_j,q_j\ne0$, reversibility is exactly their near-symmetry criterion. Theorem~\ref{t:general} answers their generalized spectral conjecture in that standard form \cite[Conjecture 1.3]{HJ2}. Their paper proves class $k=2$, states that the authors can also prove classes $3,4$, and proves the exceptional set of good exponent tuples has measure zero. The present argument treats all classes simultaneously, including signed and repeated exponents. For a nonstandard signed expression with cancellations at the ends, the test in Theorem~\ref{t:general} must be applied \emph{after} cyclic reduction. This distinction is necessary: $ABAB^{-1}A^{-1}$ is similar to $A$, although the displayed five syllables cannot be cut into two palindromes. Algebraically the factorization survives conjugation: if $C=PQ$ with $P,Q$ palindromic and $T^*$ denotes reversal, then $TCT^{-1}=(TPT^*)((T^*)^{-1}QT^{-1})$, a product of two palindromes after the usual cancellations. Here the stars agree with matrix adjoints on Hermitian substitutions.
+
+For comparison, an \emph{ordinary} word is a finite sequence of letters with each occurrence representing one copy of the indicated matrix. A palindrome reads identically in either direction; the empty word is allowed. Johnson and Hillar~\cite{HJ1} posed the ordinary two-letter classification, motivated by Lieb and Pierce's questions on individual summands in the Bessis--Moussa--Villani trace polynomial. See also \cite{HLR}. Garbe and Wei~\cite[Theorems 2.8--2.9]{GW} proved the classification for ordinary words on arbitrary finite alphabets. Their product syntax uses a finite list of variables and formal transposes. The introduction of an independent matrix for each distinct exponent would drop the crucial dependence among different powers of the same input. The distinguishing point here is that our witnesses respect that dependence, without requiring commensurable exponents.
+
+\begin{corollary}[Ordinary words; cf.\ Garbe--Wei]\label{t:ordinary}
+For an ordinary word on any finite alphabet the following assertions are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item The word is a concatenation of two palindromes.
+\item On every complex Hermitian positive definite substitution its value is diagonalizable with strictly positive real eigenvalues.
+\item On every real symmetric positive definite substitution its trace is positive.
+\end{enumerate}
+If these conditions fail, its trace is strictly negative on some real symmetric positive definite substitution.
+\end{corollary}
+
+We include a separate elementary certificate for the known ordinary-word case in the final section. The results concern individual words and do not alter the Bessis--Moussa--Villani theorem concerning sums of their traces.
+
+\section{A phase on one edge}
+
+For any word on any alphabet, its reverse is a rotation of it exactly when it is a concatenation of two palindromes. Indeed, a rotation of $uv$ is specified by the cut $u|v$ and gives $vu$. If $vu=(uv)^{\rm rev}=v^{\rm rev}u^{\rm rev}$, comparison at lengths $|v|,|u|$ proves the claim. This applies without modification when the alphabet consists of pairs $(c,p)$.
+
+The value of a palindrome in positive definite factors is positive definite: it has the form $TDT^*$, where $D$ is a positive definite middle factor or the identity, and $T$ is invertible. If $P,Q$ are positive definite, $PQ$ is similar to $P^{1/2}QP^{1/2}$. These observations give the positive directions of the theorem and corollary, including the empty and single-syllable cases.
+
+\begin{lemma}[Decorated cycle detector]\label{l:cycle}
+Suppose $(c_1,p_1),\ldots,(c_L,p_L)$ is a nonreversible reduced cycle. Then there are order-$L$ Hermitian positive definite matrices $H_c$ for which $\Tr\prod_j H_{c_j}^{p_j}$ is not real.
+\end{lemma}
+\begin{proof}
+Necessarily $L\ge3$. Fix $0<\epsilon<1/2$. Use cyclic indices and let $G$ be the Hermitian matrix with ones on the diagonal, $G_{j,j+1}=\epsilon$ for $1\le j<L$, $G_{L,1}=i\epsilon$, the conjugates of these entries below or above as required, and zeros elsewhere. In each row the sum of off-diagonal moduli is $2\epsilon<1$, so $G$ is positive definite. Realize it as $G_{ab}=v_a^*v_b$ for unit vectors in $\C^L$, and write $P_a=v_av_a^*$. Vertices of the same color are nonadjacent, hence their vectors are orthogonal.
+
+Give vertex $a$ an independent real scale $x_a>0$. For each color set
+\[
+ H_c=I+\sum_{a:c_a=c}(x_a-1)P_a,\qquad
+ H_c^p=I-\sum_{a:c_a=c}P_a+\sum_{a:c_a=c}x_a^pP_a.
+\]
+The first operator acts by the positive eigenvalue $x_a$ on $v_a$ of that color, and by one on the orthogonal complement, proving both its positivity and the second identity for arbitrary real $p$.
+
+Expand $F(x)=\Tr\prod_j H_{c_j}^{p_j}$ as a finite sum of generalized monomials. Extract the coefficient of
+\[
+ M(x)=x_1^{p_1}\cdots x_L^{p_L}.
+\]
+Every variable has a nonzero exponent in $M$. Since each of the $L$ factors can supply at most one variable, a term contributing to $M$ must choose one variable from every factor and use every vertex exactly once. Thus it determines a permutation $a_1,\ldots,a_L$ with $(c_{a_j},p_{a_j})=(c_j,p_j)$ for all $j$. This argument does not require distinct exponents or forbid negative exponents.
+
+The contribution of that permutation is
+\[
+ \Tr(P_{a_1}\cdots P_{a_L})=G_{a_1a_2}G_{a_2a_3}\cdots G_{a_La_1}.
+\]
+For the product to be nonzero the permutation must go once around the cycle in either direction: a Hamilton tour of a simple cycle uses its two incident edges at every vertex. A forward tour is a rotation of the decorated list and contributes $i\epsilon^L$. At least the identity rotation contributes. A backward tour would identify the decorated list with a rotation of its reverse; none exists. Therefore the coefficient of $M$ is $h i\epsilon^L$ with $h\ge1$ the number of preserving rotations.
+
+Finally distinct generalized monomials are linearly independent on the positive orthant: write $x_j=e^{t u_j}$, choosing $u$ outside the finitely many hyperplanes where two exponent vectors have equal dot product with $u$. The resulting exponentials with distinct real exponents are linearly independent, for example by differentiating at zero and using a Vandermonde determinant. The imaginary part of $F$ is consequently not identically zero. This proves the lemma.
+\end{proof}
+
+\paragraph{A mixed-sign, incommensurable example.}
+Take the ten alternating colors $A,B,\ldots,A,B$, $\epsilon=1/4$, $x_i=2^i$ for $1\le i\le10$, and $p_j=\log_2 a_j$ with
+\[
+ (a_1,\ldots,a_{10})=(2,3,1/3,2,5,1/2,2,3,1/5,3).
+\]
+These are not all integer multiples of a common number, even among the $A$ exponents, since $\log_2 3$ is irrational. In the basis $v_1,\ldots,v_{10}$ the projector $P_i$ has matrix $E_{ii}G$, and $x_i^{p_j}=a_j^i$. Thus all calculation uses rational real and imaginary parts, despite the irrational exponents. The supplied script multiplies the ten factors exactly, obtaining
+\[
+ \Im\Tr W=3551844588600593897951801/5598720000000.
+\]
+This example illustrates the exponent dependence absent from ordinary words.
+
+\section{From nonreal trace to all trace values}
+
+Let a positive definite tuple $H$ yield $z=\Tr W(H)\notin\R$. For tensor powers of each input, spectral calculus gives $(H_c^{\otimes m})^{p}=(H_c^p)^{\otimes m}$. Multiplication and trace are multiplicative on tensor products, so the \emph{same} word, not its $m$th power, has trace $z^m$ on the new inputs. Some $m\ge1$ has $\Re z^m<0$. In fact, for $\theta=|\arg z|\in(0,\pi)$ choose $m=\lfloor\pi/(2\theta)\rfloor+1$; then $\pi/2<m\theta<3\pi/2$.
+
+For a complex matrix $K$ define its realification by
+\[
+ R(K)=\begin{pmatrix}\Re K&-\Im K\\\Im K&\Re K\end{pmatrix}.
+\]
+It respects products and adjoints, takes positive definite Hermitian matrices to real symmetric positive definite ones, and has $\Tr R(K)=2\Re\Tr K$. It respects real powers of positive definite inputs: diagonalize $K=UDU^*$ and apply the realification to this decomposition. The real tuple $R(H_c^{\otimes m})$ therefore has strictly negative trace~$s$ at some order $D$.
+
+The straight-line path from that tuple to the identity tuple remains in the positive cone and gives a continuous real trace from $s$ to $D$. Direct sums preserve powers and add traces; using $b$ copies gives the interval $[bs,bD]$. Its union over positive integers $b$ is $\R$. On complex inputs the path from a nonreal seed to the identity yields a nontrivial interval of imaginary parts with zero as one endpoint. Direct sums and entrywise conjugation give every imaginary part. To get any specified real part, append a real tuple by direct sum. This proves Theorem~\ref{t:general}.
+
+To finish Corollary~\ref{t:ordinary}, observe that run compression of a nonconstant ordinary circular word replaces each monochromatic run by its color and its positive integer length. A reflection of the expanded letter cycle carries complete runs to complete runs of the same color and length. Conversely a reversal symmetry on the run cycle lifts by reversing the letters inside each corresponding run. The two reversibility tests therefore coincide. Constant words and the empty word already satisfy the theorem. Alternatively, the following construction supplies an independent proof for ordinary words.
+
+\section{An explicit ordinary-word certificate}
+
+Let $w=c_1\cdots c_d$ be nonreversible, so $d\ge3$. Color edge $(j,j+1)$ of a directed $d$-cycle by $c_j$. Give each edge forward weight $1$, except the closing edge, which has weight $i$; assign conjugate weights in reverse. For each color let $H_c$ be $3I$ plus the Hermitian adjacency matrix of the edges of that color. These Gaussian-integer matrices are positive definite by strict diagonal dominance.
+
+A trace term for $w$ is a closed walk of $d$ steps, with a diagonal stay permitted at any step. For a closed walk the net number of forward traversals of each individual edge equals the same integer, the winding number, by flow conservation. A zero winding therefore gives real weight (indeed positive for nonzero terms). Nonzero winding at length $d$ forces all $d$ moves to be forward, or all backward. Only forward walks can match a nonreversible color list; their number is its rotational stabilizer $h$. Thus $\Im\Tr w(H)=h$. This also explains why a circular word not distinguished from its reverse cannot yield a spurious witness.
+
+For $w=AABABB$, exact multiplication gives $z=7470+i$ and exact Gaussian-integer powering gives $\Re z^{14940}<0$. Hence the realification of the indicated tensor powers is a real certificate without storing the tensor matrices. Its enormous order is a drawback of this uniform construction, not a lower bound; order-three real examples for this word up to reversal or rotation were already known \cite{HJ1}.
+
+\paragraph{Verification and limits.}
+The accompanying standard-library Python script \texttt{verify.py} tests the cut characterization for all 2046 binary words of lengths one through ten, multiplies the integer matrices for all 88 binary rotation classes of lengths three through eight, checks the displayed sign by integer arithmetic, and sums the designated coefficient over all input permutations in 241 signed-exponent examples. These finite replays check the implementation; the universal claims rest on the proofs. The arguments do not determine the smallest real witness dimension, give competing low-dimensional matrices, or solve any symmetric word equation. The manuscript is AI-assisted and has not been externally refereed or formally verified.
+
+\begin{thebibliography}{9}
+\bibitem{HJ1}
+C.~R. Johnson and C.~J. Hillar, \emph{Eigenvalues of words in two positive definite letters}, SIAM J. Matrix Anal. Appl. \textbf{23} (2002), 916--928. \href{https://doi.org/10.1137/S0895479801387073}{Published article}, Conjecture 4, p.~926; \href{https://arxiv.org/abs/math/0511411}{arXiv version}, Conjecture 1.11.
+\bibitem{HJ2}
+C.~J. Hillar and C.~R. Johnson, \emph{Positive eigenvalues of generalized words in two Hermitian positive definite matrices}, Fields Inst. Commun. \textbf{37} (2003), 111--122. \href{https://arxiv.org/abs/math/0504587}{Author manuscript}, Conjecture 1.3.
+\bibitem{HLR}
+C.~J. Hillar, L. Levine, and D. Rhea, \emph{Equations solvable by radicals in a uniquely divisible group}, Bull. Lond. Math. Soc. \textbf{45} (2013), 61--79, esp.\ Sect.~2. \href{https://doi.org/10.1112/blms/bds062}{doi:10.1112/blms/bds062}.
+\bibitem{GW}
+F. Garbe and F. Wei, \emph{A characterization for spectral and trace positivity of matrix words}, \href{https://arxiv.org/abs/2605.02314}{arXiv:2605.02314v2} (August 6, 2026), in particular Sect.~2.3.
+\end{thebibliography}
+\end{document}

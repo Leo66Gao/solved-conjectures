@@ -15,6 +15,9 @@ Proofs, LaTeX manuscripts, and reproduction files. Each result is stated at the 
 | **Random-to-below card shuffling** | Grinberg–Lafrenière’s Conjecture 15.8 for every deck size, with a Gumbel separation profile. | [Details](07-random-to-below-shuffle/) · [PDF](07-random-to-below-shuffle/paper.pdf) · [LaTeX](07-random-to-below-shuffle/paper.tex) |
 | **Reconstruction from substring compositions** | Exact maximum class sizes at lengths $pq-1$, $p^2q-1$, and $4p-1$ for the specified primes; full ambiguity classification at length $pq-1$. | [Details](08-substring-reconstruction/) · [PDF](08-substring-reconstruction/equicomposable.pdf) · [LaTeX](08-substring-reconstruction/equicomposable.tex) |
 
+| **Seven-bit information quantization** | An explicit nonlinear quantizer disproves the seven-bit threshold conjecture. Exact checks establish a strict gain at 40% crossover noise and throughout 45% to just below 50%. The one-bit theorem is unaffected. | [Details](15-seven-bit-quantizer/) · [PDF](15-seven-bit-quantizer/seven-bit-quantizer.pdf) · [LaTeX](15-seven-bit-quantizer/seven-bit-quantizer.tex) |
+| **Generalized Hillar–Johnson matrix words** | Classifies words in arbitrary real powers of positive definite matrices by reversal symmetry after cyclic reduction. The ordinary-word classification is due to Garbe and Wei. | [Details](16-positive-matrix-words/) · [PDF](16-positive-matrix-words/matrix-words.pdf) · [LaTeX](16-positive-matrix-words/matrix-words.tex) |
+
 ## Further theorems
 
 | Result | Statement proved | Manuscript |

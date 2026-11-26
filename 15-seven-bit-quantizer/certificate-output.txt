@@ -1,0 +1,5 @@
+size, minimum distance: 128 5
+distance histogram: [(0, 128), (1, 1792), (2, 11648), (3, 2688), (4, 128)]
+cell certificate (size, squared sign-sum): [((128, 114980), 64), ((128, 114996), 64)]
+B: 28747/4096 ; B - 7: 75/4096
+lower-bound margin in units rho^2 / (2 ln 2): 7939/1216512

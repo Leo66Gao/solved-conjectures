@@ -1,0 +1,5 @@
+Ordinary words: 2046 palindrome/rotation checks; 88 exact matrix checks (18 chiral).
+AABABB: complex seed trace 7470+i; Re(z^14940) < 0 (Gaussian-integer powering).
+Decorated Gram cycles: 241 exact all-permutation coefficient checks (signed rational exponents).
+Incommensurate mixed-sign, class-five witness: Im(trace) = 3551844588600593897951801/5598720000000.
+All exact checks passed.
