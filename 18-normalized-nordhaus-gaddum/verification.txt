@@ -1,0 +1,7 @@
+PSD and row inequalities passed on 739 graph-atlas entries (tolerance 1e-10).
+n=     20: scaled deficit 1.483884520
+n=    100: scaled deficit 1.289540551
+n=    500: scaled deficit 1.196985965
+n=   1000: scaled deficit 1.167283147
+n=  10000: scaled deficit 1.095637167
+n=1000000: scaled deficit 1.031142581

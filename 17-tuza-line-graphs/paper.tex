@@ -1,0 +1,591 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\title{Triangle packing and covering in line graphs}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every finite simple graph $H$, we prove Tuza's inequality for its line graph $L(H)$. We give a degree-based covering bound, characterize equality, and determine the limiting packing--covering ratio over line graphs of root graphs with growing minimum degree.
+\end{abstract}
+\section{Scientific background}
+
+Tuza's conjecture was formulated in 1981 and investigated in his 1990 paper \emph{A Conjecture on Triangles of Graphs}, published in \emph{Graphs and Combinatorics}~\cite{Tuza}.
+
+For a finite graph \(G\), define:
+
+\begin{itemize}
+\item \(\nu(G)\): the maximum number of pairwise edge-disjoint triangles in \(G\).
+\item \(\tau(G)\): the minimum number of edges whose removal eliminates every triangle in \(G\).
+
+\end{itemize}
+The elementary bounds are
+
+\[
+\nu(G)\leq\tau(G)\leq3\nu(G).
+\]
+
+Tuza conjectured that the upper bound can always be improved to
+
+\[
+\boxed{\tau(G)\leq2\nu(G).}
+\]
+
+The conjecture connects extremal graph theory, combinatorial optimization, packing-covering duality and approximation algorithms. It has attracted decades of investigation, including research published as recently as 2026.
+
+\section{Main results}
+
+Let \(H\) be any finite simple graph. Its line graph \(L(H)\) has one vertex for each edge of \(H\), with two vertices adjacent precisely when their corresponding edges share an endpoint.
+
+Edges incident to a common vertex in the underlying graph become a complete subgraph in its line graph.
+
+Define
+
+\[
+c_d=\binom d2-\left\lfloor\frac{d^2}{4}\right\rfloor
+\]
+
+and
+
+\[
+S(H)=\sum_{v\in V(H)}c_{d_H(v)}.
+\]
+
+Let \(\epsilon(H)\) denote the number of connected components of \(H\) in which every vertex has even degree but the total number of edges is odd.
+
+\textbf{Theorem.} For every finite simple graph \(H\):
+
+\textbf{I. Universal packing-covering inequality}
+
+\[
+\boxed{\tau(L(H))\leq2\nu(L(H)).}
+\]
+
+\textbf{II. Degree-based covering formula}
+
+\[
+\boxed{S(H)\leq\tau(L(H))
+\leq S(H)+\epsilon(H).}
+\]
+
+Furthermore, if \(H\) is triangle-free, then
+
+\[
+\boxed{\tau(L(H))=S(H).}
+\]
+
+\textbf{III. Complete equality characterization}
+
+\[
+\boxed{
+\tau(L(H))=2\nu(L(H))
+}
+\]
+
+if and only if \(H\) is triangle-free and every vertex degree belongs to
+
+\[
+\boxed{\{0,1,2,4,5\}.}
+\]
+
+\section{Proof}
+
+\subsection{Lemma 1 --- Decomposition into local cliques}
+
+For every vertex \(v\) of \(H\), let \(Q_v\) be the clique in \(L(H)\) formed by the edges of \(H\) incident to \(v\).
+
+Then
+
+\[
+Q_v\cong K_{d_H(v)}.
+\]
+
+Since \(H\) is simple, two distinct edges of \(H\) share at most one endpoint. Consequently, the edge sets of the cliques \(Q_v\) partition the edge set of the line graph:
+
+\[
+E(L(H))=\bigsqcup_{v\in V(H)}E(Q_v).
+\]
+
+Moreover, every triangle of \(L(H)\) is of exactly one of two types.
+
+\textbf{Star triangle}
+
+Three underlying edges incident to one vertex.
+
+\textbf{Cycle triangle}
+
+Three underlying edges forming a 3-cycle.
+
+This follows because three pairwise intersecting distinct two-element sets either share a common element or are the three edges of a triangle.
+
+This decomposition is the fundamental structural observation. It permits independent local triangle packings, while the cycle triangles require a coordinated covering argument.
+
+\subsection{Lemma 2 --- An almost perfectly balanced edge coloring}
+
+Every connected finite simple graph admits a red-blue edge coloring such that:
+
+\begin{itemize}
+\item If it has any odd-degree vertices, the numbers of red and blue edges incident to each vertex differ by at most one.
+\item If all vertex degrees are even and the number of edges is even, the numbers are equal at every vertex.
+\item Otherwise, they are equal everywhere except at one vertex, where they differ by two.
+
+\end{itemize}
+\textbf{Proof.}
+
+First suppose that odd-degree vertices exist. Introduce an auxiliary vertex \(z\) and connect it to every odd-degree vertex.
+
+By the handshaking lemma, the number of odd-degree vertices is even. The augmented graph therefore has even degree everywhere and admits an Euler circuit.
+
+Start the Euler circuit at \(z\) and color successive edges alternately red and blue.
+
+At every original vertex, entering and departing edges can be paired consecutively along the circuit. Each pair contains one edge of each color.
+
+Delete the auxiliary vertex and its incident edges. Originally even-degree vertices remain perfectly balanced, while originally odd-degree vertices lose exactly one edge and have imbalance one.
+
+If every vertex originally has even degree, apply the alternating coloring directly to an Euler circuit. When its length is even, all vertices are balanced. When its length is odd, the starting vertex has imbalance two and all others remain balanced.
+
+The isolated-vertex case is immediate. \(\square\)
+
+\subsection{Lemma 3 --- The covering bound}
+
+For every finite simple graph \(H\),
+
+\[
+S(H)\leq\tau(L(H))\leq S(H)+\epsilon(H).
+\]
+
+\textbf{Lower bound.} By Mantel's theorem, a triangle-free graph on \(d\) vertices contains at most
+
+\[
+\left\lfloor\frac{d^2}{4}\right\rfloor
+\]
+
+edges.
+
+Thus, to eliminate all triangles from \(Q_v\), at least \(c_{d_H(v)}\) edges must be removed.
+
+Because the local clique edge sets are disjoint, summation gives
+
+\[
+\tau(L(H))\geq S(H).
+\]
+
+\textbf{Upper bound.} Apply Lemma 2 to each connected component of \(H\). The red-blue coloring of the edges of \(H\) induces a vertex coloring of \(L(H)\).
+
+Remove every line-graph edge whose endpoints have the same color.
+
+The remaining line graph is bipartite, so it contains no triangles of either type.
+
+If vertex \(v\) has \(r_v\) red and \(b_v\) blue incident edges, the number of deleted edges in \(Q_v\) is
+
+\[
+\binom{r_v}{2}+\binom{b_v}{2}.
+\]
+
+When the two color classes are balanced, this equals \(c_{d_H(v)}\).
+
+When an even-degree vertex has imbalance two, the expression increases by exactly one:
+
+\[
+\binom{k+1}{2}+\binom{k-1}{2}
+=k(k-1)+1.
+\]
+
+Lemma 2 introduces at most one such defect in each exceptional component counted by \(\epsilon(H)\).
+
+Therefore,
+
+\[
+\tau(L(H))\leq S(H)+\epsilon(H).
+\]
+
+Finally, when \(H\) is triangle-free, Lemma 1 establishes that there are no cycle triangles. Each local clique may then be treated independently, using its own balanced bipartition, whether or not these bipartitions agree on shared vertices.
+
+This gives a cover of exactly \(S(H)\) edges. \(\square\)
+
+\subsection{Lemma 4 --- A constructive local triangle-packing bound}
+
+This is the central packing construction.
+
+For every nonnegative integer \(d\), the complete graph \(K_d\) admits an explicitly constructible edge-disjoint triangle packing of size \(p_d\), where
+
+\[
+p_{2k}=\binom{k}{2}+\mathbf1_{\{k\geq3\}},
+\]
+
+and
+
+\[
+p_{2k+1}=
+\left\lceil\frac{k^2}{2}\right\rceil+
+\mathbf1_{\{k\geq3\}}.
+\]
+
+Here \(\mathbf1\) is the indicator function.
+
+These packings satisfy
+
+\[
+2p_d\geq c_d,
+\]
+
+with equality precisely when
+
+\[
+d\in\{0,1,2,4,5\}.
+\]
+
+\textbf{Proof.}
+
+Partition the vertices of \(K_d\) into two sets \(A\) and \(B\), of sizes
+
+\[
+m=\left\lceil\frac d2\right\rceil,\qquad
+k=\left\lfloor\frac d2\right\rfloor.
+\]
+
+Label the vertices of \(A\) by \(a_0,\ldots,a_{m-1}\).
+
+For each edge \(a_i a_j\) inside \(A\), assign the color
+
+\[
+s(i,j)=i+j\pmod m.
+\]
+
+This is a proper edge coloring: for fixed \(i\), distinct values of \(j\) give distinct colors.
+
+\textbf{Even case: \(d=2k\).}
+
+There are \(k\) colors and \(k\) vertices in \(B\). Assign each color to a distinct vertex \(b_s\).
+
+Replace each edge \(a_i a_j\) in \(A\) by the triangle
+
+\[
+\{a_i,a_j,b_{s(i,j)}\}.
+\]
+
+These triangles are pairwise edge-disjoint. Their edges inside \(A\) are distinct by construction, and their edges between \(A\) and \(B\) cannot repeat because the coloring is proper.
+
+This produces \(\binom{k}{2}\) triangles.
+
+\textbf{Odd case: \(d=2k+1\).}
+
+There are \(k+1\) colors but only \(k\) vertices in \(B\). Discard the edges of color zero and assign the remaining colors bijectively to \(B\).
+
+The discarded edges correspond to distinct pairs of indices satisfying
+
+\[
+i+j\equiv0\pmod{k+1}.
+\]
+
+There are exactly \(\lfloor k/2\rfloor\) such unordered pairs.
+
+The same construction therefore produces
+
+\[
+\binom{k+1}{2}-\left\lfloor\frac k2\right\rfloor
+=\left\lceil\frac{k^2}{2}\right\rceil
+\]
+
+edge-disjoint triangles.
+
+In both cases, no edge internal to \(B\) has been used. If \(k\geq3\), one further triangle can therefore be added inside \(B\).
+
+Since
+
+\[
+c_{2k}=k(k-1),\qquad c_{2k+1}=k^2,
+\]
+
+the claimed inequality and its equality conditions follow directly. The case \(d=0\) is trivial. \(\square\)
+
+The following table illustrates the packing surplus that drives the proof.
+
+\begin{center}
+\small
+\begin{tabular}{llll}
+Degree \(d\) & Cover lower bound \(c_d\) & Packing \(p_d\) & Surplus \(2p_d-c_d\) \\
+\hline
+2 & 0 & 0 & 0 \\
+3 & 1 & 1 & 1 \\
+4 & 2 & 1 & 0 \\
+5 & 4 & 2 & 0 \\
+6 & 6 & 4 & 2 \\
+7 & 9 & 6 & 3 \\
+8 & 12 & 7 & 2 \\
+9 & 16 & 9 & 2 \\
+10 & 20 & 11 & 2 \\
+\end{tabular}
+\end{center}
+
+In particular, an even degree of at least six supplies enough surplus to absorb the exceptional covering defect from Lemma 3.
+
+\subsection{Lemma 5 --- Avoiding a prescribed edge}
+
+If \(d\in\{2,4,5\}\), then for any prescribed edge \(e\) of \(K_d\), there exists a packing of \(p_d\) triangles that does not use \(e\).
+
+\textbf{Proof.}
+
+For \(d=2\), the empty packing suffices.
+
+For \(d=4\) or \(5\), choose the two endpoints of \(e\) to form the set \(B\) in Lemma 4.
+
+The construction uses no edge internal to \(B\). Since \(B\) has only two vertices, no additional triangle inside it is required.
+
+Consequently, the prescribed edge remains unused. \(\square\)
+
+\subsection{Proof of the principal theorem}
+
+It suffices to consider connected underlying graphs, since both triangle-packing and triangle-covering numbers are additive over connected components.
+
+Write
+
+\[
+P=\sum_{v\in V(H)}p_{d_H(v)}.
+\]
+
+The local cliques have disjoint edge sets, so their triangle packings can be combined. Hence
+
+\[
+\nu(L(H))\geq P.
+\]
+
+Let
+
+\[
+D=\{0,1,2,4,5\}.
+\]
+
+There are three exhaustive cases.
+
+\textbf{Case 1: \(H\) is triangle-free.}
+
+Lemma 3 gives
+
+\[
+\tau(L(H))=S(H).
+\]
+
+Lemma 4 gives
+
+\[
+2P\geq S(H).
+\]
+
+Therefore,
+
+\[
+\tau(L(H))\leq2P\leq2\nu(L(H)).
+\]
+
+The inequality is strict whenever some vertex degree lies outside \(D\).
+
+\textbf{Case 2: \(H\) contains a triangle and some vertex degree lies outside \(D\).}
+
+If \(H\) is not an exceptional Eulerian component, Lemma 3 gives
+
+\[
+\tau(L(H))\leq S(H),
+\]
+
+while Lemma 4 gives
+
+\[
+2\nu(L(H))\geq2P>S(H).
+\]
+
+If \(H\) is exceptional, all degrees are even. A degree outside \(D\) must therefore be at least six.
+
+Such a vertex supplies a surplus of at least two, giving
+
+\[
+2\nu(L(H))\geq S(H)+2.
+\]
+
+But Lemma 3 gives
+
+\[
+\tau(L(H))\leq S(H)+1.
+\]
+
+Thus the inequality is strict in either situation.
+
+\textbf{Case 3: \(H\) contains a triangle and every vertex degree belongs to \(D\).}
+
+Choose a triangle \(abc\) in \(H\). Its three edges form a cycle triangle \(T\) in \(L(H)\).
+
+Each of the three edges of \(T\) belongs to a different local clique: \(Q_a,Q_b,Q_c\).
+
+The degrees of \(a,b,c\) are necessarily in \(\{2,4,5\}\).
+
+Apply Lemma 5 independently in those three cliques, choosing their local triangle packings to avoid the corresponding edge of \(T\).
+
+All three edges of \(T\) are now unused by the combined local packing. Therefore, \(T\) can itself be added.
+
+Consequently,
+
+\[
+\nu(L(H))\geq P+1.
+\]
+
+Because all vertex degrees belong to \(D\),
+
+\[
+2P=S(H).
+\]
+
+It follows that
+
+\[
+2\nu(L(H))\geq S(H)+2
+>S(H)+1\geq\tau(L(H)).
+\]
+
+This completes the proof of Tuza's inequality for all finite simple line graphs. \(\square\)
+
+\subsection{Proof of the equality characterization}
+
+The preceding argument proves strict inequality whenever \(H\) contains a triangle or has a vertex degree outside \(D\).
+
+It remains to prove equality when \(H\) is triangle-free and all degrees belong to \(D\).
+
+In this situation, every line-graph triangle belongs to one local clique. Consequently,
+
+\[
+\nu(L(H))=\sum_v\nu(K_{d_H(v)}).
+\]
+
+The exact local packing numbers are
+
+\[
+\nu(K_0)=\nu(K_1)=\nu(K_2)=0,
+\]
+
+\[
+\nu(K_4)=1,\qquad \nu(K_5)=2.
+\]
+
+The only nonimmediate assertion is that \(K_5\) cannot contain three edge-disjoint triangles.
+
+Three such triangles would collectively use nine of its ten edges. Every vertex would have even degree in their union, since each triangle contributes degree two at every vertex it contains.
+
+However, \(K_5\) with one edge removed has two vertices of odd degree. This is a contradiction.
+
+For every \(d\in D\), therefore,
+
+\[
+2\nu(K_d)=c_d.
+\]
+
+Summing yields
+
+\[
+2\nu(L(H))=S(H)=\tau(L(H)).
+\]
+
+The equality characterization is complete. \(\blacksquare\)
+
+\section{A further consequence: the asymptotic constant is \(3/2\)}
+
+The packing construction admits a useful strengthening.
+
+Instead of adding just one triangle inside the unused set \(B\), apply the entire construction recursively to \(B\).
+
+Denote the resulting packing size in \(K_d\) by \(q_d\). The recursive construction gives
+
+\[
+q_{2k}\geq\binom{k}{2}+q_k,
+\]
+
+\[
+q_{2k+1}\geq
+\left\lceil\frac{k^2}{2}\right\rceil+q_k.
+\]
+
+Elementary induction then gives
+
+\[
+q_d\geq\frac{d^2-4d}{6}.
+\]
+
+Summing over the local cliques,
+
+\[
+\nu(L(H))\geq
+\frac{|E(L(H))|}{3}
+-\frac12\sum_v d_H(v).
+\]
+
+Suppose that the minimum degree of \(H\) is at least \(\delta>4\). Since
+
+\[
+|E(L(H))|
+=\frac12\sum_v d_H(v)(d_H(v)-1),
+\]
+
+we obtain
+
+\[
+\nu(L(H))\geq
+|E(L(H))|
+\left(\frac13-\frac1{\delta-1}\right).
+\]
+
+Every graph has a bipartite subgraph containing at least half its edges. Consequently,
+
+\[
+\tau(L(H))\leq\frac{|E(L(H))|}{2}.
+\]
+
+Combining these facts with the main theorem gives
+
+\[
+\boxed{
+\frac{\tau(L(H))}{\nu(L(H))}
+\leq
+\min\left\{2,\frac{3(\delta-1)}{2(\delta-4)}\right\}.
+}
+\]
+
+\subsection{Packing-covering ratio bound}
+
+As the minimum underlying degree increases, the guaranteed upper bound converges to 1.5.
+
+This limit is optimal.
+
+Take the complete bipartite underlying graph \(H=K_{\delta,\delta}\). Because it is triangle-free,
+
+\[
+\tau(L(H))=2\delta c_\delta.
+\]
+
+Every edge-disjoint triangle packing uses three edges per triangle, so
+
+\[
+\nu(L(H))\leq\frac{|E(L(H))|}{3}.
+\]
+
+Consequently,
+
+\[
+\frac{\tau(L(H))}{\nu(L(H))}
+\geq\frac{3c_\delta}{\binom{\delta}{2}}
+\longrightarrow\frac32.
+\]
+
+Thus, over simple line graphs of increasingly large minimum underlying degree, the worst-case packing-covering ratio converges exactly to \(3/2\).
+
+\section{Reproduction}
+The accompanying \texttt{verify.py} checks the combinatorial packing and cover certificates on all 1,253 graphs in the NetworkX graph atlas, on 100 seeded random graphs, and for local clique orders through 200. The computation checks feasible witnesses and supplements the proof.
+
+\section*{Disclosure}
+This manuscript was prepared with AI assistance. The arguments and priority claims are open to independent review.
+
+\begin{thebibliography}{9}
+\bibitem{Tuza} Z. Tuza, A conjecture on triangles of graphs, Graphs and Combinatorics 6 (1990), 373--380. \href{https://doi.org/10.1007/BF01787705}{Source.}
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,557 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\title{A vanishing universal-input capacity fraction for additive noise}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+We show that no power-constrained input guarantees a positive universal fraction of additive-noise channel capacity. Even when the input is chosen using the noise variance $N$, the worst-case capacity fraction is $O(1/log N)$ as $N$ grows. The noise can be chosen to have a symmetric $C^1$ compactly supported density or a smooth, everywhere-positive density.
+\end{abstract}
+\section{The universal-input question}
+
+In their 2004 paper, \emph{A Gaussian Input Is Not Too Bad}~\cite{ZE}, Ram Zamir and Uri Erez established that Gaussian inputs lose at most half a bit per sample relative to the capacity of an arbitrary power-constrained additive-noise channel.
+
+In Section VII, equation (24), they explicitly posed a stronger question: does there exist an input \(X\) and an absolute constant \(\alpha>0\) such that
+
+\[
+I(X;X+Z)>\alpha C(Z;P)
+\]
+
+for every independent noise distribution \(Z\), where
+
+\[
+C(Z;P)=
+\sup_{\mathbb E[U^2]\le P} I(U;U+Z)?
+\]
+
+Twenty years later, Lampros Gavalakis, Ioannis Kontoyiannis and Mokshay Madiman revisited this question in \emph{The Entropic Doubling Constant and Robustness of Gaussian Codebooks for Additive-Noise Channels}~\cite{GKM}.
+
+Their Theorem 8 proved the partial result
+
+\[
+I(X_G;X_G+Z)
+\geq
+\frac{\mathrm{SNR}}{3\mathrm{SNR}+2}C(Z;P),
+\]
+
+where \(X_G\sim\mathcal N(0,P)\). The guaranteed fraction tends to zero at low SNR, leaving the original universal-constant question unresolved by their theorem.
+
+\section{Main theorem}
+
+\textbf{Theorem (Universal-input impossibility).} Normalize the transmitter's power constraint to \(\mathbb E[X^2]\leq1\), and define
+
+\[
+R(N)=
+\sup_{\mathbb E[X^2]\leq1}
+\inf_{Z\in\mathcal Z_N}
+\frac{I(X;X+Z)}{C(Z;1)},
+\]
+
+where \(\mathcal Z_N\) is the class of independent, zero-mean noise distributions with variance \(N\) and finite differential entropy.
+
+Then, as \(N\to\infty\),
+
+\[
+\boxed{R(N)=O\left(\frac1{\log N}\right)}
+\]
+
+and consequently,
+
+\[
+\boxed{\lim_{N\to\infty}R(N)=0.}
+\]
+
+The conclusion remains valid when the noise is restricted to symmetric, continuously differentiable, compactly supported probability densities, or alternatively to everywhere-positive, infinitely differentiable densities.
+
+\section{Proof}
+
+All logarithms below are natural. The choice of logarithm base does not affect capacity ratios.
+
+\subsection{Lemma 1 --- A channel with a scale-dependent capacity}
+
+Let \(W\) have probability density
+
+\[
+f(w)=
+\begin{cases}
+\dfrac{15}{16}(1-w^2)^2,& |w|\leq1,\\
+0,& |w|>1.
+\end{cases}
+\]
+
+Direct integration gives
+
+\[
+\mathbb E[W]=0,\qquad
+\operatorname{Var}(W)=\frac17.
+\]
+
+Consider the additive-noise channel with noise \(aW\), where \(a\geq2\).
+
+Choose a binary input
+
+\[
+U=
+\begin{cases}
+3a,&\text{with probability }p=\dfrac1{9a^2},\\
+0,&\text{with probability }1-p.
+\end{cases}
+\]
+
+It satisfies the power constraint exactly:
+
+\[
+\mathbb E[U^2]=1.
+\]
+
+The two conditional output supports are
+
+\[
+[-a,a]\quad\text{and}\quad[2a,4a].
+\]
+
+They are disjoint. Consequently, \(U\) can be recovered without error, and
+
+\[
+I(U;U+aW)=H_b(p),
+\]
+
+where \(H_b\) is binary entropy.
+
+Therefore,
+
+\[
+\begin{aligned}
+C(aW;1)
+&\geq H_b(p)\\
+&\geq p\log(1/p)\\
+&\geq\frac{2\log a}{9a^2}.
+\end{aligned}
+\]
+
+We obtain
+
+\[
+\boxed{C(aW;1)\geq\frac{2\log a}{9a^2}.}
+\]
+
+This lower bound is achieved by an input whose nonzero amplitude depends explicitly on the noise scale. \(\square\)
+
+\subsection{Lemma 2 --- A universal input cannot exploit every scale}
+
+Define the scale-localization function
+
+\[
+\omega(r)=
+\begin{cases}
+r,&0\leq r\leq\frac12,\\
+r^{-2},&r>\frac12.
+\end{cases}
+\]
+
+For every input \(X\) with \(\mathbb E[X^2]\leq1\) and every \(a\geq2\), I claim that
+
+\[
+\boxed{
+I(X;X+aW)
+\leq
+\frac{
+72+120\log a\,
+\mathbb E[X^2\omega(|X|/a)]
+}{a^2}.
+}
+\]
+
+\textbf{Proof.} Introduce an auxiliary reference density
+
+\[
+q_a(w)=(1-\delta)f(w)+\delta g(w),
+\]
+
+where
+
+\[
+\delta=a^{-2},
+\qquad
+g(w)=\frac1{\pi(1+w^2)}.
+\]
+
+The Cauchy component is only a comparison distribution used to bound relative entropy; it is not part of the physical noise channel.
+
+Write \(f_u(y)=f(y-u)\). The information-radius inequality gives
+
+\[
+I(X;X+aW)
+\leq
+\mathbb E\left[D(f_{X/a}\Vert q_a)\right].
+\]
+
+This follows directly from the relative-entropy chain rule.
+
+We will establish the pointwise bound, with \(r=|u|\),
+
+\[
+D(f_u\Vert q_a)
+\leq
+2a^{-2}+70r^2+
+120\log a\,r^2\omega(r).
+\tag{1}
+\]
+
+\textbf{Case A: \(0<r\leq1/2\).}
+
+Split the integral defining relative entropy into the central region
+
+\[
+A_r=\{w:|w|\leq1-2r\}
+\]
+
+and its complement within the support of \(f\).
+
+On \(A_r\),
+
+\[
+q_a(w+u)\geq(1-\delta)f(w+u).
+\]
+
+Let \(L(w)=\log f(w)\) inside the support. Then
+
+\[
+L''(w)=-\frac{4(1+w^2)}{(1-w^2)^2}.
+\]
+
+For every point \(t\) between \(w\) and \(w+u\),
+
+\[
+|L''(t)|\leq
+\frac{32}{(1-|w|)^2}.
+\]
+
+Taylor's theorem therefore yields
+
+\[
+L(w)-L(w+u)
+\leq-uL'(w)+
+\frac{16r^2}{(1-|w|)^2}.
+\]
+
+The linear term integrates to zero over \(A_r\), since \(f\) is even, \(L'\) is odd and \(A_r\) is symmetric.
+
+Furthermore,
+
+\[
+\int_{-1}^{1}
+\frac{f(w)}{(1-|w|)^2}\,dw
+=\frac{35}{8}.
+\]
+
+Using \(-\log(1-\delta)\leq2\delta\), the central contribution to the divergence is at most
+
+\[
+2\delta+70r^2.
+\]
+
+For the boundary region, observe that
+
+\[
+f(w)\leq\frac{15}{4}(1-|w|)^2.
+\]
+
+Consequently,
+
+\[
+\Pr(|W|>1-2r)\leq20r^3.
+\]
+
+On this region, \(|w+u|\leq3/2\), so the reference density satisfies
+
+\[
+\frac{f(w)}{q_a(w+u)}
+\leq\frac{10}{\delta}=10a^2.
+\]
+
+Since \(a\geq2\),
+
+\[
+\log(10a^2)\leq6\log a.
+\]
+
+Thus the boundary contribution is at most
+
+\[
+120r^3\log a.
+\]
+
+Combining the two regions proves
+
+\[
+D(f_u\Vert q_a)
+\leq2a^{-2}+70r^2+120r^3\log a,
+\]
+
+which is precisely (1) in Case A. The case \(r=0\) follows directly from \(q_a\geq(1-\delta)f\).
+
+\textbf{Case B: \(r>1/2\).}
+
+For every \(w\) in the support of \(f\),
+
+\[
+q_a(w+u)\geq
+\frac{\delta}{\pi(1+(w+u)^2)}.
+\]
+
+Using \(|w|\leq1\),
+
+\[
+\frac{f(w)}{q_a(w+u)}
+\leq9a^2(1+r^2).
+\]
+
+It follows that
+
+\[
+\begin{aligned}
+D(f_u\Vert q_a)
+&\leq2\log a+\log9+\log(1+r^2)\\
+&\leq2\log a+70r^2.
+\end{aligned}
+\]
+
+Because \(r^2\omega(r)=1\) in this case, inequality (1) follows here as well.
+
+Finally, substitute \(r=|X|/a\) into (1) and take expectations. The power constraint gives
+
+\[
+I(X;X+aW)
+\leq
+\frac{72+
+120\log a\,\mathbb E[X^2\omega(|X|/a)]}{a^2}.
+\]
+
+This proves the lemma. \(\square\)
+
+\subsection{Lemma 3 --- The multiscale obstruction}
+
+Consider dyadic amplitude scales
+
+\[
+a_j=2^j,\qquad j=m,\ldots,2m.
+\]
+
+For every real \(x\),
+
+\[
+\sum_{j\in\mathbb Z}
+\omega\left(\frac{|x|}{2^j}\right)
+\leq\frac{19}{3}.
+\tag{2}
+\]
+
+To see this, divide the terms at the threshold \(r=1/2\).
+
+The terms for \(r\leq1/2\) form a geometric series with total at most \(1\). The remaining terms are inverse squares forming a geometric series with total at most \(16/3\).
+
+Multiplying (2) by \(X^2\), taking expectations and using the power constraint gives
+
+\[
+\sum_{j=m}^{2m}
+\mathbb E\left[
+X^2\omega\left(\frac{|X|}{a_j}\right)
+\right]
+\leq\frac{19}{3}.
+\]
+
+There must therefore exist at least one \(j\in\{m,\ldots,2m\}\) for which
+
+\[
+\boxed{
+\mathbb E[X^2\omega(|X|/a_j)]
+\leq\frac{19}{3(m+1)}.
+}
+\]
+
+Combining Lemmas 1 and 2 at this particular scale yields
+
+\[
+\begin{aligned}
+\frac{I(X;X+a_jW)}{C(a_jW;1)}
+&\leq
+\frac{324}{\log a_j}
++540\mathbb E[X^2\omega(|X|/a_j)]\\
+&\leq
+\frac{324}{m\log2}
++\frac{3420}{m+1}.
+\end{aligned}
+\]
+
+The right-hand side tends to zero as \(m\to\infty\).
+
+This already disproves a variance-independent universal input. The next step establishes the stronger result. \(\square\)
+
+\subsection{Lemma 4 --- Concealing the relevant scale from the transmitter}
+
+Fix a noise variance \(N\geq16\). Let
+
+\[
+m=\left\lfloor\frac{\log_2N}{4}\right\rfloor.
+\]
+
+All the candidate scales in Lemma 3 satisfy
+
+\[
+a_j^2\leq N.
+\]
+
+Select the scale \(a\) whose existence is guaranteed by that lemma.
+
+Set
+
+\[
+v=N-\frac{a^2}{7},
+\qquad
+L=10(a+\sqrt N).
+\]
+
+Independently of \(X\) and \(W\), introduce a random variable \(J\) with distribution
+
+\[
+J=
+\begin{cases}
+-L,&\text{probability }\dfrac{v}{2L^2},\\
+0,&\text{probability }1-\dfrac{v}{L^2},\\
+L,&\text{probability }\dfrac{v}{2L^2}.
+\end{cases}
+\]
+
+Define the physical channel noise as
+
+\[
+Z=aW+J.
+\]
+
+By construction,
+
+\[
+\mathbb E[Z]=0,
+\]
+
+and
+
+\[
+\operatorname{Var}(Z)
+=\frac{a^2}{7}+v=N.
+\]
+
+The Markov chain
+
+\[
+X\longrightarrow X+aW
+\longrightarrow X+aW+J
+\]
+
+implies, by the data-processing inequality,
+
+\[
+I(X;X+Z)\leq I(X;X+aW).
+\tag{3}
+\]
+
+Crucially, adding \(J\) does not destroy the capacity lower bound from Lemma 1.
+
+Use the same binary input \(U\in\{0,3a\}\). Its conditional output supports now consist of six separated intervals.
+
+For any fixed value of \(J\), the two output intervals remain disjoint. Intervals corresponding to different values of \(J\) are also disjoint because \(L>6a\).
+
+Hence \(U\) remains perfectly recoverable:
+
+\[
+C(Z;1)\geq H_b(p)
+\geq\frac{2\log a}{9a^2}.
+\tag{4}
+\]
+
+Combining (3), (4) and the preceding lemmas gives
+
+\[
+\boxed{
+\frac{I(X;X+Z)}{C(Z;1)}
+\leq
+\frac{324}{m\log2}
++\frac{3420}{m+1}.
+}
+\]
+
+This bound holds for every admissible input \(X\), even if its distribution was chosen with full knowledge of \(N\).
+
+The adversarial noise has exactly the prescribed variance, a symmetric continuously differentiable density, compact support and finite differential entropy. Its capacity is finite by the maximum-entropy bound.
+
+Taking the supremum over all admissible inputs establishes
+
+\[
+R(N)=O\left(\frac1{\log N}\right).
+\]
+
+Therefore,
+
+\[
+\boxed{\lim_{N\to\infty}R(N)=0.}
+\]
+
+\(\blacksquare\)
+
+\section{A stronger extension: everywhere-positive smooth noise}
+
+One potential objection is that the construction exploits exact gaps in the support of the noise density.
+
+That restriction can be removed.
+
+Let \(G\) be an independent standard Gaussian and replace the constructed noise with
+
+\[
+Z_\tau=aW+J+\tau G,
+\]
+
+adjusting the variance of \(J\) to
+
+\[
+v=N-\frac{a^2}{7}-\tau^2.
+\]
+
+For sufficiently small positive \(\tau\), this is a valid construction with exactly the required variance.
+
+The noise now possesses an everywhere-positive, infinitely differentiable density. By data processing,
+
+\[
+I(X;X+Z_\tau)\leq I(X;X+aW).
+\]
+
+The binary input from Lemma 1 is no longer perfectly recoverable, but its decoding-error probability is bounded by
+
+\[
+P_e\leq
+\Pr\left(|\tau G|\geq\frac a4\right).
+\]
+
+This tends to zero as \(\tau\to0\).
+
+By Fano's inequality, choose \(\tau\) sufficiently small that
+
+\[
+I(U;U+Z_\tau)\geq\frac12H_b(p).
+\]
+
+The preceding universal-input upper bound consequently changes by at most a factor of two.
+
+\section*{Disclosure}
+This manuscript was prepared with AI assistance. The arguments and priority claims are open to independent review.
+
+\begin{thebibliography}{9}
+\bibitem{ZE} R. Zamir and U. Erez, A Gaussian input is not too bad, IEEE Transactions on Information Theory 50 (2004), 1362--1367. \href{https://doi.org/10.1109/TIT.2004.828153}{Source.}
+\bibitem{GKM} L. Gavalakis, I. Kontoyiannis and M. Madiman, The entropic doubling constant and robustness of Gaussian codebooks for additive-noise channels, IEEE Transactions on Information Theory (2024). \href{https://arxiv.org/abs/2403.07209}{Source.}
+\end{thebibliography}
+\end{document}

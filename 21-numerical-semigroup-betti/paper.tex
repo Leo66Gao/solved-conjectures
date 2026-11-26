@@ -1,0 +1,517 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\title{Simplicial homology and Betti numbers of numerical-semigroup tangent cones}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+We express the graded and total Betti numbers of a numerical-semigroup tangent cone as sums of reduced homology dimensions of explicit simplicial complexes. The formula holds over any field, admits a finite cutoff, and yields characteristic independence in embedding dimension at most four.
+\end{abstract}
+\section{The tangent-cone Betti-number problem}
+
+In June 2024, Alessio Moscariello and Alessio Sammartano released their specialist survey \emph{Open problems on relations of numerical semigroups}~\cite{MS}, subsequently published in Springer's \emph{Recent Progress in Ring and Factorization Theory}.
+
+The survey was updated on September 28, 2026, to identify resolved problems. Its Problem 1 remained listed without a solution.
+
+\subsection{Problem 1 --- Simplicial computation of tangent-cone Betti numbers}
+
+Let \(\Gamma\) be a numerical semigroup and let
+
+\[
+G_\Gamma=\operatorname{gr}_{\mathfrak m}
+\bigl(k[[\Gamma]]\bigr)
+\]
+
+be the associated graded ring of its local semigroup ring.
+
+The problem asks whether its Betti numbers
+
+\[
+b_i(G_\Gamma),\qquad b_{i,j}(G_\Gamma)
+\]
+
+can be computed through the homology of suitable simplicial complexes.
+
+\subsection{Why the problem matters}
+
+The Betti numbers encode the defining relations of an algebra and the higher-order relations between those relations. They are fundamental invariants in commutative algebra and algebraic geometry.
+
+For ordinary semigroup rings, classical work by Bruns, Herzog, Campillo and Marijuán provides a topological interpretation using squarefree divisor complexes. However, tangent cones have different multiplication rules, may contain zero divisors, and need not be Cohen--Macaulay.
+
+The proposed solution extends the simplicial description to precisely this setting, without assuming that the tangent cone is Cohen--Macaulay.
+
+\section{The main theorem}
+
+Let
+
+\[
+\Gamma=\langle g_1,\ldots,g_e\rangle
+\]
+
+be a numerical semigroup with its minimal generating set, where
+
+\[
+g_1<g_2<\cdots<g_e.
+\]
+
+For \(s\in\Gamma\), define its maximum factorization length by
+
+\[
+\operatorname{ord}(s)=
+\max\left\{
+\sum_{r=1}^{e}a_r:
+\sum_{r=1}^{e}a_rg_r=s,\;
+a_r\in\mathbb N
+\right\}.
+\]
+
+Set \(\operatorname{ord}(s)=-\infty\) when \(s\notin\Gamma\).
+
+For a subset \(F\subseteq[e]\), write
+
+\[
+g_F=\sum_{r\in F}g_r.
+\]
+
+Define the following family of simplicial complexes:
+
+\[
+\Delta_{s,j}=
+\left\{
+F\subseteq[e]:
+\operatorname{ord}(s-g_F)+|F|\ge j
+\right\}.
+\]
+
+Introduce one additional vertex \(v\), and construct
+
+\[
+K_{s,j}=
+\Delta_{s,j}\cup
+\left(v*\Delta_{s,j+1}\right),
+\]
+
+where \(v*\Delta\) denotes the cone over \(\Delta\).
+
+\subsection{Theorem --- Simplicial formula for tangent-cone syzygies}
+
+For every numerical semigroup \(\Gamma\), every field \(k\), and all nonnegative integers \(i,j\),
+
+\[
+\boxed{b_{i,j}(G_\Gamma)=\sum_{s\in\Gamma}\dim_k\widetilde H_{i-1}(K_{s,j};k)}
+\]
+
+Equivalently, using relative simplicial homology,
+
+\[
+\boxed{
+b_{i,j}(G_\Gamma)=
+\sum_{s\in\Gamma}
+\dim_k\widetilde H_{i-1}
+(\Delta_{s,j},\Delta_{s,j+1};k).
+}
+\]
+
+The total Betti numbers are consequently
+
+\[
+b_i(G_\Gamma)=
+\sum_{j\ge0}\sum_{s\in\Gamma}
+\dim_k\widetilde H_{i-1}(K_{s,j};k).
+\]
+
+Every complex in the formula has at most \(e+1\) vertices.
+
+\section{Interpretation of the construction}
+
+The central difficulty is that multiplication in the tangent cone can vanish even when multiplication in the original semigroup ring does not.
+
+The construction handles this using two nested simplicial complexes.
+
+The additional vertex converts relative homology into ordinary simplicial homology.
+
+\section{Proof}
+
+\subsection{Lemma 1 --- Nested simplicial complexes}
+
+For all integers \(s,j\), the set \(\Delta_{s,j}\) is a simplicial complex, allowing the void complex, and
+
+\[
+\Delta_{s,j+1}\subseteq\Delta_{s,j}.
+\]
+
+\textbf{Proof.}
+
+Suppose \(F\in\Delta_{s,j}\) and \(r\in F\). Let
+
+\[
+F'=F\setminus\{r\}.
+\]
+
+Since
+
+\[
+s-g_{F'}=(s-g_F)+g_r,
+\]
+
+every factorization of \(s-g_F\) can be extended by adding one generator. Therefore,
+
+\[
+\operatorname{ord}(s-g_{F'})
+\ge
+\operatorname{ord}(s-g_F)+1.
+\]
+
+It follows that
+
+\[
+\begin{aligned}
+\operatorname{ord}(s-g_{F'})+|F'|
+&\ge
+\operatorname{ord}(s-g_F)+1+|F|-1\\
+&\ge j.
+\end{aligned}
+\]
+
+Hence \(F'\in\Delta_{s,j}\).
+
+Closure under arbitrary subsets follows by repeated deletion. The nesting property follows immediately from the defining inequality. \(\square\)
+
+\subsection{Lemma 2 --- Multiplication in the tangent cone}
+
+Let \(u_s\) denote the initial form of \(t^s\) in the associated graded ring \(G_\Gamma\).
+
+Then \(u_s\) is homogeneous of degree \(\operatorname{ord}(s)\), and the collection
+
+\[
+\{u_s:s\in\Gamma\}
+\]
+
+is a vector-space basis of \(G_\Gamma\).
+
+For each minimal generator \(g_r\),
+
+\[
+u_{g_r}u_s=
+\begin{cases}
+u_{s+g_r},
+&\operatorname{ord}(s+g_r)
+=\operatorname{ord}(s)+1,\\
+0,&\text{otherwise}.
+\end{cases}
+\]
+
+\textbf{Proof.}
+
+Membership of a monomial \(t^s\) in \(\mathfrak m^d\) is equivalent to the existence of a factorization of \(s\) of length at least \(d\).
+
+Consequently,
+
+\[
+t^s\in
+\mathfrak m^{\operatorname{ord}(s)}
+\setminus
+\mathfrak m^{\operatorname{ord}(s)+1}.
+\]
+
+The basis assertion follows because the ideals \(\mathfrak m^d\) are monomial ideals.
+
+Multiplication by \(t^{g_r}\) increases the filtration degree by at least one. The product survives in the expected associated graded component exactly when the filtration degree increases by one, rather than by two or more. This gives the stated formula. \(\square\)
+
+\subsection{Lemma 3 --- Identification of the Koszul complex}
+
+Let
+
+\[
+P=k[x_1,\ldots,x_e]
+\]
+
+act on \(G_\Gamma\) through
+
+\[
+x_r\longmapsto u_{g_r}.
+\]
+
+Give \(x_r\) the bidegree \((g_r,1)\).
+
+Consider the Koszul complex computing
+
+\[
+\operatorname{Tor}^{P}_i(G_\Gamma,k).
+\]
+
+Its component of bidegree \((s,j)\) is naturally isomorphic, with a shift of homological degree by one, to
+
+\[
+\widetilde C_\bullet
+(\Delta_{s,j},\Delta_{s,j+1};k).
+\]
+
+\textbf{Proof.}
+
+A basis element of Koszul homological degree \(i\) has the form
+
+\[
+u_{s-g_F}\otimes e_F,
+\qquad |F|=i.
+\]
+
+It belongs to the required bidegree precisely when
+
+\[
+\operatorname{ord}(s-g_F)+|F|=j.
+\]
+
+By definition, this is equivalent to
+
+\[
+F\in
+\Delta_{s,j}\setminus\Delta_{s,j+1}.
+\]
+
+These are exactly the basis faces of the relative simplicial chain complex.
+
+The Koszul differential is
+
+\[
+d(u\otimes e_F)=
+\sum_{r\in F}
+(-1)^{\epsilon(r,F)}
+x_ru\otimes e_{F\setminus\{r\}},
+\]
+
+where \(\epsilon(r,F)\) is the position of \(r\) in the ordered face, counted from zero.
+
+By Lemma 2, the term corresponding to \(r\) survives precisely when
+
+\[
+\begin{aligned}
+&\operatorname{ord}(s-g_{F\setminus\{r\}})\\
+&\qquad=
+\operatorname{ord}(s-g_F)+1.
+\end{aligned}
+\]
+
+Equivalently,
+
+\[
+F\setminus\{r\}
+\in
+\Delta_{s,j}\setminus\Delta_{s,j+1}.
+\]
+
+The relative simplicial differential has exactly the same terms and signs: faces belonging to the higher-filtration subcomplex vanish in the quotient.
+
+The basis correspondence therefore commutes with the differentials and is an isomorphism of chain complexes.
+
+Since a face of cardinality \(i\) has simplicial dimension \(i-1\), the asserted degree shift follows. \(\square\)
+
+\subsection{Proof of the main theorem}
+
+Taking homology in Lemma 3 gives
+
+\[
+\operatorname{Tor}^{P}_i(G_\Gamma,k)_{(s,j)}
+\cong
+\widetilde H_{i-1}
+(\Delta_{s,j},\Delta_{s,j+1};k).
+\]
+
+Summing over semigroup degrees \(s\) yields the relative-homology formula for \(b_{i,j}(G_\Gamma)\).
+
+Now attach the cone \(v*\Delta_{s,j+1}\) to \(\Delta_{s,j}\). The cone is acyclic, and the relative chain complex obtained by quotienting out this cone is precisely the relative chain complex of the original nested pair.
+
+Consequently,
+
+\[
+\widetilde H_q(K_{s,j};k)
+\cong
+\widetilde H_q
+(\Delta_{s,j},\Delta_{s,j+1};k).
+\]
+
+If the higher-filtration complex is void, the cone attachment is omitted, and the same identity holds directly. The augmented chain convention also covers the empty face and homological degree zero.
+
+Substituting this identity establishes the ordinary simplicial-homology formula.
+
+Summing over \(j\) establishes the total Betti-number formula. \(\blacksquare\)
+
+\section{Second proof through an extended Rees semigroup}
+
+A separate derivation connects the proposed theorem to classical affine-semigroup theory.
+
+Define the positive affine semigroup
+
+\[
+H=
+\left\langle
+(g_1,1),\ldots,(g_e,1),(0,-1)
+\right\rangle
+\subseteq\mathbb Z^2.
+\]
+
+By construction,
+
+\[
+(s,j)\in H
+\iff
+s\in\Gamma
+\text{ and }
+j\le\operatorname{ord}(s).
+\]
+
+Its semigroup algebra \(k[H]\) is isomorphic to the extended Rees algebra of the monomial maximal ideal of \(k[\Gamma]\).
+
+Let \(z\) correspond to the generator \((0,-1)\). Then
+
+\[
+k[H]/(z)\cong G_\Gamma.
+\]
+
+Because \(k[H]\) is a domain, \(z\) is a non-zero-divisor. Thus a minimal multigraded free resolution of \(k[H]\) over
+
+\[
+Q=k[x_1,\ldots,x_e,z]
+\]
+
+remains exact and minimal after reduction modulo \(z\), giving a free resolution of \(G_\Gamma\) over \(P=Q/(z)\).
+
+The classical squarefree divisor complex of \(H\) at degree \((s,j)\) consists of:
+
+\begin{itemize}
+\item Faces not containing the additional generator, corresponding to \(\Delta_{s,j}\).
+\item Faces containing that generator, corresponding to \(v*\Delta_{s,j+1}\).
+
+\end{itemize}
+It is therefore exactly \(K_{s,j}\).
+
+The squarefree divisor complex formula of Bruns and Herzog~\cite{BH} gives the result directly.
+
+\section{Explicit finite computational bound}
+
+The formula can be converted into a terminating algorithm with an explicit search range.
+
+Let
+
+\[
+m=g_1,\qquad M=g_e
+\]
+
+and define
+
+\[
+B=(m-1)M+\sum_{r=1}^{e}g_r.
+\]
+
+\subsection{Theorem 2 --- Finite cutoff}
+
+For every \(s\ge B\) and every integer \(j\),
+
+\[
+\widetilde H_i(K_{s,j};k)=0.
+\]
+
+It follows that the complete graded Betti table is determined by the finite range
+
+\[
+\boxed{
+0\le s<B,\qquad
+0\le j\le
+\left\lfloor\frac{B-1}{m}\right\rfloor.
+}
+\]
+
+\textbf{Proof.}
+
+Consider a maximum-length factorization of an element of \(\Gamma\).
+
+Suppose the factorization contains at least \(m\) generators strictly greater than \(m\). Among the partial sums of any \(m\) such generators, including the initial zero, two must coincide modulo \(m\).
+
+Their difference therefore gives a nonempty collection of generators whose sum is divisible by \(m\).
+
+Since every generator in this collection exceeds \(m\), replacing the collection with the appropriate number of copies of \(m\) strictly increases the factorization length.
+
+This contradicts maximality.
+
+Consequently, every maximum-length factorization contains at most \(m-1\) generators greater than \(m\).
+
+In particular, whenever
+
+\[
+a\in\Gamma,\qquad a\ge(m-1)M+m,
+\]
+
+a maximum-length factorization of \(a\) must contain at least one copy of \(m\). Removing it establishes
+
+\[
+\operatorname{ord}(a-m)
+=\operatorname{ord}(a)-1.
+\]
+
+Now suppose \(s\ge B\) and \(F\subseteq\{2,\ldots,e\}\). Then
+
+\[
+s-g_F\ge(m-1)M+m.
+\]
+
+Whenever the relevant element belongs to the semigroup,
+
+\[
+\operatorname{ord}(s-g_F)+|F|
+=
+\operatorname{ord}(s-g_F-m)+|F|+1.
+\]
+
+Membership of \(F\) in either filtration complex is therefore equivalent to membership of \(F\cup\{1\}\).
+
+The same remains true after attaching the additional vertex \(v\). Hence \(K_{s,j}\) is either void or a cone with apex \(1\).
+
+Its reduced homology vanishes.
+
+Finally, every nonzero relative chain of bidegree \((s,j)\) satisfies \(s\ge mj\), since all semigroup generators are at least \(m\).
+
+Combining the two bounds proves the theorem. \(\blacksquare\)
+
+This supplies an explicit finite algorithm without requiring a computation of the defining toric ideal, a Gröbner basis, or a minimal free resolution.
+
+\section{Additional mathematical consequence}
+
+\subsection{Characteristic independence in embedding dimension at most four}
+
+\textbf{Corollary.} Let \(\Gamma\) be a numerical semigroup minimally generated by at most four integers. Then all graded and total Betti numbers of \(G_\Gamma\) are independent of the characteristic of the coefficient field.
+
+\textbf{Proof.}
+
+Every \(K_{s,j}\) has at most five vertices.
+
+Simplicial complexes on at most five vertices have torsion-free integral reduced homology. This topological fact is discussed by Ripke and Yoon~\cite{RY}.
+
+By the universal coefficient theorem, the dimensions
+
+\[
+\dim_k\widetilde H_i(K_{s,j};k)
+\]
+
+are independent of the characteristic of \(k\).
+
+The main theorem transfers this independence to the Betti numbers of the tangent cone. \(\blacksquare\)
+
+More generally, the formula identifies a concrete mechanism for characteristic-dependent Betti numbers: torsion in the integral homology of the constructed simplicial complexes.
+
+\section{Reproduction}
+The accompanying \texttt{verify.py} computes the homology of the explicit complexes and compares it with the homology computed directly from the tangent-cone multiplication rule. The examples cover seven numerical semigroups over $\mathbb F_2$, $\mathbb F_3$, and $\mathbb F_{101}$.
+
+\section*{Disclosure}
+This manuscript was prepared with AI assistance. The arguments and priority claims are open to independent review.
+
+\begin{thebibliography}{9}
+\bibitem{MS} A. Moscariello and A. Sammartano, Open problems on relations of numerical semigroups, Recent Progress in Ring and Factorization Theory (2025), 365--380. \href{https://arxiv.org/html/2406.00790v3}{Source.}
+\bibitem{BH} W. Bruns and J. Herzog, Semigroup rings and simplicial complexes, Journal of Pure and Applied Algebra 122 (1997), 185--208. \href{https://doi.org/10.1016/S0022-4049(97)00051-0}{Source.}
+\bibitem{RY} N. Ripke and P. Yoon, Characteristic independence of Betti numbers of monomial ideals in five variables, arXiv:2607.10639 (2026). \href{https://arxiv.org/abs/2607.10639}{Source.}
+\end{thebibliography}
+\end{document}

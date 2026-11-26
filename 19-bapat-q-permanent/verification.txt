@@ -1,0 +1,2 @@
+Exact rational bounds passed.
+Endpoint identity matched direct permutation sums on 72 exact integer Gram matrices.
