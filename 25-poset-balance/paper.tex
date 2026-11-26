@@ -1,0 +1,551 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{An inverse-linear bounded-range bound for the $1/3$--$2/3$ conjecture}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a sharp gap-insertion bound for a comparable pair in a uniformly random linear extension. Applied to a displacement-maximizing triple, it yields an additive improvement of order $1/D$ over the Brightwell--Felsner--Trotter constant for finite nonchains of incomparability range at most $D$. We also describe an exact rational prefix certificate for ruling out candidate counterexamples.
+\end{abstract}
+
+\section{Statement}
+
+For a finite partially ordered set $P$, let $f$ be a uniformly random linear extension, interpreted as a rank map. Write $x\parallel y$ for incomparability and let
+\[
+ \delta(P)=\max_{x\ne y}\min\{\Pr[f(x)<f(y)],\Pr[f(y)<f(x)]\}.
+\]
+The range of $P$ is $\max_{x\in P}|\{y\in P:x\parallel y\}|$. The $1/3$--$2/3$ conjecture asks whether $\delta(P)\ge 1/3$ for every finite nonchain. Put $C=(5-\sqrt5)/10$ and $K=5+3\sqrt5$. Theorem~1.3 of Aires, Chan, Pak and Panova~\cite{ACPP} gives an additive improvement over $C$ of $(D+1)^{-3(D+1)}/12$ when the range is at most $D$.
+
+\begin{theorem}
+For every finite nonchain $P$ of range at most $D$, where $D\ge2$,
+\[
+\delta(P)\ge C+\min\left\{\frac{67}{242}-C,\frac{C}{K(D+1)+1}\right\}.
+\]
+\end{theorem}
+
+The additive improvement in this estimate is of order $1/D$ as $D$ grows. The unrestricted conjecture remains open.
+
+\section{Gap insertion}
+
+\subsection{Lemma 1 --- Sharp gap-insertion inequality}
+
+Let \(Q\) be a finite poset of range at most \(D\), and let \(a\prec_Q b\).
+
+Suppose there exists at least one linear extension in which \(a\) and \(b\) are not consecutive.
+
+Then
+
+\[
+\boxed{
+\Pr_Q[f(b)-f(a)\geq2]
+\geq\frac1{D+1}.
+}
+\]
+
+Moreover, this dependence on \(D\) is optimal.
+
+\paragraph{Proof.}
+
+Partition the linear extensions of \(Q\) into two classes:
+
+\begin{itemize}
+\item \(\mathcal A\): extensions in which \(a,b\) are consecutive.
+\item \(\mathcal B\): extensions in which at least one element separates them.
+
+\end{itemize}
+By assumption, \(\mathcal B\ne\varnothing\).
+
+Define the set of eligible elements
+
+\[
+T=Q\setminus
+\bigl(\downarrow a\;\cup\;\uparrow b\bigr),
+\]
+
+where the principal downset and upset include \(a\) and \(b\), respectively.
+
+Every element occurring between \(a,b\) in any linear extension must belong to \(T\). Consequently, \(T\ne\varnothing\).
+
+Take an arbitrary extension in \(\mathcal A\).
+
+If an element of \(T\) occurs before \(a\), choose the last such element \(w\), remove it and insert it between \(a,b\).
+
+Otherwise, choose the first element of \(T\) occurring after \(b\), remove it and insert it between \(a,b\).
+
+
+
+The selected element crosses only elements incomparable with it, preserving the validity of the extension.
+
+
+
+To see this, consider the first case. Every element crossed by \(w\) belongs to \(\downarrow a\). If \(w\) were required to precede a crossed element \(u\), transitivity would imply
+
+\[
+w\prec_Q u\preceq_Q a,
+\]
+
+contradicting \(w\in T\).
+
+Therefore moving \(w\) to the right violates no order relation. The second case is the order-dual argument.
+
+This defines a map
+
+\[
+\Phi:\mathcal A\longrightarrow\mathcal B.
+\]
+
+Every image of this map contains precisely one element between \(a,b\), so the identity of the moved element \(w\) can be recovered uniquely.
+
+A possible preimage can be recovered by moving \(w\) back to its original position.
+
+An element incomparable with at most \(D\) others has at most \(D+1\) possible ranks in any linear extension. One rank is its current position, leaving at most \(D\) possible preimages.
+
+Hence
+
+\[
+|\mathcal A|\leq D|\mathcal B|.
+\]
+
+It follows that
+
+\[
+\Pr_Q[f(b)-f(a)\geq2]
+=
+\frac{|\mathcal B|}
+{|\mathcal A|+|\mathcal B|}
+\geq\frac1{D+1}.
+\]
+
+\[
+\qquad\square
+\]
+
+\paragraph{Sharpness.}
+
+Take a chain of \(D\) elements and one isolated element \(w\).
+
+There are exactly \(D+1\) linear extensions, corresponding to the possible insertion positions of \(w\).
+
+For any consecutive pair \(a,b\) in the chain, exactly one extension places \(w\) between them.
+
+Thus
+
+\[
+\Pr[f(b)-f(a)\geq2]=\frac1{D+1}.
+\]
+
+The lemma is therefore sharp for every \(D\geq2\).
+
+\subsection{Lemma 2 --- Conditional gap inequality}
+
+Let \(a,b\) be incomparable elements of a finite poset \(P\) of range at most \(D\).
+
+If some linear extension places \(a\) before \(b\), with an intervening element, then
+
+\[
+\boxed{
+\Pr[f(b)-f(a)\geq2]
+\geq
+\frac{\Pr[f(a)<f(b)]}{D+1}.
+}
+\]
+
+\textbf{Proof.} Add the relation \(a\prec b\) to \(P\) and take its transitive closure, obtaining a new poset \(Q\).
+
+Adding relations cannot increase the range. The uniform distribution on the linear extensions of \(Q\) is precisely the conditional distribution of the linear extensions of \(P\), given \(f(a)<f(b)\).
+
+Applying Lemma 1 gives the result. \(\square\)
+
+This conditional formulation is the crucial improvement over the general-purpose rare-event estimate employed in the October 2026 paper.
+
+\section{Proof of the bound}
+
+The proof uses the triple analysis of Brightwell, Felsner and Trotter~\cite{BFT} and the refinements of Aires, Chan, Pak and Panova~\cite{ACPP}.
+
+
+
+\subsection{Step 1 --- Boundary displacement}
+
+Let
+
+\[
+h(v)=\mathbb E[f(v)]
+\]
+
+be the expected rank of an element.
+
+List the elements in nondecreasing order of expected rank:
+
+\[
+h(v_1)\leq h(v_2)\leq\cdots\leq h(v_n).
+\]
+
+Define
+
+\[
+d_i=h(v_i)-i,
+\qquad
+M=\max_i|d_i|.
+\]
+
+We may assume the incomparability graph is connected. Otherwise, its connected components form an ordinal sum, and the comparison probabilities inside each component are preserved.
+
+The two-element case is immediate.
+
+Since the incomparability graph is connected and nontrivial, the poset has at least two minimal elements. Choose a minimal element \(u\ne v_1\).
+
+Moving \(u\) to the beginning of any linear extension produces another valid linear extension. Each resulting extension has at most \(D+1\) preimages.
+
+Consequently,
+
+\[
+\Pr[f(u)=1]\geq\frac1{D+1}.
+\]
+
+Whenever \(f(u)=1\), the rank of \(v_1\) is at least two. Therefore
+
+\[
+\boxed{
+M\geq h(v_1)-1\geq\frac1{D+1}.
+}
+\]
+
+This independently replaces the extremely small boundary-displacement estimate used in the existing proof.
+
+\subsection{Step 2 --- Select a critical triple}
+
+Lemma~4.1 of~\cite{ACPP} guarantees a triple of consecutive elements in expected-rank order,
+
+\[
+(x,y,z)=(v_m,v_{m+1},v_{m+2}),
+\]
+
+that does not form a chain and satisfies
+
+\[
+h(z)-h(x)\leq2,
+\]
+
+with
+
+\[
+\max\{|d_m|,|d_{m+2}|\}=M.
+\]
+
+Such a triple is called a BFT triple.
+
+Set
+
+\[
+t=\delta(P)-C.
+\]
+
+The desired conclusion already holds if
+
+\[
+t\geq\frac{67}{242}-C.
+\]
+
+We therefore assume
+
+\[
+\delta(P)<\frac{67}{242}.
+\]
+
+The established BFT triple classification, including the Case C estimate in Section~2.1 of~\cite{ACPP}, then forces
+
+\[
+x\prec z,\qquad x\parallel y,\qquad y\parallel z.
+\]
+
+\subsection{Step 3 --- Control the probability of separated inversions}
+
+Define
+
+\[
+p=\Pr[f(y)<f(x)],
+\]
+
+\[
+p'=\Pr[f(z)<f(y)].
+\]
+
+The expected-rank ordering and the established height-probability inequality imply that, under our assumption,
+
+\[
+p,p'\leq\delta(P)=C+t.
+\]
+
+The proof of Lemma~2.4 of~\cite{ACPP} supplies a nonnegative quantity \(R\) satisfying
+
+\[
+\frac{p+p'}2\geq C+\frac R K
+\]
+
+and
+
+\[
+R\geq
+\Pr[f(x)-f(y)\geq2]
++
+\Pr[f(y)-f(z)\geq2].
+\]
+
+In particular,
+
+\[
+R\leq Kt,
+\qquad
+p,p'\geq C-t.
+\]
+
+Suppose that some extension realizes a separated inversion of \(x,y\).
+
+By the new conditional gap inequality,
+
+\[
+R\geq
+\Pr[f(x)-f(y)\geq2]
+\geq\frac{p}{D+1}
+\geq\frac{C-t}{D+1}.
+\]
+
+Combining the inequalities gives
+
+\[
+Kt\geq\frac{C-t}{D+1}.
+\]
+
+Rearranging,
+
+\[
+\boxed{
+t\geq\frac{C}{K(D+1)+1}.
+}
+\]
+
+The argument for a separated inversion of \(y,z\) is identical.
+
+Thus the desired theorem holds whenever either kind of separated inversion is possible.
+
+\subsection{Step 4 --- Resolve the remaining structural case}
+
+The only remaining possibility is that every reversed occurrence of either pair is consecutive:
+
+\[
+f(y)<f(x)\Longrightarrow f(x)=f(y)+1,
+\]
+
+\[
+f(z)<f(y)\Longrightarrow f(y)=f(z)+1.
+\]
+
+First, \(z\) covers \(x\). Otherwise, an element strictly between \(x,z\) in the partial order, together with the positive-probability event \(f(x)<f(y)<f(z)\), would force
+
+\[
+h(z)-h(x)>2,
+\]
+
+a contradiction.
+
+The consecutive-inversion property also implies that for every other element \(w\),
+
+\[
+w\prec y\quad\text{or}\quad x\prec w,
+\]
+
+and
+
+\[
+w\prec z\quad\text{or}\quad y\prec w.
+\]
+
+Indeed, if neither alternative in the first assertion held, a linear extension containing \(y,w,x\) in that relative order would exist, contradicting the consecutive-inversion property. The second assertion follows similarly.
+
+If \(w\) were incomparable with \(y\), these implications would yield
+
+\[
+x\prec w\prec z,
+\]
+
+contradicting the cover property.
+
+Consequently, \(y\) is incomparable only with \(x,z\).
+
+Write
+
+\[
+L=\{w:w\prec y\},
+\qquad
+U=\{w:y\prec w\}.
+\]
+
+The ground set decomposes as
+
+\[
+P=L\sqcup\{x,y,z\}\sqcup U,
+\]
+
+and
+
+\[
+L\cup\{x\}\prec U\cup\{z\}.
+\]
+
+We give the displacement calculation from Claims~4.3--4.4 of~\cite{ACPP} under the structure just derived. All elements of $L$ come before $x$ in the expected-rank order, and all elements of $U$ follow $z$, because $L\prec y\prec U$ and $x,y,z$ are consecutive in that order. Thus $m=|L|+1$.
+
+Set
+
+\[
+L'=L\cup\{x\},\qquad U'=U\cup\{z\}.
+\]
+
+Let \(r\) be the probability that \(x\) is last in a uniform extension of \(L'\), and let \(s\) be the probability that \(z\) is first in a uniform extension of \(U'\).
+
+Counting the possible insertion positions of \(y\) gives
+
+\[
+p=\frac r{1+r+s},
+\qquad
+p'=\frac s{1+r+s}.
+\]
+
+Define
+
+\[
+a=\max(p,p').
+\]
+
+Then
+
+\[
+r,s\leq\frac a{1-2a}.
+\]
+
+Let \(\alpha\) denote the expected number of elements of \(L\) following \(x\), and \(\beta\) the expected number of elements of \(U\) preceding \(z\).
+
+The same insertion count gives
+
+\[
+\alpha\geq(1-p)(1-r),
+\]
+
+\[
+\beta\geq(1-p')(1-s).
+\]
+
+Hence, defining
+
+\[
+V(a)=\frac{(1-a)(1-3a)}{1-2a},
+\]
+
+we obtain
+
+\[
+\alpha,\beta\geq V(a).
+\]
+
+The endpoint displacements satisfy
+
+\[
+d_m=p-\alpha,
+\qquad
+d_{m+2}=\beta-p'.
+\]
+
+Since the triple has expected span at most two,
+
+\[
+d_{m+2}\leq d_m.
+\]
+
+Therefore
+
+\[
+V(a)-a\leq d_{m+2}
+\leq d_m\leq a-V(a).
+\]
+
+By our selection of the triple,
+
+\[
+M\leq a-V(a).
+\]
+
+The algebraic estimate
+
+\[
+a-V(a)
+=
+\frac{5a-5a^2-1}{1-2a}
+\leq6(a-C)
+\]
+
+holds for \(C\leq a<1/3\), as established in Claim~4.4 of~\cite{ACPP}.
+
+Thus
+
+\[
+\delta(P)-C\geq\frac M6
+\geq\frac1{6(D+1)}.
+\]
+
+This is stronger than the required inverse-linear bound.
+
+Combining all cases proves
+
+\[
+\boxed{
+\delta(P)\geq
+C+\min\left\{
+\frac{67}{242}-C,\,
+\frac{C}{K(D+1)+1}
+\right\}.
+}
+\]
+
+\[
+\qquad\square
+\]
+
+\section{Exact prefix certificates}
+
+For a reference linear extension $v_1,\ldots,v_n$ of a range-$D$ poset, every linear extension satisfies $|f(v_i)-i|\le D$. Indeed, the rank change is the difference between the counts of elements crossing $v_i$ in opposite directions, and only incomparable elements can cross it. At cut $k$, every possible prefix ideal $I$ therefore contains the first $k-D$ reference elements and is contained within the first $k+D$, with indices clipped to $[1,n]$.
+
+Suppose $P$ has no balanced pair. Orient each pair in its strict majority direction, whose probability exceeds $2/3$. Three directed majority comparisons cannot form a cycle. In any total order at most two comparisons in a directed cycle on three elements hold, whereas the sum of their probabilities would exceed two. A tournament without a directed triangle is transitive. Its linear order extends $P$ and has reversal probability below $1/3$ for every pair. Use this as the reference order.
+
+For each candidate ideal $I$ of size $k$ and incomparable reference pair $v_a,v_b$ with $a<b$, let $q_I(a,b)$ be the fraction of extensions of $I$ that reverse the pair when both elements lie in $I$. Take $q_I(a,b)=1$ when only $v_b$ is in $I$, and $q_I(a,b)=0$ otherwise. This lower-bounds the conditional reversal probability given $I$. The prefix under that conditioning is uniform because each of its linear extensions has exactly the same number of completions.
+
+\begin{proposition}
+Suppose nonnegative rational weights $w_{ab}$, with at least one positive weight, satisfy
+\[
+ 3\sum_{a<b}w_{ab}q_I(a,b)\ \,\ge\ \sum_{a<b}w_{ab}
+\]
+for every candidate prefix ideal $I$. Then the reference order cannot be the majority order of a counterexample.
+\end{proposition}
+\begin{proof}
+Average the inequality over the distribution of the prefix ideal in a uniform extension. Every unconditional reversal probability is strictly below $1/3$ in the majority order of a counterexample, a contradiction.
+\end{proof}
+
+For a prescribed finite prefix, a certificate involving pairs within that prefix applies uniformly to its range-$D$ continuations when all candidate ideals at the cut lie within the prefix. The fraction $q_I$ can be computed by exact extension counts. The criterion leaves open whether such certificates suffice across all bounded-range instances.
+
+\section{Exact checks}
+The accompanying \texttt{verify.py} enumerates naturally labelled posets and checks the gap inequality for comparable pairs in which separation occurs. The computation supports the insertion lemma. The general bound follows from the proof above.
+
+\section*{Disclosure}
+This manuscript was prepared with AI assistance. Independent proof review and priority assessment are pending.
+
+\begin{thebibliography}{9}
+\bibitem{ACPP} M. Aires, S. H. Chan, I. Pak and G. Panova, \emph{Breaking the infinite barrier in the $1/3$--$2/3$ conjecture}, arXiv:2609.30888v2 (2026). \href{https://arxiv.org/html/2609.30888v2}{Preprint.}
+\bibitem{BFT} G. Brightwell, S. Felsner and W. Trotter, \emph{Balancing pairs and the cross product conjecture}, Order 12 (1995), 327--349. \href{https://trotter.math.gatech.edu/papers/97.pdf}{Article.}
+\end{thebibliography}
+\end{document}

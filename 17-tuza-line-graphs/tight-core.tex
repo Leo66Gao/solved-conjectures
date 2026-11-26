@@ -1,0 +1,298 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{Vertex extensions and tight cores in Tuza's conjecture}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove Tuza's inequality for graphs obtained by adjoining a vertex to a graph whose triangle components are copies of $K_4$ or $K_5$. A second extension argument shows that, after removal of the edges of any triangle of an edge-minimal counterexample, the remaining graph is tight, has packing number one smaller, and contains an exceptional triangle component. Exact small-graph checks examine the proposed equality structure and open-wedge avoidance.
+\end{abstract}
+
+\section{Definitions}
+
+Write $\nu(G)$ for the maximum size of an edge-disjoint triangle packing and $\tau(G)$ for the minimum number of edges meeting all triangles of a finite simple graph $G$. Tuza conjectured that $\tau(G)\le2\nu(G)$~\cite{Tuza}. A graph is \emph{tight} if $\tau(G)=2\nu(G)$.
+
+The triangle components of $G$ are the unions of triangles in the connected components of the graph whose vertices are triangles of $G$ and whose adjacencies indicate a shared edge. Say that $G$ has \emph{standard triangle structure} when each triangle component is a $K_4$ or a $K_5$. Edges in no triangle are allowed. The two graph parameters add over triangle components because their edge sets are disjoint. For $K_4$ the pair $(\nu,\tau)$ is $(1,2)$. For $K_5$ it is $(2,4)$ by Mantel's theorem and a balanced bipartition for the cover, and because three packed triangles would use nine edges and have even degree at every vertex.
+
+The results below concern extensions and minimal counterexamples. The line-graph case appears in the companion manuscript.
+
+\section{Arbitrary vertex-extension theorem}
+
+\textbf{Theorem.} Let \(H\) be any finite simple graph whose triangle components are copies of \(K_4\) or \(K_5\). Construct \(G\) by adding a new vertex with an arbitrary neighborhood in \(H\). Then
+
+\[
+\boxed{\tau(G)\leq2\nu(G).}
+\]
+
+There is no restriction on the degree of the added vertex, the number of components, or the presence of additional triangle-free edges in \(H\).
+
+This provides a new exact extension mechanism beyond the triangle-deletion approach developed previously.
+
+The new vertex may connect arbitrarily to multiple triangle components.
+
+\subsection{Proof}
+
+Write
+
+\[
+k=\nu(H).
+\]
+
+Because the triangle components have disjoint edge sets, and because \(K_4\) and \(K_5\) both attain equality in Tuza's inequality,
+
+\[
+\tau(H)=2k.
+\]
+
+Let \(v\) be the new vertex, and define its link graph
+
+\[
+L=H[N_G(v)].
+\]
+
+Choose an inclusion-maximal matching \(M\) in \(L\), subject to the restriction that at most one matching edge belongs to each \(K_4\) triangle component.
+
+No additional restriction is needed for \(K_5\) components.
+
+\textbf{Packing construction.}
+
+A \(K_4\) contains a maximum triangle packing avoiding any specified edge.
+
+A \(K_5\) contains a maximum triangle packing avoiding any two disjoint specified edges. Indeed, if those edges are \(ab\) and \(cd\), and the fifth vertex is \(e\), the triangles \(ace\) and \(bde\) provide the required packing.
+
+Consequently, we can choose a maximum triangle packing of \(H\) avoiding every edge of \(M\).
+
+For each \(xy\in M\), add the triangle \(vxy\).
+
+These additional triangles are pairwise edge-disjoint, because \(M\) is a matching.
+
+Hence
+
+\[
+\nu(G)\geq k+|M|.
+\]
+
+\textbf{Cover construction.}
+
+Delete every edge joining \(v\) to an endpoint of \(M\). This costs exactly \(2|M|\) edges.
+
+Every remaining triangle through \(v\) corresponds to an edge of \(L\) whose endpoints are both unmatched.
+
+By the maximality of \(M\), such an edge must belong to a \(K_4\) component already represented by an edge of \(M\).
+
+Inside that component, the only possible edge with both endpoints unmatched is the edge opposite the selected matching edge.
+
+Choose the minimum triangle cover of this \(K_4\) to contain both opposite edges. This is a valid cover of size two.
+
+Choose minimum covers independently in the remaining components.
+
+The resulting cover of \(G\) has size at most
+
+\[
+2k+2|M|.
+\]
+
+Therefore,
+
+\[
+\boxed{
+\tau(G)\leq2k+2|M|\leq2\nu(G).
+}
+\]
+
+\[
+\square
+\]
+
+\section{Restoring two incident edges}
+
+Suppose \(J\) has standard triangle structure and \(H\) is obtained from \(J\) by adding two distinct incident edges.
+
+Then it is impossible to have simultaneously
+
+\[
+\nu(H)=\nu(J)+1
+\]
+
+and
+
+\[
+\tau(H)=2\nu(H).
+\]
+
+\subsection{Proof}
+
+Write the two added edges as \(wu,wv\), and put
+
+\[
+k=\nu(J).
+\]
+
+Assume for contradiction that
+
+\[
+\nu(H)=k+1,\qquad \tau(H)=2k+2.
+\]
+
+There must be a triangle using \(wu\) but not \(wv\), and another using \(wv\) but not \(wu\).
+
+Otherwise, a minimum cover of \(J\), together with one additional edge, would cover \(H\).
+
+Write these triangles as
+
+\[
+wux,\qquad wvy.
+\]
+
+\textbf{Case I: \(x\neq y\).}
+
+The two triangles are edge-disjoint.
+
+We show that a maximum triangle packing of \(J\) can avoid all four edges
+
+\[
+wx,\ ux,\ wy,\ vy.
+\]
+
+No complete triangle component of \(J\) contains both outside edges of either new triangle: doing so would require one of the missing edges \(wu,wv\).
+
+Moreover, whenever a component contains two of the four edges, those edges must be incident.
+
+A disjoint pair consisting of one edge through $w$ and one of $ux,vy$ cannot lie in a single component: that component would contain both endpoints of one of the absent edges $wu,wv$. If $ux$ and $vy$ belong to the same component, it contains $u,v,x,y$ and hence $xy$. The triangle $wxy$ then puts $w$ in the component, again forcing an absent edge.
+
+Thus each component must avoid at most two incident edges.
+
+Both cliques admit maximum packings avoiding two incident edges $ab,ac$. For $K_4$ use the triangle on the other three vertices. For $K_5$ with remaining vertices $d,e$, use $ade$ and $bce$.
+
+Combining these packings and adding the two new triangles gives
+
+\[
+\nu(H)\geq k+2,
+\]
+
+a contradiction.
+
+\textbf{Case II: \(x=y\) for every choice of extension triangles.}
+
+All triangles using exactly one new edge therefore share the same outside vertex \(x\).
+
+They can all be covered by the single edge \(wx\).
+
+The only possible additional triangle is \(wuv\).
+
+If this triangle exists, then \(uvx\) is a triangle of \(J\). Choose a minimum cover of its complete triangle component containing \(uv\).
+
+Together with \(wx\), this covers all triangles of \(H\) using at most
+
+\[
+2k+1
+\]
+
+edges.
+
+Again, this contradicts the assumed equality.
+
+\[
+\square
+\]
+
+\section{A necessary condition for a minimal counterexample}
+
+This theorem produces a stronger necessary condition for a minimal counterexample than our previous open-wedge reduction.
+
+\textbf{Theorem.} If \(G\) is an edge-minimal counterexample to Tuza's conjecture, with
+
+\[
+\nu(G)=k,
+\]
+
+then, for every triangle \(T\) of \(G\), the graph
+
+\[
+J=G-E(T)
+\]
+
+satisfies all three conditions:
+
+\[
+\boxed{
+\begin{aligned}
+\nu(J)&=k-1,\\
+\tau(J)&=2(k-1),\\
+J&\text{ has nonstandard triangle structure.}
+\end{aligned}
+}
+\]
+
+\subsection{Proof}
+
+Minimality gives
+
+\[
+\tau(G)=2k+1
+\]
+
+and, for every edge \(e\),
+
+\[
+\nu(G-e)=k,\qquad \tau(G-e)=2k.
+\]
+
+For any triangle \(T\),
+
+\[
+\tau(G-E(T))
+\geq\tau(G)-3
+=2k-2.
+\]
+
+By minimality,
+
+\[
+\tau(G-E(T))
+\leq2\nu(G-E(T)).
+\]
+
+Any packing of \(G-E(T)\) can be extended by adding \(T\), so
+
+\[
+\nu(G-E(T))\leq k-1.
+\]
+
+Equality follows throughout.
+
+Now choose one edge \(e\) of \(T\), and set \(H=G-e\).
+
+The graph \(H\) is obtained from \(J\) by adding two incident edges, and satisfies
+
+\[
+\nu(H)=\nu(J)+1,\qquad \tau(H)=2\nu(H).
+\]
+
+The incident-edge restoration theorem shows that \(J\) cannot have standard triangle structure.
+
+\[
+\square
+\]
+
+\section{An exact small-graph check}
+
+The accompanying \texttt{verify-tight.py} computes packing and covering numbers by integer recurrences for all 1,253 NetworkX graph-atlas graphs. The atlas contains 44 tight graphs with at least one triangle. Each of their triangle components is a $K_4$ or a $K_5$. Across those graphs all 250 open wedges can be avoided by a maximum packing. Here an open wedge consists of two incident edges whose other endpoints are nonadjacent.
+
+The reduction above leaves the equality structure of general tight graphs open. The atlas computation checks a finite range and complements the structural results.
+
+\section*{Disclosure}
+This manuscript was prepared with AI assistance. Independent proof review and priority assessment are pending.
+
+\begin{thebibliography}{9}
+\bibitem{Tuza} Z. Tuza, \emph{A conjecture on triangles of graphs}, Graphs and Combinatorics 6 (1990), 373--380. \href{https://doi.org/10.1007/BF01787705}{Article.}
+\end{thebibliography}
+\end{document}

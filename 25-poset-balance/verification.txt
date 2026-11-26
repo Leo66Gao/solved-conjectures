@@ -1,0 +1,6 @@
+Order 2: 2 posets, 0 applicable checks, 0 equalities
+Order 3: 7 posets, 8 applicable checks, 8 equalities
+Order 4: 40 posets, 105 applicable checks, 31 equalities
+Order 5: 357 posets, 1568 applicable checks, 110 equalities
+Order 6: 4824 posets, 31218 applicable checks, 434 equalities
+Total: 5230 posets, 32899 exact gap checks, 583 equalities

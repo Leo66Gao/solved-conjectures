@@ -1,0 +1,3 @@
+Atlas graphs: 1253
+Nontrivial tight graphs, all with standard triangle structure: 44
+Open wedges avoidable by a maximum packing: 250
