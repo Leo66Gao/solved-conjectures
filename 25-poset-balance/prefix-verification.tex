@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\title{Exact prefix certificates at the closed $1/3$ threshold}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Verification note}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give an exact separation criterion for prefix-state certificates in the $1/3$--$2/3$ conjecture. A range-two example shows why certificates that attain equality are useful. An exact finite search closes every range-four branch by depth ten and checks the shorter finite cases. This verifies a proof method on a class already covered by Peczarski's six-thin theorem.
+\end{abstract}
+
+\section{Reference orders and prefix states}
+
+Write $p_P(a,b)$ for the probability that $b$ precedes $a$ in a uniformly random linear extension of a finite poset $P$. Its range is the maximum number of elements incomparable with any one element. The $1/3$--$2/3$ conjecture asks whether every nonchain has an incomparable pair with reversal probability in $[1/3,2/3]$. The companion manuscript studies quantitative bounds when the range is at most $D$.
+
+In a hypothetical counterexample, orient each pair in the direction having probability greater than $2/3$. This gives a strict total order extending $P$. Indeed, a directed triangle would require three events with probabilities summing to more than two, while at most two events in such a triangle can occur in any linear extension. Label the elements in this reference order. Every reversal $b<a$ with $a<b$ in the reference order now has probability strictly below $1/3$.
+
+Fix a prefix $Q$ of this order with $L>D$ elements, and put $k=L-D$. The rank of an element can differ from its reference rank by at most $D$, since it can cross only incomparable elements. Consequently every initial segment of size $k$ lies in $Q$ and is an order ideal there. We allow all order ideals of $Q$ of size $k$ as candidate states. Let $E_I$ count the linear extensions of a candidate ideal $I$. For each incomparable reference pair $a<b$ in $Q$, let $N_I(a,b)$ count those extensions witnessing $b$ before $a$. When only $b$ lies in $I$, set $N_I(a,b)=E_I$. When $b$ lies outside $I$, set $N_I(a,b)=0$. Put $q_I(a,b)=N_I(a,b)/E_I$.
+
+The prefix conditioned on the ideal $I$ is uniform over its extensions, since the number of suffix completions is independent of the order within $I$. If $\lambda_I$ is the probability of that prefix ideal, then $p_P(a,b)\ge\sum_I\lambda_I q_I(a,b)$.
+
+\begin{theorem}[Closed-threshold separation]
+There is no probability distribution over the candidate ideals satisfying $\sum_I\lambda_I q_I(a,b)<1/3$ for every incomparable reference pair if and only if there are nonnegative rational pair weights $w_{ab}$, with at least one positive weight, such that
+\[
+ \sum_{a<b}w_{ab}\bigl(3N_I(a,b)-E_I\bigr)\ge0
+ \qquad\text{for every candidate ideal }I.
+\]
+Such a certificate rules out any continuation of range at most $D$ with the specified majority order.
+\end{theorem}
+\begin{proof}
+Divide each certificate inequality by $E_I$ and average with the hypothetical weights $\lambda_I$. The left side must be negative if every reversal mean is strictly below $1/3$.
+
+For the converse, take the convex hull of the vectors $q_I$ and separate it from the open set in which all coordinates are strictly less than $1/3$. If there are no incomparable pairs, a distribution satisfying the empty set of constraints exists and neither assertion holds. Otherwise, weak separation gives a nonzero normal $w$ with $w\cdot q_I\ge\sup_{x_{ab}<1/3} w\cdot x$. The open set is unbounded in every negative coordinate direction, so $w\ge0$. Its supremum is $\sum_{a<b}w_{ab}/3$. Normalize $w$ to have sum one. These inequalities define a nonempty rational polytope, which has a rational point. Multiplying each inequality for that point by $3E_I$ gives the certificate.
+\end{proof}
+
+The equivalence concerns the relaxation in which the weights on candidate ideals are arbitrary. Actual continuations can impose further restrictions on those weights.
+
+\section{Why equality matters}
+
+Consider the six-element poset whose only incomparable pairs in the reference order are $(1,2)$, $(2,3)$, $(3,5)$, and $(4,5)$. At cut $k=4$ there are two candidate ideals, $I_1=\{1,2,3,4\}$ and $I_2=\{1,2,3,5\}$.
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+ & $I_1$ & $I_2$\\
+\midrule
+Extensions & $3$ & $5$\\
+$q_I(1,2)$ & $1/3$ & $2/5$\\
+$q_I(2,3)$ & $1/3$ & $1/5$\\
+$q_I(3,5)$ & $0$ & $2/5$\\
+$q_I(4,5)$ & $0$ & $1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Weight on pair $(1,2)$ alone certifies the closed threshold. Every coordinate of $q_{I_1}$ is at most $1/3$, so no weights give a strictly larger normalized bound at this cut.
+
+\section{Exact range-four verification}
+
+If $i<j$ are incomparable in a reference order, every element strictly between them is incomparable with at least one endpoint. Each endpoint already uses one of its $D$ allowed incomparabilities on the other. Therefore $j-i\le 2D-1$. The connected components of the incomparability graph form an ordinal sum. To see this, a vertex outside a component is comparable to all its vertices and must lie on the same side of both ends of each incomparability edge. Propagating along paths orders the components, and restricting a uniform extension to one component gives a uniform extension there. Thus it suffices to consider connected nonchains.
+
+The verifier appends one reference vertex at a time. It tries every pattern of incomparabilities within the bandwidth bound, tests the degree bound, and checks that the new vertex's predecessors form an ideal. These checks generate every naturally labelled prefix that a connected counterexample could have. An uncrossed cut is discarded once no future vertex can cross it within the bandwidth bound. A closed-threshold certificate also discards the entire branch. It suffices in this particular run to search certificates on one or two pairs. The two-pair test intersects rational intervals for the ratio of their weights. The ideal dynamic program uses integer extension and reversal counts, including for the direct check of every remaining finite connected candidate.
+
+\begin{center}
+\small
+\begin{tabular}{rrrr}
+\toprule
+Prefix length & Examined & Certified & Remaining\\
+\midrule
+1 & 1 & 0 & 1\\
+2 & 2 & 0 & 2\\
+3 & 7 & 0 & 7\\
+4 & 40 & 0 & 40\\
+5 & 357 & 0 & 357\\
+6 & 3,167 & 1,408 & 1,759\\
+7 & 11,747 & 7,104 & 4,643\\
+8 & 15,164 & 13,191 & 1,973\\
+9 & 9,019 & 8,584 & 435\\
+10 & 1,973 & 1,973 & 0\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+No connected counterexample of range at most four can have ten or more vertices, because its prefix would survive until depth ten. The verifier checked the 5,692 shorter connected candidates left after pruning. Every such candidate had a reversal probability at least $1/3$ in its reference order, so that order cannot be the majority order of a counterexample. This proves the conjecture in the tested range. Peczarski's stronger six-thin result already covers this class~\cite{Peczarski}. Termination of this certificate search for the remaining ranges is open, and the unrestricted conjecture remains unresolved.
+
+Run \texttt{python3 verify-prefix.py} to reproduce the integer and rational checks and the equality example.
+
+\section*{Disclosure}
+This research note was prepared with AI assistance. Independent proof review and priority assessment are pending.
+
+\begin{thebibliography}{9}
+\bibitem{Peczarski} M. Peczarski, \emph{The Gold Partition Conjecture for 6-Thin Posets}, Order 25 (2008), 91--103. \href{https://doi.org/10.1007/s11083-008-9081-9}{Article}.
+\end{thebibliography}
+\end{document}

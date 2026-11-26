@@ -16,6 +16,8 @@ With NetworkX installed, run `python3 verify.py`. The script checks exact packin
 
 A vertex-extension theorem and an incident-edge restoration argument restrict the shape of a hypothetical edge-minimal counterexample. Deleting the edges of any triangle would leave a tight graph with packing number one smaller and a triangle component other than a $K_4$ or $K_5$.
 
+The supplement gives exact packing and covering formulas for restoring the three edges. It derives an equivalent augmentation problem and verifies a six-vertex counterexample to simultaneous avoidance of two arbitrary open wedges in a tight graph.
+
 [Supplement PDF](tight-core.pdf) · [LaTeX](tight-core.tex)
 
-With NetworkX installed, run `python3 verify-tight.py` for exact packing, covering, and open-wedge checks on the graph atlas. [Recorded output](tight-verification.txt)
+With NetworkX installed, run `python3 verify-tight.py` for exact packing, covering, open-wedge, and triangle restoration checks on the graph atlas. [Recorded output](tight-verification.txt)

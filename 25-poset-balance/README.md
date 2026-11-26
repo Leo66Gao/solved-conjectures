@@ -11,3 +11,11 @@ A sharp gap-insertion inequality gives an additive improvement of order $1/D$ ov
 Run `python3 verify.py` with the Python standard library. It checks the gap-insertion inequality on 5,230 naturally labelled posets of orders two through six, with 32,899 applicable pair checks.
 
 [Recorded output](verification.txt)
+
+## Verification note on the closed threshold
+
+The note gives an exact separation criterion, a worked example where a certificate attains $1/3$, and a finite cutoff for the range-four search. This verifies the method on a class covered by Peczarski’s six-thin theorem.
+
+[Note PDF](prefix-verification.pdf) · [LaTeX](prefix-verification.tex) · [Exact verifier](verify-prefix.py) · [Recorded output](prefix-verification.txt)
+
+Run `python3 verify-prefix.py` with the Python standard library. All branches close by depth ten, and the script checks 5,692 shorter connected cases.

@@ -1,3 +1,9 @@
 Atlas graphs: 1253
 Nontrivial tight graphs, all with standard triangle structure: 44
-Open wedges avoidable by a maximum packing: 250
+Open wedges individually avoidable by a maximum packing: 250
+Independent triples tested: 167
+All single restorations raise the cover: 5
+All single restorations raise the cover and packing: 5
+All double restorations raise the cover by two: 0
+Full minimal-counterexample restoration profiles: 0
+Simultaneous two-wedge avoidance counterexample verified.

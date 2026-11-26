@@ -1,0 +1,12 @@
+Equality example: exact prefix counts and closed certificate verified.
+1 {'checked': 1} 1
+2 {'checked': 2, 'finite': 1} 2
+3 {'checked': 7, 'finite': 4} 7
+4 {'checked': 40, 'finite': 27} 40
+5 {'checked': 357, 'finite': 275} 357
+6 {'checked': 3167, 'finite': 1229, 'certified': 1408} 1759
+7 {'checked': 11747, 'finite': 2308, 'certified': 7104} 4643
+8 {'cut': 11747, 'checked': 15164, 'finite': 1549, 'certified': 13191} 1973
+9 {'checked': 9019, 'certified': 8584, 'finite': 299} 435
+10 {'checked': 1973, 'certified': 1973} 0
+All range-four branches closed by depth 10; 5692 shorter connected cases checked.

@@ -13,7 +13,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We prove Tuza's inequality for graphs obtained by adjoining a vertex to a graph whose triangle components are copies of $K_4$ or $K_5$. A second extension argument shows that, after removal of the edges of any triangle of an edge-minimal counterexample, the remaining graph is tight, has packing number one smaller, and contains an exceptional triangle component. Exact small-graph checks examine the proposed equality structure and open-wedge avoidance.
+We prove Tuza's inequality for graphs obtained by adjoining a vertex to a graph whose triangle components are copies of $K_4$ or $K_5$. A second extension argument shows that, after removal of the edges of any triangle of an edge-minimal counterexample, the remaining graph is tight, has packing number one smaller, and contains an exceptional triangle component. Exact restoration formulas give an equivalent packing-augmentation condition for the full conjecture. Small-graph checks test the local conditions and verify a counterexample to unrestricted simultaneous wedge avoidance.
 \end{abstract}
 
 \section{Definitions}
@@ -38,7 +38,7 @@ This provides a new exact extension mechanism beyond the triangle-deletion appro
 
 The new vertex may connect arbitrarily to multiple triangle components.
 
-\subsection{Proof}
+\paragraph{Proof.}
 
 Write
 
@@ -128,7 +128,7 @@ and
 \tau(H)=2\nu(H).
 \]
 
-\subsection{Proof}
+\paragraph{Proof.}
 
 Write the two added edges as \(wu,wv\), and put
 
@@ -232,7 +232,7 @@ J&\text{ has nonstandard triangle structure.}
 }
 \]
 
-\subsection{Proof}
+\paragraph{Proof.}
 
 Minimality gives
 
@@ -283,11 +283,55 @@ The incident-edge restoration theorem shows that \(J\) cannot have standard tria
 \square
 \]
 
-\section{An exact small-graph check}
+\section{Local consistency in a minimal counterexample}
 
-The accompanying \texttt{verify-tight.py} computes packing and covering numbers by integer recurrences for all 1,253 NetworkX graph-atlas graphs. The atlas contains 44 tight graphs with at least one triangle. Each of their triangle components is a $K_4$ or a $K_5$. Across those graphs all 250 open wedges can be avoided by a maximum packing. Here an open wedge consists of two incident edges whose other endpoints are nonadjacent.
+Let $G$ be an edge-minimal counterexample, with $k=\nu(G)$ and $\tau(G)=2k+1$ as above. For every nonempty $F\subseteq E(G)$,
+\[
+ 2k+1\le |F|+\tau(G-F)\le |F|+2\nu(G-F).
+\]
+Thus deleting $F$ costs at most $\lfloor (|F|-1)/2\rfloor$ triangles from a maximum packing. If $r$ edge-disjoint triangles and $s$ additional edges are specified, with $1\le r+s\le2$, delete the $3r+s$ edges involved. The bound gives a residual packing of size at least $k-r$. Restoring the $r$ specified triangles therefore gives a maximum packing containing those triangles and avoiding the $s$ additional edges. In particular, any two specified edges can be avoided, any specified triangle can be included while avoiding one other edge, and any two edge-disjoint triangles can be included together.
 
-The reduction above leaves the equality structure of general tight graphs open. The atlas computation checks a finite range and complements the structural results.
+\section{Exact formulas for restoring a triangle}
+
+Let $J$ be tight with $\nu(J)=m$, and let $a,b,c$ be independent vertices of $J$. Write $T=\{ab,ac,bc\}$ and $G=J+T$. When $J$ is obtained by deleting a triangle from an edge-minimal counterexample $G$, its partial restorations satisfy
+\[
+ \nu(J+S)=m+1,\qquad \tau(J+S)=2m+|S|
+ \quad(\varnothing\ne S\subseteq T).
+\]
+For the cover number, adding $S$ to a minimum cover of $J$ gives the upper bound, and adding $T\setminus S$ to a cover of $J+S$ gives the lower bound from $\tau(G)=2m+3$. For proper nonempty $S$, minimality gives $2\nu(J+S)\ge2m+|S|$, and $\nu(J+S)\le m+1$. The full restoration follows by definition.
+
+For a restored edge $uv\in T$, an \emph{extension wedge} consists of the two edges $ux,vx$ of $J$ for a common neighbor $x$. Call the type $uv$ active relative to a cover $C$ of $J$ if some wedge of this type avoids $C$. Write $A(C)\subseteq T$ for the active types. The exact covering formula is
+\begin{equation}\label{eq:restoration-cover}
+ \tau(G)=\min_{C\text{ covers }J}\bigl(|C|+\max\{1,|A(C)|\}\bigr).
+\end{equation}
+Indeed, once the old-edge portion $C$ of the cover is fixed, each active type requires its restored edge. Also, some restored edge must meet the triangle $abc$. These requirements suffice, because every other new triangle has one restored edge and one extension wedge. Since $\tau(J)=2m$, the condition $\tau(G)=2m+3$ is equivalent to both of the following.
+\begin{enumerate}
+\item Every size-$2m$ cover leaves all three types active.
+\item Every size-$2m+1$ cover leaves at least two types active.
+\end{enumerate}
+Larger covers already cost at least $2m+3$ after meeting $abc$. We call these two conditions \emph{cover resistance}.
+
+For the packing formula, let $\mathcal U$ run over sets of extension triangles using distinct restored edges and distinct outside vertices. Such triangles are edge-disjoint: for distinct types the only possible shared edge joins their shared distinguished vertex to a common outside vertex. Let $F(\mathcal U)$ be their union of old edges. Then
+\begin{equation}\label{eq:restoration-pack}
+ \nu(G)=\max\left\{m+1,\ \max_{\mathcal U}
+ \bigl(|\mathcal U|+\nu(J-F(\mathcal U))\bigr)\right\}.
+\end{equation}
+The first branch uses $abc$. A packing leaving out $abc$ uses exactly a set $\mathcal U$ of extension triangles and a packing in the old graph avoiding their old edges. Thus $\nu(G)\ge m+2$ holds precisely when a pair of extension triangles can be added without losing any old packing triangles, or a triple can be added while losing at most one.
+
+Tuza's conjecture is equivalent to the following statement: for every tight $J$ with three distinguished independent vertices satisfying cover resistance, at least one of these two packing augmentations exists. Indeed, if the conjecture holds, the exact cover number $2m+3$ forces a packing of size at least $m+2$. Conversely, deleting any triangle from an edge-minimal counterexample gives a tight $J$ satisfying cover resistance. Either augmentation would contradict $\nu(G)=m+1$. The augmentation statement remains open.
+
+There are further restrictions in such a hypothetical counterexample. Restoring just one edge increases the packing number by one, so some wedge of each type is avoidable by a maximum packing of $J$. For two disjoint extension triangles, the packing loss in $J$ on deleting their four old edges is either one or two. It is at least one by~\eqref{eq:restoration-pack}. It is at most two because the residual cover number is at least $2m-4$ and the residual graph satisfies Tuza's inequality by edge-minimality. If the loss is two, local consistency in $G$ forces a compatible third extension triangle. A maximum packing containing the given pair would otherwise require $m-1$ triangles from the residual core, which has packing number $m-2$.
+
+\subsection{A failed simultaneous avoidance rule}
+
+Take $K_4$ on vertices $0,1,2,3$ and add pendant edges $04$ and $25$. The graph is tight with packing number one and cover number two. The open wedges $4$--$0$--$1$ and $5$--$2$--$3$ can each be avoided by some maximum packing. Avoiding both requires avoiding the opposite clique edges $01$ and $23$. Deleting these two edges leaves no triangle, so the two wedges cannot be avoided together by a maximum packing. The three-distinguished-vertex geometry in the augmentation statement is a genuine restriction.
+
+\section{Exact small-graph checks}
+\enlargethispage{\baselineskip}
+
+The accompanying \texttt{verify-tight.py} computes packing and covering numbers by integer recurrences for all 1,253 NetworkX graph-atlas graphs. It recovers 44 tight graphs containing a triangle, whose triangle components are all $K_4$ or $K_5$, and verifies avoidance for all 250 open wedges in these graphs.
+
+The verifier also checks all 167 independent triples in those tight graphs. For five triples, all three single-edge restorations increase both the cover and packing numbers by one. No triple has all three double-edge restorations increase the cover number by two, so none realizes the required full restoration profile. The finite checks include the simultaneous-avoidance counterexample above.
 
 \section*{Disclosure}
 This manuscript was prepared with AI assistance. Independent proof review and priority assessment are pending.
