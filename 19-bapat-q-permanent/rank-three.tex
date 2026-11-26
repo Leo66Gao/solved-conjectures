@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\DeclareMathOperator{\perma}{per}
+\newtheorem{theorem}{Theorem}
+\title{A rank-three construction for a smaller real $q$-permanent counterexample}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research supplement}
+\begin{document}
+\maketitle
+\begin{abstract}
+We construct a real symmetric positive definite integer matrix of order $271{,}147{,}008$ whose $q$-permanent has negative derivative at $q=1$. The Gram factor has three columns before the positive diagonal lift. Relative angular discretization and two pure polynomial coefficients give a rationally certified norm ratio exceeding $1.001$. The finite certificate establishes the needed bounds without materializing the full matrix.
+\end{abstract}
+
+\section{The endpoint identity}
+
+For an $n\times n$ matrix $A$, set
+\[
+ P_q(A)=\sum_{\sigma\in S_n}q^{\operatorname{inv}(\sigma)}\prod_i A_{i,\sigma(i)}.
+\]
+Bapat's monotonicity conjecture concerns the original interval $[-1,1]$~\cite{BL}. This supplement gives a smaller witness for the real-symmetric case. The companion manuscript gives a four-column construction, and da Fonseca and Goyal give real counterexamples for the extension to $q>1$~\cite{FG}.
+
+Let $H=VV^{\mathsf T}$ for real rows $v_i$, let $C=\binom n2$, and put
+\[
+ L_i(z)=v_i\cdot z,\qquad p(z)=\prod_iL_i(z),\qquad
+ F_{ab}(z)=\sum_{i<j}(v_{ia}v_{jb}-v_{ib}v_{ja})\prod_{k\ne i,j}L_k(z).
+\]
+The dot product in $L_i$ is bilinear. For $f(z)=\sum_\alpha f_\alpha z^\alpha$ write $\|f\|_F^2=\sum_\alpha\alpha!|f_\alpha|^2$.
+The factorial inner product of two products of linear forms is the permanent of the matrix of pairwise factor inner products, by applying the product of directional derivatives and evaluating at zero. Thus $\perma(H)=\|p\|_F^2$. Expanding the exterior norms using the two-by-two determinant for wedge inner products counts a permutation once positively for every ascending pair and once negatively for every descending pair. Consequently
+\begin{equation}\label{eq:endpoint}
+ 2P'_1(H)=C\|p\|_F^2-\sum_{a<b}\|F_{ab}\|_F^2.
+\end{equation}
+Define $R(V)=\sum_{a<b}\|F_{ab}\|_F^2/(C\|p\|_F^2)$. For exact computation on smaller inputs, appending a row $v$ with form $L$ updates the polynomials by
+\[
+ p_{\mathrm{new}}=L p_{\mathrm{old}},\qquad
+ F_{ab,\mathrm{new}}=L F_{ab,\mathrm{old}}+v_b\partial_a p_{\mathrm{old}}-v_a\partial_b p_{\mathrm{old}}.
+\]
+The two derivative terms collect the new pairs whose second row is $v$.
+
+\section{The ordered frame}
+
+Set $K=256$, $D=K^2$, $T=60$, $H_0=662$, $M=4096$, $\beta=H_0/(D+H_0)$ and $n=(D+H_0)M=271{,}147{,}008$. For $0\le j<K$ and $0\le k<M$, put
+\[
+ u_j=1-\frac{(K-j)^2}{D},\quad
+ w_j=2(K-j)-1,\quad b_j=\min\left(T,\frac{u_j}{\sqrt{1-u_j^2}}\right),\quad
+ \theta_k=\frac{2\pi(k+1/2)}{M}.
+\]
+Take $w_j$ copies of $(\cos\theta_k,\sin\theta_k,b_j)$ for every $(j,k)$ and $H_0$ additional copies of $(\cos\theta_k,\sin\theta_k,0)$ for every $k$. Order the rows by increasing $b_j\cos\theta_k$, using zero for the additional rows and breaking ties lexicographically by labels and copy indices. The resulting matrix is $V$.
+
+\section{Angular estimates}
+
+For $|c|\ge |d|$ with $c\ne0$, the angular mean of
+$\log|c e^{i\theta}+d e^{-i\theta}+w|$ is
+\[
+ \log|c|+\log\max(1,|r_1|,|r_2|),
+\]
+where $r_1,r_2$ are the roots of $cX^2+wX+d$. This follows from the circle formula and $|r_1r_2|\le1$. For $R>\sqrt{|d/c|}$ the level sets of the larger root modulus are centered ellipses $w=-cRe^{i\theta}-(d/R)e^{-i\theta}$. A ray meets each such ellipse once, so the angular mean is nondecreasing as $w$ moves out along a ray.
+
+On any rotated grid of $M$ roots of unity, the product of the linear factors for a root $r_i$ shows that the discrete mean minus the continuous mean is at most
+\[
+ \frac1M\log\bigl(1+\min(|r_i|,|r_i|^{-1})^M\bigr)\le\frac1M\min(1,|r_i|^M)
+quad\text{per root}.
+\]
+At a grid zero the desired upper bound is immediate.
+
+Write $z_0=(1,i,0)/\sqrt2$ and $z=c_z z_0+d_z\bar z_0+w_z e_3$ for a unit vector. By reversing the angular grid if needed, take $\rho=|c_z|\ge|d_z|$. If $\rho=0$ the anchor factors vanish. Otherwise the two angular coefficients have moduli $|c|=\rho/\sqrt2$, $|d|=|d_z|/\sqrt2$. Put $r=|d/c|$ and $v=|w_z/c|$. The empirical height $b$ is dominated by $U/\sqrt{1-U^2}$ for uniform $U\in[0,1]$. Indeed, the weights $w_j/D$ are the lengths of successive intervals with left endpoints $u_j$ and final endpoint one, and the cap and anchors only reduce heights. Hence
+\[
+ \Pr(b>x)\le1-\frac{x}{\sqrt{1+x^2}}\le\frac1{2x^2}\qquad(x>0).
+\]
+One angular root has modulus at most $\sqrt r$. If the larger modulus $R>s\ge\sqrt{2r}$, then $bv\ge R-r/R\ge s/2$. For $v=0$ both moduli are $\sqrt r$. Integrating the tail bound gives
+\[
+ \mathbb E\min(1,R^M) \le \min(1,(2r)^{M/2})+\frac{2v^2M}{M-2}\le4r^2+4v^2.
+\]
+The smaller root adds at most $r^{M/2}\le r^2$. When $\rho^2\ge1/2$, the resulting upper discretization error is at most $(5r^2+4v^2)/M\le16(1-\rho^2)/M$. When $\rho^2<1/2$, the unconditional bound $2/M$ suffices.
+
+\section{An upper bound on the product norm}
+
+The vector $(\sqrt{1-U^2}\cos\theta,\sqrt{1-U^2}\sin\theta,U)$ with uniform $U$ and uniform independent angle is uniform on the upper real hemisphere. Absolute values of linear forms are even under antipodal reflection. After a scalar complex phase and a real rotation, the real and imaginary parts of a unit $z$ have lengths $\sqrt h$ and $\sqrt{1-h}$ and are orthogonal. The circle mean on their plane is $\log((\sqrt h+\sqrt{1-h})/2)$, apart from a radial term independent of $h$. Its loss relative to $h=1/2$ is at most $-|z\cdot z|^2/8$, by $\sqrt{1-x}\le1-x/2$ and $\log(1-x)\le-x$. Dividing by $\sqrt{1-U^2}$ adds a constant independent of $z$. At $z_0$ the modulus after division is $1/\sqrt2$. These log means are integrable by comparison with the logarithm of a nonzero real coordinate.
+
+Height binning and capping only decrease the continuous ordinary-row mean by radial monotonicity. For the anchors the continuous mean is $-\tfrac12\log 2+\log\rho$. Combining the two populations with the relative angular error and $\log\rho\le-(1-\rho^2)/2$ gives
+\begin{equation}\label{eq:global}
+ \frac1n\log|p(z)|\le-\tfrac12\log2-c_0(1-\rho^2)-\frac{1-\beta}{8}|z\cdot z|^2,
+ \qquad c_0=\frac\beta2-\frac{16}{M}>0.
+\end{equation}
+
+Let $\mu$ be uniform probability measure on the complex unit sphere in $\mathbb C^3$. Gaussian integration gives $\|f\|_F^2=(d+2)!\int|f|^2\,d\mu/2$ for degree $d$. Set $w_0=0.65/T$, $s_0=0.03$, $q_*=0.97$ and $\varepsilon=10^{-4}$. On the region $|w_z|\le w_0$, $|z\cdot z|\le s_0$, the identity $z\cdot z=2c_zd_z+w_z^2$ and normalization show that $\rho>0.99$. Here the certificate checks that the root bounds $r_*=(s_0+w_0^2)/(2(0.99)^2)$ and $v_*=\sqrt2 T w_0/0.99$ satisfy $v_*q_*+r_*<q_*^2$. Thus every root has modulus below $q_*$, by its quadratic equation. The continuous mean is $\log|c|$ and the grid contributes at most $2q_*^M/M$ per row. Consequently on this region
+\[
+ |p(z)|^2\le2^{-n}\rho^{2n}\exp(4nq_*^M/M)\le2^{-n}\rho^{2n}(1+\varepsilon).
+\]
+On the complementary region, \eqref{eq:global} gives $|p(z)|^2\le2^{-n}e^{-2gn}$, where $g=\min(c_0w_0^2,(1-\beta)s_0^2/8)$. The certificate checks $\binom{n+2}2 e^{-2gn}<\varepsilon$ using $e>2$. Since $\rho^{2n}\le|c_z|^{2n}+|d_z|^{2n}$ and each power integrates to $1/\binom{n+2}2$, these two regional estimates give
+\begin{equation}\label{eq:product}
+ \|p\|_F^2\le n!2^{-n}(2+3\varepsilon).
+\end{equation}
+
+\section{Two coefficients certify the numerator}
+
+At $z_0$, put $t_i=L_i(e_3)/L_i(z_0)=\sqrt2 b_i e^{-i\theta_i}$. Contract the exterior vector with the unit wedge $z_0\wedge e_3$ using the bilinear pairing. Dividing this contraction by $p(z_0)$ gives $\sum_{i<j}(t_j-t_i)$. Its real part is $n^2G_*$ where $G_*=\tfrac12\mathbb E|X-X'|$ for independent copies of the real part of $t_I$ at a uniformly chosen row $I$. This is precisely the effect of the prescribed order.
+
+By sign symmetry, $\mathbb E|X-X'|=\mathbb E\max(|X|,|X'|)$. The certificate partitions the folded angular grid into 256 equal bins and bounds each cosine below using the degree-ten alternating Taylor polynomial at the bin's right endpoint, with $\pi<22/7$. It also rounds each height and $\sqrt2$ downward using integer square-root comparisons. Sorting the resulting nonnegative rational values with their weights computes a lower bound on the maximum expectation, by differences of squares of cumulative weights. The zero-height anchor mixture is included exactly. Write $G\le G_*$ for the resulting rational bound.
+
+Cauchy--Schwarz for the contraction gives $\sum_{a<b}|F_{ab}(z_0)|^2\ge2^{-n}n^4G^2$. Real coefficients give the same bound at $\bar z_0$. These evaluations select distinct pure monomials in a unitary coordinate system, so their factorial-norm contributions add. It follows that
+\[
+ \sum_{a<b}\|F_{ab}\|_F^2\ge2(n-2)!2^{-n}n^4G^2,qquad
+ R(V)\ge\frac{2G^2n^4}{C n(n-1)(2+3\varepsilon)}>1.001.
+\]
+The last inequality is a rational check. Also $\|p\|_F^2\ge n!|p(z_0)|^2=n!2^{-n}$ by factorial Cauchy--Schwarz. Equation~\eqref{eq:endpoint} yields $P'_1(H)<-C n!2^{-n}/2000$.
+
+\section{The integer lift and interior comparison}
+
+Set $B=1+T^2$, $S=10^6 n(T+1)[2(B+1)]^n$, $W_{ij}=\lfloor SV_{ij}\rfloor$, and $A=WW^{\mathsf T}+I_n$. All inputs to the floor are algebraic. The matrix is integer and positive definite by the Gram factorization and identity term. Repeated nonzero anchor rows give a nonzero off-diagonal entry. Write $\widetilde A=A/S^2$. Entrywise the rounding and diagonal lift change $H$ by less than $6(T+1)/S$ and both matrices have entries bounded in absolute value by $B+1$. Telescoping the products in the derivative gives
+\[
+ |P'_1(\widetilde A)-P'_1(H)|\le
+ \frac{6}{10^6(B+1)}C n!2^{-n}.
+\]
+Thus $P'_1(\widetilde A)<-C n!2^{-n}/2500$. Also $|P''_q(\widetilde A)|\le n! C^2(B+1)^n$ for $0\le q\le1$. With $h=1/(10000 C[2(B+1)]^n)$ the derivative stays negative on $[1-h,1]$. In particular,
+\[
+ P_{1-h}(A)>P_{1-h/2}(A),
+\]
+since positive scaling preserves the comparison. Both parameters lie strictly inside $[-1,1]$.
+
+\section{Reproduction and scope}
+
+Run \texttt{python3 rank3\_certificate.py} for the exact rational checks. The proof gives an upper bound on the minimum counterexample dimension. A practical directly evaluable witness and a minimality result remain open in this work.
+
+\section*{Disclosure}
+This supplement was prepared with AI assistance. Independent proof review and priority assessment are pending.
+
+\begin{thebibliography}{9}
+\bibitem{BL} R. B. Bapat and A. K. Lal, \emph{Inequalities for the $q$-permanent}, Linear Algebra and its Applications 197--198 (1994), 397--409. \href{https://doi.org/10.1016/0024-3795(94)90497-9}{Article}.
+\bibitem{FG} C. M. da Fonseca and D. D. Goyal, \emph{Real positive definite counterexamples to a monotonicity conjecture for the $q$-permanent}, arXiv:2611.14694 (2026). \href{https://arxiv.org/abs/2611.14694}{Preprint}.
+\end{thebibliography}
+\end{document}

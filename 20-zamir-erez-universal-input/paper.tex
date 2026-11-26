@@ -4,13 +4,13 @@
 \usepackage[hidelinks]{hyperref}
 \allowdisplaybreaks[2]
 \setlength{\emergencystretch}{2em}
-\title{A vanishing universal-input capacity fraction for additive noise}
+\title{The sharp universal-input capacity fraction for additive noise}
 \author{Leo Gao\\[-1pt]{\small AI-assisted research}}
 \date{November 26, 2026 \quad$\cdot$\quad Research draft}
 \begin{document}
 \maketitle
 \begin{abstract}
-We show that no power-constrained input guarantees a positive universal fraction of additive-noise channel capacity. Even when the input is chosen using the noise variance $N$, the worst-case capacity fraction is $O(1/log N)$ as $N$ grows. The noise can be chosen to have a symmetric $C^1$ compactly supported density or a smooth, everywhere-positive density.
+For scalar additive noise with mean zero, variance $N$, and finite differential entropy, we show that the best worst-case fraction of power-constrained channel capacity is $\Theta(1/\log N)$ as $N\to\infty$. A standard Gaussian input attains the optimal order without knowledge of $N$. The same rate holds for symmetric compactly supported $C^1$ noise densities and for smooth, everywhere-positive noise densities. The upper bound uses a multiscale noise construction. The lower bound controls every competing input through Gaussian smoothing, directed Hellinger distances, and a geometric decomposition of its amplitudes.
 \end{abstract}
 \section{The universal-input question}
 
@@ -43,32 +43,19 @@ where \(X_G\sim\mathcal N(0,P)\). The guaranteed fraction tends to zero at low S
 
 \section{Main theorem}
 
-\textbf{Theorem (Universal-input impossibility).} Normalize the transmitter's power constraint to \(\mathbb E[X^2]\leq1\), and define
-
+Normalize input power to $\mathbb E[X^2]\le 1$. Let $\mathcal Z_N$ be the class of zero-mean noise laws with a density, variance $N$, and finite differential entropy. All channel inputs are independent of the noise, and we abbreviate $C(Z)=C(Z;1)$. Define
 \[
-R(N)=
-\sup_{\mathbb E[X^2]\leq1}
-\inf_{Z\in\mathcal Z_N}
-\frac{I(X;X+Z)}{C(Z;1)},
+ R(N)=\sup_{\mathbb E[X^2]\le1}\inf_{Z\in\mathcal Z_N}\frac{I(X;X+Z)}{C(Z)}.
 \]
-
-where \(\mathcal Z_N\) is the class of independent, zero-mean noise distributions with variance \(N\) and finite differential entropy.
-
-Then, as \(N\to\infty\),
-
+\textbf{Theorem.} For $G\sim\mathcal N(0,1)$, there are absolute constants $c,K>0$ such that for $N\ge16$,
 \[
-\boxed{R(N)=O\left(\frac1{\log N}\right)}
+ \frac{c}{\log N} \le
+ \inf_{Z\in\mathcal Z_N}\frac{I(G;G+Z)}{C(Z)}
+ \le R(N) \le \frac{K}{\log N}.
 \]
+The same order bounds hold when the noise is restricted to symmetric compactly supported $C^1$ densities, or to smooth everywhere-positive densities. The upper bound is uniform over input laws that can depend on $N$.
 
-and consequently,
-
-\[
-\boxed{\lim_{N\to\infty}R(N)=0.}
-\]
-
-The conclusion remains valid when the noise is restricted to symmetric, continuously differentiable, compactly supported probability densities, or alternatively to everywhere-positive, infinitely differentiable densities.
-
-\section{Proof}
+\section{The multiscale upper bound}
 
 All logarithms below are natural. The choice of logarithm base does not affect capacity ratios.
 
@@ -546,6 +533,697 @@ I(U;U+Z_\tau)\geq\frac12H_b(p).
 \]
 
 The preceding universal-input upper bound consequently changes by at most a factor of two.
+
+\section{The Gaussian lower bound}
+
+\textbf{Theorem (Gaussian comparison).} Let \(Z\) have finite variance and finite differential entropy, and let
+
+\[
+G\sim\mathcal N(0,1),\qquad
+t=I(G;G+Z).
+\]
+
+For every \(\varepsilon>0\), there is a finite universal constant \(B_\varepsilon\), independent of the noise distribution, such that
+
+\[
+\boxed{
+C(Z)
+\leq
+t\left[
+\left(\frac12+\varepsilon\right)
+\log_+\frac1t+B_\varepsilon
+\right],
+}
+\tag{5}
+\]
+
+where \(\log_+x=\max(0,\log x)\).
+
+For noise symmetric about its mean, the logarithmic coefficient in (5) can be taken to be \(1/4+\varepsilon\).
+
+\subsection{Lemma G1 --- Gaussian mutual information controls the smoothed noise score}
+
+Let \(f\) be the noise density, let \(\varphi\) be the standard Gaussian density, and write
+
+\[
+q=f*\varphi.
+\]
+
+This is the density of \(Y=Z+G\).
+
+Differentiating the convolution gives
+
+\[
+q'(y)
+=-\int g\varphi(g)f(y-g)\,dg,
+\]
+
+and therefore
+
+\[
+\frac{q'(y)}{q(y)}
+=-\mathbb E[G\mid Y=y].
+\tag{6}
+\]
+
+For any distribution \(P\) with finite mean \(m\),
+
+\[
+D(P\Vert\mathcal N(0,1))
+\geq\frac{m^2}{2}.
+\tag{7}
+\]
+
+Indeed, comparing the standard Gaussian with a unit-variance Gaussian of mean \(\lambda\), nonnegativity of relative entropy yields
+
+\[
+D(P\Vert\mathcal N(0,1))
+\geq\lambda m-\frac{\lambda^2}{2}.
+\]
+
+Choose \(\lambda=m\).
+
+Apply (7) to the conditional distribution of \(G\) given \(Y\), then average:
+
+\[
+t\geq
+\frac12\mathbb E\left[
+\mathbb E[G\mid Y]^2
+\right].
+\]
+
+Using (6), the Fisher information of \(q\) satisfies
+
+\[
+\boxed{
+J(q)=\int\frac{q'(y)^2}{q(y)}\,dy
+\leq2t.
+}
+\tag{8}
+\]
+
+Notice that no differentiability or Fisher-information assumption on the original noise density \(f\) is required. \(\square\)
+
+\subsection{Lemma G2 --- The original and smoothed noise densities are close}
+
+Define the squared Hellinger distance by
+
+\[
+d_H^2(p,q)=
+\int(\sqrt p-\sqrt q)^2.
+\]
+
+Let \(f_x(y)=f(y-x)\) and let \(G'\) be an independent standard Gaussian.
+
+The elementary inequality
+
+\[
+d_H^2(p,q)\leq D(p\Vert q)
+\]
+
+follows from \(-\log u\geq1-u\). Hence
+
+\[
+\mathbb E_G d_H^2(f_G,q)\leq t.
+\]
+
+The Hilbert-space variance identity then gives
+
+\[
+\mathbb E_{G,G'}
+d_H^2(f_G,f_{G'})
+\leq2t.
+\tag{9}
+\]
+
+For completeness, let \(\psi=\sqrt f\), and let \(T_s\) denote convolution by a centered Gaussian of variance \(s\). Gaussian convolution is a self-adjoint contraction on \(L^2\), with
+
+\[
+T_sT_u=T_{s+u}.
+\]
+
+Consequently,
+
+\[
+\begin{aligned}
+\langle\psi,T_1\psi\rangle
+&=\|T_{1/2}\psi\|_2^2\\
+&\geq\|T_1\psi\|_2^2\\
+&=\langle\psi,T_2\psi\rangle.
+\end{aligned}
+\]
+
+Since \(\|\psi\|_2=1\), this implies
+
+\[
+\mathbb E_G d_H^2(f,f_G)
+\leq
+\mathbb E_{G,G'}d_H^2(f_G,f_{G'}).
+\]
+
+By convexity of squared Hellinger distance and (9),
+
+\[
+\boxed{
+d_H^2(f,q)\leq2t.
+}
+\tag{10}
+\]
+
+Thus Gaussian smoothing changes the noise density by a Hellinger distance of at most \(\sqrt{2t}\). \(\square\)
+
+\subsection{Lemma G3 --- Control of arbitrary noise translations}
+
+It follows from (8) that
+
+\[
+\|(\sqrt q)'\|_2^2
+=\frac14J(q)
+\leq\frac t2.
+\]
+
+The fundamental theorem of calculus and the triangle inequality in \(L^2\) give
+
+\[
+d_H(q_x,q)
+\leq |x|\sqrt{\frac t2}.
+\]
+
+Combining this with (10) and translation invariance,
+
+\[
+\begin{aligned}
+d_H(f_x,f)
+&\leq d_H(f_x,q_x)
++d_H(q_x,q)+d_H(q,f)\\
+&\leq2\sqrt{2t}+|x|\sqrt{\frac t2}.
+\end{aligned}
+\]
+
+Therefore, for every real \(x\),
+
+\[
+\boxed{
+d_H^2(f_x,f)
+\leq
+\min\left\{
+2,\,
+t\left(2\sqrt2+\frac{|x|}{\sqrt2}\right)^2
+\right\}.
+}
+\tag{11}
+\]
+
+This is a useful intermediate result in its own right: mutual information under a single Gaussian input controls the distinguishability of every translation of an arbitrary noise density.
+
+For the sharper leading coefficient, introduce the directed Hellinger quantity
+
+\[
+d_+(p,q)=\|(\sqrt p-\sqrt q)_+\|_2.
+\]
+
+It obeys the directed triangle inequality because
+
+\[
+(a-c)_+\leq(a-b)_++(b-c)_+.
+\]
+
+After centering a symmetric \(f\), the convolution \(q\) is symmetric, and the positive and negative parts of \((\sqrt q)'\) have equal squared \(L^2\) norms. Applying the fundamental theorem of calculus to the corresponding directional derivative gives
+
+\[
+d_+(q_x,q)\leq |x|\sqrt{\frac t4}.
+\]
+
+Consequently, for general or symmetric noise, respectively,
+
+\[
+\boxed{
+d_+(f_x,f)
+\leq
+\sqrt t\left(2\sqrt2+\sqrt\beta\,|x|\right),
+}
+\tag{12}
+\]
+
+where
+
+\[
+\beta=
+\begin{cases}
+1/2,&\text{general noise},\\
+1/4,&\text{symmetric noise}.
+\end{cases}
+\]
+
+\(\square\)
+
+\subsection{Lemma G4 --- A useful relative-entropy inequality}
+
+Suppose probability densities \(p,q\) satisfy
+
+\[
+p\leq Mq,\qquad M\geq1.
+\]
+
+Then
+
+\[
+\boxed{
+D(p\Vert q)
+\leq
+2d_H^2(p,q)+(\log M)d_+^2(p,q).
+}
+\tag{13}
+\]
+
+To prove this, put \(u=p/q\) and \(s=\sqrt u\). Define
+
+\[
+F(s)=2s^2\log s-s^2+1.
+\]
+
+Since
+
+\[
+F(1)=F'(1)=0,\qquad
+F''(s)=4\log s+4,
+\]
+
+Taylor's theorem implies
+
+\[
+F(s)\leq
+\begin{cases}
+2(s-1)^2,&0\leq s\leq1,\\
+(2+\log M)(s-1)^2,&1\leq s\leq\sqrt M.
+\end{cases}
+\]
+
+Integrating with respect to \(q\) proves (13), because
+
+\[
+D(p\Vert q)=\int q(u\log u-u+1).
+\]
+
+The directed term is important: only the part of the density ratio exceeding one contributes to the potentially large logarithmic factor. \(\square\)
+
+\subsection{Lemma G5 --- Bounded-amplitude inputs are controlled without a logarithmic loss}
+
+Let \(V\) be any input satisfying \(|V|\leq r\), with \(r\geq1\). Then
+
+\[
+\boxed{
+I(V;V+Z)\leq K_0r^2t
+}
+\tag{14}
+\]
+
+for a universal constant \(K_0\).
+
+\textbf{Proof.} Take an independent random variable \(A\), uniform on \([-r,r]\).
+
+The density of \(V+A\) is supported on \([-2r,2r]\) and is bounded above by \(1/(2r)\). It is therefore dominated by \(M_0\) times the density of \(G_r\sim\mathcal N(0,r^2)\), where
+
+\[
+M_0=\frac1{2\varphi(2)}.
+\]
+
+Mutual information for a fixed channel is concave in the input law. Density domination consequently implies
+
+\[
+I(V+A;V+A+Z)
+\leq M_0 I(G_r;G_r+Z).
+\]
+
+Adding independent input randomness cannot decrease output entropy, so
+
+\[
+I(V;V+Z)
+\leq I(V+A;V+A+Z).
+\]
+
+Finally, set \(n=\lceil r^2\rceil\). A Gaussian of variance \(n\) is a sum of \(n\) independent standard Gaussians. Telescoping the output-entropy increments and applying data processing to each additional Gaussian gives
+
+\[
+I(G_r;G_r+Z)\leq nt\leq2r^2t.
+\]
+
+Thus (14) holds with \(K_0=2M_0\). \(\square\)
+
+These entropy comparisons are legitimate even for singular input laws: finite noise entropy and finite second moments ensure that the relevant convolved output entropies are finite.
+
+\section{The geometric decomposition of an arbitrary input}
+
+Fix a constant \(b>1\), and consider an entirely arbitrary competing input \(X\) satisfying
+
+\[
+\mathbb EX^2\leq1.
+\]
+
+Partition its amplitudes into geometric bins:
+
+\[
+\begin{aligned}
+J=0 &: \quad |X|<1,\\
+J=j+1 &: \quad b^j\leq |X|<b^{j+1},
+\quad j\geq0.
+\end{aligned}
+\]
+
+Write
+
+\[
+r_0=1,\qquad r_{j+1}=b^{j+1},
+\]
+
+and \(p_j=\Pr(J=j)\).
+
+Communication within a bin costs only order \(t\) times its squared amplitude. The additional information carried by the bin index accounts for the logarithmic factor.
+
+The power constraint implies
+
+\[
+\sum_jp_jr_j^2\leq1+b^2.
+\tag{15}
+\]
+
+For bins beyond any sufficiently large fixed threshold, the stronger inequality holds:
+
+\[
+\sum_{j:r_j\geq L}p_jr_j^2
+\leq b^2,\qquad L>1.
+\tag{16}
+\]
+
+Since \(J\) is a deterministic function of \(X\), the mutual-information chain rule gives
+
+\[
+I(X;X+Z)
+=
+I(J;X+Z)+I(X;X+Z\mid J).
+\tag{17}
+\]
+
+By Lemma G5 and (15),
+
+\[
+I(X;X+Z\mid J)
+\leq K_0(1+b^2)t.
+\tag{18}
+\]
+
+Thus the information transmitted \emph{within} the bins is only \(O(t)\).
+
+It remains to control the information transmitted by the bin index.
+
+\subsection{Output distributions associated with the bins}
+
+Let \(P_j\) be the conditional density of \(X+Z\) given \(J=j\), and let
+
+\[
+Q=\sum_jp_jP_j.
+\]
+
+By construction,
+
+\[
+Q\geq p_jP_j.
+\]
+
+For bins with positive mass, Lemma G4 yields
+
+\[
+D(P_j\Vert Q)
+\leq
+2d_H^2(P_j,Q)
++\log(1/p_j)d_+^2(P_j,Q).
+\tag{19}
+\]
+
+Squared Hellinger distance is convex in either density. The same is true of squared directed Hellinger distance in its first density: for fixed \(v\geq0\), the function
+
+\[
+u\mapsto(\sqrt u-\sqrt v)_+^2
+\]
+
+is convex.
+
+Consequently, (11)--(12) imply
+
+\[
+d_H^2(P_j,f)=O\bigl(t(1+r_j^2)\bigr),
+\]
+
+and
+
+\[
+d_+^2(P_j,f)\leq v_j,
+\]
+
+where
+
+\[
+v_j=
+\min\left\{
+1,\,
+t(2\sqrt2+\sqrt\beta\,r_j)^2
+\right\}.
+\tag{20}
+\]
+
+The bound by one holds because \(d_+^2(p,q)\leq\int p=1\).
+
+Using convexity again and (15),
+
+\[
+d_H^2(Q,f)=O_b(t).
+\tag{21}
+\]
+
+For every fixed \(\eta>0\), the directed triangle inequality gives
+
+\[
+\begin{aligned}
+d_+^2(P_j,Q)
+\leq{}&(1+\eta)v_j\\
+&+(1+\eta^{-1})d_H^2(f,Q).
+\end{aligned}
+\]
+
+Multiplying (19) by \(p_j\), summing and using (21) yields
+
+\[
+I(J;X+Z)
+\leq
+(1+\eta)
+\sum_jp_jv_j\log(1/p_j)
++O_{b,\eta}(t),
+\tag{22}
+\]
+
+provided the entropy of \(J\) is uniformly bounded.
+
+\subsection{The critical entropy estimate}
+
+Choose any \(\delta>0\) and define reference probabilities
+
+\[
+\pi_j=\frac{r_j^{-(2+\delta)}}{A},
+\qquad
+A=\sum_jr_j^{-(2+\delta)}<\infty.
+\]
+
+Because the radii increase geometrically,
+
+\[
+\sum_j\pi_jr_j^2<\infty.
+\tag{23}
+\]
+
+For any probabilities \(p,\pi>0\),
+
+\[
+p\log\frac1p
+\leq
+p\log\frac1\pi+\frac{\pi}{e}.
+\tag{24}
+\]
+
+This follows from the elementary bound
+
+\[
+x\log(1/x)\leq1/e.
+\]
+
+Summing (24), using (15) and Jensen's inequality for the logarithm, proves a uniform bound on \(H(J)\).
+
+Applying (24) instead with the weights \(v_j\), and using (20) and (23), gives
+
+\[
+\begin{aligned}
+\sum_jp_jv_j\log(1/p_j)
+\leq{}&(2+\delta)\sum_jp_jv_j\log r_j\\
+&+O_{b,\delta}(t).
+\end{aligned}
+\tag{25}
+\]
+
+Now fix any \(\kappa>0\). For all sufficiently large \(r_j\),
+
+\[
+(2\sqrt2+\sqrt\beta\,r_j)^2
+\leq(\beta+\kappa)r_j^2.
+\]
+
+The finitely many smaller bins contribute only \(O(t)\) to (25).
+
+For the remaining bins, put \(u=tr_j^2\). Then
+
+\[
+\begin{aligned}
+v_j\log r_j
+&\leq
+\min\{1,(\beta+\kappa)u\}
+\frac{\log(1/t)+\log u}{2}\\
+&\leq
+\frac{\beta+\kappa}{2}
+tr_j^2\log_+\frac1t
++\frac{tr_j^2}{2e}.
+\end{aligned}
+\tag{26}
+\]
+
+In the last step, use \(\log_+u/u\leq1/e\).
+
+Combining (25), (26) and (16),
+
+\[
+\begin{aligned}
+\sum_jp_jv_j\log(1/p_j)
+\leq{}&
+\left(1+\frac\delta2\right)
+(\beta+\kappa)b^2
+t\log_+\frac1t\\
+&+O_{b,\delta,\kappa}(t).
+\end{aligned}
+\tag{27}
+\]
+
+Finally, substitute this into (22) and (17):
+
+\[
+\begin{aligned}
+I(X;X+Z)
+\leq{}&
+(1+\eta)
+\left(1+\frac\delta2\right)
+(\beta+\kappa)b^2
+t\log_+\frac1t\\
+&+O_{b,\delta,\kappa,\eta}(t).
+\end{aligned}
+\]
+
+For any desired \(\varepsilon>0\), choose \(b\) sufficiently close to one and \(\eta,\delta,\kappa\) sufficiently small that the leading coefficient is at most \(\beta+\varepsilon\).
+
+All remainder constants are independent of \(X\) and \(Z\).
+
+Taking the supremum over every power-constrained input proves
+
+\[
+\boxed{
+C(Z)\leq
+t\left[
+(\beta+\varepsilon)\log_+\frac1t
++B_\varepsilon
+\right].
+}
+\]
+
+This completes the Gaussian comparison theorem. \(\blacksquare\)
+
+\section{Completing the matching minimax lower bound}
+
+We can now connect the Gaussian comparison theorem to the prescribed noise variance.
+
+Let
+
+\[
+M(Y)=\mathbb E[G\mid Y],
+\qquad Y=G+Z.
+\]
+
+Independence and the variance constraint imply
+
+\[
+\mathbb E[M(Y)Y]=\mathbb E[GY]=1,
+\]
+
+while
+
+\[
+\mathbb EY^2=N+1.
+\]
+
+By Cauchy--Schwarz,
+
+\[
+\mathbb E[M(Y)^2]\geq\frac1{N+1}.
+\]
+
+Lemma G1 therefore implies
+
+\[
+\boxed{t\geq\frac1{2(N+1)}.}
+\]
+
+Substituting this into the Gaussian comparison theorem gives
+
+\[
+\frac{I(G;G+Z)}{C(Z)}
+\geq
+\frac1{
+(\beta+\varepsilon)\log(2N+2)+B_\varepsilon
+}.
+\]
+
+This holds uniformly over every noise distribution in the specified class.
+
+Consequently,
+
+\[
+R(N)\geq
+\frac1{
+(\frac12+\varepsilon)\log(2N+2)+B_\varepsilon
+}.
+\]
+
+Together with the multiscale upper bound, this gives
+
+\[
+\boxed{
+R(N)=\Theta\left(\frac1{\log N}\right).
+}
+\]
+
+In fact, multiplying by \(\log N\), taking the lower limit and then letting \(\varepsilon\downarrow0\) establishes the stronger quantitative statement
+
+\[
+\boxed{
+\liminf_{N\to\infty}(\log N)R(N)\geq2.
+}
+\tag{28}
+\]
+
+For the symmetric noise class, the improved coefficient \(\beta=1/4\) gives
+
+\[
+\boxed{
+\liminf_{N\to\infty}(\log N)R_{\rm sym}(N)\geq4.
+}
+\tag{29}
+\]
+
+The standard Gaussian guarantees are uniform in the noise variance. The upper bound applies to this particular input as well, on the full class and on each smooth subclass, which proves the asserted order for its worst-case fraction. The exact leading minimax constant remains open.
 
 \section*{Disclosure}
 This manuscript was prepared with AI assistance. The arguments and priority claims are open to independent review.

@@ -1,0 +1,9 @@
+All exact rational checks PASSED.
+Matrix order: 271147008
+G lower bound (display only): 0.7077276619683643
+Global log-product deficit g (display only): 1.2838144407790936e-07
+Tail exponent: 69 required bits: 69
+R lower bound (display only): 1.001606653421433
+Certified R > 1.001; integer lift has P_prime(1)<0.
+The proof also certifies P(q1)>P(1) at the explicit rational q1.
+No full matrix or derivative was materialized.
