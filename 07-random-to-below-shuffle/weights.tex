@@ -1,0 +1,127 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\title{The endpoint phase transition for power-weighted random-to-below shuffles}
+\author{Leo Gao\\\small AI-assisted research note; supplement}
+\date{November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+When the chance of selecting the card $j$ places from the bottom is proportional to $j^\beta$, the separation cutoff changes character exactly at $\beta=0$. Below the transition a single Gumbel fluctuation survives. Above it a second, independent fluctuation appears, having the limit law of a second-largest exponential order statistic. The unweighted shuffle at the transition has an additional $\log\log n$ delay.
+\end{abstract}
+Put $Z_n=\sum_{j=1}^n j^\beta$ and $b_n=Z_n/n^\beta$. At each step select a card height $j$, counted from below, with probability $j^\beta/Z_n$, then reinsert it uniformly at or below its previous position. Let $\tau_n$ be the bookmark stopping time in Grinberg and Lafrenière's one-sided cycle shuffle construction \cite[\S15]{GL}; from a fixed start its tail equals separation from uniform. Let $G=-\log E$, $D=-\log Y$, where $E$ has the rate-one exponential law and $Y$ has the shape-two, rate-one gamma law, independently. Thus $G$ is standard Gumbel, whereas $D$ has cumulative distribution $\exp(-e^{-x})(1+e^{-x})$. Write $\gamma$ for Euler's constant and $\beta_+=\max(\beta,0)$.
+\begin{theorem}
+For every fixed real $\beta\ne0$, writing $c_n=(1+\beta_+)\log n-\log|\beta|$,
+\[
+ \frac{\tau_n}{b_n}-c_n\ \Rightarrow\ G+\beta_+D.
+\]
+The mean and variance converge after this normalization:
+\[
+ \frac{\mathbb E\tau_n}{b_n}-c_n\longrightarrow\gamma+\beta_+(\gamma-1),\qquad
+ \frac{\operatorname{Var}\tau_n}{b_n^2}\longrightarrow
+ \zeta(2)+\beta_+^2(\zeta(2)-1).
+\]
+At $\beta=0$, $b_n=n$ and $\tau_n/n-\log n-\log\log n\Rightarrow G$, by the accompanying paper. In each case, the cutoff window is $b_n$ and the separation profile is the tail of the stated law.
+\end{theorem}
+\begin{proof}
+The bookmark holding times $T_i$, $2\le i\le n$, are independent geometrics with means $b_n w_i$, where
+\[
+ w_i=\frac{n^\beta}{i\sum_{j=i}^n j^{\beta-1}}.
+\]
+As in the uniform case, the advance probability is $\sum_{j=i}^n(j^\beta/Z_n)(i/j)$. In particular $b_n\to\infty$: for $j\in[n/2,n]$ the terms $(j/n)^\beta$ are bounded below by a positive $\beta$-dependent constant.
+
+Fix $0<\delta<1/4$, eventually sent to zero, and write $k=n-i+1$. Constants in the estimates may depend on $\beta$. At the right endpoint, $k\le\delta n$, the mean value theorem on $[3/4,1]$ gives
+$w_i=k^{-1}(1+O(k/n))$, so the sum there is
+\[
+ H_{\lfloor\delta n\rfloor}+O(\delta)=\log(n\delta)+\gamma+O(\delta)+o_n(1).
+\]
+Here and below $o_n(1)$ is for fixed $\delta$.
+
+First consider $\beta>0$. For $i\le\delta n$, elementary integral comparison yields
+\[
+ \sum_{j=i}^n j^{\beta-1}=
+ \frac{n^\beta}{\beta}
+ \{1+O((i/n)^\beta+n^{-\min(\beta,1)})\}.
+\]
+Indeed the error in replacing the full power sum by its integral is $O(1+n^{\beta-1})$ by monotonicity, and the portion below $i$ is $O(i^\beta)$. For all sufficiently small fixed $\delta$ the relative error is bounded away from one, so
+\[
+ \sum_{2\le i\le\delta n} w_i
+ =\beta\{\log(n\delta)+\gamma-1\}+O(\delta^\beta)+o_n(1),
+\]
+using $\sum_{i\le\delta n}i^{\beta-1}=O((\delta n)^\beta)$ and $n^{-\min(\beta,1)}\log n\to0$.
+If instead $\beta<0$, the first $i$ terms in the sum, from $i$ to $2i-1$, give $\sum j^{\beta-1}\ge C_\beta i^\beta$, whence
+$\sum_{2\le i\le\delta n}w_i\le C_\beta' n^\beta\sum_{i\le\delta n}i^{-1-\beta}=O(\delta^{-\beta})$.
+
+On the remaining compact bulk interval, smooth Riemann sums converge uniformly for the denominator, which is bounded away from zero after division by $n^\beta$. Hence $\sum w_i$ there tends to
+\[
+ \int_\delta^{1-\delta}\frac{\beta\,dx}{x(1-x^\beta)}
+ =F_\beta(1-\delta)-F_\beta(\delta),\qquad
+ F_\beta(x)=\beta\log x-\log|1-x^\beta|.
+\]
+Now $F_\beta(1-\delta)=-\log\delta-\log|\beta|+o_\delta(1)$, and $F_\beta(\delta)=\beta_+\log\delta+o_\delta(1)$. Adding the three contributions and then sending $\delta$ to zero gives the stated mean.
+
+It remains to identify the random fluctuations. On the right half of the indices $w_i\le C/k$, by comparing $j^{\beta-1}$ with $n^{\beta-1}$; for fixed $k$, $w_{n+1-k}\to1/k$. On the left half, if $\beta>0$, the terms $j\ge n/2$ give $w_i\le C/i$ and $w_i\to\beta/i$ for fixed $i$. If $\beta<0$, $w_i\le C n^\beta i^{-1-\beta}$ as above, so
+\[
+ \sum_{i\le n/2}w_i^2
+ \le C n^{2\beta}\sum_{i\le n/2} i^{-2-2\beta}=o(1).
+\]
+Indeed the bound is $O(n^{2\beta})$ for $-1/2<\beta<0$, $O(n^{-1}\log n)$ at $-1/2$, and $O(n^{-1})$ below $-1/2$.
+
+Because $\operatorname{Var}(T_i/b_n)=w_i^2-w_i/b_n$, dominated convergence and the mean estimate give the variance formula. The squared-weight bounds also show that, after discarding finitely many levels at the relevant endpoints, the variance of the remainder can be made arbitrarily small uniformly in the limit. The finite endpoint vectors converge independently to exponentials of respective means $1/k$ on the right and (when $\beta>0$) $\beta/i$ on the left. Thus the limiting centered variable consists of independent exponential series with their means subtracted.
+
+For completeness, the sum of exponentials with rates $1,2,\ldots,K$ has the law of the largest of $K$ independent unit exponentials, by the spacing representation. Omitting the rate-one term gives their second largest. The latter has distribution $(1-u)^K+Ku(1-u)^{K-1}$ at $t\ge0$, where $u=e^{-t}$. Subtracting $\log K$ gives limits $G$ and $D$, respectively. The corresponding centered series have laws $G-\gamma$ and $D-(\gamma-1)$ since their means before centering are $H_K$ and $H_K-1$. Adding the mean asymptotic proves the assertion.
+\end{proof}
+\paragraph{Check at unit exponent.}
+For $\beta=1$, $w_i=n/(ik)=\{n/(n+1)\}(1/i+1/k)$ and $b_n=(n+1)/2$. Consequently $\mathbb E\tau_n=(n/2)(H_n+H_{n-1}-1)$, independently verifying both the location constant and the missing first left-end level.
+
+
+\section*{The critical window}
+The apparently singular fixed-exponent shift $-\log|\beta|$ resolves on the scale $1/\log n$. Let $\beta=\beta_n$, $L=\log n$, and $\theta_n=\beta_nL$. Define $\Psi(u)=(e^u-1)/u$ by continuity at zero.
+\begin{theorem}
+If $(\theta_n)$ is bounded, then
+\[
+ \frac{\tau_n}{b_n}-L-\log L-\log\Psi(\theta_n)\Rightarrow G.
+\]
+The corresponding centered mean tends to $\gamma$, and $\operatorname{Var}(\tau_n)/b_n^2\to\zeta(2)$. On the original $n$ scale the location shift relative to the uniform shuffle is $\log\Psi(-\theta_n)$:
+\[
+ \frac{\tau_n}{n}-L-\log L-\log\Psi(-\theta_n)\Rightarrow G .
+\]
+\end{theorem}
+\begin{proof}
+For $\beta_n=0$ the assertions are the uniform theorem, so take $\beta_n\ne0$. All bounds below can depend on a fixed bound $M$ for $|\theta_n|$. Write
+\[
+ A(x)=\int_x^1 u^{\beta-1}\,du,\qquad
+ v(t)=1/[tA(t/n)].
+\]
+For $1/n\le x\le1$ the factor $x^\beta$ is between $e^{-M}$ and $e^M$. In particular $A(x)$ is between these constants times $\log(1/x)$. For large $n$ the function $u^{\beta-1}$ is decreasing. Rectangle comparison on $[i/n,1]$ gives
+\[
+ 0\le \sum_{j=i}^n (j/n)^\beta/j-A(i/n)\le e^M/i.
+\]
+Thus for $i\le n/2$,
+$
+ |w_i-v(i)|\le C/[i^2\log^2(n/i)].
+$
+This error sums to $o(1)$ by splitting at $\sqrt n$. Differentiation gives, for $t\le n/2$ and $t\ge1$,
+\[
+ |v'(t)|\le \frac{C}{t^2}\left(\frac1{\log(n/t)}+
+                             \frac1{\log^2(n/t)}\right).
+\]
+The integral of this bound is $o(1)$, by the same split; $v(1)=O(1/L)$. As a result, the lower-half sum of $w_i$ differs from $\int_1^{n/2}v(t)\,dt$ by $o(1)$, by the unit-interval variation bound. On $n/2\le i\le(1-\delta)n$ the same comparison, for any fixed $\delta>0$, has total error $O_\delta(1/n)$: $A$ is bounded away from zero, and $|v'|=O_\delta(n^{-2})$ there. Integer rounding at the bulk endpoints has vanishing cost. The whole bulk sum therefore equals
+\[
+ F_\beta(1-\delta)-F_\beta(1/n)+o_n(1),
+\]
+with $F_\beta$ as in the previous proof. For $|\beta|\le1/2$, $\beta\ne0$, Taylor's theorem (or the integral defining $A$) implies
+$F_\beta(1-\delta)=-\log|\beta|-\log\delta+O(\delta)$ uniformly. At the other end $F_\beta(1/n)=-\theta_n-\log|1-e^{-\theta_n}|$ exactly. The rightmost $\lfloor\delta n\rfloor$ rates contribute $\log(n\delta)+\gamma+O(\delta)+o_n(1)$ as above, uniformly for these exponents. Adding and sending $\delta\downarrow0$ proves
+\[
+ \sum w_i=L+\log L+\log\Psi(\theta_n)+\gamma+o(1).
+\]
+The uniform comparison $w_i\le e^M/[i(H_n-H_{i-1})]$ transfers the negligible left-half variance and the summable upper-tail bound from the unweighted proof. At each fixed right level $k$, $w_{n+1-k}\to1/k$. Thus the same centered exponential-series argument yields the variance and limit distribution. Finally, rectangle comparison for $u^\beta$ on $[1/n,1]$, and the explicit integral over $[0,1/n]$, give
+$b_n/n=1/(1+\beta)+O_M(1/n)$. Multiplying the location by this factor changes it by $-\theta_n+o(1)$; $\log\Psi(\theta)-\theta=\log\Psi(-\theta)$.
+\end{proof}
+
+\paragraph{Scope.} The profile is for separation, not total variation. The bounded critical window and fixed exponents do not exhaust all possible slowly varying exponent sequences. No peer review or formal verification is claimed.
+\begin{thebibliography}{1}
+\bibitem{GL} D. Grinberg and N. Lafrenière, The one-sided cycle shuffles in the symmetric group algebra, \emph{Algebraic Combinatorics} 7 (2024), 275--326. \url{https://doi.org/10.5802/alco.346}.
+\end{thebibliography}
+\end{document}

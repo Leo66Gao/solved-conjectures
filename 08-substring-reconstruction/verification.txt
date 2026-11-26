@@ -1,0 +1,2 @@
+p=3 q=5 length=14 words=16384 classes: size1=128 size2=8104 size4=12 ambiguous words=48 all class memberships match
+p=3 q=7 length=20 words=1048576 classes: size1=1024 size2=523664 size4=56 ambiguous words=224 all class memberships match

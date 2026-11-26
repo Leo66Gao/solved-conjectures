@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,hyperref}
+\hypersetup{hidelinks,pdftitle={Ambiguity in reconstructing words from substring compositions},pdfauthor={Leo Gao}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\E}{\mathcal E}
+\newcommand{\X}{\mathbf x}
+\newcommand{\one}{\mathbf 1}
+\DeclareMathOperator{\diag}{diag}
+\title{Ambiguity in reconstructing words\\ from substring compositions}
+\author{Leo Gao\\[-2pt]\small AI-assisted research}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+A word is observed through the multiset of letter-count vectors of all its contiguous substrings. For distinct odd primes \(p,q\), we classify the words of length \(pq-1\) that admit more than the two reconstructions given by reversal. They are precisely the interleavings of two nonpalindromic words of lengths \(p-1\) and \(q-1\), in either order. Every exceptional class has size four, and we give its exact count. A rigidity lemma for reciprocal factor changes also gives maximum class size eight at length \(p^2q-1\). A further parity argument gives maximum four at length \(4p-1\). All conclusions hold over any fixed finite alphabet with at least two letters. They establish mixed-prime instances, not the full generality, of the maximum-class-size conjecture of Acharya, Das, Milenkovic, Orlitsky and Pan.
+\end{abstract}
+
+\section{Statement and scope}
+Let \(w=w_1\cdots w_n\) be a word on an alphabet \(\Sigma\) with \(h\ge2\) letters. Its \emph{deck} is the multiset of composition vectors of all its nonempty contiguous substrings, with multiplicities retained. Write \(\E(w)\) for the set of words with its deck, \(E_n=\max_{|w|=n}|\E(w)|\), and \(w^R\) for reversal. For \(u,v\) define
+\[
+ u\circ v=u\,v_1\,u\,v_2\cdots u\,v_{|v|}\,u.
+\]
+Its width is \(|u|+1\). A \emph{proper interleaving} has both components nonempty.
+\begin{theorem}\label{main}
+For distinct odd primes \(p,q\), a word of length \(pq-1\) admits a reconstruction outside \(\{w,w^R\}\) if and only if it is \(u\circ v\) with both components nonpalindromic and \((|u|+1,|v|+1)=(p,q)\) or \((q,p)\). Its entire class consists of the four independent reversals of the components. In particular \(E_{pq-1}=4\). The number of size-four classes is
+\[
+ C_4=\tfrac12\big(h^{p-1}-h^{(p-1)/2}\big)
+                   \big(h^{q-1}-h^{(q-1)/2}\big).
+\]
+\end{theorem}
+\begin{theorem}\label{repeat}
+For distinct odd primes \(p,q\), \(E_{p^2q-1}=8\).
+\end{theorem}
+
+In the binary case Acharya et al.\ \cite{admop} proved the reciprocal-factor description of a class and the product rule for already-interleaved words. Their Theorems 27, 32 and 33 give interleaving lower bounds, general upper bounds, and sharp results at prime powers; the mixed-prime general upper bound permits eight at \(pq-1\). They ask whether the interleaving lower bound is always optimal. Noninterleaved confusions do occur at other lengths, so necessity in Theorem~\ref{main} does not follow from the construction. Our main ingredient is a spectral and integral obstruction to such confusion.
+
+\section{From reciprocal factors to periodic changes}
+Put \(N=n+1\), and let \(\alpha(r)\) be the composition vector of the prefix of length \(r\). Write
+\[
+ P_w(\X)=\sum_{r=0}^{N-1}\X^{\alpha(r)},\qquad
+ S_N(t)=P_w(t,\ldots,t)=1+\cdots+t^{N-1}.
+\]
+For a factor \(F\) of \(P_w\) write \(f(t)=F(t,\ldots,t)\) and \(F^*(\X)=\X^{\deg_{\mathrm{coord}} F}F(\X^{-1})\), with the vector of coordinatewise degrees in the exponent.
+
+\begin{lemma}[Factor flips; cf.\ {\cite[Thm.~12]{admop}}]\label{factor}
+Factor \(P_w=\prod F_j\) into irreducibles normalized to have constant term one. Each \(f_j\) is a nonempty product of cyclotomic polynomials \(\Phi_d\), \(d\mid N,\ d>1\), and no order occurs twice. The polynomials of the words in \(\E(w)\) are precisely the independent choices of \(F_j\) or \(F_j^*\) in this product. Their number is \(2^k\), where \(k\) is the number of non-self-reciprocal, or \emph{active}, factors.
+\end{lemma}
+\begin{proof}
+The degree sum over the coordinates is at least the total degree; equality holds for \(P_w\). Both quantities are additive under products. Thus each factor has a unique top monomial attaining all its coordinate degrees. Diagonal specialization preserves its degree, and \(\prod f_j=S_N=\prod_{d\mid N,\,d>1}\Phi_d\) gives the first assertion. All \(f_j\) are monic with constant one and reciprocal, so flipping preserves the diagonal.
+
+The Laurent autocorrelation \(P_w(\X)P_w(\X^{-1})\) records the deck and its negative, plus the constant \(N\). A factor flip leaves this autocorrelation unchanged. The resulting polynomial \(Q\) has integer coefficients \(c\) with \(\sum c=\sum c^2=N\), by its diagonal and constant autocorrelation. Thus every nonzero coefficient equals one, and there is one monomial of each degree. Their exponent vectors are totally ordered coordinatewise: an incomparable pair would create a mixed-sign term in the autocorrelation, impossible for \(P_w\). Hence consecutive monomials differ by multiplication by a letter, and \(Q\) is a word polynomial. Conversely the unique longest substring gives the full composition, so equal autocorrelations give equal ordinary products \(QQ^*=P_wP_w^*\). Unique factorization gives exactly the stated choices: inversion in the Laurent ring preserves irreducibility, monomial units are fixed by the constant-one normalization, and no two distinct factors can be reciprocals because their diagonal orders are disjoint. The binary proof is due to \cite{admop}; the argument above covers any finite alphabet.
+\end{proof}
+
+For a fixed letter \(a\), specialize \(x_a=tz,\ x_b=t\) for \(b\ne a\); a dot denotes the derivative in \(z\) at \(z=1\). Then \(\dot P_w=\sum_r\alpha_a(r)t^r\). Index letters by \(\Z/N\Z\), assigning every letter indicator value zero at the dummy position 0. Let \(D_i(r)\) be the new indicator of \(a\) minus the old one under the single flip of \(F_i\), and \(D_i(t)=\sum_r D_i(r)t^r\).
+\begin{lemma}\label{linear}
+The indicator change from a set \(I\) of flips is \(\sum_{i\in I}D_i\). Each \(D_i\) is odd on \(\Z/N\Z\), takes values in \(\{-1,0,1\}\), and has Fourier spectrum only at roots of \(f_i\).
+\end{lemma}
+\begin{proof}
+Because every flip preserves the diagonal, the product rule gives
+\[
+ \dot P_I-\dot P_w=\sum_{i\in I}\frac{S_N}{f_i}
+                 (\dot{F_i^*}-\dot F_i).
+\]
+Multiplication by \(1-t\) differences prefix counts. The boundary term at \(t^N\) cancels because the total composition is the same. Thus
+\[
+ D_i(t)=(1-t)\frac{S_N(t)}{f_i(t)}(\dot{F_i^*}-\dot F_i).
+\]
+Evaluation at \(N\)th roots gives the spectral assertion. Flipping every factor reverses the word; flipping every factor except \(i\) reverses the singly flipped word. Subtract these identities and use additivity to obtain \(D_i(-r)=-D_i(r)\). The value restriction follows from the definition.
+\end{proof}
+
+\section{Prime-order rigidity}
+\begin{lemma}\label{rigid}
+Suppose \(N\) is composite and an active irreducible factor \(F\) has diagonal \(f\) whose cyclotomic orders are all prime. Then the word is properly interleaved with width a prime divisor \(p\) of \(N\).
+\end{lemma}
+\begin{proof}
+Some letter \(a\) has a nonzero indicator change \(D\) under this flip. By Lemma~\ref{linear}, this is a sum of mean-zero functions \(A_\ell(r\bmod\ell)\), one for each prime \(\ell\) occurring in \(f\). They are real and odd: each is the average of \(D\) over the corresponding residue class. The Chinese remainder theorem allows their arguments to vary independently. A nonzero real odd function takes at least three values. If two summands were nonzero, their sum would take at least five values: finite real sets \(U,V\) satisfy \(|U+V|\ge |U|+|V|-1\). This contradicts \(D\in\{-1,0,1\}\). Thus \(D\) depends on only one residue \(r\bmod p\), and is \(-1\) at some nonzero residue \(c\). All \(m=N/p\) old letters in column \(c\) are \(a\).
+
+Write \(P_w=FG,\ f=\Phi_p H\), \(g=\diag G\). The class of \(H\) is an integral unit in \(\Z[t]/(\Phi_p)\): for a different prime \(\ell\), choose \(s\ge1\) with \(s\ell\equiv1\bmod p\). Then
+\[
+ \Phi_\ell(t)(1+t^\ell+\cdots+t^{(s-1)\ell})
+ =1+\cdots+t^{s\ell-1}\equiv 1\pmod{\Phi_p}.
+\]
+Since \(gH=S_N/\Phi_p=1+t^p+\cdots+t^{(m-1)p}\), the residue of \(g\) modulo \(\Phi_p\) is an integer multiple of \(m\) in this ring. In particular both \(g,f\) belong to the ideal \((m,\Phi_p)\).
+
+For \emph{every} letter \(b\) form its own derivative and write
+\[
+ L_b=(1-t)\dot P_w
+ =\sum_{r=1}^{N-1}\one_{\{w_r=b\}}t^r-\alpha_b(N-1)t^N.
+\]
+The product rule puts \(L_b\) in \((m,\Phi_p)\). Reduced modulo \(m\) and \(t^p-1\), its representative of degree below \(p\) is a scalar multiple of \(1+\cdots+t^{p-1}\). Indeed \(\Phi_p\) is monic and divides \(t^p-1\), even over \((\Z/m\Z)[t]\). Consequently all column sums are congruent modulo \(m\). Column \(c\) is homogeneous, so its \(b\)-count is \(0\) or \(m\); all nonzero columns have \(b\)-count \(0\) or \(m\). Each is monochromatic. Reading the columns \(1,\dots,p-1\) gives the repeated block; the positive multiples of \(p\) give the separators.
+\end{proof}
+\begin{corollary}\label{bound}
+If a word of length \(N-1\) is not a proper interleaving and \(N\) is composite, the number of its active factors is at most the number of \emph{composite} divisors of \(N\).
+\end{corollary}
+\begin{proof}
+Each active factor must occupy at least one composite order by Lemma~\ref{rigid}, and the occupied sets are disjoint.
+\end{proof}
+
+\section{Interleaving, classification and counting}
+For clarity we give the product rule in the finite-alphabet setting.
+\begin{lemma}[Interleaving classes; cf.\ {\cite[Thm.~26]{admop}}]\label{inter}
+\(\E(u\circ v)=\{u'\circ v':u'\in\E(u),\,v'\in\E(v)\}\).
+\end{lemma}
+\begin{proof}
+Put \(d=|u|+1,\ m=|v|+1,\ M=\X^{\alpha_u(|u|)}\), and let \(T\) substitute \(M x_b\) for \(x_b\). Group the prefixes into \(m\) successive blocks to obtain \(P_{u\circ v}=P_u T(P_v)\). Every equivalent word \(w'\) therefore has a grouping \(H\) of its factors with diagonal \(S_d\), obtained by flipping those of \(P_u\). Writing \(P_{w'}=HK\), the diagonal of \(K\) is \(1+t^d+\cdots+t^{(m-1)d}\). For each letter the derivative identity gives
+\[
+ (1-t)\dot P_{w'}\equiv m(1-t)\dot H\pmod{t^d-1}.
+\]
+Each nonzero column count mod \(d\) is hence zero or \(m\): \(w'=u'\circ v'\) with the same width. Now \(P_{u'}=H\): the irreducibles forming a group with diagonal \(S_d\) are unique by their disjoint cyclotomic orders. Thus \(u'\sim u\), where \(\sim\) denotes equality of decks. In particular \(u'\) has the same \(M\). Cancel the equal block autocorrelations in the interleaving identity. The substitution \(T\) is injective on Laurent monomials: it maps an exponent \(\beta\) to \(\beta+(\sum\beta_i)\alpha_u(|u|)\), multiplying its coordinate sum by \(d\). Hence the separator autocorrelations also agree, i.e.\ \(v'\sim v\). The reverse inclusion follows from the same polynomial identity.
+\end{proof}
+\begin{proof}[Proof of Theorem~\ref{main}]
+At \(N=pq\) there is just one composite divisor \(pq\). If \(w\) has more than two reconstructions it has at least two active factors, and Corollary~\ref{bound} forces a proper interleaving of widths \(p,q\) in one of the stated orders. Words of prime-minus-one length have only themselves and their reversals in their classes by Lemma~\ref{factor}. Lemma~\ref{inter} gives the four variants and shows that both components must be nonpalindromic. Conversely either orientation with two such components attains four.
+
+An intersection of the two width families would have monochromatic nonzero rows and nonzero columns on \(\Z/p\times\Z/q\). At their crossings the labels must all agree; every actual position belongs to one of those rows or columns. Thus only constant words occur in both. For each orientation the components are read off uniquely, with the two displayed nonpalindromic word counts. Doubling for orientation and dividing by four gives \(C_4\). If \(n=pq-1\), the full distribution has \(C_1=h^{n/2}\) singletons and \(C_2=(h^n-C_1-4C_4)/2\) two-element classes: by the independent flips a palindrome has no active factors, since the all-flips reversal fixes it.
+\end{proof}
+\begin{proof}[Proof of Theorem~\ref{repeat}]
+For \(N=p^2q\) the composite divisors are \(p^2,pq,p^2q\). A word not properly interleaved therefore has at most three active factors. For an interleaved word the possible pairs of widths are \((p,pq)\) and \((q,p^2)\), in either order. A prime width permits at most two words per class, width \(pq\) at most four by Theorem~\ref{main}, and width \(p^2\) at most four because \(S_{p^2}\) has just two irreducible cyclotomic factors. Lemma~\ref{inter} gives the same upper bound eight. Iterated interleaving of three nonpalindromic blocks of widths \(p,p,q\) attains it.
+\end{proof}
+
+\section{A dyadic mixed-prime family}
+\begin{theorem}\label{fourp}
+For an odd prime \(p\) and every finite alphabet of size at least two, \(E_{4p-1}=4\).
+\end{theorem}
+\begin{proof}
+We first record two observations. Independent active factors change disjoint \emph{letter positions}. Indeed, by Lemma~\ref{linear} the indicator vector at any position is affine on the cube of flips. From a standard basis vector \(\mathbf e_a\), two nonzero independent changes would give
+\(\mathbf e_b+\mathbf e_c-\mathbf e_a\) after both flips, with \(b,c\ne a\), not a basis vector.
+
+Also, any irreducible factor with diagonal \(f=1+t^d\) is inactive if \(N=2dm\). For a letter use \(L=(1-t)\dot P_w\). The product rule modulo \(1+t^d\) gives
+\[
+ L\equiv \frac{1-t^N}{1+t^d}\dot F\equiv 2m\dot F\pmod {1+t^d}.
+\]
+At each residue \(1\le r<d\) the reduced coefficient of \(L\) is the alternating sum of \(2m\) indicators, hence belongs to \([-m,m]\). Thus the degree-\(r\) coefficient of \(\dot F\) is zero. The unreduced derivative has constant zero, degree at most \(d\), and top term \(c t^d\), where \(c\) is the degree of \(F\) in that letter. Consequently \(\dot F=ct^d\). The reciprocal's derivative is \(t^d[c f(t^{-1})-\dot F(t^{-1})]=ct^d\) as well. Its flip makes no indicator change for any letter, as asserted.
+
+A proper interleaving at \(N=4p\) gives at most four words by Lemma~\ref{inter}: width \(4\) gives at most two (the two single cyclotomics are binomial), and width \(2p\) at most two. For the latter, Corollary~\ref{bound} gives at most one active factor outside proper interleavings; a proper interleaving has widths \(2,p\), again with at most two variants.
+
+Suppose a word is not properly interleaved and has at least three active factors. Each factor is represented by its block in a partition of the five orders \(2,4,p,2p,4p\). None of the sets of orders of \(S_2,S_4,S_p,S_{2p}\) can be a union of blocks: the derivative argument in Lemma~\ref{inter} would force a proper interleaving. A block equal to \(\{2\},\{4\},\{2,2p\}\), or \(\{4,4p\}\) is inactive by the binomial observation. These restrictions together leave only the following partitions with three or more potentially active blocks (each listed block must be active):
+\[
+\begin{array}{ccc}
+ \{2,4,p\}&\{2p\}&\{4p\}\\
+ \{4,p\}&\{2p\}&\{2,4p\}\\
+ \{2,p\}&\{4,2p\}&\{4p\}.
+\end{array}
+\]
+For a short independent check, enumerate set partitions by adding the five symbols in the displayed order, each time either to an existing block or as a new singleton. Reject a partition if one of \(\{2\},\{2,4\},\{p\},\{2,p,2p\}\) is a union of blocks, or if fewer than three blocks remain after discounting the four inactive possibilities. The companion \texttt{partitions.py} performs all 52 cases.
+
+Consider the first block in each row and choose a nonzero single-letter flip difference \(D\). Its Fourier support allows only a function of \(r\bmod4\) plus a function of \(r\bmod p\); the two summands are odd. By the CRT sumset argument of Lemma~\ref{rigid}, only one summand is nonzero. If \(D\) is \(p\)-periodic, write \(f=\Phi_p H\). Here \(H\) is a product of some of \(\Phi_2,\Phi_4\), both units modulo \(\Phi_p\): the unit calculation of that lemma applies to \(\Phi_2(t)\) and to \(\Phi_4(t)=\Phi_2(t^2)\), as \(t\mapsto t^2\) is an automorphism modulo \(\Phi_p\). The column saturation argument of Lemma~\ref{rigid} forces width-\(p\) interleaving, a contradiction. Otherwise \(D\) is nonzero and odd of period four. It is nonzero at \emph{every} odd position. The third row has no order-four frequency and is impossible. In the first two rows the separate active block \(\{2p\}\) cannot change any odd position, by disjointness. Yet its nonzero flip difference for some letter obeys \(D'(r+p)=-D'(r)\), since every primitive \(2p\)th root has \(p\)th power \(-1\). The odd translation \(p\) exchanges the two parities, a contradiction. This exhausts the upper bound. Interleaving two nonpalindromes of lengths \(3,p-1\) supplies the four-word lower bound.
+\end{proof}
+
+\section*{Independent checks and limits}
+A direct enumeration of all binary words at the two smallest distinct-odd-prime products and of all ternary words of length 14 was performed without factoring any polynomials. For each word it computes the full substring histogram and verifies every member of its predicted class. Hashing only sorts comparisons; final equality uses the full histogram.
+\[
+\begin{array}{rrrrrr}\toprule
+h&n&\text{words}&C_1&C_2&C_4\\\midrule
+2&14&16{,}384&128&8{,}104&12\\
+2&20&1{,}048{,}576&1{,}024&523{,}664&56\\
+3&14&4{,}782{,}969&2{,}187&2{,}389{,}959&216\\\bottomrule
+\end{array}
+\]
+The binary cases were within the computational range already reported in \cite{admop}; the proofs are uniform in the primes. The accompanying \texttt{verify.cpp} and \texttt{verify\_ternary.cpp} reproduce the binary and ternary checks, respectively. This manuscript does not classify all equivalence classes for arbitrary lengths. Recent related work studies reconstruction algorithms \cite{alg} and extensions from words to graph labelings \cite{graph}. A targeted literature search identified no previous proof of these mixed-prime conclusions; this is not a guarantee of priority.
+
+\begin{thebibliography}{9}
+\bibitem{admop} J. Acharya, H. Das, O. Milenkovic, A. Orlitsky, and S. Pan,
+\emph{String reconstruction from substring compositions}, SIAM J. Discrete Math. 29 (2015), 1340--1371. \href{https://doi.org/10.1137/140962486}{doi:10.1137/140962486}.
+\bibitem{alg} U. Gupta and H. Mahdavifar, \emph{A new algebraic approach for string reconstruction from substring compositions}, IEEE Trans. Inform. Theory 71 (2025), 125--137. \href{https://doi.org/10.1109/TIT.2024.3493762}{doi:10.1109/TIT.2024.3493762}.
+\bibitem{graph} A. Dailly and T. Lehtil\"a, \emph{Reconstructing graphs with subgraph compositions}, Discrete Appl. Math. 390 (2026), 198--219. \href{https://doi.org/10.1016/j.dam.2026.04.023}{doi:10.1016/j.dam.2026.04.023}.
+\end{thebibliography}
+\end{document}

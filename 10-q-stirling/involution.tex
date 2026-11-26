@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,hyperref}
+\title{A last-letter involution for the Stirling--Newton expansion}
+\author{Leo Gao\\\small AI-assisted research note}
+\date{26 November 2026}
+\begin{document}\maketitle
+\noindent Two published questions ask for a sign-reversing involution behind known identities: Section 7.5 of Sagan--Swanson's \emph{$q$-Stirling numbers in type B} asks for their Theorem 2.2 in this form; Section 6.2 of their \emph{Stirling numbers for complex reflection groups} asks for such a proof of Theorem 4.2. The same last-letter toggle answers both. The identities themselves are not new.
+\paragraph{General identity.} For commuting indeterminates $t,x_1,x_2,\ldots$, write $h_r$ for the complete homogeneous symmetric function of degree $r$. Then
+\[
+t^n=\sum_{k=0}^n h_{n-k}(x_1,\ldots,x_{k+1})\prod_{i=1}^k(t-x_i).
+\]
+Encode the right side by length-$n$ histories starting at height $0$. At height $j$ there are three kinds of steps:
+\[
+\begin{array}{c|ccc}
+&\text{horizontal }H&\text{marked rise }R&\text{plain rise }T\\\hline
+\text{new height}&j&j+1&j+1\\
+\text{signed weight}&x_{j+1}&-x_{j+1}&t
+\end{array}
+\]
+At final height $k$, the counts of horizontal steps at the successive heights form a weak composition of $n-k$ into $k+1$ parts. Their weight enumerator is $h_{n-k}$; independently each of the $k$ rises chooses the indicated positive or negative summand, yielding the displayed product. No cancellation has been used to construct this signed set.
+ 
+\medskip\noindent\textbf{Involution.} Locate the last letter that is not $T$ and interchange $H$ and $R$ there. If none exists, leave the history fixed. The toggled letter starts at the same height, so contributes the same monomial with the opposite sign. All subsequent letters are plain rises of weight $t$ independent of their starting heights. No preceding letter changes. The same position is chosen on a second application, which undoes the first. The sole fixed history is $T^n$ (the empty word when $n=0$), of weight $t^n$. This proves the identity by a sign-reversing involution on its entire monomial expansion.
+\paragraph{Direct lattice-ordered $q$ form.} Here is the toggle directly on a set whose signs are $(-1)^{n-k}$ and whose weights are positive powers of $q$. For any nonnegative integer sequence $a_0,a_1,\ldots$, put $[a]=1+q+\cdots+q^{a-1}$ with $[0]=0$, and consider
+\[
+\sum_{k=0}^n (-q)^{n-k}
+h_{n-k}([a_0],\ldots,[a_k])
+\prod_{j=0}^{k-1}[a_j+1]=1.
+\]
+At height $j$ a rise carries any integer label $0,\ldots,a_j$; a horizontal carries any label $1,\ldots,a_j$. The absolute weight is $q$ to the sum of the labels. Each horizontal contributes a minus sign. This realizes the summand at final height $k$: the rising labels give the product and the horizontal labels give $q^{n-k}$ times the homogeneous function. Switch rise/horizontal at the last nonzero label, preserving the label. The prefix is untouched, the nonzero label remains permitted for both choices at that height, and the suffix consists solely of zero-labelled rises legal at \emph{all} heights. It follows that this is a sign-reversing, weight-preserving involution with precisely one survivor, the all-zero rising path.
+ 
+For the lattice-ordered colored-group formula, take $a_j=mj+1$, giving the unordered widths of Sagan--Swanson's Theorem 3.2 and rising factors $[mj+2]$ of Theorem 4.2. For the usual type-A identity (19) take $a_j=j$, starting with the legal empty horizontal alphabet at height zero. This distinguishes the ordinary type-A convention from the formal substitution $m=1$ in the shifted alphabet; the involution works for both. The histories can also be read as insertion records: for colored partitions, a horizontal chooses an existing block for the new base, with the label minus one its inversion increment; a rise starts a new nonzero block orbit and records one digit of the additional ordering factor. The recursion and block insertion correspondence are Proposition 3.1 of the reflection-group paper. The path construction suffices without assuming a pre-existing intrinsic ordering of the colored partitions.
+\paragraph{Scope.} This is a combinatorial proof, not a newly discovered polynomial identity. It answers the stated requests using decorated histories rather than a local move on a prescribed partition diagram. Targeted searches did not locate an earlier explicit answer to these two requests; no assertion of priority over the entire Newton-interpolation literature is made.
+\begin{itemize}
+\item B.~E.~Sagan and J.~P.~Swanson, \href{https://users.math.msu.edu/users/bsagan/Papers/Old/qStB-pub.pdf}{$q$-Stirling numbers in type B}, European J. Combin. 118 (2024), 103899, Thm.~2.2 and Sec.~7.5.
+\item B.~E.~Sagan and J.~P.~Swanson, \href{https://users.math.msu.edu/users/bsagan/Papers/Old/StG-doi.pdf}{Stirling numbers for complex reflection groups}, Prop.~3.1, Thms.~3.2, 4.2 and Sec.~6.2.
+\end{itemize}
+\end{document}

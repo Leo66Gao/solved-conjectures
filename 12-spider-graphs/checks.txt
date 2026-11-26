@@ -1,0 +1,4 @@
+PASS: exact randomized coefficient vs direct composition weights; two symbolic polynomials; all 17 residue table entries; final CRT classes
+PASS: c=2, b=12: 55 non-coin cases have a negative elementary coefficient; all other a are excluded by missing connected partitions
+PASS: c=2, b=15: 91 non-coin cases have a negative elementary coefficient; all other a are excluded by missing connected partitions
+PASS: c=2, b=18: 136 non-coin cases have a negative elementary coefficient; all other a are excluded by missing connected partitions

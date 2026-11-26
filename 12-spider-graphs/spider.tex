@@ -1,0 +1,224 @@
+\documentclass[11pt]{article}
+\usepackage[OT1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,longtable,array,calc,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\pandocbounded}[1]{#1}
+\providecommand{\tightlist}{}
+\title{A finiteness theorem for elementary-positive three-legged spiders}
+\author{Leo Gao\\\small AI-assisted research}
+\date{26 November 2026}
+\begin{document}\maketitle
+
+
+This
+is a partial theorem about Tom's classification conjecture, not a claim
+to have proved its list of seven graphs.
+
+\textbf{Theorem.} For every fixed integer \(c\ge2\) other than 3, only
+finitely many three-legged spiders \(S(a,b,c)\), with \(a\ge b\ge c\),
+have elementary-positive chromatic symmetric function. In particular
+this proves the finiteness assertion for the entire previously unbounded
+family \(S(a,b,2)\). For \(c=3\), any infinite counterfamily to
+finiteness must, after dropping finitely many terms, escape along the
+balanced direction \(a/b\to1\), and Section 5 sharpens this to two
+explicit arithmetic progressions: \(a=b+14\) and
+\(b\equiv16,36\pmod{140}\).
+
+\emph{Terminology.} A spider has a common vertex joined to paths of
+edge-lengths \(a,b,c\); it has \(n=a+b+c+1\) vertices.
+Elementary-positive means that every coefficient of its chromatic
+symmetric function in the elementary basis is nonnegative.
+
+\section*{1. A randomized coefficient identity
+(exact)}\label{a-randomized-coefficient-identity-exact}
+
+Write \(P_j=X_{\mathrm{path}_j}\) and \(d=c+1\). We use two established
+identities: the path expansion \[
+P_n=\sum_{I\vDash n}i_1\prod_{t>1}(i_t-1)e_I
+\] and the spider identity \[
+X_S=P_n+\sum_{i=1}^c(P_iP_{n-i}-P_{b+i}P_{n-b-i}).
+\] See \href{https://arxiv.org/pdf/2112.06619}{Wang--Wang, Proposition
+2.5 and Lemma 2.10} (the latter attributed to Zheng).
+
+Choose a partition consisting of \(M-L\) copies of \(d\) and \(L\)
+copies of \(d+1\), so \(dM+L=n\). Let \(V_1,\ldots,V_M\) be these parts
+in uniformly random order. Write \(T_j=\sum_{i\le j}V_i\),
+\(R(x)=x/(x-1)\), and \(H=\{T_j\in[b+1,b+d-1]\text{ for some }j\}\). On
+\(H\) this \(j\) is unique; write it \(\tau\). The selected coefficient
+divided by \(\binom ML(d-1)^{M-L}d^L>0\) is exactly \[
+ C=\mathbb E R(V_1)-\mathbb E[\mathbf1_H R(V_1)R(V_{\tau+1})].
+\] Indeed no part fits in the small positive factors \(P_i\), and each
+negative product is obtained by cutting an ordered composition at the
+indicated partial sum, introducing exactly one additional first-part
+weight. Both segments are nonempty. Normalize by the number of orderings
+and the product of all part-minus-one factors.
+
+\section*{2. A sparse-defect limit}\label{a-sparse-defect-limit}
+
+Suppose \(b\to\infty\). Pass to a subsequence on which
+\(p=\lim b/n\in[0,1/2]\) exists, and the residues \(r=b\bmod d\) and
+\(s=n\bmod d\) are fixed. For \(p>0\), take any fixed nonnegative
+\(L\equiv s\pmod d\). For \(p=0\), fix \(\mu>0\) and choose
+\(L\equiv s\pmod d\) nearest to \(\mu n/b\). In both cases \(M=(n-L)/d\)
+is integral, \(0\le L\le M\) eventually and \(L/M\to0\).
+
+Put \(m=\lfloor b/d\rfloor\), and let \(J\) be the number of \(d+1\)'s
+in the first \(m\) positions. It has the hypergeometric distribution. If
+\(p>0\) then \(J\Rightarrow Z\sim\mathrm{Bin}(L,p)\), by sampling the
+fixed number \(L\) of marked positions without replacement, as
+\(m/M\to p\). If \(p=0\) then \(m,L\to\infty\), \(mL/M\to\mu\), and
+\(J\Rightarrow Z\sim\mathrm{Pois}(\mu)\): for every fixed \(k\),
+\(\mathbb E(J)_k=(m)_k(L)_k/(M)_k\to\mu^k\) in falling-factorial
+notation; the Poisson law is moment-determinate.
+
+We claim \(\Pr(H)\to1-\Pr(Z\equiv r\pmod d)\). For any fixed \(K\), the
+probability of a marked position in \([m-K,m+K]\) is at most
+\((2K+1)L/M\to0\). On its complement, near \(m\) we have \(T_t=dt+J\).
+If \(J\le K\) and \(K\ge4\), this arithmetic progression locally spans
+the entire target interval and its neighbors, since \(0\le b-dm<d\).
+Hence it hits the target precisely when \(J\not\equiv r\pmod d\); any
+successor part is \(d\) (increase \(K\) by two if necessary). Since
+\(J\) is tight, let \(K\to\infty\). Also \(\Pr(V_1\ne d)=L/M\to0\).
+Boundedness of the weights in the exact identity now yields \[
+ C\ \longrightarrow\ R(d)-R(d)^2[1-\Pr(Z\equiv r\pmod d)].
+\] This is strictly negative exactly when \(\Pr(Z\equiv r\pmod d)<1/d\).
+
+\section*{3. Tuning the residue bias}\label{tuning-the-residue-bias}
+
+Let \(\omega=e^{2\pi i/d}\). For \(0<p<1/2\), put \(z_j=1-p+p\omega^j\),
+\(\theta=\arg z_1\). The root-of-unity filter gives \[
+ d\Pr(\mathrm{Bin}(L,p)\equiv r)-1
+ =\sum_{j=1}^{d-1}\omega^{-rj}z_j^L.
+\] The two conjugate terms with \(j=1,d-1\) strictly dominate in modulus
+the remaining terms, since \(|z_j|^2=1-2p(1-p)(1-\cos(2\pi j/d))\).
+Further \(0<\theta<\pi/d\): the chord point is strictly between the
+positive real axis and the ray through the midpoint of \(1,\omega\).
+Along \(L=s+kd\), the phase \(L\theta-2\pi r/d\) rotates in steps
+strictly between 0 and \(\pi\). There are infinitely many \(k\) on which
+its cosine is bounded above by a fixed strictly negative number: for
+irrational rotation use density; for rational rotation its orbit is a
+regular polygon with at least three vertices, not contained in a closed
+semicircle. Choose any sufficiently large such \(L\). The sum is
+strictly negative.
+
+If \(p=1/2\), the first terms have phase \((L-2r)\pi/d\), because
+\((1+\omega)/2=e^{\pi i/d}\cos(\pi/d)\). If \(\cos((s-2r)\pi/d)\ne0\),
+increasing \(L\) by \(d\) flips its sign, giving the same result. If it
+is zero, then \(d\) is even and \(s-2r\equiv d/2\pmod d\). For
+\(d\ge6\), the first pair cancels identically, but the next pair
+\(j=2,d-2\) has positive modulus \(\cos(2\pi/d)^L\) and cosine
+\(\cos(2(L-2r)\pi/d)=-1\). Its magnitude strictly dominates all
+remaining terms for large \(L\), giving a negative sum. Only \(d=4\) is
+exceptional (the second harmonic is zero).
+
+If \(p=0\), the filter instead gives
+\(\sum_{j=1}^{d-1}\omega^{-rj}\exp(\mu(\omega^j-1))\). Again the first
+pair dominates as \(\mu\to\infty\). Choose arbitrarily large \(\mu>0\)
+satisfying \(\mu\sin(2\pi/d)-2\pi r/d\equiv\pi\pmod{2\pi}\); this gives
+a strictly negative sum, as \(d\ge3\).
+
+\section*{4. Finiteness}\label{finiteness}
+
+A hypothetical infinite family with unbounded \(b\) yields a negative
+elementary coefficient by Sections 1--3, outside the stated exception.
+For bounded \(b\) there are only finitely many \(a\): every sufficiently
+large \(n\) is the sum of copies of \(b+1,b+2\), by coprimality. For the
+associated partition, the center block of a connected partition would
+have to contain the whole middle and short legs, since neither can
+contain a detached block of size at least \(b+1\). The center block
+would then have at least \(b+c+1>b+2\) vertices. This missing connected
+partition obstructs elementary positivity by Wolfgang's criterion (also
+\href{https://arxiv.org/pdf/2112.06619}{Wang--Wang, Theorem 2.4}). For
+\(c=3\), the exceptional congruence \(s-2r\equiv2\pmod4\) is precisely
+\(a-b\equiv2\pmod4\). This proves the theorem.
+
+\textbf{Status and limitations.}
+\href{https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2025/118.pdf}{Tom's
+Conjecture 2.16} asks for an exact list of seven graphs for all
+\(c\ge2\). \href{https://arxiv.org/pdf/2608.22184}{Wang--Wang,
+arXiv:2608.22184v2, pp.~3 and 23} explicitly leaves \(3\mid b, b\ge12\)
+open in the \(c=2\) slice; low multiples of 3 and the other residues are
+already classified. Our compactness argument provides no practical
+cutoff and does not identify the finite exceptional set. Nor does
+fixed-\(c\) finiteness imply finiteness when \(c\) itself varies. No
+independent peer review or priority certification is implied.
+
+\section*{5. Sharpening the singular shortest-leg-three
+case}\label{sharpening-the-singular-shortest-leg-three-case}
+
+In fact the only possibly infinite family left for \(c=3\) is \[
+   a=b+14,\qquad b\equiv16\text{ or }36\pmod{140}.
+\] This is a necessary condition for escape, not a claim that its
+members are positive.
+
+To see this, restrict an escaping sequence to the exceptional regime.
+Write \(a-b=4t+2\); we have \(t=o(b)\). If \(b\) is odd, the three legs
+are odd and there is no perfect matching (each arm would require its own
+center edge). As \(n\) is then even, this excludes the connected
+partition into pairs. Suppose then \(b=4x+r\), \(r=0\) or \(2\). For the
+partition with \(l\) fives and \(k=(n-5l)/4\) fours define \(W(h,0)=16\)
+and for \(j\ge1\) put \[
+ W(h,j)=(h+1)\cdots(h+j-1)(16h+15j).
+\] The coefficient has the sign of the polynomial \[
+ Q=12W(k,l)-\sum_{i=1}^3\sum_{j=0}^l\binom lj W(h,j)W(k-h,l-j),
+ \quad h=(b+i-5j)/4,
+\] where nonintegral or infeasible \(h\) are omitted. This is the
+ordered-path weight after labeling each five and suppressing fixed
+positive factors. For large \(x\) all integral \(h\) are feasible. The
+exact polynomial expansions are reproduced by the accompanying script.
+For \(r=2,l=2\) the polynomial is \(-16(16t+5)x-2(4t+5)(8t+9)<0\). For
+\(r=0,l=6\) the \(x^6\) coefficient vanishes and the \(x^5\) coefficient
+is \(-768(4t-13)\). The total degree is at most six, so the lower terms
+are \(O((1+t)^2x^4)\) when \(t=o(x)\). Hence \(t\ge4\) cannot occur
+infinitely often. This leaves \(r=0\), \(a-b=2,6,10,14\). Gap 2 is
+excluded by the missing connected partition into two equal blocks of
+size \(b+3\).
+
+For the other gaps we use a finite, particularly simple variant of the
+sparse-defect identity. Take bulk parts \(d\ge4\), and take finitely
+many exceptional parts of sizes \(d+v_i\) with prescribed offsets,
+allowing signed \(v_i\) as long as the exceptional part is at least 4 (a
+congruent positive offset always suffices). Require
+\(\sum v_i\equiv n\pmod d\). As \(b/n\to1/2\), the finitely many marked
+positions fall before \(\lfloor b/d\rfloor\) asymptotically as
+independent fair coin tosses. The exceptional positions avoid that
+position's bounded neighborhood with probability tending to one. The
+limiting chance of a cut in \([b+1,b+3]\) is therefore the fraction of
+subsets of offsets whose sum modulo \(d\) lies in
+\(\{b+1,b+2,b+3\}\pmod d\). If this exceeds \((d-1)/d\), the coefficient
+is eventually negative. (This repeats Section 2 with an interval of
+width 3 instead of \(d-1\).)
+
+Here is the entire small certificate, with offsets written modulo \(d\);
+a superscript is multiplicity, and the empty tuple means zero offsets.
+Each entry is checked by at most 16 subset sums; omitted residues are
+not asserted to work.
+
+\begin{longtable}[]{@{}rrl@{}}
+\toprule\noalign{}
+gap & bulk \(d\) & residue \(b\bmod d\): offsets \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+6 & 6 & 0: \(1^4\); 2: \(5^4\); 4: empty \\
+10 & 5 & 0: \(1^4\); 1: \(4^4\); 2: \(3\); 3: empty; 4: \(2\) \\
+14 & 5 & 0: \(1^3\); 2: \(4^3\); 3: \(4\); 4: \(1\) \\
+14 & 7 & 0: \(1^4\); 3: \(6^4\); 4: \(5\); 5: empty; 6: \(2\) \\
+\end{longtable}
+
+The first row covers all even \(b\). For gap 14 only \(b\equiv1\pmod5\)
+and \(b\equiv1,2\pmod7\) remain, in addition to \(4\mid b\). The Chinese
+remainder theorem gives the asserted two classes.
+
+\textbf{Reproducibility.} Run \texttt{python\ verify.py} (Python 3,
+SymPy). It cross-checks the cut identity by direct finite enumeration,
+verifies the two symbolic polynomials, the subset certificates and the
+final residue classes. It also certifies, independently of the
+asymptotic argument, nonpositivity in every previously unclassified
+layer \(c=2, b=12,15,18\) for all \(a\ge b\). Beyond the two-coin
+threshold the missing-partition argument applies; below it the script
+finds an explicit negative coefficient for each outstanding case.
+
+\end{document}

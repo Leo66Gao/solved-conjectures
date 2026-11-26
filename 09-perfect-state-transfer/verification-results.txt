@@ -1,0 +1,6 @@
+exact prescribed-support constructions n=2..60: 315
+prime-power numerator determinant / norm checks: 304
+orders surviving necessary exact tests through 10000: [2, 3]
+direct triangle inverse-DFT checks: 289
+Independent Smith-normal-form generic support PGST checks: 307
+Independent Smith-normal-form fixed magnetic gain PGST checks: 78

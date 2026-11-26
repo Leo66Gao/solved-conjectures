@@ -1,0 +1,123 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\Var}{\operatorname{Var}}
+\title{The random-to-below shuffle:\\ a sharp mean and a separation cutoff profile}
+\author{Leo Gao\\\small AI-assisted research note}
+\date{November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Grinberg and Lafrenière conjectured a finite lower bound on the expected time to stationarity of their bookmark for the random-to-below shuffle. We prove this bound for every deck size. The normalized mean has constant term Euler's constant after subtraction of $\log n+\log\log n$. The entire shuffle has a separation cutoff with the Gumbel profile on a window of $n$ steps. The proof separates the drift arising from both ends of the deck from the order-$n$ fluctuations, which arise from only one end.
+\end{abstract}
+\section{The shuffle and the result}
+At each step choose one of the $n$ cards uniformly and reinsert it uniformly among its present position and all lower positions. Start from a fixed ordering and write $s_n(t)=1-n!\min_\sigma\Prb(X_t=\sigma)$ for separation from uniform. Let $\tau_n$ be the bookmark strong stationary time of Grinberg and Lafrenière \cite[\S15]{GL}. Let $H_j=\sum_{l=1}^j1/l$, $L=\log n$, $\gamma=\lim(H_n-\log n)$, and $d=\gamma-1$.
+\begin{theorem}
+For all $n\ge2$, $\E\tau_n> n(\log n+\log\log n)$, proving \cite[Conjecture 15.8]{GL}. More precisely,
+\[
+\frac{\E\tau_n}{n}
+=L+\log L+\gamma+\frac dL-
+ \frac{d^2+\zeta(2)-1}{2L^2}+o(L^{-2}).
+\]
+Moreover $\Var(\tau_n)/n^2\to\pi^2/6$, and for every real $c$,
+\[
+\lim_{n\to\infty}s_n\big(\lfloor n(\log n+\log\log n+c)\rfloor\big)
+=1-\exp(-e^{-c}).
+\]
+This statement concerns separation; no total-variation profile is asserted.
+\end{theorem}
+The bookmark starts above the bottom card. When there are $i-1$ cards below it, a move from the $j$th position from the bottom increases this number by one with conditional probability $i/j$ if $j\ge i$, and cannot increase it otherwise. The bookmark convention places a moved card below the mark when inserted at the mark. Thus with
+\[
+h_i=\sum_{j=i}^n\frac1j,\qquad p_i=\frac{i h_i}{n},\qquad x_i=\frac1{i h_i},
+\]
+we have $\tau_n\stackrel d=\sum_{i=2}^n G_i$, with independent geometrics of success probabilities $p_i$, on $\{1,2,\ldots\}$. Independence follows from independent choices after each advance; the probabilities depend only on the bookmark level. Set $S_n=\E\tau_n/n=\sum_{i=2}^n x_i$.
+\section{Telescoping the normalized mean}
+With $f(x)=-\log(1-x)-x$ for $0\le x<1$, the identity $h_{i+1}=h_i(1-x_i)$, $h_n=1/n$ and $x_n=1$ give the exact formula
+\begin{equation}
+ S_n=\log(n h_2)+1-\sum_{i=2}^{n-1}f(x_i).\label{eq:t}
+\end{equation}
+We use $0\le f(x)\le x^2/[2(1-x)]$. With $k=n-i+1$,
+\begin{equation}
+\frac1k\le x_i\le\frac n{ik},\qquad h_i\ge\log\frac{n+1}{i}.
+\label{eq:b}
+\end{equation}
+The first two bounds follow from $k/n\le h_i\le k/i$; the last compares the sum with the integral of $1/t$ on $[i,n+1]$.
+
+First estimate the contribution from $2\le i\le n/2$. For $i\le\sqrt n$, $x_i\le 2/(iL)$, so $L^2 f(x_i)\le 4/i^2$ for large $n$. For each fixed $i$, $h_i/L\to1$; hence $L^2 f(x_i)\to1/(2i^2)$. The sum over $\sqrt n<i\le n/2$ is $O(n^{-1/2})$ since $x_i\le 1/(i\log2)$. Dominated convergence now yields
+\[
+ \sum_{i=2}^{\lfloor n/2\rfloor} f(x_i)=\frac{\zeta(2)-1}{2L^2}+o(L^{-2}).
+\]
+On the other half, $0\le x_i-1/k\le(k-1)/(ik)\le 2/n$. For $k\ge4$, $x_i\le2/k\le1/2$, and $f'(u)=u/(1-u)\le4/k$ on $[1/k,x_i]$. For $k=2,3$ the derivative is uniformly bounded for all sufficiently large $n$. Consequently replacing $x_i$ by $1/k$ on this half ($i<n$) costs $O(\log n/n)$. Extending the resulting series to infinity costs $O(1/n)$. Since
+\[
+ \sum_{k=2}^m f(1/k)=\log m-H_m+1\longrightarrow 1-\gamma,
+\]
+the second half contributes $1-\gamma+O(\log n/n)$. Finally $h_2=H_n-1=L+d+O(1/n)$. Substitution in \eqref{eq:t} and Taylor expansion of $\log h_2$ prove the mean expansion.
+
+\section{A uniform strict lower bound}
+The following proof needs no machine computation. Suppose $n\ge4$ and write $k=n-i+1$. The arithmetic--harmonic mean inequality for $i,i+1,\ldots,n$ gives $h_i\ge2k/(n+i)$, whence
+\[
+ x_i\le\frac{n+i}{2ik}
+ =1-\left(1-\frac1k\right)\left(1-\frac1{2i}\right).
+\]
+The function $f$ is increasing and satisfies
+$f(u+v-uv)=f(u)+f(v)+uv$. This separates the two ends of the deck:
+\[
+ \sum_{i=2}^{n-1}f(x_i)\le
+ \sum_{k=2}^{n-1}f(1/k)+\sum_{i=2}^{n-1}f(1/(2i))
+ +\frac{H_{n-1}-1}{n+1}.
+\]
+The last term uses $1/(ik)=(1/i+1/k)/(n+1)$. To bound the first sum use $f(1/k)\le1/[2k(k-1)]$, except that the $k=2$ term is exactly $\log2-1/2$. To bound the second sum use $f(1/(2i))\le1/[4i(2i-1)]\le1/[8i(i-1)]$. Both majorants telescope, giving, with $y=n-1$,
+\begin{equation}
+ \sum_{i=2}^{n-1}f(x_i)
+ \le\log2-\tfrac18+\frac{H_y-1}{y+2}-\frac5{8y}
+ \le\log2+\tfrac1{24}.
+ \label{eq:cost}
+\end{equation}
+For the last inequality, $H_y-1\le\log y$. Concavity gives
+$\log y\le y/6+\log6-1\le y/6+23/24$. The right-hand side is at most $(y+2)(1/6+5/(8y))$. Here $\log6<47/24$ follows, for instance, from $\log2\le25/36$ and $\log3<6/5$. The former bound follows by summing $2\sum_{j\ge0}3^{-(2j+1)}/(2j+1)$ and replacing $2j+1$ by $3$ in the tail starting at $j=1$; the latter follows from the first four terms of $e^{6/5}$.
+
+Next, $h_2=H_n-1\ge(7/9)\log n$ for $n\ge4$. At $n=4$ this follows from $H_4-1=13/12>(14/9)(25/36)$, and the induction follows from $1/(n+1)\ge7/(9n)\ge(7/9)\log(1+1/n)$. Equations \eqref{eq:t} and \eqref{eq:cost} therefore imply
+\[
+ S_n-L-\log L\ge 1-\log(18/7)-1/24>0.
+\]
+Indeed $\log u\le u/e$ and $e>27/10$ give $\log(18/7)<20/21<23/24$. The cases $n=2,3$ follow from $S_2=1$, $S_3=8/5$, $\log2<1$, $\log3<6/5$ and $\log(6/5)<1/5$. This proves the finite inequality.
+\section{The fluctuations and the separation profile}
+Independence gives $\Var(G_i/n)=x_i^2-x_i/n\le x_i^2$. For $i\le n/2$, split at $\sqrt n$ as before to see that $\sum x_i^2=O(L^{-2}+n^{-1/2})$. For $i>n/2$, $x_i\le2/k$, and $x_{n-k+1}\to1/k$ for each fixed $k$. Dominated convergence gives $\sum_{i=2}^n x_i^2\to\zeta(2)$. Since $\sum x_i/n=S_n/n=o(1)$, this proves the variance limit.
+
+For fixed $k$, $np_{n-k+1}\to k$, and the geometric distribution gives $G_{n-k+1}/n\Rightarrow E_k$ with $E_k$ exponential of rate $k$. These convergences are joint for finitely many $k$, with independent limits. The variance of the omitted centered summands $k>K$ is bounded by $o(1)+4\sum_{k>K}k^{-2}$, so truncation and Chebyshev's inequality give
+\[
+ \frac{\tau_n-\E\tau_n}{n}\Rightarrow\sum_{k=1}^\infty(E_k-1/k).
+\]
+The series converges in $L^2$. By exponential memorylessness, the gaps between successive order statistics of $K$ independent unit exponentials have independent exponential rates $K,K-1,\ldots,1$. Thus $\sum_{k=1}^K E_k$ has the law of their maximum, with distribution $(1-e^{-u})^K$ at $u\ge0$. Centering by $\log K$ gives a standard Gumbel limit $Z$; hence the series has law $Z-\gamma$. The mean expansion gives $\tau_n/n-L-\log L\Rightarrow Z$.
+
+To pass from the stopping time to separation, use the strong stationary property \cite[\S15.2]{GL}: for each $\sigma$, $\Prb(X_t=\sigma,\tau_n\le t)=\Prb(\tau_n\le t)/n!$. An ordering $\sigma$ with the initially bottom card on top cannot occur before the bookmark finishes, since every card still above the mark is above that card \cite[\S15.4]{GL}. Thus a minimum probability is exactly $\Prb(\tau_n\le t)/n!$, proving $s_n(t)=\Prb(\tau_n>t)$. The asserted profile follows by the continuity of the Gumbel distribution.
+
+\section*{Scope and verification}
+The original paper supplies the exact sum, bookmark, and optimality. The authors' conference version \cite{GLfpsac} states the asymptotic conjecture. Grinberg's subsequent work \cite{G} determines the eigenvalues on Specht modules; it is not a derivation of this cutoff profile. Searches by the conjecture number, shuffle names, harmonic-tail formula and profile, including AI-generated research listings, found no previous proof of the bound or profile. This is not a guarantee of priority. The manuscript is not peer reviewed. The companion checker also compares bookmark probabilities with exact enumeration of the entire deck law at times zero through twelve for two through five cards.
+\appendix
+\section{Independent finite check in Python 3}
+The following optional check verifies $S_n>\log(n\log n)$ at every $2\le n\le4095$ using integer arithmetic only. Here $U_n/D\ge H_n$, $X/D\le S_n$, and the truncated, downward-rounded exponential series gives $B/D\le\exp(X/D)$. The trapezoidal upper bound for the integral of $1/t$ on $[1,n]$ yields $\log n\le H_n-(1+1/n)/2\le U_n/D-1/2$. Thus any strictly positive reported margin is sufficient.
+\begin{verbatim}
+D = 10**9
+U = [0]
+for j in range(1,4096):
+    U.append(U[-1] + (D+j-1)//j)
+margins = []
+for n in range(2,4096):
+    X = sum(D*D // (i*(U[n]-U[i-1])) for i in range(2,n+1))
+    a = B = D
+    for k in range(1,81):
+        a = a*X // (D*k)
+        B += a
+    margins.append((B-n*(U[n]-D//2),n))
+assert min(margins) == (718281823,2)
+\end{verbatim}
+\begin{thebibliography}{9}
+\bibitem{GL} D. Grinberg and N. Lafrenière, The one-sided cycle shuffles in the symmetric group algebra, \emph{Algebraic Combinatorics} 7 (2024), 275--326. \url{https://doi.org/10.5802/alco.346}.
+\bibitem{GLfpsac} D. Grinberg and N. Lafrenière, The somewhere-to-below shuffles in the symmetric group and Hecke algebras, FPSAC 2024. \url{https://fpsac2024.rub.de/public/extended_abstracts/grinberg.pdf}.
+\bibitem{G} D. Grinberg, The representation theory of somewhere-to-below shuffles, \emph{Electron. J. Combin.} 33 (2026), P2.55. \url{https://arxiv.org/abs/2508.00752}.
+\end{thebibliography}
+\end{document}

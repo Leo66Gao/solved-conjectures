@@ -1,0 +1,139 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,hyperref}
+\newtheorem{thm}{Theorem}\newtheorem{lem}{Lemma}\newcommand{\Var}{\operatorname{Var}}\newcommand{\Cov}{\operatorname{Cov}}\newcommand{\E}{\mathbb E}\newcommand{\Prob}{\mathbb P}
+\title{The Gaussian boundary for four $q$-Stirling triangles}
+\author{Leo Gao\\\small AI-assisted research note}
+\date{26 November 2026}
+\begin{document}\maketitle
+\begin{abstract}For the unsigned $q$-Stirling polynomials of the first and second kinds in types A and B, we classify all standardized coefficient limits as the row grows. Among nondegenerate entries the Gaussian limit occurs precisely when the distance from the diagonal tends to infinity. At a fixed positive distance $d$, the limit before standardization and after division by the largest alphabet width is the sum of $d$ independent beta$(1,2)$ variables, also locally with an explicit order of error. A uniform lattice local central limit theorem holds throughout the Gaussian regime, including arbitrarily slowly diverging defects. The principal boundary estimate controls weighted occupation deficits for complete homogeneous symmetric functions even when the largest box condenses. The proof also yields local Gaussian graded dimensions for the generalized coinvariant rings of $G(m,1,n)$ at every nondegenerate rank choice, for each fixed $m$. This concerns the boundary regimes outside the proportional central limit theorem; no new priority is claimed for the interior theorem.\end{abstract}
+\section{Statement and the coefficient model}
+Use the unshifted unsigned convention of Sagan--Swanson~\cite{ss}. For a nonzero polynomial $P$ with nonnegative coefficients, its exponent $X$ has law $\Prob(X=s)=[q^s]P/P(1)$. Put $d=n-k$, $[j]=1+q+\cdots+q^{j-1}$. In each row of the table use the indicated symmetric function of degree $d$ in the variables $[L_i]$. Put $N=\#\{i\}$ and $L=\max L_i$.
+\[
+\begin{array}{c|cc}
+P &\text{function}&(L_i)_{i=1}^N\\\hline
+c[n,k]&e_d&1,2,\ldots,n-1\\
+c_B[n,k]&e_d&1,3,\ldots,2n-1\\
+S[n,k]&h_d&1,2,\ldots,k\\
+S_B[n,k]&h_d&1,3,\ldots,2k+1
+\end{array}
+\]
+Here $e_d,h_d$ are respectively the elementary and complete homogeneous symmetric functions. Ignore entries that are zero or have variance zero; in particular the second-kind top width must exceed one.
+\begin{thm}\label{main}Let $n\to\infty$ along any sequence of nondegenerate entries in any one of the four triangles. Then $(X-\E X)/\sqrt{\Var X}\Rightarrow\mathcal N(0,1)$ if and only if $d\to\infty$. If $d=b\ge1$ is fixed, $X/L\Rightarrow U_1+\cdots+U_b$ with convergence of all moments, where the $U_i$ are independent with density $2(1-u)$ on $(0,1)$. In particular the centered, variance-normalized limit on this diagonal has bounded support and is not Gaussian. If $d\to\infty$ and $d/n\to0$, then $\E X\sim Ld/3$ and $\Var X\sim L^2d/18$.\end{thm}
+The fixed-defect question is discussed after Theorem 7.7 of~\cite{ss}, where the one-step triangular limit is noted. Their Conjecture 7.8 asks about $k/n\to\alpha\in(0,1)$. A public proof and local limit refinement for that region already exist~\cite{prior}. We provide a self-contained proof because proportional convergence alone does not imply a result as $k/n$ tends to either endpoint. A deterministic shift of a $q$-Stirling convention does not change its standardized law.
+\paragraph{Model.} Draw an occupancy vector $A$ of total $d$ with probability proportional to $\prod_i L_i^{A_i}$, disallowing $A_i>1$ for $e_d$ and imposing no cap for $h_d$. Given $A$, draw $A_i$ independent discrete uniforms on $\{0,\ldots,L_i-1\}$ for each $i$ and add all the marks. Expansion of each monomial gives exactly $X$, including multiplicities. Its conditional mean and variance are
+\begin{equation}
+M=\tfrac12\sum_i A_i(L_i-1),\qquad V=\tfrac1{12}\sum_i A_i(L_i^2-1). \label{mv}
+\end{equation}
+\section{Bounded and sparse defects}
+For fixed $d=b$ the total weight of selections with a repeated index is $O_b(N^{b-1}L^b)$ in either the unordered homogeneous or ordered sampling model. The weight of distinct selections is $\Omega_b(N^b L^b)$, by choosing all indices from the upper half of the alphabet. Independently sample $b$ indices with probabilities $L_i/\sum_jL_j$. Conditional on distinctness, the unordered list has precisely the law of the elementary model and of the homogeneous model conditional on distinctness: every distinct list has $b!$ orders. Thus each exponent distribution differs by $O_b(1/N)$ in total variation from the sum of $b$ independent mixed marks. For one such mark $J$,
+\[
+\Prob(J=s)=\frac{\#\{i:L_i>s\}}{\sum_i L_i}.
+\]
+The empirical distribution of widths $L_i/L$ tends to uniform on $[0,1]$ in the four growing alphabets. Riemann summation now gives $J/L\Rightarrow U_1$. The variables $X/L$ are bounded by $b$, giving all moment limits.
+In fact this is a \emph{local} limit too. If $g(u)=2(1-u)\mathbf1_{0\le u<1}$, and $g^{*b}$ denotes its $b$-fold convolution, then at fixed $b$
+\begin{equation}
+\sup_{s\in\mathbb Z}\left|L\Prob(X=s)-g^{*b}(s/L)\right|=O_b(N^{-1}).\label{fixedlocal}
+\end{equation}
+Here are details controlling the lattice scale that a total-variation estimate alone would miss. In either the ordered model or the homogeneous model, there are $O_b(N^{b-1})$ repeated-index patterns, and any given pattern contributes at most $L^{b-1}$ to a single coefficient (fix the first $b-1$ marks, then the last is forced). Thus the repeated part contributes at most $O_b(1/(NL))$ to a normalized coefficient. The same counting without restricting to repeats gives $O_b(1/L)$ for the maximum point probability in the distinct-only model. Its normalization changes by a relative $O_b(1/N)$ on adding the repeats. Hence each of the two fixed-total laws differs pointwise by $O_b(1/(NL))$ from the independent mixed-mark sum. For independent marks the displayed one-mark mass gives $L\Prob(J=s)=g(s/L)+O(1/N)$ uniformly, since the widths are equally spaced. Taking lattice convolutions preserves this estimate for fixed $b$ after rescaling: each sum has $O_b(L)$ terms of size $O_b(1)$ with grid factor $1/L$, and its Riemann-sum error for $g^{*j}(u)g(v-u)$ is $O_b(1/L)$ uniformly in $v$. Indeed all these integrands have bounded total variation uniformly in $v$ (convolution with a density preserves the supremum and variation bounds; use the product variation inequality), so the grid error is at most the variation times the mesh. Since $L\asymp N$, induction proves \eqref{fixedlocal}.
+
+\paragraph{Dilute and interior regimes.} Suppose $d\to\infty$. In this section assume $d/N\to\rho$, where $0\le\rho<1$ for $e_d$ and $0\le\rho<\infty$ for $h_d$; necessarily $N\to\infty$. Define $x_i=L_i/L$ and independent $B_i$, Bernoulli with odds $z x_i$ in the elementary case and geometric on $\{0,1,\ldots\}$ with ratio $z x_i$ in the homogeneous case. Choose $z>0$ so that $\sum_i\E B_i=d$; in the homogeneous case $z<1$. Existence and uniqueness follow by strict monotonicity and the endpoint limits. Let $T=\sum B_i$ and let $W$ be the sum of the corresponding independent marks divided by $L$. Conditional on $T=d$, $W$ has the law of $X/L$, exactly. Define
+\[
+a=\Var(T)/d,\qquad b_0=\Cov(T,W)/d,\qquad c=\Var(W)/d .
+\]
+For the moment these symbols depend on the row.
+\begin{lem}\label{tilt}The covariance parameters have finite limits $a_*,b_*,c_*$ with $a_*>0$ and $v_*=c_*-b_*^2/a_*>0$. The conditional law of $(W-\E W)/\sqrt d$ given $T=d$ tends to $\mathcal N(0,v_*)$ with convergence of the first two moments. Here $\E W$ is the \emph{unconditional} mean.\end{lem}
+\begin{proof}
+Write $u_i=\E B_i$, $v_i=\Var B_i$, $m_i=(L_i-1)/(2L)$, $s_i^2=(L_i^2-1)/(12L^2)$. The covariance sums are respectively $\sum v_i$, $\sum v_i m_i$, and $\sum(v_i m_i^2+u_i s_i^2)$, each divided by $d$. If $\rho>0$, $z$ converges to the unique solution of $\int_0^1 zx/(1\pm zx)\,dx=\rho$ (plus for elementary). Indeed fixed-$z$ Riemann sums converge and bracket the root by strict monotonicity. The integral increases from zero to one at $z=\infty$ in the elementary case, and to infinity as $z\uparrow1$ in the homogeneous case. The three limits follow from Riemann sums; the positive contribution $\sum u_i s_i^2/d$ survives the Schur complement by Cauchy--Schwarz. When $\rho=0$ the same bracketing gives $z\to0$, uniformly $u_i,v_i=zx_i(1+O(z))$, and $z\sim2d/N$. The limits are $(1,1/3,1/6)$, so $v_*=1/18$; here $\E W/d=\sum u_i m_i/d\to1/3$.
+ 
+Here are details that justify conditioning on a single lattice point, including arbitrarily slow $d\to\infty$. Write $W_i$ for box $i$'s scaled mark sum, so $0\le W_i\le B_i$. For some fixed $\epsilon>0$, $\sum_i\E[B_i^j e^{\epsilon B_i}]=O_j(d)$ for every fixed integer $j\ge1$: the Bernoulli identity is immediate, and all geometric ratios are uniformly bounded away from one. This bound also holds under a tilt proportional to $e^{tW/\sqrt d}$ for each fixed real $t$, since the tilt factorizes and $\E e^{tW_i/\sqrt d}$ is uniformly bounded away from zero. Taylor expansion of the independent box log moment generating functions, using the bounds through order three for all mixed derivatives in a fixed neighborhood of zero, yields
+\begin{align*}
+\log \E e^{t(W-\E W)/\sqrt d}&=t^2 c/2+O_t(d^{-1/2}),\\
+\E_t T&=d+t b_0\sqrt d+O_t(1),&
+\Var_t T&=da+O_t(\sqrt d).
+\end{align*}
+Under this tilt, $B_i$ still has the original family with its parameter $zx_i$ multiplied by the one-mark mgf $\E e^{tJ_i/(L\sqrt d)}=1+O_t(d^{-1/2})$ uniformly, where $J_i$ is the uniform integer mark. In particular $\sum_i \Prob_t(B_i=0)\Prob_t(B_i=1)\ge C d$: the two-point product is uniformly comparable to $u_i$ by the parameter bounds above. For $|\theta|\le\pi$, independent multiplication and symmetrization of each characteristic function give
+\[
+|\E_t e^{i\theta T}|\le \exp[-C d(1-\cos\theta)] .
+\]
+At $\theta=y/\sqrt d$ the centered characteristic function tends to $e^{-a_* y^2/2}$ by the third-moment bound. Fourier inversion, dominated after scaling by $e^{-C' y^2}$, gives
+\[
+\sqrt d\,\Prob_t(T=d)\longrightarrow(2\pi a_*)^{-1/2}
+\exp[-t^2 b_*^2/(2a_*)] .
+\]
+Multiplying the centered mgf by $\Prob_t(T=d)/\Prob(T=d)$ therefore yields $e^{t^2 v_*/2}$ in the limit. MGF convergence near zero gives convergence in law; bounded positive and negative exponential moments imply uniform integrability for the first two moments. Thus recentering and rescaling by the actual conditional moments is valid.
+\end{proof}
+The lemma proves normality for the entire stated sparse/interior regime and the mean and variance equivalents in Theorem~\ref{main} when $d=o(n)$.
+\section{Dense occupations: the opposite boundary}
+Now assume $k=o(n)$. The elementary and homogeneous models approach quite different endpoints. We explicitly control the fluctuations of the conditional mean; treating it as deterministic solely from a first-moment asymptotic would not justify a CLT.
+\paragraph{Elementary case.} Exactly $s=N-d=o(N)$ indices are omitted. Their binary indicators $I_i$ follow weighted sampling of an $s$-subset with product weights $w_i=1/L_i$. Distinct indicators have nonpositive covariance: omitting variables $i,j$ and writing $E_t$ for the degree-$t$ elementary symmetric function in the remaining $w$'s, the sign of the covariance is the sign of $E_{s-2}E_s-E_{s-1}^2$. This follows from the two-by-two probability determinant and is nonpositive by Newton's inequalities (indices outside the support give zero). It follows that
+\[
+\Var M\le\tfrac14 L^2\sum_i\Var I_i\le sL^2/4 .
+\]
+Let $H=\sum_i(L_i^2-1)/12\sim NL^2/36$. Deterministically $0\le H-V\le sL^2/12=o(H)$. Thus $\Var M=o(H)$ and $\Var X=\E V+\Var M\sim H$. Conditional on the indicators, the independent centered uniforms have total third absolute moments at most $NL^3$, so the Berry--Esseen bound is $O(N^{-1/2})$ uniformly since $V\sim H$. Since $(M-\E M)/\sqrt H\to0$ in $L^2$, conditional characteristic functions (or Slutsky's theorem) prove the desired standardized CLT. This includes fixed $k$ for the first kind.
+\paragraph{Homogeneous case.} Now $N=O(k+1)=o(d)$, and $L\ge2$; this includes fixed nondegenerate columns. We use two estimates that do not require staying away from the dominant pole. Let $h_t=h_t(L_1,\ldots,L_N)$ and set $h_t=0$ for $t<0$. Decrementing a prescribed box gives the exact identities
+\[
+\Prob(A_i\ge r)=L_i^r h_{d-r}/h_d,\quad
+\Prob(A_i\ge r,A_j\ge t)=L_i^rL_j^t h_{d-r-t}/h_d\quad(i\ne j).
+\]
+The sequence $h_t$ is log-concave: it is the convolution of the log-linear sequences $(L_i^t)_{t\ge0}$, and convolution preserves log-concavity for nonnegative sequences with interval support. For completeness, the lower-triangular Toeplitz matrix of such a sequence has nonnegative minors of order two (by monotone successive ratios); convolution multiplies these matrices, and Cauchy--Binet proves the claim on any finite leading section. Hence $h_{d-r-t}h_d\le h_{d-r}h_{d-t}$, and summing the tail covariances gives $\Cov(A_i,A_j)\le0$. Also $h_d\ge L^r h_{d-r}$ by appending $r$ copies of a largest box. Thus each box of width $L_i<L$ is stochastically dominated by a geometric with ratio $L_i/L$.
+ 
+Define $D=\sum_i(L-L_i)A_i$. Summing the geometric means and using negative covariances with the geometric second-moment bounds gives
+\[
+\E D\le NL,\qquad
+\Var D\le\sum_{L_i<L}(L-L_i)^2 \E A_i^2\le2 NL^2.
+\]
+Indeed $(1-p)\E G=p$ and $(1-p)^2\E G^2=p(1+p)$ for a geometric $G$ of ratio $p$. Zero weights at largest boxes cause no problem. Now $M=(d(L-1)-D)/2$ and $H=d(L^2-1)/12$. By \eqref{mv},
+\[
+0\le H-V\le LD/6,\qquad
+\E(H-V)/H=O(N/d),\qquad\Var M/H=O(N/d).
+\]
+We have $V/H\to1$ in probability and $\Var X\sim H$; conditional on $V\ge H/2$, Berry--Esseen is $O(d^{-1/2})$ by the trivial bound $dL^3$ for the third moments and $L\ge2$. The complementary event has probability $o(1)$; again $M-\E M$ is negligible on the standard-deviation scale. This proves the CLT in the entire dense homogeneous regime, even if typically most particles occupy the largest few boxes.
+\paragraph{Completion.} If $d\to\infty$, every subsequence has a further subsequence along which $k/n$ converges in $[0,1]$. Limit zero uses the dense arguments, and both other cases use Lemma~\ref{tilt} with $d/N\to(1-\alpha)$ for elementary and $(1-\alpha)/\alpha$ for homogeneous, where $\alpha=\lim k/n>0$. Thus standardization gives the Gaussian limit along the unrestricted sequence. If $d$ fails to diverge, a subsequence has a fixed positive defect, whose standardized limit is bounded and nondegenerate, not Gaussian. This proves Theorem~\ref{main}.
+\section{A uniform lattice local limit, including both boundaries}
+The same classification yields more than weak convergence. Let $\phi_0(x)=(2\pi)^{-1/2}e^{-x^2/2}$.
+\begin{thm}\label{local}In all four families, whenever $d\to\infty$ along nondegenerate entries, writing $\mu=\E X$ and $\sigma^2=\Var X$, one has
+\[
+\sup_{s\in\mathbb Z}\left|\sigma\Prob(X=s)-\phi_0((s-\mu)/\sigma)\right|\longrightarrow0 .
+\]
+\end{thm}
+\begin{proof}
+As before it suffices to work along subsequences where $k/n$ converges. On each such sequence $\sigma\asymp L\sqrt d$ by the variance estimates above (the limiting positive constants can depend on the limit ratio). We need two bounds in different frequency ranges. Call a box wide if $L_i\ge\max(2,L/2)$, and write $B$ for the number of marks in wide boxes in the fixed-total model. For some $\eta,\gamma>0$ depending at most on the subsequence regime, we have
+\begin{equation} \Prob(B<\eta d)\le e^{-\gamma d}\quad\text{for large }n.\label{wide}\end{equation}
+For the dilute/interior regime, consider the independent boxes before conditioning in Lemma~\ref{tilt}. The sum over wide boxes of $\Prob(B_i\ge1)$ is at least a constant times $d$: a positive fraction of the alphabet is wide, $x_i\ge1/2$ there, and $\Prob(B_i\ge1)\asymp z$ uniformly there (the parameter is bounded, including the regime $z\to0$). Moreover $Nz\asymp d$ there. The multiplicative Chernoff bound for independent indicators gives the claimed exponential lower tail for the count of occupied wide boxes and hence for the number of marks. Conditioning costs $1/\Prob(T=d)=O(\sqrt d)$ by Lemma~\ref{tilt}'s proof; decrease $\gamma$ to absorb this polynomial. In the dense elementary case all but $o(N)$ boxes are present and a positive fraction are wide, so the bound is deterministic. In the dense homogeneous case, the total weight of configurations with fewer than $d/2$ wide marks is at most $\binom{N+d-1}{N-1}L^d 2^{-d/2}$, while $h_d\ge L^d$. The binomial is $e^{o(d)}$ because $N=o(d)$. This proves \eqref{wide}.
+ 
+Put $f(\theta)=\E e^{i\theta X}$. For any fixed $K>0$ there is $c_K>0$ such that the characteristic function of a single wide integer uniform has modulus at most $e^{-c_K(L\theta)^2}$ whenever $|\theta|\le\min(K/L,\pi)$. To see this directly, its modulus for width $\ell$ is $|\sin(\ell\theta/2)/(\ell\sin(\theta/2))|$. When $|L\theta|\le1$, symmetrizing two independent uniforms and using $1-\cos t\ge c t^2$ on $[-1,1]$ gives the quadratic decrement, since $\ell^2-1\gg L^2$. On $1\le |L\theta|\le K$, any sequence of widths violating a strict gap below one must have $L\to\infty$ (finite widths have a gap on the specified compact sets). Pass to a subsequence with $\ell/L\to r\ge1/2$ and $L\theta\to t$, $1\le |t|\le K$: the limit is $|\sin(rt/2)/(rt/2)|<1$, a contradiction. Combining with the independent marks conditional on occupancy and \eqref{wide} gives
+\begin{equation}
+|f(\theta)|\le e^{-c_K\eta d (L\theta)^2}+e^{-\gamma d},
+\qquad |\theta|\le\min(K/L,\pi). \label{minor}
+\end{equation}
+A bound of just $e^{-\gamma d}$ at larger frequencies would be insufficient when $d\ll\log L$. Instead, let $F$ denote $e_d$ or $h_d$, and set $C=F(1,\ldots,1)$. Since $|[\ell](e^{i\theta})|\le\pi/|\theta|$ for $0<|\theta|\le\pi$, positivity and homogeneity bound the numerator of $f$ by $C(\pi/|\theta|)^d$. On averaging the products $\prod_i L_i^{A_i}$ \emph{uniformly} over all occupancy patterns (not according to their weighted law), symmetry gives each coordinate average $d/N$. Arithmetic--geometric means and $L_i/L\ge i/(2N)$ now give
+\[
+\frac{F(L_1,\ldots,L_N)}{C}
+\ge\left(\prod_{i=1}^N L_i\right)^{d/N}\ge (L/(2e))^d ,
+\]
+using $N!\ge(N/e)^N$. Hence the high-frequency bound
+\begin{equation}
+|f(\theta)|\le\left(\frac{2\pi e}{L|\theta|}\right)^d.\label{high}
+\end{equation}
+Fix $K>2\pi e$. Equation~\eqref{high} shows that the integral over $K/L\le|\theta|\le\pi$, multiplied by $\sigma$, is $O(\sqrt d\,(2\pi e/K)^d/(d-1))=o(1)$, with fixed constants depending on $K$; take zero when this interval is empty. In the remaining range set $y=\sigma\theta$. The centered characteristic function converges to $e^{-y^2/2}$ at each fixed $y$ by Theorem~\ref{main}. Equation~\eqref{minor} bounds its modulus by $e^{-c' y^2}+e^{-\gamma d}$ on an interval of length $O_K(\sqrt d)$ growing to all of $\mathbb R$. Thus the Fourier integrands converge in $L^1$ after extending by zero outside $[-\pi\sigma,\pi\sigma]$. Fourier inversion for the lattice and the Gaussian yields the asserted uniformity in $s$.
+\end{proof}
+
+\section{Reflection groups and generalized coinvariant rings}
+For each fixed integer $m\ge2$, Sagan--Swanson's formulas for $G(m,1,n)$~\cite{groups} give the unsigned first and second kinds respectively as $e_{n-k}$ on the widths $1,m+1,\ldots,(n-1)m+1$, and $h_{n-k}$ on the widths $1,m+1,\ldots,km+1$. Theorem~\ref{main}, \eqref{fixedlocal}, and Theorem~\ref{local} extend to both of these triangles verbatim: the empirical scaled widths still converge to uniform, $L\asymp_m N$, and $L_i/L\ge i/(mN)$. In \eqref{high} replace $2\pi e$ by $m\pi e$; all other count and moment bounds are unchanged up to fixed constants. We take $m$ fixed and assert nothing here about varying $m$ or the distinct subtractive families for $G(m,m,n)$.
+ 
+There is a consequence in which the finite-defect obstruction disappears entirely. For $1\le k\le n$, take the generalized coinvariant ring $R^{(m)}_{n,k}$ in the notation of~\cite{groups}, including the classical $m=1$ version. Draw a degree with probabilities proportional to the graded dimensions. For any fixed $m\ge1$ and $n\to\infty$, along all nondegenerate choices of $k$, these degrees obey a standardized uniform lattice local CLT of the form of Theorem~\ref{local}.
+ 
+Indeed, after coefficient reversal, (31) and Proposition 5.10 of~\cite{groups} identify the Hilbert polynomial as the product of the second-kind polynomial above (ordinary $S[n,k]$ when $m=1$) and $\prod_{j=1}^k[mj]$. Reversal reflects a lattice random variable about a constant and preserves the conclusion. The product adds an independent $Y$, a sum of integer uniforms of widths $mj$. If $k\to\infty$, $Y$ has variance asymptotic to $m^2 k^3/36$ and obeys a uniform local CLT: the elementary dense argument applies with every box included, lengths $mj$, and the Fourier proof of Theorem~\ref{local} applies with all upper-half boxes occupied. If $k$ stays bounded, $Y$ has bounded variance while the nondegenerate second-kind factor has variance of order $n$ (except the identically constant type-A $k=1$ ring, excluded). When $d$ stays bounded and $k\to\infty$, the second-kind factor instead has variance $O_d(k^2)$, negligible against $Y$. Passing to subsequences covers the remaining case where both $k$ and $d$ tend to infinity and both factors satisfy local CLTs.
+ 
+For detail on convolution in this argument, pass to a further subsequence where the variance fraction of the larger-variance independent summand tends to $a\in[1/2,1]$. This summand has the uniform local CLT in the cases just enumerated. On the total standard-deviation scale $s$, the centered other summand converges to $\mathcal N(0,1-a)$, interpreted as a point mass when $a=1$ (by Chebyshev then). Convolving the larger summand's local approximation with the law of the smaller produces an error $o(1)$ after multiplying by $s$. The scaled approximating functions converge to the standard Gaussian density: they are expectations of translates of a Gaussian density of variance approaching $a$, with the translation converging weakly to the other Gaussian. Convergence is uniform on compact sets by equicontinuity and uniform on the tails by tightness and Gaussian decay. This proves the claimed local limit without assuming any growth rate for the smaller factor.
+
+\section*{Scope and priority}
+The result addresses the full boundary classification, not coefficient log-concavity or parity log-concavity. The fixed-$k$ second-kind Gaussian limit is already Theorem 7.7 of Sagan--Swanson, who also noted the triangular one-step limit. Their original Conjecture 7.8 only concerns the proportional interior. The public 2026 account~\cite{prior} explicitly excludes the boundary regimes; its conditional model is natural prior methodology, not a claim of this note. Kasraoui~\cite{kas} computed moments for classical Carlitz statistics. A targeted search of the four-triangle and Carlitz literature and public solution records located no earlier full boundary characterization; this is not a proof of priority or a substitute for external peer review. The principal additional statements here are the transition down to arbitrarily slowly diverging defects, the explicit fixed-defect convolution family, and the dense-edge treatment valid across the pole regime. Theorem~\ref{local} additionally gives a lattice local limit in all diverging-defect boundary regimes, not only for interior proportions.
+\begin{thebibliography}{9}
+\bibitem{ss} B. E. Sagan and J. P. Swanson, \emph{$q$-Stirling numbers in type B}, European J. Combin. 118 (2024), 103899. \href{https://doi.org/10.1016/j.ejc.2023.103899}{Published article}; \href{https://users.math.msu.edu/users/bsagan/Papers/Old/qStB-pub.pdf}{author-hosted published text}, Theorem 2.1 and Section 7.7.
+\bibitem{groups} B. E. Sagan and J. P. Swanson, \emph{Stirling numbers for complex reflection groups}, Theorem 3.2, Proposition 5.10 and Section 6.1. \url{https://arxiv.org/abs/2408.13874}.
+\bibitem{prior} \emph{Sagan--Swanson conjecture}, public research record, November 2026. \url{https://itsdavis.com/solved-conjectures/results/sagan-swanson-normality/}. Interior-proportion CLT and interior local limit theorem; not reported there as a boundary theorem.
+\bibitem{kas} A. Kasraoui, \emph{Average values of some Z-parameters in a random set partition}, Electron. J. Combin. 18 (2011), P228, Section 2.2.1. \url{https://arxiv.org/abs/1304.4813}.
+\end{thebibliography}
+\end{document}

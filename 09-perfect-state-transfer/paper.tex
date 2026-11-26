@@ -1,0 +1,240 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Which unit-gain circulants admit universal perfect state transfer?},pdfauthor={Leo Gao (AI-assisted)}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\ZZ}{\mathbb Z}\newcommand{\QQ}{\mathbb Q}
+\newcommand{\CC}{\mathbb C}
+\title{Which unit-gain circulants admit universal perfect state transfer?}
+\author{Leo Gao\\\small AI-assisted research note}
+\date{26 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A translation-invariant quantum walk on a ring with unimodular nonzero
+hopping amplitudes can transmit a state perfectly between every two sites
+only on rings of orders two and three. We parameterize all the triangles
+that work by directions of a translated Eisenstein lattice and give the switching-equivalence test.
+The key obstruction is that a squared hopping magnitude, after spectral
+normalization, must have $p$-adic valuation $-2/\varphi(p^b)$
+for every prime power $p^b$ dividing the order; since the magnitude squared is rational,
+this valuation must be an integer.
+Without the magnitude constraint, we characterize all zero patterns
+enabling universal perfect transfer. We also determine which translations
+are approximable for generic amplitudes on an arbitrary fixed support.
+\end{abstract}
+
+\section{The unit-gain classification}
+Write $T e_j=e_{j+1}$ on $\ZZ/n$. A Hermitian circulant Hamiltonian is
+$H=\sum_{s=0}^{n-1} h_s T^s$, where $h_{n-s}=\overline{h_s}$ and $h_0$ is real.
+A scalar diagonal affects only the global phase, so we subtract it freely. A unit-gain Hamiltonian has $|h_s|=1$ for all its nonzero off-diagonal coefficients.
+For a literal property-$\mathbb T$ matrix as in \cite{connelly}, the diagonal must in addition be zero or $\pm1$; simply restore any such diagonal after classification.
+Universal perfect state transfer (UPST) means that, for every two vertices
+$u,v$, there is a time $t>0$ with $|\langle e_v,e^{-itH}e_u\rangle|=1$.
+Here and below we exclude the vacuous one-vertex case.
+
+\begin{theorem}\label{th:main}
+A unit-gain Hermitian circulant with UPST has order two or three. In order two the
+off-diagonal coefficient is $1$ or $-1$. In order three write
+$H=aT+\bar a T^{-1}$, $|a|=1$, and fix $\omega=e^{-2\pi i/3}$. The admissible gains are precisely
+\[
+ a=\frac{b}{|b|},\qquad b\in (\omega-1)^{-1}+\ZZ[\omega].
+\]
+Two such loopless triangles are switching equivalent, allowing vertex
+permutations, if and only if $a^3=(a')^3$ or $a^3=\overline{(a')^3}$.
+In particular, there are infinitely many inequivalent triangles.
+\end{theorem}
+
+For context, Cameron et al. \cite{cameron} give the spectral
+UPST criterion. Connelly et al. \cite[Sec.~8]{connelly} conjectured
+uniqueness of the oriented triangle in the circulant unit-gain setting,
+apart from the edge. Their conjecture as literally stated was already
+refuted by a three-vertex counterexample in a public formalization report
+\cite{truth}; that report explicitly leaves the classification open.
+The theorem here is the upper bound on order coupled to an exhaustive
+description, not a claim to priority for refuting uniqueness.
+The earlier oriented ($\pm i$) theorem \cite{complex} has different
+hypotheses. No world-priority claim is made.
+
+\begin{lemma}[Fourier normalization]\label{lem:fourier}
+Set $\zeta=e^{2\pi i/n}$ and index eigenvectors so that $T$ has eigenvalue $\zeta^k$.
+UPST is equivalent to the existence of $\alpha\in\mathbb R$, $\beta>0$ and
+$c_0,\ldots,c_{n-1}\in\ZZ$ for which the eigenvalues in this order are
+\[
+ \lambda_k=\alpha+\beta(k+n c_k).
+\]
+For $s\ne0$, setting $z=\zeta^{-s}$, the normalized coefficient is
+\[
+ \frac{h_s}{\beta}=B(z):=\frac1{z-1}+C(z),\qquad C(X)=\sum_{k=0}^{n-1} c_kX^k.
+\]
+\end{lemma}
+\begin{proof}
+Since the propagator commutes with $T$, perfect transfer from $0$ to $-1$
+forces $e^{-itH}=\gamma T^{-1}$ for one phase $\gamma$; conversely the powers
+of such a propagator perform every translation.
+Comparing eigenphases yields the first formula with
+$\beta=2\pi/(nt)$. Conversely $t=2\pi/(n\beta)$ works.
+Fourier inversion gives the second formula because $\sum z^k=0$ and
+$\sum k z^k=n/(z-1)$ at nontrivial $n$th roots of unity (differentiate
+the finite geometric sum). No simplicity assumption is needed.
+\end{proof}
+
+\begin{lemma}[Prime-power norm obstruction]\label{lem:norm}
+Suppose $z$ has order $d=p^r>1$ and $C\in\ZZ[X]$.
+For the field norm $N$ from $K=\QQ(z)$, one has $B(z)\ne0$ and
+$v_p(N(B(z)))=-1$, with $v_p(p)=1$ on $\QQ$.
+If all nonzero $B(w)$ for $w^n=1$, $w\ne1$, have a common absolute value, their common squared magnitude $D$ is rational and
+\[
+  \varphi(p^r)v_p(D)=-2
+       \quad\text{for every }p^r\mid n,\quad r\ge1.
+\]
+\end{lemma}
+\begin{proof}
+Let $F(X)=1+(X-1)C(X)$, so $B(z)=F(z)/(z-1)$.
+The norm $N(F(z))$ is the resultant of $\Phi_{p^r}$ and $F$.
+Modulo $p$, the first polynomial equals $(X-1)^{\varphi(p^r)}$, hence
+the resultant is $F(1)^{\varphi(p^r)}=1\pmod p$.
+Meanwhile $N(z-1)=\pm\Phi_{p^r}(1)=\pm p$.
+This proves the first assertion.
+All conjugates of $B(z)\overline{B(z)}$ are $|B(z^u)|^2$ with $u$ coprime to $p$:
+complex conjugation commutes with all the cyclotomic automorphisms.
+These quantities equal $D$ because none of these conjugates can be zero.
+Thus $D$ is fixed by $\mathrm{Gal}(K/\QQ)$, so rational. Taking norms
+in $D=B(z)\overline{B(z)}$ gives $D^{\varphi(p^r)}=N(B(z))^2$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{th:main}]
+For a unit-gain Hamiltonian, the common $D$ in the lemma is $1/\beta^2$.
+Its valuations are integers. Thus $\varphi(p^r)\mid2$ for every prime
+power dividing $n$, leaving only $2,3,4$ as possible prime powers and hence $n\mid 12$.
+If $4\mid n$, applying the lemma to $2$ and $4$ gives $v_2(D)=-2$ and
+$-1$ simultaneously.
+If $6\mid n$, order $2$ gives $D=B(-1)^2$ with $B(-1)\in\QQ$, so $v_3(D)$ is even; order $3$ requires $v_3(D)=-1$.
+This eliminates every $n\ge4$.
+
+The two-vertex edge transfers at $\pi/2$.
+In order three the set of all $C(\omega)$ in Lemma~\ref{lem:fourier}
+is $\ZZ[\omega]$. Normalizing any $b$ in the indicated translate to unit
+length makes the off-diagonal coefficients $a,\bar a$. The inverse Fourier construction gives a real diagonal removable without affecting transition magnitudes; it also gives the explicit time $t=2\pi|b|/3$.
+The norm lemma ensures $b\ne0$. This proves both directions.
+On a triangle the product of edge gains around the oriented cycle is the complete invariant under diagonal unitary switching: match gains on a spanning path using successive vertex phases and the last edge agrees exactly when the products do. Reversing labels conjugates the product. The allowed directions of a translate of a full planar lattice are dense on the unit circle (approximate any ray at distance $R$ by a lattice point within a bounded covering radius and take $R\to\infty$). Thus there are infinitely many admissible directions even after the finite equivalences.
+\end{proof}
+
+\begin{corollary}
+The same order restriction holds for every finite group $G$ acting regularly
+by symmetries of a unit-gain Hamiltonian.
+\end{corollary}
+\begin{proof}
+Choose group coordinates so $H$ commutes with right translations. Transfer
+from the identity to $g$ then implies $e^{-itH}=\gamma L_g$, a phase times left multiplication by $g$. In the projective unitary group let $S$ consist of times $t\in\mathbb R$ for which the propagator lies in the finite subgroup of left translations.
+This preimage is a closed subgroup of $\mathbb R$, and it is proper:
+a continuous image of $\mathbb R$ in a finite group is constant, whereas UPST is nontrivial.
+UPST maps $S$ onto the left translations, so $S$ is nonzero. It is therefore of the form $t_0\ZZ$.
+Its image is cyclic, forcing $G$ cyclic. Apply Theorem~\ref{th:main}.
+\end{proof}
+
+\section{Inverse support problem for exact transfer}
+\begin{theorem}\label{th:support}
+Given an order $n$, an off-diagonal zero pattern for a Hermitian circulant
+with unrestricted complex weights is realizable with UPST if and only if
+its zeros are a union of entire additive-order classes, none of prime-power order.
+All allowable omissions can be prescribed simultaneously. In particular,
+the smallest possible degree is $\sum_{p^r\parallel n}(p^r-1)$, where $p^r$ is the exact power of $p$ dividing $n$.
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:fourier}, zeros away from the diagonal are exactly the
+zeros of $F(X)=1+(X-1)C(X)$ among the nontrivial $n$th roots. Since $F$ is integral,
+its zeros include all primitive roots of any omitted order.
+A prime-power class cannot be omitted by Lemma~\ref{lem:norm}.
+Conversely let $J$ be any set of desired omitted orders, all divisors of
+$n$ with at least two distinct prime factors. Take
+$P(X)=\prod_{d\in J}\Phi_d(X)$. Each $\Phi_d(1)=1$, so $C(X)=(P(X)-1)/(X-1)$ lies in $\ZZ[X]$ and has degree below $n$ (including the zero polynomial if $J=\varnothing$).
+The elementary cyclotomic value follows, for example, by induction at $X=1$ in $(X^d-1)/(X-1)=\prod_{1<e\mid d}\Phi_e(X)$.
+Our $F$ is exactly $P$ and has precisely the prescribed zeros. Set $\lambda_k=k+n c_k$ with zero-padded coefficients of $C$; its inverse Fourier transform is Hermitian because all eigenvalues are real. To get the degree formula, keep exactly the prime-power classes, which contribute $\sum_{j=1}^r\varphi(p^j)=p^r-1$ per prime.
+\end{proof}
+This extends the Fourier coefficient formula and composite-order constructions of \cite[Secs.~6--7]{connelly}. It completes the support pattern beyond the prime, prime-square, and power-of-two dense-support cases of \cite{connelly}; all prime-power UPST circulants are dense. It does not impose unit gains.
+
+\section{Approximate versus exact transfer on the same support}
+Say that a displacement $m$ admits pretty good state transfer (PGST) when
+$\sup_{t>0}|\langle e_m,e^{-itH}e_0\rangle|=1$.
+Fix a symmetric set of nonzero allowed steps $S=-S\subset\ZZ/n$.
+Write $D_S=\{n/\gcd(n,s):s\in S\}$ and
+\[
+ M=\prod_{d\in D_S}\Phi_d(1)
+   =\prod_{p\mid n}p^{\#\{j\ge1:p^j\in D_S\}} .
+\]
+In particular $M\mid n$. Here the support specification concerns allowed nonzero step coefficients, not an arbitrary pattern for individual edges.
+
+\begin{theorem}\label{th:generic}
+For any Hermitian couplings on $S$, PGST can occur only to
+$m\in(n/M)\ZZ/n$. Outside a countable union of proper real linear
+hyperplanes in the coupling parameters, it occurs to every such $m$.
+The same full-measure conclusion holds on the phase torus for any fixed
+positive hopping magnitudes and independent phases on the non-involutive
+step pairs (fix either nonzero sign at the unique involution if present).
+\end{theorem}
+\begin{proof}
+By Fourier diagonalization and compactness, transfer with fidelity tending
+to one is equivalent to approximating the phases of $T^m$ in every
+Fourier coordinate, up to a common phase: the modulus of an average of
+unit numbers is one only when all its summands agree.
+The character form of Kronecker's theorem for a continuous torus flow,
+applied to the differences $\lambda_k-\lambda_0$, therefore says that $m$ works precisely when
+\[
+ n\mid m f'(1)\quad\hbox{for all }f(X)=\sum_{k=0}^{n-1} l_k X^k
+ \text{ with }l_k\in\ZZ,\ f(1)=0,\ \sum_k l_k\lambda_k=0 .
+\]
+Indeed the character indexed by $(l_k)$ kills the flow modulo common phase under just these two zero conditions and it evaluates on the target as $\zeta^{m\sum k l_k}$.
+Positive times have the same closure as all real times by recurrence of a compact torus flow.
+
+Relations independent of coupling values are precisely those with
+$f(1)=0$ and $f(\zeta^s)=0$ for every $s\in S$. In fact the relation is
+$\sum_{s\in S}h_s f(\zeta^s)=0$; each step pair contributes
+$2\Re(h_s f(\zeta^s))$, and an involution contributes a real scalar.
+It vanishes identically precisely when every coefficient is zero. For any
+of the countably many other $f$ it defines a proper real hyperplane.
+For fixed magnitudes it instead defines a nonidentically-zero real trigonometric polynomial in the phases: the distinct one-coordinate Fourier modes cannot cancel, and the only possible constant term comes from the lone involution. Such a zero set has measure zero.
+
+Universal relations are exactly the multiples of
+$L(X)=(X-1)\prod_{d\in D_S}\Phi_d(X)$ of degree below $n$.
+All give $f'(1)$ divisible by $M=L'(1)$. For necessity one may reduce
+$L$ modulo $X^n-1$: every $n$th-root evaluation stays unchanged, and its derivative at $1$ changes by a multiple of $n$. Thus the test above implies $n\mid mM$ even in the edge case $L=X^n-1$. Conversely when no additional relations hold, $n\mid mM$ suffices.
+\end{proof}
+
+A nearest-neighbor ring with $n$ having two distinct prime factors
+cannot have nontrivial PGST at \emph{any} magnetic flux. On $p^r$ sites,
+exactly $p$ sites (counting the original site) are generically reachable;
+this says nothing by itself about the waiting time. Universal PGST
+needs only one step pair from every prime-power order dividing $n$,
+in contrast to the entire order classes required for UPST. Earlier
+papers give oriented prime cycles \cite{cameron} and real unweighted
+cycles \cite{pal} as special (not generic) cases.
+
+\paragraph{Reproducibility and boundaries.}
+The companion \texttt{verify.py} checks prescribed supports using the
+inverse Fourier polynomial directly; it checks prime-power norms by exact
+integer determinants, and checks explicit triangle parameters. None of
+the proofs relies on these finite tests. The results do not impose an upper
+bound on arbitrary noncirculant unit-gain Hamiltonians with no regular
+group symmetry. Existence of PGST is not a useful-time transfer estimate.
+
+\begin{thebibliography}{9}
+\bibitem{cameron} S.~Cameron, S.~Fehrenbach, L.~Granger, O.~Hennigh, S.~Shrestha, and C.~Tamon,
+\emph{Universal state transfer on graphs}, Linear Algebra Appl.~455 (2014), 115--142.
+\href{https://arxiv.org/abs/1310.3885}{arXiv:1310.3885}.
+\bibitem{connelly} E.~Connelly, N.~Grammel, M.~Kraut, L.~Serazo, and C.~Tamon,
+\emph{Universality in perfect state transfer}, Linear Algebra Appl.~531 (2017), 516--532.
+\href{https://arxiv.org/abs/1701.04145}{arXiv:1701.04145};
+\href{https://doi.org/10.1016/j.laa.2017.06.015}{journal DOI}.
+\bibitem{complex} A.~Acuaviva, A.~Chan, S.~Eldridge, C.~Godsil, M.~How-Chun-Lun, C.~Tamon, E.~Wright, and X.~Zhang, \emph{State transfer in complex quantum walks}, Philos. Trans. Roy. Soc. A 383 (2025), 20240420,
+\href{https://arxiv.org/abs/2301.01473}{arXiv:2301.01473}.
+\bibitem{pal} H.~Pal and B.~Bhattacharjya, \emph{Pretty good state transfer on circulant graphs},
+Electronic J. Combin. 24 (2017), P2.23.
+\href{https://arxiv.org/abs/1607.03598}{arXiv:1607.03598}.
+\bibitem{truth} trureturing, \emph{A unit-gain circulant on three vertices with universal perfect state transfer}, formalization report with explicit order-three witness, accessed 26 November 2026.
+\href{https://www.trureturing.org/research/connelly-2017-property-t-universal-state-transfer/}{Primary project report}.
+\end{thebibliography}
+\end{document}

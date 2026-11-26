@@ -1,0 +1,296 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry,hyperref,booktabs}
+\geometry{margin=1in}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=black}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Q}{\mathcal Q}
+\title{A sharp height threshold for nonreal Ehrhart roots of singleton arbors}
+\author{Leo Gao\\{\small AI-assisted research note}}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For singleton-labeled arbors, height two forces every Ehrhart root into
+$[-1,0)$, while height three permits $\Omega(\sqrt n)$ distinct nonreal
+conjugate pairs in every sufficiently large dimension $n$. The negative
+construction works already at height two if the root is allowed two labels.
+The $\sqrt n$ order is optimal within the two-top forest-of-stars construction. A pair of explicit examples has dimension 76. The original conjecture was
+already disproved by Yuran Xiu using a 243-dimensional height-three arbor:
+our contribution is the positive height bound and a quantitative
+root-splitting mechanism, not the original disproof.
+\end{abstract}
+
+An arbor is a finite rooted tree whose nodes carry pairwise disjoint
+nonempty blocks of labels. For every node $v$ let $I_v$ collect the labels
+at $v$ and its descendants. The arbor polytope is
+$\Q_T=\{x\ge0:\sum_{i\in I_v}x_i\le |I_v|\text{ for each }v\}$.
+Its (full) dimension is the number $n$ of labels, and its Ehrhart
+polynomial $E_T(m)$ counts the integer points in $m\Q_T$ for nonnegative
+integers $m$. Height means maximum root-to-leaf distance in edges.
+Chapoton's Conjecture 2.2 \cite{chap} asserted real roots in $[-1,0]$;
+Xiu's theorem \cite{xiu} gives a counterexample. The Ehrhart polynomial
+here is not the Ehrhart $h^*$-polynomial.
+
+\begin{thm}\label{positive}
+For every arbor of height at most two in which all internal nodes have
+singleton labels, every zero of $E_T$ is real and belongs to $[-1,0)$.
+Leaf blocks may have arbitrary size.
+\end{thm}
+
+\begin{thm}\label{many}
+There is an absolute $c>0$ such that, for every sufficiently large $n$,
+there is an $n$-dimensional singleton arbor of height three whose
+Ehrhart polynomial has at least $c\sqrt n$ distinct conjugate pairs
+of nonreal roots. The same assertion holds for arbors of height two with
+a two-label root and all other labels singleton.
+\end{thm}
+
+\section{Interlacing at height two}
+The deficit of a subtree at dilation $m$ is its label count times $m$
+minus the sum of its coordinates. A leaf block of size $d$ has
+$L_d(m)=\binom{dm+d}{d}$ configurations. Its $d$ coordinates
+and the deficit $Y_d$ form a uniform weak composition of $dm$ into
+$d+1$ parts; thus
+\[
+ \E Y_d=\frac{dm}{d+1},\qquad
+ V_d(m):=\operatorname{Var}Y_d=
+ \frac{d^2 m(dm+d+1)}{(d+1)^2(d+2)} .
+\]
+Indeed the ordinary generating function in the total $N$ marking one
+part by $z$ is $(1-t)^{-d}(1-zt)^{-1}$; differentiating once and twice
+in $z$ gives the first and second factorial moments. For $d=1$ these are
+the usual uniform-integer moments.
+
+For a singleton internal child with leaf block sizes $d_1,\dots,d_b$,
+$b\ge1$, put $C=1+\sum d_i/(d_i+1)$, $V=\sum V_{d_i}$ and $q=1+Cm$.
+Given random leaf deficits, set $T=m+\sum Y_{d_i}$. There is one choice
+of the internal coordinate for each resulting deficit $0,\dots,T$.
+The count of this branch is $q\prod L_{d_i}$ and its mean deficit is
+\[
+        H(m)=\frac{\E[T(T+1)]}{2q}=\frac{Cm}{2}+\frac{V(m)}{2q}.
+\]
+These expectation statements refer only to integer $m\ge0$;
+their explicit polynomials and rational functions determine the continuation.
+If the root is a singleton, factoring out the child configuration counts
+leaves the rational function
+\[
+ F(m)=1+m+\sum_{\rm direct\ leaves}\frac{dm}{d+1}
+              +\sum_{\rm internal\ children} H(m).
+\]
+Each $H$ is affine plus a simple fraction at $a=-1/C\in(-1,0)$.
+Its affine slope is positive, and its residue $V(a)/(2C)$ is strictly
+negative: $a<0$ and $d_i a+d_i+1>0$. Thus $F$ is strictly increasing
+between consecutive distinct poles (coincident residues add), with
+limits $+\infty$ to the left of each pole and $-\infty$ to the right.
+Also $F(0)=1$ and $F(-1)\le0$, since
+\[
+ H(-1)=-\frac C2+
+ \frac{\sum_i d_i^2/((d_i+1)^2(d_i+2))}{2(C-1)}<0.
+\]
+The inequality uses $d_i^2/((d_i+1)^2(d_i+2))<d_i/(d_i+1)$.
+Its positive affine slope at infinity ensures that $F$ has exactly one
+zero in every interval between poles and in each exterior interval
+(the numerator degree is number of distinct poles plus one).
+All these zeros belong to $[-1,0)$. Upon restoring the factored counts,
+any other zeros are zeros of the linear factors $q$ or of the
+$L_d$, all in the same interval. A single leaf block is covered by $L_d$
+alone. This proves Theorem~\ref{positive}.
+
+\section{Stars and two top coordinates}
+Let $S_j$ be a singleton parent of $j$ singleton leaves. Removing the
+common leaf factor $(1+m)^j$, write $p_j,D_j,W_j$ for the count, sum of
+deficits, and sum of squared deficits. As in Xiu's moment method
+\cite{xiu}, set
+\[
+ u_j=(1+j/2)m,\quad v_j=jm(m+2)/12,\quad p_j=1+u_j.
+\]
+The formulas are
+\begin{equation}\label{mom}
+ D_j=\frac{u_j(u_j+1)+v_j}{2},\quad
+ W_j=\frac{u_j(u_j+1)(2u_j+1)+(6u_j+3)v_j}{6}.
+\end{equation}
+Indeed $T=m+\sum Y_1$ has mean $u_j$, variance $v_j$ and zero third
+central moment by symmetry; sum $d$ and $d^2$ over $d=0,\ldots,T$.
+Set $a_j=D_j/p_j$ and $b_j=W_j/p_j$.
+
+Take a forest of these stars. Add either (I) a singleton parent of the
+forest followed by a singleton root or (II) a single two-label parent.
+Given total forest deficit $s$, twice the number of allowed top-coordinate
+choices is $A_0+A_1s+s^2$, where
+\[
+ A_1=4m+3,\qquad A_0=(m+1)(3m+2)+\epsilon m(m+1),
+ \quad \epsilon=0\text{ for I},\ 1\text{ for II}.
+\]
+In I sum $2(2m+s-y+1)$ over $0\le y\le m+s$; in II twice the count is
+$(2m+s+1)(2m+s+2)$. After factoring out the forest count, twice the
+Ehrhart polynomial is therefore represented by the rational expression
+$A_0+A_1\E s+\E s^2$. Independence gives
+$\E s=\sum a_j$ and $\E s^2=(\sum a_j)^2+\sum(b_j-a_j^2)$,
+with stars listed with multiplicity. All identities below follow on
+nonnegative integers, hence as rational identities after continuation.
+
+Fix a small star type $i$, of multiplicity $r$, and distinguish one
+large star $S_K$. For the forest left after removing the $r$ copies and
+$S_K$, call the normalized first and second moments $B,J$. Multiplying
+the preceding rational expression by $p_i^2$ gives
+\begin{align}
+ G_i={}&p_i^2\{b_K+(2B+A_1)a_K+J+A_1B+A_0\}\notag\\
+ &+r p_i\{(2a_K+2B+A_1)D_i+W_i\}
+       +r(r-1)D_i^2.\label{local}
+\end{align}
+Off the poles and the roots of the removed forest factors, its zeros
+are precisely Ehrhart zeros.
+
+\subsection*{The local splitting law for fixed small stars}
+With fixed distinct sizes and multiplicities, take $K\to\infty$.
+Put $\rho_i=-1/(1+i/2)$ and $m=\rho_i+z/K$; then
+$p_i=(1+i/2)z/K$. The other small-star moments are uniformly bounded on
+bounded $z$-sets. From \eqref{mom},
+$a_K/K\to\rho_i/4$ and $b_K/K^2\to\rho_i^2/12$. Since
+$(1+i/2)\rho_i=-1$, \eqref{local} tends locally uniformly to
+\begin{equation}\label{quad}
+ Q_{r,i}(z)=z^2/12-r D_i(\rho_i)z/2+r(r-1)D_i(\rho_i)^2,\qquad
+ D_i(\rho_i)=-\frac{i(i+1)}{6(i+2)^2}.
+\end{equation}
+Its discriminant is $D_i(\rho_i)^2r(4-r)/12$; hence a group of $r\ge5$
+equal stars produces two distinct nonreal roots within $O(1/K)$
+of its own pole. This follows from Rouch\'e's theorem on disjoint small
+circles about the two nonreal roots. For $r=2,3$ the two local roots are
+real and simple (apply the same argument in conjugation-invariant disks);
+$r=4$ is the double-root boundary and the leading term alone is inconclusive.
+
+\section{Uniform splitting at linearly many poles}
+Choose five stars of every size $j=h,\ldots,2h$, and one star of size
+$K\ge C h^2$, for an absolute sufficiently large constant $C$. We show
+uniform splitting for integers $5h/4\le i\le7h/4$. In this section all
+implicit constants are absolute for $|z|\le 5$, $C$ sufficiently large,
+and $h$ sufficiently large. Write $m=\rho_i+z/K$. All estimates below
+are for complex arguments, using the rational identities, not
+probabilistic inequalities.
+
+As $h\to\infty$ the quadratics in \eqref{quad} at $r=5$ tend uniformly to
+\[
+ Q(z)=z^2/12+5z/12+5/9,
+\]
+since $D_i(\rho_i)\to-1/6$ uniformly. Its two roots are
+$(-5\pm i\sqrt{5/3})/2$. We prove that
+\begin{equation}\label{uniform}
+ G_i(\rho_i+z/K)= Q(z)+O(1/C)+O(1/h).
+\end{equation}
+First $|m|\asymp h^{-1}$, $p_i=O(h/K)$, and
+$D_i(m)=D_i(\rho_i)+O(h/K)$ by \eqref{mom}; $W_i(m)=O(1)$.
+For the big star, $|p_K|\asymp K/h$ and
+\[
+ a_K=Km/4+O(1),\qquad b_K=K^2m^2/12+O(K/h).
+\]
+These follow by division in \eqref{mom}, in particular
+$b_K=u_K(2u_K+1)/6+v_K(1-1/(2p_K))$.
+
+The key uniform bounds for the remaining small stars are
+$B=O(h)$ and $J=O(h^2)$. To prove them put
+$\alpha=-2/m-2$, so that $p_j=(m/2)(j-\alpha)$ and
+$|\alpha-i|=O(h^2/K)\le1/2$ on increasing $C$. Then
+\[
+ a_j=\frac{u_j}{2}+\frac{m+2}{12}
+               \left(1+\frac{\alpha}{j-\alpha}\right).
+\]
+The sum of $1/(j-i)$ over $h\le j\le2h,\ j\ne i$ is bounded by an
+absolute constant since $i$ is in the middle half of the interval.
+Replacing $i$ by $\alpha$ costs $O(\sum_{j\ne i}|j-i|^{-2})=O(1)$.
+Since $\alpha=O(h)$ this proves the first bound, including multiplicity
+five. Further $|a_j|+|b_j|=O(1+h/|j-i|)$ from \eqref{mom}, hence
+$\sum |a_j|^2=O(h^2)$ and $\sum |b_j|=O(h\log(2h))$. The identity
+$J=B^2+\sum(b_j-a_j^2)$ proves the second bound.
+
+Substitute in \eqref{local}. The only terms not bounded by
+$O(h^2/K+h^4/K^2+h/K)$ in the discrepancy from the local quadratic are
+the leading three terms
+$p_i^2 K^2m^2/12$, $r p_i Km D_i(m)/2$, and $r(r-1)D_i(m)^2$.
+Here, for example, $p_i^2Ba_K=O(h^2/K)$ and
+$p_i^2J=O(h^4/K^2)$. As
+$(1+i/2)m=-1+O(h/K)$, the leading terms sum to
+$Q_{5,i}(z)+O(h/K)$. This proves \eqref{uniform}.
+
+Choose fixed small nonintersecting circles about the roots of $Q$, each
+off the real axis and inside $|z|<5$. Fix $C$ large and then $h$ large
+so the error in \eqref{uniform} is less than the positive minimum of
+$|Q|$ on their union. No poles of \eqref{local} occur in these disks:
+the other small types have $|j-\alpha|\ge1/2$, and $p_K$ is bounded away
+from zero. Rouch\'e certifies one nonreal zero per circle. The removed
+factors do not vanish there. For distinct $i$ the corresponding pairs
+are distinct: adjacent $\rho_i$ are separated by
+$2/((i+2)(i+3))\asymp h^{-2}$, and $5/K$ is smaller than half the
+minimum separation after increasing $C$.
+
+Finally the dimension is $n=K+3+5\sum_{j=h}^{2h}(j+1)$ in both
+constructions. For any large $n$, choose
+$h=\lfloor\sqrt{n/(C+30)}\rfloor$ and let $K$ be the difference in this
+formula. Then $K\ge Ch^2$ and $h\asymp\sqrt n$. The middle half supplies
+at least $h/2-O(1)$ distinct pairs, proving Theorem~\ref{many}.
+
+\begin{prop}[Optimal order for a forest of stars under two coordinates]
+In either of the two top constructions, with an arbitrary forest of
+singleton stars, the Ehrhart polynomial has at most
+$1+\sqrt{2n}$ nonreal conjugate pairs, counting multiplicities.
+Hence Theorem~\ref{many} has optimal order within this construction.
+\end{prop}
+\begin{proof}
+Let $s_j$ count stars with $j$ leaves, $d$ the number of distinct such
+sizes and $L=\sum_j js_j$. The forest's count is
+$(1+m)^L\prod p_j^{s_j}$. In
+$A_0+A_1\E s+\E s^2$ each $p_j$ occurs in the denominator with exponent
+at most $\min(2,s_j)$, since terms with $p_j^{-2}$ require two distinct
+stars of that type. Consequently the real-rooted product
+$(1+m)^L\prod_j p_j^{\max(0,s_j-2)}$ divides $E_T$. The complementary
+degree is at most $2+\sum_j\min(2,s_j)\le2+2d$. Since distinct star
+sizes $j+1$ are positive integers, $n\ge 2+d(d+1)/2$, giving the
+claim. This does not assert an upper bound for arbitrary height-three
+arbors, which need not have these two top coordinates.
+\end{proof}
+
+\section{A small exact certificate}
+Take one 53-leaf star and ten one-leaf stars with either of the two tops.
+There are 63 leaves in the forest; in both versions the polytope has
+dimension 76. From \eqref{mom} and the independent-forest formula,
+\[
+ E(m)=(1+m)^{63}(1+3m/2)^8 f(m)/288.
+\]
+The coefficients of $f$ in \emph{ascending} order are
+\begin{center}\small\begin{tabular}{crrrrrr}\toprule
+top & $m^0$ & $m^1$ & $m^2$ & $m^3$ & $m^4$ & $m^5$\\\midrule
+I & 288&22728&521548&3974230&8567209&5558487\\
+II &288&22872&526084&3990826&8588323&5567397\\\bottomrule
+\end{tabular}\end{center}
+Their discriminants, in the same order, are
+\begin{gather*}
+-88759682604202320438159140024405852160,\\
+-46370879247534563368703395704913920000.
+\end{gather*}
+Each negative discriminant
+certifies a nonreal conjugate pair, without numerical root finding. The
+companion script reconstructs the quintics, checks exact real-root counts
+and compares them against a separate direct deficit-counting implementation
+in dilations $0,\ldots,5$. No minimality of dimension 76 is asserted.
+
+\paragraph{Scope and prior work.}
+The star moments and the unary-top count in \S2 specialize calculations
+of Xiu \cite{xiu}; Xiu already established height-three failure.
+Athanasiadis--Xiao--Yan \cite{axy} give results on related capped
+simplex arbor polytopes, including real-rootedness of their $h^*$-polynomials,
+a different invariant. We found no prior statement of the height-two
+interlacing theorem or the fixed-height $\sqrt n$ lower bound in the
+literature we checked. This is not a claim of exhaustive priority review
+or external peer review.
+\begin{thebibliography}{9}
+\bibitem{chap} F. Chapoton, On posets and polytopes attached to arbors,
+Math. Scand. 131 (2025), \href{https://doi.org/10.7146/math.scand.a-159563}{doi:10.7146/math.scand.a-159563}. See also \href{https://arxiv.org/abs/2503.04247}{arXiv:2503.04247}.
+\bibitem{xiu} Y. Xiu, An Arbor Polytope with Nonreal Ehrhart Roots,
+October 2026, \href{https://hexagonmath.org/pdf/2610.00235v2}{hexagon:2610.00235v2}.
+\bibitem{axy} C. A. Athanasiadis, Q. Xiao and X. Yan,
+Lattice point enumeration of some arbor polytopes (2026),
+\href{https://arxiv.org/abs/2603.11654}{arXiv:2603.11654}.
+\end{thebibliography}
+\end{document}

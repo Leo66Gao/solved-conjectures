@@ -1,0 +1,6 @@
+216 full coefficient-vector comparisons, 2445 covariance signs,
+and both weighted-deficit inequalities in 99 homogeneous entries passed.
+cA n=18 k=15: mass=468180 mean=35884/2295 variance=253256624/5267025
+cB n=18 k=15: mass=4479840 mean=370487/10980 variance=24694854971/120560400
+SA n=18 k=15: mass=367200 mean=25739/1800 variance=134441279/3240000
+SB n=18 k=15: mass=3538176 mean=269467/8672 variance=13359515207/75203584

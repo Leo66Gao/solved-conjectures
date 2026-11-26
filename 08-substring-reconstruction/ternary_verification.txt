@@ -1,0 +1,1 @@
+alphabet=3 length=14 words=4782969 classes: size1=2187 size2=2389959 size4=216 all class memberships match

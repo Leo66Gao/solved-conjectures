@@ -1,0 +1,2 @@
+88573 general signed words verified.
+112404 q-labelled histories verified in 24 specializations.
