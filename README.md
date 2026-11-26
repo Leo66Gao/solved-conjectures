@@ -8,6 +8,7 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Nonmonotone magnitude on nine points** | Counterexample | An explicit nine-point metric of strict negative type loses magnitude when distances double. The minimum possible order remains open. | [Details](33-nonmonotone-magnitude/) · [Proof](33-nonmonotone-magnitude/NINE_POINTS.md) |
 | **Bipartite self-permanent inequality** | Theorem | Proves strong self-permanent contraction for all complex correlation matrices with bipartite support, with equality characterized. No width restriction. | [Details](26-bipartite-self-permanents/) · [PDF](26-bipartite-self-permanents/paper.pdf) · [LaTeX](26-bipartite-self-permanents/paper.tex) |
 | **Zamir–Erez universal input** | Complete answer | The guaranteed fraction of additive-noise channel capacity tends to zero, even when the input distribution can depend on the noise variance. | [Details](20-zamir-erez-universal-input/) · [PDF](20-zamir-erez-universal-input/paper.pdf) · [LaTeX](20-zamir-erez-universal-input/paper.tex) |
 | **Bapat’s real $q$-permanent** | Complete answer for real symmetric matrices | An integer positive definite matrix of order $10^{35}$, specified by formula, violates monotonicity on $[-1,1]$. | [Details](19-bapat-q-permanent/) · [PDF](19-bapat-q-permanent/paper.pdf) · [LaTeX](19-bapat-q-permanent/paper.tex) |
@@ -22,6 +23,8 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Circulant unitary lifts in composite orders** | Partial | Every composite order at least six has counterexamples; any order-five counterexample must have full support and genuinely complex phases. | [Details](34-circulant-unitary-lifts/) · [Proof](34-circulant-unitary-lifts/RESULT.md) |
+| **Bias monotonicity in Penney races** | Counterexample and replacement theorem | Disproves the published finite-cap monotonicity conjecture and proves a uniform repair after removing exponentially rare pairs. | [Details](35-biased-penney-races/) · [Proof](35-biased-penney-races/proof.md) |
 | **Cubic transport under controlled edge averaging** | Theorem | A sharp cubic cost law for serial pairwise averaging on arbitrary graphs, including transport to a specified distant vertex. | [Details](27-controlled-edge-averaging/) · [Proof](27-controlled-edge-averaging/TRANSPORT.md) |
 | **Six-bit binary quantization** | Partial | Coordinate readout is optimal for all maps with up to nine input bits, and for balanced maps with ten or eleven input bits, at all crossover rates. | [Details](28-six-bit-quantization/) · [Nine-input proof](28-six-bit-quantization/exact-nine.md) · [Eleven-input proof](28-six-bit-quantization/exact-eleven.md) |
 | **Fractional planks for packed triangles** | Partial | Proves the sharp $2/3$ bound for every packed triangle in the three-cube, with independently reproduced exact certificates. | [Details](29-fractional-planks/) · [PDF](29-fractional-planks/triangle-planks.pdf) · [LaTeX](29-fractional-planks/triangle-planks.tex) |

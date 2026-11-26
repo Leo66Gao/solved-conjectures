@@ -1,0 +1,7 @@
+N=9 exact algebraic Gram = I, all 81 squared entries verified; 27p = [12, 4, 1, 0, 4, 1, 0, 4, 1]
+k=2,...,10: no triple-root multiset with zero sum and product omega (exhaustive)
+N=5 all weight-2 and -3 supports excluded by singleton overlap
+N=5 exact nondegenerate example: shift 1 zero and shift-2 closing lengths equal
+PASS
+N=6 positive kernel: exact Gram=I, all 36 squared entries verified; 64800p= [32398, 10800, 1, 10800, 1, 10800]
+PASS (including positive example)

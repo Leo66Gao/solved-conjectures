@@ -1,0 +1,29 @@
+negacyclic signs k=1: 2 complete solutions
+negacyclic signs k=2: 4 complete solutions
+negacyclic signs k=3: 0 complete solutions
+negacyclic signs k=4: 0 complete solutions
+negacyclic signs k=5: 0 complete solutions
+negacyclic signs k=6: 0 complete solutions
+negacyclic signs k=7: 0 complete solutions
+negacyclic signs k=8: 0 complete solutions
+negacyclic signs k=9: 0 complete solutions
+negacyclic signs k=10: 0 complete solutions
+negacyclic signs k=11: 0 complete solutions
+negacyclic signs k=12: 0 complete solutions
+negacyclic signs k=13: 0 complete solutions
+negacyclic signs k=14: 0 complete solutions
+d=4 exact Fourier-block unitarity/moduli OK
+d=6 exact Fourier-block unitarity/moduli OK; first row ['1/2', '1/6', '0', '1/6', '0', '1/6']
+d=8 exact Fourier-block unitarity/moduli OK
+d=10 exact Fourier-block unitarity/moduli OK
+d=12 exact Fourier-block unitarity/moduli OK
+d=14 exact Fourier-block unitarity/moduli OK
+d=16 exact Fourier-block unitarity/moduli OK
+d=18 exact Fourier-block unitarity/moduli OK
+d=10: k=2, m=5, exact Gram+every circulant square checked; kM_plus=16/25
+d=15: k=3, m=5, exact Gram+every circulant square checked; kM_plus=16/25
+d=21: k=3, m=7, exact Gram+every circulant square checked; kM_plus=16/25
+d=25: k=5, m=5, exact Gram+every circulant square checked; kM_plus=16/25
+d=35: k=5, m=7, exact Gram+every circulant square checked; kM_plus=16/25
+d=20: k=4, m=5, exact Gram+every circulant square checked; kM_plus=16/25
+PASS

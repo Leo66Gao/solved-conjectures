@@ -1,0 +1,5 @@
+Unperturbed integer squared-distance realization and all triangle inequalities passed.
+Strict off-diagonal perturbation: beta=1-10^-10 at t1=log(100/99); t2=2t1.
+Exact comparisons: 1.41 < M(t1) < 1.42 and 1.38 < M(t2) < 1.40.
+Displayed decimals only: 1.4187004613311955 1.3882616818317148
+39 rational samples certify the bounded-degree identity; M(0+)=3/2, M prime(0+)=-25/2.

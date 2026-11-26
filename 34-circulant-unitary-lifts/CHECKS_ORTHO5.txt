@@ -1,0 +1,5 @@
+family=+1, position=1: 5 irreducible factors with admissible root; 2 realizable factors; all real lifts matched
+family=+1, position=2: 9 irreducible factors with admissible root; 2 realizable factors; all real lifts matched
+family=-1, position=1: 7 irreducible factors with admissible root; 2 realizable factors; all real lifts matched
+family=-1, position=2: 8 irreducible factors with admissible root; 2 realizable factors; all real lifts matched
+PASS
