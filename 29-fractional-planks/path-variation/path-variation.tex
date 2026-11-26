@@ -1,0 +1,355 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  10pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[OT1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=.82in]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Path variation and fractional planks},
+  pdfauthor={Leo Gao, AI-assisted research},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Path variation and fractional planks}
+\author{Leo Gao, AI-assisted research}
+\date{}
+
+\renewcommand{\labelitemi}{$\bullet$}
+\begin{document}
+\maketitle
+
+\section{A path-variation bound for fractional planks with two equal
+normal
+coefficients}\label{a-path-variation-bound-for-fractional-planks-with-two-equal-normal-coefficients}
+
+
+
+\textbf{Theorem.} Let \(K\) be a convex subset of the unit three-cube
+meeting all six facets, and suppose \(K\) lies in \(x+y+az=t\) with
+\(a\ge0\). Then its fractional plank covering number satisfies \[
+\tau^*(K)\ge \max\{1-a,0\}.
+\] In particular the conjectured threshold \(2/3\) holds for \textbf{all
+offsets when \(0\le a\le1/3\)}. The previous convolution bound proved it
+only for \(a\le5-2\sqrt6\approx0.10102\). The construction below uses no
+convolution and does not require a single inscribed triangle. This does
+not resolve the whole two-equal-normal problem.
+
+A fractional cover consists of nonnegative measurable profiles \(f_i\)
+of the three coordinates with \(\sum_i f_i(x_i)\ge1\) on \(K\); the cost
+is \(\sum_i\int_0^1 f_i\). A finite nonnegative measure on \(K\) with
+each marginal dominated by Lebesgue measure certifies cost at least its
+mass. This is the dual viewpoint of
+\href{https://doi.org/10.1007/s00454-001-0088-x}{Aharoni--Holzman--Krivelevich--Meshulam,
+Fractional Planks (2002)}.
+
+\subsection{1. Trimming a shear by downward path
+variation}\label{trimming-a-shear-by-downward-path-variation}
+
+For a continuous piecewise affine function \(g:[0,1]\to[0,1]\), let
+\(V_-(g)=\int_0^1(-g'(s))_+\,ds\), the sum of the decreases along its
+affine pieces. Let \(\nu\) denote the distribution of \[
+F(s)=s+a g(s)+b
+\] for uniform \(s\in[0,1]\), with \(a\ge0\) and any real \(b\). For
+every Borel set \(E\subseteq\mathbb R\) of finite length, \[
+\nu(E)-|E|\le aV_-(g). \tag{1}
+\] To see this, take \(H(u)=\int_0^u\mathbf 1_E(v)\,dv\), interpreted as
+a signed integral for \(u<0\). Direct substitution on each affine piece
+of \(F\) gives \[
+\int_0^1 F'(s)\mathbf 1_E(F(s))\,ds
+ =H(F(1))-H(F(0))\le |E|.
+\] The identity also holds on a constant piece, where both sides of that
+piece's identity are zero. Since \(1=F'(s)-ag'(s)\) almost everywhere,
+(1) follows. This argument handles folds and atoms without treating them
+separately.
+
+The same bound holds for a mixture of such paths, with its right-hand
+side averaged over the path weights. In particular, if each path has
+\(V_-(g)\le1\), the projected shear law \(\nu\) has nonnegative excess
+over Lebesgue measure of total mass at most \(a\). Explicitly, its
+decomposition \(\nu=q\,dv+\nu_s\) gives \[
+\sup_E(\nu(E)-|E|)=\int(q-1)_+\,dv+\nu_s(\mathbb R).
+\] Here the laws in use have compact support, so the supremum can be
+taken over finite-length sets. To trim a measure with this shear
+marginal, discard its singular shear part and on the absolutely
+continuous part keep the fraction \(\min(1,1/q(v))\) at shear value
+\(v\) (take the fraction one when \(q(v)=0\)). The shear marginal
+becomes \(\min(q,1)\,dv\). The retained mass is at least \(1-a\) for an
+original probability, and no other marginal has increased.
+
+\subsection{2. An ordered square contact hull supports bounded-variation
+paths}\label{an-ordered-square-contact-hull-supports-bounded-variation-paths}
+
+Let a convex set in the \((s,z)\) unit square contain four contacts \[
+L=(0,C),\quad R=(1,D),\quad P=(A,0),\quad Q=(B,1),
+\qquad A\ge B,\quad C\ge D.
+\] There is a probability in their hull with both \(s,z\) uniform, which
+can be built from paths of downward \(z\)-variation at most one. First
+assume \(0<B<A<1\) and \(0<D<C<1\). Consider the following four
+piecewise affine paths, each parameterized by its first coordinate from
+zero to one: \[
+\begin{array}{c|c|c}
+\text{path}&\text{vertices in order}& V_-\text{ in }z\\ \hline
+\mathrm{lo}& L,P,R & C\\
+\mathrm{up}& L,Q,R & 1-D\\
+\mathrm{vert}& L,Q,P,R & 1\\
+\mathrm{diag}& L,R & C-D
+\end{array}
+\] Every edge stays in the hull by convexity. Give each path the law of
+uniform \(s\); all four first marginals are automatically uniform. Their
+\(z\) densities are constant on the three open intervals
+\((0,D),(D,C),(C,1)\). To find a mixture with uniform \(z\), associate
+to a path the vector \[
+(\text{density on }(0,D)-\text{density on }(D,C),\
+ \text{density on }(C,1)-\text{density on }(D,C)).
+\] From the elementary density formula for a segment, the respective
+four vectors are \[
+\begin{array}{c|cc}
+\mathrm{lo} & (1-A)/D &-A/C\\
+\mathrm{up} & -(1-B)/(1-D)& B/(1-C)\\
+\mathrm{vert}&(1-A)/D & B/(1-C)\\
+\mathrm{diag}&-1/(C-D)&-1/(C-D).
+\end{array}
+\] For example, the middle edge \(QP\) contributes the same density
+\(A-B\) on the three intervals of the vertical path, and cancels from
+its two differences.
+
+There is one vector in each open quadrant, so the origin belongs to
+their convex hull. One direct check is that for every nonzero linear
+functional, choose the displayed vector whose coordinate signs oppose
+its nonzero coefficients: its value is negative, contradicting any
+separating functional. A mixture giving the zero vector has equal
+density on the three intervals, hence density one since it has total
+mass one. Each of its paths has downward variation at most one, as
+required. This uses the same kinds of boundary segments and diagonals as
+\href{https://msp.org/pjm/1988/135-2/pjm-v135-n2-p06-s.pdf}{Gardner's
+Theorem 1, case (ii)}; the routing into full-width paths and the shear
+estimate are the additional steps.
+
+For degenerate ordered contacts, replace each of \(A,B,C,D\) by its
+convex interpolation with fixed strictly ordered interior values. The
+convex hulls of the adjusted contacts converge to the original hull.
+Apply the preceding construction, then trim as in Section 1 for any
+fixed \(a,b\). The measures are supported in a fixed compact set in the
+\((s,z)\) plane, so a subsequence converges weakly. Its limit is
+supported on the actual contact hull. All three marginal dominations,
+including the shear marginal, survive the limit by testing with
+nonnegative continuous functions; their masses converge and each is at
+least \(1-a\). This form of the conclusion is all that is needed; no
+claim about the piecewise-path form of the limiting untrimmed measure is
+necessary.
+
+\subsection{3. Apply the ordering to the two equal
+coefficients}\label{apply-the-ordering-to-the-two-equal-coefficients}
+
+We may restrict to the compact convex hull of finitely many facet
+contacts. When \(a=0\), the plane is \(x+y=1\), and Gardner's
+two-coordinate theorem applied to \((x,z)\) gives full uniform marginals
+in all three coordinates after lifting. Now let \(a>0\). Packedness
+implies \(1\le t\le1+a\) (the stronger feasible inequalities are
+unnecessary here). Choose one point of \(K\) on each of \(z=0,1\). If
+their respective \((x,y)\) coordinates are \((A_x,A_y)\) and
+\((B_x,B_y)\), then \[
+ (A_x-B_x)+(A_y-B_y)=a>0.
+\] At least one of the two horizontal coordinates, call it \(s\),
+satisfies \(A_s\ge B_s\). In the \((s,z)\) projection choose contacts
+\((0,C),(1,D)\). The unselected horizontal coordinate lies in \([0,1]\),
+so \[
+ C\ge (t-1)/a\ge D.
+\] Indeed at \(s=0\) the other value is \(t-aC\le1\), and at \(s=1\) the
+other value is \(t-1-aD\ge0\). Thus the four chosen contacts satisfy
+Section 2.
+
+Lift the paths back to the plane. The remaining horizontal coordinate is
+\(t-s-az\), whose reflection is \[
+1-t+s+az .
+\] This is exactly the shear of Section 1 with \(b=1-t\). After
+trimming, the projected \(s,z\) marginals and the reflected remaining
+marginal are all dominated by Lebesgue measure. Reflection preserves
+this domination for the original coordinate, so the measure is a
+matching in \(K\) of mass at least \(1-a\). The degenerate-case limiting
+argument applies even if the auxiliary strict-order hulls are not
+contained in the original plane section of the cube: they are used only
+in the projection before taking the limit back to the exact contacts.
+
+The resulting bound proves the new all-offset range. The argument does
+not by itself establish the sharp threshold for \(a>1/3\); its loss
+bound is an upper bound on the mass discarded, not a counterexample in
+the remaining parameter range.
+
+\section{Strictness of the path-variation
+bound}\label{strictness-of-the-path-variation-bound}
+
+
+
+\textbf{Theorem.} For every \(0<a<1\), every packed convex \(K\) in
+\(x+y+az=t\) has \(\tau^*(K)>1-a\). On each fixed compact interval of
+coefficients \(J\subset(0,1)\) this improvement over \(1-a\) is uniform
+over all feasible offsets and all packed \(K\). In particular there is
+some nonexplicit \(\epsilon>0\) for which the sharp conjectured bound
+\(2/3\) holds at \textbf{every} feasible offset for
+\(0\le a\le 1/3+\epsilon\).
+
+Use the previous note's notation for a chosen horizontal coordinate
+\(s\), the other reflected coordinate \(W=1-t+s+az\), and the contact
+hull with vertices \(L=(0,C), R=(1,D), P=(A,0), Q=(B,1)\) in \((s,z)\).
+Choose \(s\) so that \(A>B\), which is possible because the sum of the
+two candidate differences is \(a>0\). Put \(c=(t-1)/a\). For interior
+offsets \(1<t<1+a\), we have \(0<c<1\) and \(C\ge c\ge D\).
+
+\subsection{1. Interior offsets: a strictly better path mixture, or an
+augmentable
+antidiagonal}\label{interior-offsets-a-strictly-better-path-mixture-or-an-augmentable-antidiagonal}
+
+If \(0<D<C<1\) and \(0<B<A<1\), the four density-difference vectors in
+the main proof have the origin in the interior of their hull (every
+nonzero functional takes both signs). They therefore admit a solution
+assigning positive weights to all four paths: first allocate a
+sufficiently small common positive weight to each, then represent the
+small residual displacement using their convex hull. Paths other than
+the vertical route have \(V_-<1\). Hence the average variation is less
+than one and clipping the shear marginal loses strictly less than \(a\).
+
+If still \(0<D<C<1\) but \(A=1,B>0\), the lower and the vertical path
+vectors are respectively \((0,-1/C)\) and \((0,B/(1-C))\); their
+positive mixture gives the zero vector, and the lower path has
+\(V_-=C<1\). If \(B=0,A<1\), instead use the upper and the vertical
+paths, whose first components are opposite and whose second components
+vanish; \(V_-\) for the upper path is \(1-D<1\). In such cases a
+vertical segment with zero \(s\) width at a path endpoint is simply
+omitted when parameterizing by \(s\). If \(A=1\) and \(B=0\), the
+segment from \(Q\) to \(P\) is a full antidiagonal.
+
+If \(C=D=c\in(0,1)\), the lower path carries a \(z\) marginal uniform on
+\([0,c]\), the upper path one on \([c,1]\). Mix with weights \(c,1-c\)
+to get a uniform \(z\) marginal and average downward variation
+\(c^2+(1-c)^2<1\), including when one of these paths skips a zero-width
+endpoint segment.
+
+If \(C=1\) and \(0<D<1\), the lower path and the straight diagonal
+\(LR\) suffice when \(A<1\). The lower path density on \((0,D)\) is
+\(A+(1-A)/D>1\), and both paths have constant density on each of
+\((0,D),(D,1)\). Assign the lower path the reciprocal of that density
+and the straight path the remaining positive mass. The density is then
+one on both intervals by normalization, and the straight path has
+\(V_-=1-D<1\). If \(A=1\) the segment \(LP\) is instead a full
+antidiagonal. In the case \(0<C<1,D=0\), use the upper path and \(LR\)
+when \(B>0\): the upper path has density \((1-B)+B/(1-C)>1\) on
+\((C,1)\), so it receives the reciprocal of that density, and the rest
+of the mass uses \(LR\) with \(V_-=C<1\). For \(B=0\) the segment \(QR\)
+is a full antidiagonal. The last possibility \(C=1,D=0\) gives a full
+antidiagonal directly via \(LR\).
+
+Whenever there is a full antidiagonal in \((s,z)\), its image under
+\(W\) is an interval of length \(1-a\). Put mass \(1-a\) uniformly on
+the antidiagonal. Its \(s,z\) marginals have density \(1-a<1\) and its
+\(W\) marginal has density one on that interval only. Since \(K\) is
+packed in the remaining coordinate, it contains a point whose \(W\) lies
+strictly outside the interval (at least one of 0 and 1 does). Connect it
+to an antidiagonal point that differs from it in all three projected
+coordinates. This is possible: the antidiagonal is injective in \(s,z\),
+so at most two of its points are excluded, and every point on it differs
+in \(W\). A short initial subsegment lies entirely outside the saturated
+\(W\) interval and has nonzero length in all projections. Give it a
+sufficiently small positive uniform mass. It fits under the \(s,z\)
+density slack \(a\) and the \(W\) density cap one, proving the strict
+improvement.
+
+\subsection{2. Endpoint offsets}\label{endpoint-offsets}
+
+At \(t=1\), the two cube vertices \((1,0,0)\) and \((0,1,0)\) are forced
+into \(K\) by the corresponding facet contacts. Choose any \(z=1\)
+contact. Its \(s\) coordinate \(B\) is in \([0,1-a]\), and the
+projection contains the triangle \((0,0),(1,0),(B,1)\) in \((s,z)\).
+Here \(W=s+az\). Consider the route from \((0,0)\) to \((B,1)\) to
+\((1,0)\) with uniform \(s\) parameter. If \(B=0\) omit the first edge
+of zero \(s\) width. The \(z\) marginal is uniform, since the two edges
+contribute respective constant densities \(B\) and \(1-B\) on \((0,1)\).
+
+The first edge projects to \(W\in[0,B+a]\) with density \(B/(B+a)\). The
+second projects to \([B+a,1]\); retain the fraction \((1-B-a)/(1-B)\) of
+its mass, making its \(W\) density one. If \(B+a=1\) its \(W\)
+projection is constant and the retained fraction is zero. The resulting
+measure has mass \(1-a\). Its \(z\) marginal has density \(1-a\)
+throughout \((0,1)\); its \(s\) marginal has positive slack on
+\((B,1)\); and its \(W\) marginal has positive slack on \((0,B+a)\).
+
+Inside this triangle there is an open region with \(s>B\) and \(W<B+a\).
+For example, start at any baseline \(s\in(B,B+a)\) and raise \(z\) a
+sufficiently small positive amount. Choose a short segment in this
+region varying all three coordinates, and give it a sufficiently small
+positive uniform mass, respecting the three slacks. This yields a strict
+improvement at \(t=1\). Reflect all coordinates for \(t=1+a\).
+
+\subsection{3. Uniformity on a compact coefficient
+range}\label{uniformity-on-a-compact-coefficient-range}
+
+Suppose there were no uniform improvement on a compact
+\(J\subset(0,1)\). For a sequence violating such an improvement, choose
+six contacts and pass to a subsequence on which their coefficients,
+offsets, and all contact points converge. The equal-normal pair of first
+two coefficients is retained; call the limiting third coefficient
+\(a_*>0\). The limiting contact hull has interior in its plane. Indeed,
+a packed segment would have absolute coordinate increments all equal to
+one, which cannot solve \(\pm1\pm1\pm a_*=0\) for \(a_*\in(0,1)\). The
+strict result gives a dominated measure of mass \(m>1-a_*\) in the
+limiting hull.
+
+Contract slightly toward an interior point and scale its mass by the
+contraction factor, preserving all marginal caps while keeping mass
+above \(1-a_*\). Convolve in the plane with a smooth compactly supported
+nonnegative probability kernel of sufficiently small support. This
+preserves every cap by convolution and puts a smooth density compactly
+inside the limiting hull. Use \((s,z)\) coordinates, with the same
+choice of \(s\) for all hulls in this argument. The nearby contact hull
+projections converge in Hausdorff distance, so they eventually contain
+this compact support (use the positive support-function margin). Its
+\(s,z\) densities remain unchanged; the third density for the linear
+form \(t-s-az\) varies uniformly with \(a,t\) by the integral formula
+for projecting a smooth compactly supported density. Divide by
+\(1+o(1)\) to restore all three caps, obtaining a uniform mass excess
+above \(1-a_n\) for large \(n\), a contradiction. Apply this around
+\(a_*=1/3\) for the final consequence.
+
+\end{document}

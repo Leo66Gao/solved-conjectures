@@ -1,0 +1,36 @@
+# Three blocks: every deadline under equal singleton marginals
+
+**Theorem.** For $n=3s$, suppose every coupon has inclusion probability $1/3$ and every package has at most $s$ coupons. At every integer deadline, the probability of complete coverage is bounded above by that for three equally likely disjoint $s$-blocks. This is the balanced $q=3$ case of [Conjecture 8.1](https://hexagonmath.org/pdf/2611.00814v1). It does not require independence within a draw. In fact the proof permits successive package laws chosen adaptively, if the conditional inclusion probability of *each* coupon at each round remains $1/3$.
+
+We prove a more general two-block-residual bound. Suppose every coupon is drawn with conditional marginal $p$, with $0<p\le1/2$. Put $a=1-p$, $b=1-2p$. Given any nonempty collection of outstanding coupons of normalized size $x=(\text{number outstanding})/s\le2$, the probability that some remains after $t$ draws is at least
+$$
+ L_t(x)=
+ \begin{cases}
+ a^t,&0<x\le1,\\
+ xa^t-(x-1)b^t,&1<x\le2.
+ \end{cases}
+$$
+Use $L_t(0)=0$ and $0^0=1$.
+
+For $0<x\le1$, follow any single outstanding coupon: by the conditional-marginal hypothesis its probability of remaining outstanding is $a^t$. For $1<x\le2$, proceed by induction on $t$. At $t=0$ the bound is exact. The normalized outstanding count $Y$ after one draw obeys $Y\ge x-1>0$, $Y\le2$, and $\mathbb E Y=ax$. The induction hypothesis and convexity of the positive part give a lower bound
+$$
+ a^t+(a^t-b^t)\mathbb E(Y-1)_+
+ \ \ge\ a^t+(a^t-b^t)(ax-1)_+.
+$$
+If $ax\le1$, this is at least $xa^{t+1}-(x-1)b^{t+1}$. If $ax\ge1$, the difference from this target equals $p(2-x)b^t\ge0$. This proves the induction including the case $b=0$.
+
+In the three-block setting the mean package size equals the deterministic upper bound $s$, so every draw has size $s$. After the first draw exactly $2s$ coupons are outstanding, hence $x=2$. For $m\ge1$, the failure probability is at least
+$$
+ 2(2/3)^{m-1}-(1/3)^{m-1}
+ =3(2/3)^m-3(1/3)^m,
+$$
+the exact three-block failure probability by inclusion-exclusion. At $m=0$ both laws fail with certainty. No enumeration or numerical approximation is required.
+
+**Strictness and a stability term.** For iid balanced draws the partition law is the *only* maximizer at any fixed $m\ge3$ up to labels. In the induction, replacing the positive part by $ax-1$ (even when negative) shows that for $1<x<2$ and $t\ge1$ the actual lower bound exceeds $L_t(x)$ by at least $p(2-x)b^{t-1}$. After two draws $A,B$ in the three-block problem, the outstanding mass is $Y=1+|A\cap B|/s$. On $1\le Y\le2$, the function $L_{m-2}$ is affine, and $\mathbb E Y=4/3$. Thus its expectation is exactly the partition failure probability; this is the equality case $x=2$ in the induction (here that affine formula even holds at $Y=1$). Keeping the extra term gives the explicit separation
+$$
+ \Pr_\mu(T>m)-\Pr_D(T>m)\ \ge\
+ 3^{-(m-2)}\mathbb E\!\left[
+     \left(1-\frac{|A\cap B|}{s}\right)
+       \mathbf1_{\{0<|A\cap B|<s\}}\right].
+$$
+Zero gap requires that any two supported packages be identical or disjoint. All coupons have positive marginals, so those packages form a partition; their common block weights must be $1/3$. Conversely the partition attains the bound.

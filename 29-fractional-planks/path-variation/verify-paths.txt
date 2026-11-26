@@ -1,0 +1,2 @@
+PASS: 2205 exact rational path/shear configurations; 210 have atoms.
+PASS: all 36 endpoint fold samples have exactly the mass and slack predicted.

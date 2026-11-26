@@ -1,0 +1,2 @@
+All 15232 rational derivative enclosures strictly positive; minimum 5263442/70308225, at (t,r,i)=(1, 2, 63).
+Additional exact grid sanity checks: 3145 recurrence, 390 shortened-jump and 3470 convexity comparisons.

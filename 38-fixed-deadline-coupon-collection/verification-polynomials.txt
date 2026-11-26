@@ -1,0 +1,4 @@
+d=2: polynomial identity verified at 5 distinct points, all coefficients strictly positive
+d=3: polynomial identity verified at 7 distinct points, all coefficients strictly positive
+d=4: polynomial identity verified at 9 distinct points, all coefficients strictly positive
+d=5: polynomial identity verified at 11 distinct points, all coefficients strictly positive
