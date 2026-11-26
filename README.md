@@ -1,20 +1,36 @@
-# Project Prometheus: six research runs
-26 November 2026 · AI-assisted research notes · Not peer reviewed
+# Solved conjectures and mathematical results
 
-Six agents independently selected problems from the same research prompt. These are the strongest documented results, with scope, proofs, and executable checks where relevant. A complete argument below means complete at the stated scope, not independently published or field-verified. Literature searches did not establish priority.
+**Leo Gao** · AI-assisted research · Not peer reviewed
 
-| Result | What is established at this scope |
-| --- | --- |
-| [Thin lattice simplices](01-thin-simplices/Thin-simplex-proofs.md) | Proofs of Kurylenko’s Conjectures 1.5 and 1.6 and both parts of Question 1.4. Every odd-dimensional thin simplex has width one. In any fixed dimension only finitely many thin simplices have width at least two, with normalized volume at most `(d+1)!`. Spanning thin simplices that are not free joins are finite in each dimension and absent in odd dimensions. |
-| [Couplings of uniform distributions](02-uniform-couplings/euclidean-majorization.md) | The greedy coupling of two finite uniforms simultaneously maximizes every top-`k` mass sum, hence minimizes all Rényi entropies. For the family of three uniform marginals with sizes `(3,4,12t+7)`, a greatest mass vector does not exist and greedy is Shannon-suboptimal. |
-| [Almost-sure random-walk range](03-random-walks/Sharp-almost-sure-range.md) | Uniform escape gives a sharp almost-sure lower bound on the `t/log(log(t))` scale. A tree of cliques shows this is the best general order for vertex-expanding simple graphs, despite linear expected range. The exact coefficient is proved sharp for countable Markov chains, not for undirected graphs. |
-| Fallat–Xing spectral spread in [dimension nine](04-spectral-spread/n9/PROOF.md) and [dimension ten](04-spectral-spread/n10/PROOF.md) | Full parameter-interval proofs for nine-by-nine and ten-by-ten real symmetric matrices; no assertion about higher dimensions. The repository contains exact certificates for 12,451,530 positive-definiteness tests and rational interpolation inequalities. |
-| [Line-graph signature](05-line-graph-signature/NOTES.md) | A finite reduction of the maximum-signature problem at each fixed cycle rank, to graphs with at most `19(c-1)` vertices for `c >= 2`. The conjectured maximum is proved through cycle rank seven, with exact computation for ranks six and seven; the all-rank formula remains open. |
-| [Distinct covering systems](06-covering-systems/report.md) | Exactly certified conditional optima of 84 and 68 uncovered residues at periods 10,080 and 15,120, respectively, for the specified fixed prefixes. Neither period is globally excluded. |
+Proofs, LaTeX manuscripts, and reproduction files. Each result is stated at the scope proved. Computational proofs use exact arithmetic; partial results are listed separately.
 
-## Reproduce the computational checks
-- Uniform coupling: in `02-uniform-couplings`, run `python uniform_coupling.py 25` and `python verify_three_uniforms.py`. These independent integer checks supplement the proofs.
-- Spectral spread: run `sh 04-spectral-spread/reproduce.sh` (or add `n9` or `n10`). The verifier requires C++17 and GMP. Verification itself uses no NumPy and no floating point.
-- Line-graph signature: see `05-line-graph-signature/COMPUTATION.md` for reproducing the checked-integer enumeration at cycle ranks six and seven.
-- Covering systems: in `06-covering-systems`, run `python proof_check.py`. The checker validates the integer certificates and the explicit assignments, independently of the floating-point search.
-- The proof notes cite the original sources and distinguish completed results from conjectures, novelty checks, and incomplete searches. Nothing here was submitted for publication.
+## Solved statements
+
+| Result | Statement proved | Manuscript |
+| --- | --- | --- |
+| **Width of thin lattice simplices** | Kurylenko’s Conjectures 1.5 and 1.6 and both parts of Question 1.4. Odd-dimensional thin simplices have width one; in each fixed dimension only finitely many have width at least two. | [Proof](01-thin-simplices/Thin-simplex-proofs.md) · [PDF](01-thin-simplices/manuscript.pdf) · [LaTeX](01-thin-simplices/manuscript.tex) |
+| **Fallat–Xing spectral spread, order 9** | A rank-two endpoint matrix attains the maximum spread for every nondegenerate entry interval in dimension nine. The unrestricted conjecture is not claimed. | [Proof](04-spectral-spread/n9/PROOF.md) · [PDF](04-spectral-spread/n9/manuscript.pdf) · [LaTeX](04-spectral-spread/n9/manuscript.tex) |
+| **Fallat–Xing spectral spread, order 10** | The same statement in dimension ten, including the unequal-cluster case near the endpoint. Both finite-dimensional proofs use exact certificates. | [Proof](04-spectral-spread/n10/PROOF.md) · [PDF](04-spectral-spread/n10/manuscript.pdf) · [LaTeX](04-spectral-spread/n10/manuscript.tex) |
+| **Line-graph signature at fixed cycle rank** | A finite reduction for every fixed cycle rank, and the exact conjectured maximum through rank seven. The formula remains open at higher ranks. | [Proof](05-line-graph-signature/NOTES.md) · [PDF](05-line-graph-signature/manuscript.pdf) · [LaTeX](05-line-graph-signature/manuscript.tex) |
+
+## Further theorems
+
+| Result | Statement proved | Manuscript |
+| --- | --- | --- |
+| **Couplings of finite uniform distributions** | Greedy coupling majorizes every coupling of two uniform distributions. An infinite family with three marginals has no greatest coupling and greedy is not Shannon-optimal. | [Proof](02-uniform-couplings/euclidean-majorization.md) · [PDF](02-uniform-couplings/manuscript.pdf) · [LaTeX](02-uniform-couplings/manuscript.tex) |
+| **Almost-sure range of uniformly transient walks** | A sharp lower-envelope order of $t/\log\log t$; an expanding simple graph shows that a linear almost-sure lower bound need not hold. | [Proof](03-random-walks/Sharp-almost-sure-range.md) · [PDF](03-random-walks/manuscript.pdf) · [LaTeX](03-random-walks/manuscript.tex) |
+
+## Partial result
+
+**[Distinct covering systems](06-covering-systems/report.md)** · [PDF](06-covering-systems/manuscript.pdf) · [LaTeX](06-covering-systems/manuscript.tex)  
+The exact conditional optima are 84 and 68 uncovered residues at periods 10,080 and 15,120 under the stated fixed-prefix constraints. Neither period is excluded globally.
+
+## Reproducing the computations
+
+- **Spectral spread:** run `sh 04-spectral-spread/reproduce.sh` with C++17, GMP, and Python 3. The certificates cover 12,451,530 exact positive-definiteness checks and the rational interpolation inequalities.
+- **Line-graph signature:** see the [exact enumeration instructions](05-line-graph-signature/COMPUTATION.md) for cycle ranks six and seven.
+- **Uniform couplings:** from the [verification directory](02-uniform-couplings/), run `python uniform_coupling.py 25` and `python verify_three_uniforms.py`.
+- **Covering systems:** from the [certificate directory](06-covering-systems/), run `python proof_check.py`.
+- **Integrity:** run `sha256sum -c SHA256SUMS.txt` from the repository root.
+
+Each manuscript includes an AI-assistance disclosure and distinguishes its contribution from known results. No claim of peer review or confirmed priority is made.

@@ -1,4 +1,10 @@
-# Euclidean majorization for coupling two finite uniforms
+# Majorization for couplings of finite uniform distributions
+
+**Leo Gao** · AI-assisted research · Not peer reviewed
+
+[Read the PDF](manuscript.pdf) · [LaTeX source](manuscript.tex)
+
+> **Abstract.** For two uniform marginals, the greedy coupling majorizes every feasible coupling. A Euclidean-algorithm description yields the optimal entropy, support size, and number of labeled minimizers. With three uniform marginals, we give an infinite family for which there is no greatest coupling under majorization and the greedy coupling is not Shannon-optimal.
 
 **Status.** Complete mathematical proof as presented below; not independently peer-reviewed. A targeted literature search did not locate the result in this form, but does not certify novelty. This is a solved special case, not a solution of general minimum-entropy coupling.
 
@@ -18,17 +24,17 @@ Initially the only types are u=(1,0) and v=(0,1), a unimodular basis of Z², wit
 
 Within a phase set r=min(x,y), and define the linear form L by L(u)=2r-x and L(v)=2r-y. For every nonzero integer vector w=(a,b) with a,b>=0,
  
-    |d(w)|+L(w) >= 2r.                                            (1)
+$$|d(w)|+L(w)\ge 2r. \qquad\text{(1)}$$
 
 Indeed w=p u+q v with p,q integers (unimodularity), not both nonpositive (nonnegative coordinates of the nonzero basis vectors). We compute
 
-    (|d(w)|+L(w))/2 = max( r p + (r-y) q, (r-x) p + r q ).
+$$\frac{|d(w)|+L(w)}2=\max\{rp+(r-y)q,(r-x)p+rq\}.$$
 
 If x=r, the second term is at least r when q>=1. Otherwise q<=0, p>=1 and the first term is at least r since r-y<=0. The case y=r is obtained by exchanging the roles. Equality in (1) holds for u,v,u+v: for the latter use x+y-|x-y|=2r.
 
 Let k be a greedy prefix length within that phase, including either endpoint. In an arbitrary feasible matrix, choose k entries and let c be the number of connected components of their bipartite graph including isolated vertices. Since each of the k distinct edges can reduce the component count by at most one, c>=m+n-k. The component vectors sum to (m,n), so (1) gives a total selected weight at most
 
-    mn + L(m,n)/2 - r c <= mn + L(m,n)/2 - r(m+n-k).
+$$mn+\frac{L(m,n)}2-rc\le mn+\frac{L(m,n)}2-r(m+n-k).$$
 
 The greedy k-prefix attains this same expression: every selected edge merges two components, every greedy component type is u,v or u+v, and each greedy component attains its full smaller-side capacity. The bound applies in particular to the k largest entries of any feasible matrix (zeros allowed). After all greedy edges have been placed, total mass mn gives the upper bound for any later prefix. This proves majorization. No discreteness of the optimizing matrix entries was assumed.
 
@@ -36,11 +42,11 @@ The greedy k-prefix attains this same expression: every selected edge merges two
 
 Assume n>=m and set a_0=n,a_1=m. Compute q_i=floor(a_{i-1}/a_i), a_{i+1}=a_{i-1} mod a_i until a_{t+1}=0, with a_t=gcd(m,n). There are q_i a_i entries of scaled weight a_i. Indeed, when n=q m+r, the first q m greedy allocations have weight m, satisfying q entire columns per row; what remains is the transpose of the same problem for two capacities m and r. All zero entries omitted, the support size is the telescoping sum ∑ q_i a_i=m+n-gcd(m,n). For logs in any fixed base the optimal entropy is
 
-    log(mn) - (1/(mn)) ∑ q_i a_i² log(a_i).
+$$\log(mn)-\frac{1}{mn}\sum_i q_i a_i^2\log(a_i).$$
 
 For any strictly Schur-concave objective, equality requires exactly the decreasing greedy list. Such a matrix has q_1 m entries of weight m; each occupies a whole column and each row contains at most q_1 of them because its sum is n. Consequently there are exactly q_1 per row, and the residual submatrix recurses. Every optimum is thus equivalent up to independent row/column permutations and can be obtained by greedy tie-breaking. The number of distinct optimal labelled matrices is
 
-    n! m! / (gcd(m,n)! ∏_i (q_i!)^{a_i}).
+$$\frac{n!\,m!}{\gcd(m,n)!\prod_i(q_i!)^{a_i}}.$$
 
 Proof of the count: choose the q_1 labelled full columns associated with each row (n!/(r!(q_1!)^m) choices), then choose the residual matrix on the labelled leftover columns. Iterate; factorial ratios telescope. This counts matrices and not tie-break sequences.
 
@@ -88,6 +94,6 @@ Any coupling dominating A_t must have N−3 atoms of weight 12: this is a maximu
 
 The same obstruction separates the actual Rényi minimizers. Any coupling minimizing H_α for every α>1 must have the forced prefix just derived: otherwise its decreasing weight list is lexicographically smaller than A_t at or before position N, and A_t eventually has the larger power sum as α→∞. To justify this, cancel the equal initial coordinates; at the first mismatch the larger entry dominates the smaller entries of the other list because their number is finite. A coupling with the forced prefix needs at least five nonzero tail atoms. Otherwise at least two of the three U_N tail classes (each of total 3) are singletons of weight 3. They must use different U3 classes of capacity 4, so all three U3 classes still require one unit. That requires three more atoms, a contradiction. The candidate therefore has support at least N+5, whereas B_t has support N+4. As H_α tends to log of the support size when α→0+, B_t has strictly smaller Rényi entropy for some positive α. Thus no coupling minimizes the entire Rényi family even if both α=0 and α=∞ are excluded.
 
-Greedy indeed gives B_t's weight profile. Before k=N−3 allocations of weight 12 have been made, a fresh U_N class remains, some U4 class retains at least 12 (each can take 3t+1 full 12s), and the mean residual of the three U3 classes is at least 16. Each such step therefore allocates 12. During those initial N−3 allocations it subtracts 12 from a largest U3 capacity on each iteration; these capacities start equal and never differ by more than 12. Thus they become (16,16,4), not (28,4,4). The other capacities are (9,9,9,9) and (12,12,12). Repeatedly subtracting the minimum of the current maxima gives the tail (9,9,7,5,3,2,1). Compare entropy by cancelling common weights in the product ∏w^w: for A_t the residual product is 9^9·3^3=3^21=10,460,353,203; for B_t it is 7^7·5^5·2^2=10,294,287,500. Larger product means lower Shannon entropy at fixed total mass, so greedy is strictly suboptimal. The difference is log₂(3^21/(4·7^7·5^5))/(12N) bits, positive but small. We claim neither witness is the global Shannon optimum.
+Greedy indeed gives B_t's weight profile. Before k=N−3 allocations of weight 12 have been made, a fresh U_N class remains, some U4 class retains at least 12 (each can take 3t+1 full 12s), and the mean residual of the three U3 classes is at least 16. Each such step therefore allocates 12. During those initial N−3 allocations it subtracts 12 from a largest U3 capacity on each iteration; these capacities start equal and never differ by more than 12. Thus they become (16,16,4), not (28,4,4). The other capacities are (9,9,9,9) and (12,12,12). Repeatedly subtracting the minimum of the current maxima gives the tail (9,9,7,5,3,2,1). Compare entropy by cancelling common weights in the product ∏w^w: for A_t the residual product is 9^9·3^3=3^21=10,460,353,203; for B_t it is 7^7·5^5·2^2=10,294,287,500. Larger product means lower Shannon entropy at fixed total mass, so greedy is strictly suboptimal. The difference is $\log_2(3^{21}/(4\cdot 7^7\cdot 5^5))/(12N)$ bits, positive but small. We claim neither witness is the global Shannon optimum.
 
 Run `python verify_three_uniforms.py` to check the finite witnesses, the exact entropy comparison, and sample members of the infinite family. The script is a check of the algebra and constructions, not a substitute for the proof of the universal inequalities.
