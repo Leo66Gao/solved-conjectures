@@ -1,0 +1,4 @@
+toy 18 edges, 52 partition inversions; full connected counts: [(0, 1), (1, 18), (2, 144), (3, 624), (4, 1296)]
+toy 12 edges, 15 partition inversions; full connected counts: [(0, 1), (1, 12)]
+projective-plane C3 cover: 186 vertices, 558 edges, bipartite simple, no 4-cycles, degree 6 ; disjoint-path max flows 11098 → κ=λ=6
+elementary cut-bound inequalities verified for all integer d=32,...,1024 (proof is symbolic)
