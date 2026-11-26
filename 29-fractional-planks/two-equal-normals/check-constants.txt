@@ -1,0 +1,4 @@
+PASS: forced contact deviations and ellipse containments
+a minimum: 11/7 min slope gap after squaring: 1648/5589675
+squared x width above 4/9: 11/11025
+squared z width above 4/9: 301/27225
