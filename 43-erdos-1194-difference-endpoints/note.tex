@@ -1,0 +1,108 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,microtype,xcolor,hyperref}
+\hypersetup{colorlinks=true,linkcolor=teal,urlcolor=teal,citecolor=teal}
+\definecolor{ink}{HTML}{174540}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\N}{\mathbb N}
+\newcommand{\E}{\mathcal E}
+\newcommand{\rd}{\mathrm d}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt plus 1pt}
+\begin{document}
+{\small\sffamily\color{ink} ADDITIVE COMBINATORICS \quad / \quad RESEARCH NOTE \quad / \quad 26 NOVEMBER 2026}
+\vspace{3mm}
+\begin{center}{\LARGE\bfseries How often is a perfect-difference witness late?}\end{center}
+For a set $A\subseteq\N$ representing each $d\ge1$ uniquely as $u_d-v_d$ with $u_d,v_d\in A$, Erd\H os asked how rapidly $u_d/d$ must be unbounded \cite{Erdos}. The best uniform upper bound discussed in the problem register is $u_d=O(d^3)$ for a greedy construction; a formalized lower bound gives almost quadratic growth infinitely often \cite{Mazur}. We do not close that gap. We instead bound the frequency of late witnesses, and give a construction showing why the choice of density matters. Priority has not been established.
+
+Write $E(x)=|E\cap[1,x]|$. Lower natural density means $\liminf E(x)/x$; lower logarithmic density means $\liminf (\log x)^{-1}\sum_{d\le x,\ d\in E}1/d$. Upper densities use $\limsup$.
+\begin{theorem}[Frequency of late witnesses]\label{late}
+For every such $A$:
+\begin{enumerate}
+\item For $1<c<2$, the set $E=\{d:u_d>d^c\}$ has positive lower logarithmic density.
+\item For $0<\lambda<1/(2\log2)$, put $E=\{d\ge3:u_d>\lambda d^2/\log d\}$. Then
+\[
+\liminf_{X\to\infty}\sum_{\substack{\sqrt X<d\le X\\d\in E}}\frac1d
+\ \ge\ \frac{1-2\lambda\log2}{28}.
+\]
+In particular, $\sum_{d\le X,d\in E}1/d\gg_\lambda\log\log X$, and $\limsup E(X)\log X/X>0$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Two frequency breakpoints]\label{sharp}
+\mbox{}\vspace{-5pt}
+\begin{enumerate}
+\item For each $C\ge1$, every $A$ has lower natural density at least $1/(500C)$ of $d$ with $u_d>Cd$. For any $\omega(d)\to\infty$, some $A$ has lower natural density zero of $d$ with $u_d>d\omega(d)$.
+\item For every $\eta(d)\to0$, $\{d:u_d\le d^{1+\eta(d)}\}$ always has logarithmic density zero. If $F(c)$ is the supremum over $A$ of the upper logarithmic density of $\{d:u_d\le d^c\}$, then $F(c)\asymp c-1$ as $c\downarrow1$. In fact one $A$ attains upper logarithmic density at least $1-1/c$ simultaneously for all fixed $c>1$.
+\end{enumerate}
+\end{theorem}
+Thus witnesses at most $d\log(d+1)$ can have upper natural density one, even though they always have logarithmic density zero.
+
+\section*{1. Charging overcrowded intervals}
+Every interval of length $L$ contains at most $1+\sqrt{2L}$ members of $A$, since their positive differences are distinct. Partition an interval $I$ of length $L$ into half-open cells of width $h$. Write $m_i$ for their occupancies and $p=\sum_i\binom{m_i}{2}$. The number of unordered pairs in $I$ at distance at most $X$ is at most
+\begin{equation}
+ (\lceil X/h\rceil+1/2)\sum_i m_i^2
+ \ \le\ (X/h+2)(L/h+2+3p).                                      \tag{1}
+\end{equation}
+Indeed each offset $1\le k\le\lceil X/h\rceil$ counts at most $\sum m_i m_{i+k}\le\sum m_i^2$ pairs; the offset zero counts at most half this bound. Finally $m^2\le1+3\binom m2$. With an increasing threshold $\Phi$, when $I$ lies above $\Phi(h)$ every within-cell pair gives a distinct exception $d<h$ with $u_d>\Phi(d)$.
+
+\textbf{Subquadratic powers.} Choose $1<r<2/c$ and the least $J\ge1$ with $r^J\ge c$. Among $d\le X$, at most $E(X)$ have top above $X^c$. Of the rest, pairs with top at most $2X$ and bottom below $\zeta X$ ($\zeta=10^{-4}$) number at most $(1+\sqrt{2\zeta X})(1+\sqrt{4X})<X/4$ for large $X$. For the remaining early tops apply (1) on $[\zeta X,2X]$ with $h_*=(\zeta X)^{1/c}$. Its term without $p$ is $o(X)$ and its other term is at most $9X E(h_*)/h_*$.
+
+For later tops put $R_j=2X^{r^j}$, $0\le j\le J$. For top in $[R_j,R_{j+1})\cap[1,X^c]$ use $[R_j-X,\min(R_{j+1},X^c)]$ and $h_j=(R_j/2)^{1/c}$. Its bottom is at least $h_j^c$, and $h_j\le X$. The volume term of (1), divided by $X$, is $O(R_{j+1}/h_j^2+1/h_j)=o(1)$ because $r<2/c$. The remaining term is $\le9XE(h_j)/h_j$. Thus for all sufficiently large real $X$, allowing rounding,
+\[
+ \frac12\le \frac{E(X)}X+9\frac{E(h_*)}{h_*}+9\sum_{j<J}\frac{E(h_j)}{h_j}.
+\]
+Every argument is $bX^t$ with fixed $0<t\le1$ and $0<b\le1$. Integrating against $\rd X/X$ up to $Y$, each right-hand term without its coefficient contributes at most $t^{-1}\int_1^Y E(z)\,\rd z/z^2+O(1)$. This forces the latter integral to be $\gg_c\log Y$; it is at most $\sum_{d\le Y,d\in E}1/d$. This proves the first part of Theorem~\ref{late}.
+
+\textbf{The logarithmic scale.} Extend $\Phi(d)=\lambda d^2/\log d$ constantly below 3, ignoring the two initial exceptions if necessary, and write $\psi$ for its inverse on the increasing branch. Then
+$\psi(s)^2\sim s\log s/(2\lambda)$ by elementary inversion. Put $M=\Phi(X)$, $Y=\sqrt X$, $W=\sum_{Y<d\le X,d\in E}1/d$. Tops exceeding $M$ account for at most $E(X)\le Y+XW+O(1)$ distances $d\le X$.
+
+Fix $0<\delta<1$, $r=1+\delta$, $K>\max(3,3/\delta)$ and $0<\zeta<1$. For top at most $KX$ and bottom below $\zeta X$, the interval bound gives at most $(2\sqrt{\zeta K}+o(1))X$ pairs. For other early tops apply (1) on $[\zeta X,KX]$ with $h_*=\psi(\zeta X)$; the volume term is $O_{\zeta,K,\lambda}(X/\log X)$. For later tops take $R_j=KXr^j\le M$ and interval $[R_j-X,\min(rR_j,M)]$, with $h_j=\psi(R_j-X)$. All cell sizes are between $h_*$ and $X$. In the late intervals the total volume term $V$ satisfies
+\[
+ \frac VX\le (\delta+K^{-1})\sum_j\frac{R_j}{h_j^2}+o(1)
+ \le \frac{2\lambda\log2\,(\delta+K^{-1})}
+ {(1-K^{-1})\log(1+\delta)}+o(1).
+\]
+For the first inequality expand (1): the error terms are bounded by constants times $X\sum_jh_j^{-1}+\sum_j R_j/h_j+O(\log X)=o(X)$ by geometric summation. For the second, uniformly in $j$, $R_j/h_j^2\le(2\lambda/(1-1/K)+o(1))/\log R_j$. The decreasing sum is at most $\sum_j1/\log R_j\le \log(\log M/\log(KX))/\log r+o(1)\to\log2/\log r$.
+
+The remaining charge from (1) is at most $9Xp/h$ per interval. Every charged pair is exceptional with $d<h$. Each pair occurs in at most three partitions because $R_{j+2}-X>rR_j$ and there is just one early partition. Hence charges for $d\le Y$ cost at most $27X(Y+O(1))/h_*=o(X)$, and charges for $d>Y$ cost at most $27XW$. We have proved
+\[
+1\le 28W+2\sqrt{\zeta K}+\frac{2\lambda\log2\,(\delta+K^{-1})}{(1-K^{-1})\log(1+\delta)}+o(1).
+\]
+Take $X\to\infty$, then $\zeta\to0$, $K\to\infty$, and $\delta\downarrow0$, in that order. Summation over successive square-root windows gives the cumulative bound. If $E(t)=o(t/\log t)$, summation by parts would give $W=o(1)$. This proves Theorem~\ref{late}.
+
+\section*{2. Bounded versus unbounded multipliers}
+For $E=\{d:u_d>Cd\}$, nonexceptional pairs at distances $d\le X$ lie in $[1,CX]$. Those with bottom below $X/100$ have top below $1.01X$ and number less than $X/4$ for large $X$, by interval packing. For the others apply (1) to $[X/100,CX]$ with $h=X/(100C)$; every within-cell pair is exceptional. Thus $X-E(X)\le X/4+(100C+2)(100C^2+2+3E(X))$, giving the asserted lower density when $C$ is fixed.
+
+For the converse, start each stage $j\ge2$ with a finite Sidon set $P$, with maximum $H$ and $D=\binom{|P|}{2}$ positive differences. Choose a very large prime $p$, let $m=p(p-1)$, $X=\lfloor m/j\rfloor$ and $g$ a primitive root modulo $p$. Via the Chinese remainder theorem use in $\mathbb Z/m$ the set
+\[
+ C=\{(t,g^t):t\in\mathbb Z/(p-1)\}\subseteq\mathbb Z/(p-1)\times\mathbb F_p.
+\]
+Each difference $(a,b)$ with both coordinates nonzero has one ordered representation: solve $g^t=b/(g^a-1)$. Others, except zero, have none. Take a uniform cyclic shift and representatives in $[0,m-1]$. For a representable $1\le d<m$ the lifted difference fails to equal $d$ with probability $d/m$. Thus expected boundary losses up to $X$ are at most $X(X+1)/(2m)$ in number, and up to $m-1$ have total harmonic weight below one. A shift meeting both these bounds within a factor of 4 exists by Markov's inequality. The permanently absent multiples of $p$ or $p-1$ contribute at most $X/p+X/(p-1)$ in number and $O(\log m/p)$ in harmonic weight.
+
+From the shifted integer Sidon set remove an endpoint for each old difference of $P$ occurring in it, at most $D$ points. Each point thereby loses at most $2+2\sqrt{2X}$ distances up to $X$. Translate the retained block by $H+m+1$, taking $p$ so large that $H<m$. All mixed differences exceed $m$, and two could agree only if the constituents had a common nonzero internal difference. The union is therefore Sidon; all new tops are at most $3m$.
+
+For large enough $p$, the missed count up to $X$ is $O(X/j)$, and $\omega(d)\ge6j^2$ for all $d\ge X/j$. Consequently every retained $d\in[X/j,X]$ has $u_d\le3m\le d\omega(d)$. To ensure perfection, if $j$ is missing append $L,L+j$ far above three times the current maximum plus $j$. Its internal difference is new; mixed differences are distinct because the existing set misses $j$. Starting with $P=\{1,2\}$ and iterating gives a perfect union. The exceptional proportions along the chosen cutoffs tend to zero.
+
+For a later application, additionally choose $D\le m^{1/j}$ at each stage. One deleted vertex loses total harmonic weight $O(L^{-1/2})$ among distances $d\ge L$: partition the range dyadically and apply the interval packing bound per bin. For fixed $c>1$, all retained $d\in[(3m)^{1/c},m-1]$ have $u_d\le d^c$, and total lost weight in this range is $O(1)+O(Dm^{-1/(2c)})=O_c(1)$. Hence at least $(1-1/c)\log m-O_c(1)$ fast-witness weight is present for every fixed $c>1$ along the stages.
+
+\section*{3. Compression of close-pair counts}
+Set $B_k=A\cap[2^{k-1},2^{k+1}]$, $m_k=|B_k|=O(2^{k/2})$, and let $N_k(j)$ count its unordered pairs with distance at most $2^j$. For $j\le\ell$, the first part of (1) using width $2^j$ and $\sum m_i^2\le m_k+2N_k(j)$ gives
+\[
+ \frac{N_k(\ell)}{2^\ell}\le\frac{2m_k}{2^j}+\frac{4N_k(j)}{2^j}.
+\]
+Define $D_k=\max_{\lfloor4k/5\rfloor\le\ell\le k+1}N_k(\ell)/2^\ell$. For large $k$, every $j\in[5k/8,3k/4]$ is an admissible smaller scale. For fixed $j$ and these $k$, $\sum m_k/2^j=O(2^{-j/5})$ by geometric summation since $k\le8j/5$. Also $\sum N_k(j)\le3\cdot2^j$ since each unique pair belongs to at most three expanded shells. Consequently the sum of $D_k$ over these $k$ is $O(1)$ per $j$. Summing in $j\le K$ and then partially summing in $k$ yields
+\[
+ \sum_{k\le K} kD_k=O(K),\qquad\sum_{k\le K}D_k=O(\log(2K)).
+\]
+Consider a top $t\in[2^k,2^{k+1})$. If its bottom is below $2^{k-1}$, its distance is at least $2^{k-1}$. The total weight of such pairs is $O((\sum_{\ell\le k}b_\ell)^2/2^k)$ where $b_\ell=|A\cap[2^\ell,2^{\ell+1})|$. Weighted Cauchy bounds this by $O(\sum_{\ell\le k}2^{-(k-\ell)/2}b_\ell^2/2^\ell)$. Since $\binom{b_\ell}{2}\le N_\ell(\ell)$, summing in $k\le K$ costs $O(\log(2K))$, including the bounded first shell.
+
+Otherwise both endpoints lie in $B_k$. If $t\le d^c$ with $1<c\le6/5$, distances in $2^{\ell-1}<d\le2^\ell$ use only $k(1-1/c)+O(1)$ bins, all in the range defining $D_k$ for large $k$. Each bin has weight at most $2D_k$. The total fast-pair weight up to top shell $K$ is therefore $O((c-1)K+\log(2K))$, with an absolute constant. Taking $K=\lceil c\log_2 X\rceil$ covers $d\le X$. This proves $F(c)=O(c-1)$ near 1, and letting $c\downarrow1$ proves the density-zero result for all $\eta(d)\to0$. Section 2 supplies the matching-order lower bound, completing Theorem~\ref{sharp}.
+
+\begin{thebibliography}{9}\small
+\bibitem{Erdos} P. Erd\H os, \href{https://www.renyi.hu/~p_erdos/1980-03.pdf}{A survey of problems in combinatorial number theory}, Ann. Discrete Math. 6 (1980), 89--115, p.~100.
+\bibitem{Mazur} GPT-5.5 Pro and L. Mazur, \href{https://github.com/lechmazur/erdos_1194}{A Lean formalization of the floor-saving lower bound for Erd\H os problem \#1194} (2026). The theorem is an infinitely-often bound, not a density assertion.
+\bibitem{CN} J. Cilleruelo and M. B. Nathanson, \href{https://arxiv.org/abs/math/0609244}{Perfect difference sets constructed from Sidon sets}, Combinatorica 28 (2008), 401--414. This concerns the counting function of the set, distinct from the endpoint statistic here.
+\bibitem{Register} T. F. Bloom, \href{https://www.erdosproblems.com/1194}{Erd\H os problem \#1194}; \href{https://github.com/teorth/erdosproblems/blob/main/data/problems.yaml}{maintained status database}, checked 26 November 2026.
+\end{thebibliography}
+\end{document}

@@ -26,6 +26,8 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Endpoint frequency in perfect difference sets (Erdős #1194)** | Partial | Quantifies how often unique witnesses must have large endpoints and separates ordinary from logarithmic density. The optimal worst-case rate is open. | [Details](43-erdos-1194-difference-endpoints/) · [PDF](43-erdos-1194-difference-endpoints/erdos-1194-frequency.pdf) |
+| **Point-symmetry obstruction (Erdős #835)** | Partial | At the first open parameter, every hypothetical 17-coloring of the 16-subsets on 32 points has an intransitive point-symmetry group. Existence remains open. | [Proof](44-erdos-835-point-symmetry/) |
 | **Coprime adjacent divisors (Erdős #1100)** | Finite theorem | Exact maxima through seven prime factors, with smallest witnesses and all seven-prime maximizing orders. The asymptotic problem remains open. | [Proof and verifiers](41-erdos-1100-coprime-divisors/) |
 | **Dyadic cycles in abelian lifts (Erdős #64)** | Partial | Sharp length bounds for graphs admitting a free abelian action with at most six vertex orbits. No graph-order bound. | [Proof and certificates](42-erdos-64-abelian-orbits/) |
 | **Reliability zeros with large girth and connectivity** | Theorem | Density in the unit disk persists for maximally connected regular bipartite graphs of logarithmic girth. Their innermost roots can approximate a separated regular polygon. | [Details](39-high-girth-reliability-zeros/) · [PDF](39-high-girth-reliability-zeros/paper.pdf) · [LaTeX](39-high-girth-reliability-zeros/paper.tex) |
