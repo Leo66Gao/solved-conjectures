@@ -1,0 +1,1 @@
+Sizes and strictly increasing proper unperturbed subspaces: [(2, 36), (3, 84), (4, 126), (5, 126), (6, 84), (7, 36), (8, 9)]

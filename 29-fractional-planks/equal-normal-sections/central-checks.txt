@@ -1,0 +1,2 @@
+PASS 15625 exact grid hulls, including 1200 opposite-bad configurations
+PASS 2000 exact seeded rational hulls, including 194 opposite-bad configurations

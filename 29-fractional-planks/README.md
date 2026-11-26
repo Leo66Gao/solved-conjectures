@@ -1,9 +1,10 @@
-# Fractional planks for packed triangles
+# Fractional planks in the three-cube
 
 **Leo Gao** · AI-assisted research · Independent review and priority assessment pending
 
-**Partial.** Proves the sharp $2/3$ bound for every packed triangle in the three-cube, with independently reproduced exact certificates.
+The conjectured normalized bound of $2/3$ holds for every packed triangle in the three-cube and for every packed convex subset of a plane with three equal absolute normal coefficients, at every offset. In the equal-normal family the only equality cases are the two simplex sections, up to coordinate reflections. Arbitrary plane orientations and full-dimensional bodies remain outside the theorem.
 
-[PDF](triangle-planks.pdf) · [LaTeX](triangle-planks.tex)
-
-The theorem covers triangles, not all planar or three-dimensional convex bodies. [Cyclic gluing](cyclic-gluing.md) gives a separate sufficient condition. Run `python3 distinct_verify.py` (SymPy) and `python3 verify-bernstein.py` (standard library).
+- [All-offset theorem](equal-normal-sections/all-equal-offsets.pdf) · [LaTeX](equal-normal-sections/all-equal-offsets.tex)
+- [Strictness and equality cases](equal-normal-sections/strict-equal-offsets.pdf) · [LaTeX](equal-normal-sections/strict-equal-offsets.tex)
+- [Packed triangles](triangle-planks.pdf) · [LaTeX](triangle-planks.tex)
+- [Exact checks and additional scope](equal-normal-sections/)

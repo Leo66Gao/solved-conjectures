@@ -1,0 +1,101 @@
+# Fractional planks in every equal-normal plane of the cube
+**Leo Gao · AI-assisted · private research note.**
+
+**Theorem.** Let $K\subseteq[0,1]^3\cap\{x_1+x_2+x_3=t\}$ be convex and meet all six cube facets. Then $K$ supports a probability law with all three coordinate marginals uniform on intervals of length $2/3$. Consequently every fractional coordinate plank cover of $K$ has cost at least $2/3$. The bound is sharp on the coordinate simplex. This holds at every offset, without body symmetry or the existence of a packed triangle. In $[-1,1]^3$ it gives matching mass $4/3$ with respect to Lebesgue measure; coordinate reflections handle normals with equal absolute coefficients. Neither general unequal normals nor full three-dimensional bodies are covered.
+
+## 1. Contacts and template inequalities
+
+Packedness requires $1\le t\le2$. Reflect all coordinates if necessary so $t=1+\delta$ with $0\le\delta\le1/2$. At $\delta=0$ the upper contacts are the three standard simplex vertices, and the assertion follows from the template below with zero translation. Assume $0<\delta\le1/2$ and put $D=1-\delta$. The ambient section is the hexagon with corners the permutations of $(0,\delta,1)$. Choose $p_i\in K$ with $(p_i)_i=0$, and $q_j\in K$ with $(q_j)_j=1$. Assume for now that each is in the relative interior of its ambient facet; endpoints will follow by limits. Let $H$ be their hull.
+
+For $i\ne j$, the contacts $p_i,q_j$ lie on adjacent ambient edges at the corner $x_i=0,\ x_j=1$. Define $a_{ij}=1-(p_i)_j$ and $b_{ij}=(q_j)_i$. In each row of $a$ the two positive entries sum to $D$, and in each column of $b$ they sum to $\delta$. The six cut inequalities describing $H$ within its plane are
+$$
+ a_{ij}x_i+b_{ij}(1-x_j)\ge a_{ij}b_{ij}. \tag{1}
+$$
+Indeed, each cut passes through the two specified contacts, and excludes the relevant ambient corner. In the two inward coordinates $x_i,1-x_j$, the line meets the two adjacent ambient edges at those contacts and has positive coefficients. The portion of the ambient convex hexagon on the corner side is the triangle with those two contacts and the ambient corner as vertices: following the two incident edges reaches the cuts before their endpoints, and the line segment through the contacts is then the entire intersection of their supporting line with the hexagon. The other four contacts are on the other side. Since each of the six contacts is exposed by its own ambient facet and their cyclic order is that of the facets, these are exactly the six edges of their hull.
+
+A template is obtained by adding a vector $\ell$ to the three cyclic permutations of $(0,1/3,2/3)$, or to the other parity. Require $0\le\ell_i\le1/3$ and $\sum\ell_i=\delta$. For each template there are three ordered pairs $i\to j$ forming a directed three-cycle with the property that the minimum of $x_i$ occurs at the same vertex as the maximum of $x_j$. Call these pairs *aligned*. The other three pairs are *unaligned*. For aligned $(i,j)$, the condition is
+$$
+ a_{ij}\ell_i\ge b_{ij}(a_{ij}-1/3+\ell_j). \tag{2}
+$$
+For unaligned $(i,j)$, it suffices to check the two vertices with offsets $(x_i-\ell_i,x_j-\ell_j)=(0,1/3),(1/3,2/3)$; the third offsets $(2/3,0)$ cannot maximize the cut functional.
+
+At the centered placement $\ell_i=\delta/3$, each unaligned cut holds. Using $a=a_{ij}$ and $b=b_{ij}$, the slack at its first test vertex is $a\delta/3+b((2-\delta)/3-a)$. If the coefficient of $b$ is negative, replacing $b$ by $\delta$ gives a lower bound $\delta(2-\delta-2a)/3\ge\delta^2/3$; otherwise the slack is nonnegative. Similarly the second test has slack $a(1+\delta)/3+b(D/3-a)$, bounded below by $(a(1-2\delta)+\delta D)/3$ if its coefficient of $b$ is negative, and nonnegative otherwise.
+
+The centered aligned cut fails exactly when $g_{ij}=a_{ij}b_{ij}-(a_{ij}\delta+b_{ij}D)/3>0$; call such a cut bad. In normalized variables $A=a_{ij}/D$, $B=b_{ij}/\delta$, this means $AB/(A+B)>1/3$, implying $A,B>1/2$. Thus no two bad cuts share a row or column. The six off-diagonal pairs form a six-cycle in the bipartite graph of rows and columns; the two template orientations are its alternating three-edge matchings. If all bad cuts belong to one orientation, the other centered template works. Otherwise two bad cuts of different parities, being nonadjacent, must be opposite edges. They are of the form $(i,j),(j,i)$. Each remaining potential bad cut shares a row or column with one of them, so there are exactly two.
+
+## 2. Opposite cuts and interpolation
+
+Relabel so the two bad cuts are $(1,2),(2,1)$, denoting their data by $(a,b,g),(a',b',g')$. Put $d=g/(a+b)$ and $d'=g'/(a'+b')$ and choose the labeling with $d\le d'$. Use the template aligned on $(1,2),(2,3),(3,1)$. Set
+$$
+(\ell_1,\ell_2,\ell_3)=(\delta/3+u,\ \delta/3-v,\ \delta/3+v-u),\qquad
+0\le v\le d,\quad u=(g-bv)/a. \tag{3}
+$$
+The $(1,2)$ cut holds at equality. Throughout (3), $v\le d\le u\le g/a\le\delta/3$, since $g/a=b-\delta/3-bD/(3a)\le(2b-\delta)/3$. Thus the minima remain in $[0,1/3]$. Cut $(1,3)$ is unaligned and only gains slack, by $a_{13}u+b_{13}(u-v)\ge0$. The following cuts hold throughout the segment, as each slack is affine and we check both endpoints.
+
+* **Cut $(2,3)$, aligned.** At $v=0$ it gains slack because $\ell_3$ decreases. At $v=d$, $u=v=d$. Write $A'=a'/D$. Then $d\le d'\le g'/a'\le\delta(2-1/A')/3$, giving $\ell_2\ge\delta(1-A')/(3A')$. In (2) the lower bound on $\ell_2$, using $a_{23}=D(1-A')$ and $b_{23}\le\delta$, is at most $\delta\max(0,1-1/[3(1-A')])$. This is zero if $A'\ge2/3$. Otherwise the comparison follows from $(1-A')^2-A'(2-3A')=(2A'-1)^2\ge0$.
+* **Cut $(3,2)$, unaligned.** At $v=d$ it gains slack since $\ell_2$ decreases. At $v=0$, $\ell_2=\delta/3$ and $\ell_3=\delta/3-g/a\ge(2/3)(\delta-b)=(2/3)b_{32}$. The minimum-$x_3$ test requires $\ell_3\ge b_{32}(1-(2-\delta)/(3a_{32}))$, whose right side is at most $b_{32}/3$ since $a_{32}\le D$. The maximum-$x_2$ test requires $\ell_3+1/3\ge b_{32}(1-D/(3a_{32}))$, whose right side is at most $2b_{32}/3\le1/3$.
+
+The remaining aligned cut $(3,1)$ is ensured by the stronger condition
+$$
+ \delta/3+v-u\ge(\delta-b')(2/3+u/D). \tag{4}
+$$
+Indeed $b_{31}=\delta-b'$ and $a_{31}\le D$, and $D/3-u\ge0$. Thus (2) asks for $\ell_3\ge b_{31}(1-(D/3-u)/a_{31})$, bounded above by the right side of (4). At $v=d$, (4) holds: writing $B'=b'/\delta$, we have $d\le d'\le g'/a'\le\delta(2B'-1)/3$, so
+$$
+ b_{31}(2/3+d/D)\le(\delta/3)(1-B')(1+2B')\le\delta/3,
+$$
+using $\delta/D\le1$ and $B'\ge1/2$. Choose the smallest $v\in[0,d]$ satisfying (4).
+
+Only the reverse unaligned cut $(2,1)$ remains. Its centered slack is $S=\min(a',b')/3-g'$, since its two test vertices improve on the aligned value by $a'/3$ and $b'/3$, respectively. It therefore asks for
+$$
+ b'u+a'v\le S. \tag{5}
+$$
+If $v=0$, this holds since $u\le\delta/3$ and $S/b'\ge\delta/3$. Indeed, if $a'\ge b'$ then $g'/b'=a'-D/3-a'\delta/(3b')\le D/3$, giving the result. If $a'<b'$, then $S/b'=D/3-a'+a'(1+\delta)/(3b')\ge D/3\ge\delta/3$, since $b'\le\delta\le1/2$.
+
+## 3. Exact compatibility when the interpolation is positive
+
+If $v>0$, (4) holds at equality. Normalize
+$$
+\begin{gathered}
+r=\delta/D,\quad (A,B)=(a/D,b/\delta),\quad(A',B')=(a'/D,b'/\delta),\\
+G=AB-(A+B)/3,\quad G'=A'B'-(A'+B')/3,\\
+q=G/(A+rB),\quad q'=G'/(A'+rB'),\quad U=u/\delta,\quad V=v/\delta,\\
+C=1-B',\quad E=(2B'-1)/3,\quad F=1+rC.
+\end{gathered}
+$$
+Here $0<r\le1$, all four normalized entries lie in $(1/2,1]$, and $0<q\le q'\le E$, since $q=d/\delta$, $q'=d'/\delta$ and $G'/A'\le(2B'-1)/3$. Equations (3) and (4) give $A U+r B V=G$ and $V=FU-E$. With $\lambda=rB/(A+rB)$,
+$$
+ U=(q+\lambda E)/(1+\lambda rC).
+$$
+For fixed $q$ this is nondecreasing in $\lambda$ because $E-rCq\ge0$. From $G=(A+rB)q$ one has $A(B-1/3-q)=B(1/3+rq)$; substituting and using $B\le1$ gives $\lambda\le r(2-3q)/(1+2r)$. The bound on $U$ obtained by substituting this value for $\lambda$ is increasing in $q$: its numerator after clearing $1+2r$ is $(1+2r)q+r(2-3q)E$, increasing, and its positive denominator is $(1+2r)+r^2 C(2-3q)$, nonincreasing. Thus
+$$
+ U\le P:=(q'+L E)/(1+LrC),\qquad L=r(2-3q')/(1+2r).
+$$
+Dividing (5) by $D\delta$, using $V=FU-E$, shows it suffices to prove
+$$
+ (rB'+A'F)P-A'E\le\min\{B'(1+r)/3,\ A'(1+r)/(3r)\}-G'. \tag{6}
+$$
+
+Here is an exact coefficient certificate. In the following expressions drop primes from $A',B'$ and set
+$$
+\begin{gathered}
+ Q=3AB-A-B,\quad W=A+rB,\quad J=r(2W-Q),\\
+ T=(1+2r)W+Jr(1-B),\quad N=(1+2r)Q+J(2B-1),\quad
+ R=rB+A(1+r(1-B)).
+\end{gathered}
+$$
+Then $P=N/(3T)$ and $T>0$, since $2W-Q=3A(1-B)+B(1+2r)>0$. Clear the denominators $3T$ and $3rT$ in (6), respectively. The two polynomial inequalities are the nonnegativity of
+$$
+\begin{split}
+ T[B(1+r)-Q+A(2B-1)]-RN,\qquad\\
+ T[A(1+r)-rQ+rA(2B-1)]-rRN .
+\end{split}
+$$
+Both have coordinate degrees $(4,2,3)$ in $(r,A,B)$. Substitute $r=x/(1+x)$, $A=(y+1/2)/(1+y)$, $B=(z+1/2)/(1+z)$ and multiply by $(1+x)^4(1+y)^2(1+z)^3$. The two transformed polynomials have only nonnegative coefficients, with respectively 55 and 59 nonzero coefficients and smallest nonzero coefficients $1/2$ and $1/4$. The companion program verify-offset-symbolic.py performs these exact expansions. Therefore the original polynomials are nonnegative throughout the closed box $[0,1]\times[1/2,1]^2$, by positivity in its interior and continuity at the boundary. This proves (6), then (5), and finishes all six cuts.
+
+## 4. Uniform law, endpoints and sharpness
+
+If some original contacts are not in the relative interiors of their ambient facets, approximate them by interior points of those same facets. These approximants need not lie in $K$. Their hulls converge to the hull of the actual contacts. Pass to a subsequence of the finitely many possible orientations and compactly bounded translations: the limiting template lies in that hull, hence in $K$.
+
+Give the three template edges equal probability $1/3$, uniformly along each edge. In each coordinate the projected edge lengths are $1/3,1/3,2/3$, with the shorter two composing the third. Thus the marginal density is identically $3/2$ on its interval. Multiply the measure by $2/3$ and integrate any fractional cover to prove the bound. The standard simplex at $t=1$ supports the zero-translation template and is covered by $f_i(x)=(2/3-x)_+$ at cost $2/3$. The other endpoint follows by reflection.
+
+The conjecture and its terminology are from [Aharoni–Holzman–Krivelevich–Meshulam, Fractional Planks (2002)](https://doi.org/10.1007/s00454-001-0088-x). The proof does not use the ordinary affine three-plank theorem, which concerns three individual intervals. Independent novelty review and priority are not established.

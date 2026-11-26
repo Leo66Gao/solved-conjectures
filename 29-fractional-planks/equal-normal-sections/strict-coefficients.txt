@@ -1,0 +1,5 @@
+polynomial 1: 55 of 60 Bernstein coefficients positive; min 0, max 59/8.
+polynomial 2: 59 of 60 Bernstein coefficients positive; min 0, max 12.
+PASS on full closed box: tensor Bernstein basis polynomials are nonnegative.
+Bernstein coefficients at (4, 1, 3): 9/2, 3/2
+Bernstein coefficients at (4, 2, 2): 2, 4

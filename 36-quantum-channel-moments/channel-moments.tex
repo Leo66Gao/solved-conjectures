@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,microtype}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Corr}{Corr}
+\newcommand{\E}{\mathbb E}
+\newcommand{\C}{\mathbb C}
+\newcommand{\s}{\mathfrak s}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\F}{\mathrm F}
+\title{Two copies control all channel moments:\\sharp rates for random quantum marginals}
+\author{Leo Gao\\\small AI-assisted research note}
+\date{26 November 2026}
+\begin{document}\pdfmapfile{+cm.map}\pdfmapfile{+symbols.map}\pdfmapfile{+euler.map}
+\maketitle
+\begin{abstract}
+For any probability law on quantum channels on a fixed finite-dimensional space, the subdominant eigenvalue modulus of the synchronous moment operator $\E\Phi^{\otimes n}$ is independent of $n$ once $n\ge2$. For fixed noise conjugated by a unitary two-design we evaluate it exactly in terms of the depolarizing parameter and unitarity. For independent Haar--Stinespring interactions we identify the absolute $L^2$ gap of the reversible state-valued Markov chain. As an application, among all pairs of square-integrable functions of the outer marginals of a Haar tripartite pure state, the two marginal purities maximize correlation. The resulting bound is exact even for unbalanced dimensions.
+\end{abstract}
+
+\section{Spectral stabilization}
+All channels below are completely positive trace-preserving (CPTP) maps on complex matrices. An eigenvalue is counted with its algebraic multiplicity. For a matrix $T$ having eigenvalue 1, let $\s(T)$ be the largest eigenvalue modulus after deleting one occurrence of 1. Let $\rho(B)$ denote the spectral radius of $B$. Matrix norms without a subscript are Euclidean operator norms.
+\begin{theorem}\label{t:stab}
+Let $\Phi$ be a random channel on $d$-by-$d$ matrices, $d\ge2$, with any probability law. Put $T_n=\E\Phi^{\otimes n}$. Let $A$ be its restriction to the real space of traceless Hermitian matrices in Hilbert--Schmidt orthonormal coordinates, and $B_r=\E A^{\otimes r}$. Then for all $n\ge2$,
+\[
+ \s(T_n)=\max\{\rho(B_1),\rho(B_2)\}=\s(T_2).
+\]
+\end{theorem}
+\begin{proof}
+The real Hermitian space complexifies to the full matrix algebra. In trace-adapted coordinates $\Phi=\left(\begin{smallmatrix}1&0\\b&A\end{smallmatrix}\right)$. In a tensor product, a traceless factor therefore stays traceless. Ordering tensors by the set of traceless factors, in increasing order of its size, triangularizes $T_n$. Its diagonal blocks are $B_{|S|}$ for $S\subseteq[n]$, where $B_0=[1]$.
+
+Take independent draws $A_1,\ldots,A_m$ and set $P_m=A_m\cdots A_1$. Thus $B_r^m=\E P_m^{\otimes r}$. Every product of channels contracts the trace norm on Hermitian inputs: apply positivity and trace preservation to the positive and negative parts. From $\|X\|_2\le\|X\|_1\le\sqrt d\,\|X\|_2$ we get $\|P_m\|\le\sqrt d$, uniformly in $m$. Let $h=d^2-1$, $v=\operatorname{vec}I_h$. The real coordinates give $\E\|P_m\|_{\F}^2=v^\top B_2^m v$. For every $r\ge2$,
+\[
+ \|B_r^m\|\le\E\|P_m\|^r\le d^{(r-2)/2}\E\|P_m\|_{\F}^2
+ \le d^{(r-2)/2}h\|B_2^m\|.
+\]
+The spectral radius formula gives $\rho(B_r)\le\rho(B_2)$. The first and second blocks both occur for $n\ge2$.
+\end{proof}
+This argument is also valid for any uniformly product-bounded semigroup of real linear parts of affine maps. It concerns spectral rates, not one-step norm contraction. Kronecker lifts of random matrix products are classical; see \cite{ogura}.
+
+\section{Unitary designs}
+\begin{corollary}\label{t:design}
+Let $\Lambda$ be a fixed channel and $\Phi=\Ad_U\circ\Lambda\circ\Ad_{U^*}$ with $U$ sampled from any exact unitary 2-design, including Haar. If $A$ is the traceless block of $\Lambda$, put $p=\tr(A)/h$ and $u=\|A\|_{\F}^2/h$. Then $\s(T_n)=\max\{|p|,u\}$ for every $n\ge2$. This quantity is less than one exactly when $\Lambda$ is nonunitary.
+\end{corollary}
+\begin{proof}
+Conjugation acts by an orthogonal representation $R$ on the traceless Hermitian space. Haar averaging $RMR^\top$ gives $(\tr M/h)I_h$ by Schur's lemma: the complexified adjoint representation is irreducible, since its invariant subspaces are Lie ideals of $\mathfrak{sl}_d$. The integrand has unitary bidegree $(2,2)$, so the identity persists for a 2-design. With $C=RAR^\top$, it yields $\E C=pI$ and $\E C^\top C=\E CC^\top=uI$. Thus $\operatorname{vec}I$ is an eigenvector of $B_2$ with eigenvalue $u$, while independent products satisfy $\E\|P_m\|_{\F}^2=hu^m$. The preceding proof gives $\rho(B_2)=u$.
+
+Cauchy--Schwarz gives $|p|\le\sqrt u$. For the unnormalized Choi matrix $J$ of $\Lambda$, reshuffling preserves the Frobenius norm, so
+\[
+ 1+\|b\|^2+\|A\|_{\F}^2=\tr J^2\le(\tr J)^2=d^2.
+\]
+Equality on the right requires $J$ of rank one: the unique Kraus operator is then an isometry and hence unitary. A unitary channel has $b=0$ and orthogonal $A$, proving the assertion.
+\end{proof}
+Wallman--Flammia \cite{wf} asked about two-copy contractivity. A public formalization covers that finite-group statement \cite{tt}; related two-copy estimates appear in \cite{helsen,unitarity}. Our focus is the quantitative extension to all orders.
+
+\section{The state-valued Haar--Stinespring chain}
+A step of the chain takes a density matrix $X$ to $\Phi_V(X)=\tr_E(VXV^*)$, where $V:\C^d\to\C^d\otimes\C^e$ is an independent Haar isometry. Let $Kf(X)=\E f(\Phi_V(X))$.
+
+\begin{theorem}\label{t:haar}
+For $d,e\ge2$, the chain has the unique stationary law $\pi$ of $G^*G/\tr(G^*G)$ for a $de$-by-$d$ standard complex Ginibre matrix $G$. It is reversible, and
+\[
+ \|K\|_{L^2_0(\pi)\to L^2_0(\pi)}
+ =\s(T_n)=q:=\frac{e(d^2-1)}{d^2e^2-1}\qquad(n\ge2).
+\]
+Centered purity realizes the norm. Here $L^2_0$ is the mean-zero subspace.
+\end{theorem}
+\begin{proof}
+Partition $G$ vertically into $e$ square blocks $G_i$. Write $c=\sum_i\tr(G_i^*G_i)$ and set
+\[
+ X=c^{-1}\sum_iG_i^*G_i,\qquad Y=c^{-1}\sum_iG_iG_i^* .
+\]
+The polar factorization $G=V(G^*G)^{1/2}$ supplies a Haar isometry $V$ independent of $X$ (by left unitary invariance). Thus $Y=\Phi_V(X)$. Blockwise adjunction preserves the Gaussian law and exchanges $X,Y$. This gives stationarity and reversibility without asymptotics.
+
+For clarity, we record the second-moment calculation with an arbitrary Hermitian input $Z$ embedded isometrically into dimension $D=de$. The Haar average of its conjugated tensor square has form $\alpha I+\beta F_D$ by the swap commutant. Setting $z=\tr Z$, $w=\tr Z^2$, the two trace equations give $\alpha=(z^2-w/D)/(D^2-1)$, $\beta=(w-z^2/D)/(D^2-1)$. The output swap trick yields
+\begin{equation}\label{eq:pur}
+ \E\tr(\Phi_V(Z)^2)=de^2\alpha+d^2e\beta
+ =\frac{d(e^2-1)}{d^2e^2-1}z^2+q w .
+\end{equation}
+This formula permits any input dimension at most $de$. For square-input channels, output isotropy gives $\E A=0$. On traceless inputs \eqref{eq:pur} gives $\E A^\top A=qI$; output isotropy and trace then give $\E AA^\top=qI$. As in Corollary~\ref{t:design}, $\rho(B_2)=q$. Theorem~\ref{t:stab} yields the asserted finite-moment spectral radius.
+
+Polynomials in the real state coordinates of degree at most $n$ can be written as $f_H(X)=\langle H,X^{\otimes n}\rangle$ by using $\tr X=1$ to homogenize. Since $Kf_H=f_{T_n^* H}$, this space is a quotient of the dual tensor representation. The eigenvalue 1 is simple and every other eigenvalue has modulus at most $q$. Self-adjointness gives the same norm bound on centered polynomials, which are dense in $L^2_0(\pi)$ by Stone--Weierstrass and compactness. Equality follows from \eqref{eq:pur}: the nonconstant function $\tr(X^2)-d(e+1)/(d^2 e+1)$ is a $q$-eigenfunction. Finally, polynomial moments from every initial law converge to those under $\pi$ by the strict finite-moment spectral gap; compactness then gives uniqueness.
+\end{proof}
+The exact two-support eigenvalue and the fixed moment vector already appear in \cite{duschenes}, which gives asymptotic estimates on other modes. Normalizing that vector yields the induced Wishart moments; stationarity is thus implicit there. Independent Haar interactions and random matrix product states also appear in \cite{movassagh,rmps}. The theorem above identifies the sharp endpoint on the full centered $L^2$ space and does not assert that moment operators have decreasing Hilbert--Schmidt norms under concatenation.
+
+\section{Maximal correlation of random marginals}
+\begin{theorem}\label{t:hgr}
+Draw a Haar pure state in $\C^a_A\otimes\C^e_E\otimes\C^b_B$, with arbitrary $a,b,e\ge2$. For its two outer marginals,
+\[
+ \sup_{f,g}\Corr\big(f(\rho_A),g(\rho_B)\big)=\sqrt{q_aq_b},
+ \qquad q_j=\frac{e(j^2-1)}{e^2j^2-1},
+\]
+where $f,g$ range over nonconstant real square-integrable functions. The two purities attain the supremum.
+\end{theorem}
+\begin{proof}
+Assume $b\le a$ by symmetry. Let $D$ be conditional expectation from centered $B$-functions to centered $A$-functions. The squared supremum is $\|D^*D\|$. This is the norm of the self-adjoint roundtrip $B\to A\to B$ on functions of $B$.
+
+The same Gaussian polar decomposition, now for an $ae$-by-$b$ matrix, realizes $\rho_A$ conditional on $X=\rho_B$ as $\sum_iK_i X K_i^*$ for the blocks $K_i:\C^b\to\C^a$ of a Haar isometry $V$. A convention for the pure-vector flattening may instead transpose $X$; the output law agrees, since $X$ and $X^\top$ are unitarily conjugate and $V$ is right invariant. Conversely, fixing $\rho_A$ leaves a Haar eigenbasis for the reduced state on $EB$ with the same nonzero eigenvalues as $\rho_A$. One traces out $E$ to obtain $\rho'_B$.
+
+To turn the roundtrip into a linear-channel ensemble even if $a>be$, put
+\[
+ W=[K_1\ \cdots\ K_e],\quad S=W^*W,\qquad
+ J_V(X)=S^{1/2}(I_e\otimes X)S^{1/2}.
+\]
+The map $J_V$ is CPTP since $\tr_E S=I_b$. For positive $X$, its output has the same nonzero spectrum as $W(I_e\otimes X)W^*$: both have the nonzero squared singular values of $W(I_e\otimes X^{1/2})$, using also the equality of the nonzero spectra of $HH^*$ and $H^*H$. The correct padded spectrum is therefore realized on $EB$, even when $\rho_A$ has deficient rank. With fresh Haar $U\in U(be)$ the random CPTP map
+\[
+ \Gamma(X)=\tr_E\!\left[U J_V(X)U^*\right]
+\]
+realizes the roundtrip kernel.
+
+For every Hermitian $X$, cyclicity gives $\tr[J_V(X)^2]=\tr[(W(I_e\otimes X)W^*)^2]$. Apply \eqref{eq:pur} to the first step with output dimension $a$, and then to the $U$ step with output dimension $b$. For traceless $X$, the result is $\E\tr[\Gamma(X)^2]=q_aq_b\tr X^2$. The mean traceless block vanishes by final output isotropy. Consequently the argument in Theorem~\ref{t:haar} gives an upper bound of $q_aq_b$ on all centered polynomial eigenvalues for $D^*D$. Reversibility, density, and self-adjointness give the same bound on its full norm. In each one-way direction, \eqref{eq:pur} sends centered output purity to the other centered purity times the target's $q$. In the reverse direction this uses a padded spectrum and requires no full-rank assumption. Thus the centered purities are an attaining singular-vector pair.
+\end{proof}
+
+\begin{corollary}
+On this tripartite projective pure-state space, choose at each step an independent Haar gate on $AE$ or $EB$ with probability $1/2$ each. The absolute $L^2$ gap for Haar stationary measure is $(1-\sqrt{q_aq_b})/2$. For three qubits it is $3/10$.
+\end{corollary}
+\begin{proof}
+Averaging over $EB$ is orthogonal projection onto functions of $\rho_A$, since purifications of a given marginal form one unitary orbit; the other gate gives the analogous projection. Let $J_A,J_B$ be the isometric pullbacks of the centered marginal function spaces. Twice the walk operator on the centered space is $LL^*$, with $L=[J_A,J_B]$. Its norm equals $\|L^*L\|$. The latter has identity diagonal blocks and conditional-expectation off-diagonal blocks of norm $r=\sqrt{q_aq_b}$. Thus its norm is at most $1+r$, attained by the two standardized purities. The operator is positive.
+\end{proof}
+This is a projective-state result, not a spectral-gap formula for the richer full unitary-moment walk considered in \cite{brick}.
+
+\begin{thebibliography}{10}\small
+\bibitem{wf} J. J. Wallman and S. T. Flammia. Randomized benchmarking with confidence. \emph{New J. Phys.} 16 (2014), 103032. \href{https://arxiv.org/abs/1404.6025}{arXiv:1404.6025}.
+\bibitem{helsen} J. Helsen, J. J. Wallman, S. T. Flammia and S. Wehner. Multiqubit randomized benchmarking using few samples. \emph{Phys. Rev. A} 100 (2019), 032304. \href{https://arxiv.org/abs/1701.04299}{arXiv:1701.04299}, Appendix C.
+\bibitem{unitarity} J. Wallman, C. Granade, R. Harper and S. T. Flammia. Estimating the coherence of noise. \emph{New J. Phys.} 17 (2015), 113020. \href{https://doi.org/10.1088/1367-2630/17/11/113020}{DOI:10.1088/1367-2630/17/11/113020}.
+\bibitem{tt} trureturing. \href{https://www.trureturing.org/research/wf1404/}{Wallman--Flammia unrestricted two-contractivity}. Public formalization, checked 26 November 2026.
+\bibitem{duschenes} M. Duschenes, D. Garc\'ia-Mart\'in, Z. Holmes and M. Cerezo. Moments of quantum channel ensembles. \emph{PRX Quantum} 7 (2026), 033050. \href{https://arxiv.org/abs/2511.12700}{arXiv:2511.12700}, Theorem 2 and Appendix B.
+\bibitem{movassagh} R. Movassagh and J. Schenker. Theory of ergodic quantum processes. \emph{Phys. Rev. X} 11 (2021), 041001. \href{https://arxiv.org/abs/2004.14397}{arXiv:2004.14397}.
+\bibitem{rmps} S. Leontica and A. G. Green. \emph{An unbiased measure over the matrix product state manifold}. \href{https://arxiv.org/abs/2505.00073}{arXiv:2505.00073}, supplemental material on right-environment spectra.
+\bibitem{ogura} M. Ogura and C. F. Martin. A limit formula for joint spectral radius with $p$-radius of probability distributions. \emph{Linear Algebra Appl.} 458 (2014), 605--625. \href{https://arxiv.org/abs/1401.3026}{arXiv:1401.3026}.
+\bibitem{brick} J. Allen, D. Belkin and B. K. Clark. \emph{Conditional $t$-independent spectral gap for random quantum circuits and implications for $t$-design depths}. \href{https://arxiv.org/abs/2411.13739}{arXiv:2411.13739}.
+\end{thebibliography}
+\end{document}

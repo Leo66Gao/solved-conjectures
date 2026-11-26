@@ -1,0 +1,15 @@
+amplitude damping, sign 1 p 13/25 u 177/625 s1..4 ['13/25', '13/25', '13/25', '13/25']
+amplitude damping, sign -1 p -3/25 u 177/625 s1..4 ['3/25', '177/625', '177/625', '177/625']
+cHaar d,e,t = 2 2 2 ; nonprincipal nonzero spectrum: 2/5 (x1) ; Wishart fixed moment OK
+cHaar d,e,t = 2 2 3 ; nonprincipal nonzero spectrum: 1/5 (x1), 2/5 (x3) ; Wishart fixed moment OK
+cHaar d,e,t = 2 2 4 ; nonprincipal nonzero spectrum: 3/14 (x1), 3/20 (x2), 1/5 (x4), 2/5 (x6) ; Wishart fixed moment OK
+cHaar d,e,t = 3 2 2 ; nonprincipal nonzero spectrum: 16/35 (x1) ; Wishart fixed moment OK
+cHaar d,e,t = 3 2 3 ; nonprincipal nonzero spectrum: 1/7 (x1), 8/35 (x1), 16/35 (x3) ; Wishart fixed moment OK
+cHaar d,e,t = 3 2 4 ; nonprincipal nonzero spectrum: 5/21 (x1), 1/14 (x3), 1/7 (x4), 8/35 (x4), 16/35 (x6), 39/280 - sqrt(241)/280 (x2), sqrt(241)/280 + 39/280 (x2) ; Wishart fixed moment OK
+cHaar d,e,t = 2 3 2 ; nonprincipal nonzero spectrum: 9/35 (x1) ; Wishart fixed moment OK
+cHaar d,e,t = 2 3 3 ; nonprincipal nonzero spectrum: 3/35 (x1), 9/35 (x3) ; Wishart fixed moment OK
+cHaar d,e,t = 2 3 4 ; nonprincipal nonzero spectrum: 2/21 (x1), 2/35 (x2), 3/35 (x4), 9/35 (x6) ; Wishart fixed moment OK
+cHaar d,e,t = 4 2 2 ; nonprincipal nonzero spectrum: 10/21 (x1) ; Wishart fixed moment OK
+cHaar d,e,t = 4 2 3 ; nonprincipal nonzero spectrum: 5/21 (x1), 4/21 (x1), 10/21 (x3) ; Wishart fixed moment OK
+cHaar d,e,t = 4 2 4 ; nonprincipal nonzero spectrum: 2/21 (x3), 5/21 (x4), 4/21 (x4), 10/21 (x6), 45/308 - sqrt(8369)/924 (x1), sqrt(8369)/924 + 45/308 (x1), 9/56 - sqrt(89)/168 (x2), sqrt(89)/168 + 9/56 (x2) ; Wishart fixed moment OK
+ALL EXACT CHECKS PASSED

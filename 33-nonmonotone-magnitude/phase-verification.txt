@@ -1,0 +1,2 @@
+27 exact finite split-cube Schur identities verified (cube dimensions 3,4,5).
+High-precision profile spot checks passed (illustrations, not the infinite proof).
