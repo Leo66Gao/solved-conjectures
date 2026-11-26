@@ -1,0 +1,6 @@
+orbits 1 templates 3 cycles by length {4: 3} invalid leaves 10
+orbits 2 templates 6 cycles by length {4: 15, 8: 7, 16: 1} invalid leaves 24
+orbits 3 templates 20 cycles by length {4: 20, 8: 26, 16: 3} invalid leaves 63
+orbits 4 templates 81 cycles by length {4: 76, 8: 75, 16: 26} invalid leaves 158
+orbits 5 templates 387 cycles by length {4: 190, 8: 215, 16: 92} invalid leaves 512
+orbits 6 templates 2104 cycles by length {4: 753, 8: 711, 16: 351, 32: 1} invalid leaves 1845
