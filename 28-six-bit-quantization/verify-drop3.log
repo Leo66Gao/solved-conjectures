@@ -1,0 +1,20 @@
+m= 3 candidates=1 intervals=14 high_slack=43/90
+m= 4 candidates=2 intervals=50 high_slack=1/50
+m= 5 candidates=2 intervals=169 high_slack=43/250
+m= 6 candidates=3 intervals=391 high_slack=53/450
+m= 7 candidates=4 intervals=811 high_slack=207/2450
+m= 8 candidates=6 intervals=2147 high_slack=1/16
+m= 9 candidates=7 intervals=2499 high_slack=191/4050
+m=10 candidates=10 intervals=4078 high_slack=9/250
+m=11 candidates=13 intervals=6332 high_slack=167/6050
+m=12 candidates=18 intervals=9232 high_slack=19/900
+m=13 candidates=23 intervals=14196 high_slack=27/1690
+m=14 candidates=31 intervals=22161 high_slack=29/2450
+m=15 candidates=39 intervals=4690 high_slack=419/2250
+m=16 candidates=52 intervals=5056 high_slack=509/1600
+m=17 candidates=66 intervals=6238 high_slack=6047/14450
+m=18 candidates=86 intervals=7491 high_slack=401/810
+m=19 candidates=110 intervals=9000 high_slack=9991/18050
+m=20 candidates=143 intervals=11313 high_slack=299/500
+m=21 candidates=181 intervals=13731 high_slack=13927/22050
+m=22 candidates=233 intervals=32817 high_slack=1729/6050

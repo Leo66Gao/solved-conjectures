@@ -1,0 +1,3 @@
+5 [(0, 1), (1, 2), (2, 3), (3, 4)] 7 10891 exact state/time pairs validated
+5 [(0, 1), (1, 2), (2, 0), (2, 3), (3, 4)] 7 169623 exact state/time pairs validated
+5 [(0, 1), (0, 2), (0, 3), (0, 4)] 6 107791 exact state/time pairs validated

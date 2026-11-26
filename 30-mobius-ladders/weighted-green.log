@@ -1,0 +1,12 @@
+cyclic 2 (0, 1) Counter({1: 12, 0: 4})
+negative first None
+cyclic 3 (0, 1, 2) Counter({1: 126, 0: 10})
+negative first None
+cyclic 4 (0, 1, 2, 3) Counter({1: 796, 0: 20})
+negative first None
+cyclic 4 (0, 1, 3, 2) Counter({1: 796, 0: 20})
+negative first None
+cyclic 4 (0, 2, 1, 3) Counter({1: 796, 0: 20})
+negative first None
+binary 4 (0, 1, 2, 3) Counter({1: 796, 0: 20})
+negative first None

@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\E}{\mathbb E}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{Strong self-permanent contraction on every complex bipartite support}
+\author{Leo Gao\\\small AI-assisted research note}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $C$ be a complex correlation matrix whose nonzero off-diagonal
+entries form a bipartite graph. Put $S=\tfrac12\|C-I\|_F^2$.
+We prove the strong self-Bapat--Sunder inequality
+$\per(C\circ\overline C)\le\per C$ with no restriction on either
+part size, rank, or phases. Equality holds only for disjoint rank-one
+pairs and singleton blocks. In particular, the self-Chollet ratio is at
+most $4^{-S/3}$. Our lower bound uses the occupation distribution of
+two orthonormal families; our upper bound compares injections with walks
+in a random map. A binary polynomial positivity check completes a
+one-row estimate. This removes the width-five restriction from a
+recent structured-support preprint. It does not settle unrestricted
+Chollet; no definitive priority claim is made.
+\end{abstract}
+
+\section{The result}
+Write $\per A=\sum_{\sigma}\prod_i a_{i,\sigma(i)}$.
+Chollet~\cite{Chollet} asked whether
+$\per(A\circ B)\le\per A\per B$ for all Hermitian positive
+semidefinite $A,B$, where $\circ$ denotes entrywise product. By
+Cauchy--Schwarz applied to permutation monomials, it suffices to prove
+$\per(A\circ\overline A)\le(\per A)^2$ for each $A$.
+This reduction concerns the unrestricted conjecture; knowledge for a
+restricted class of $A$ proves the paired inequality when \emph{both}
+factors are covered. For historical surveys and recent restricted
+results see~\cite{Wanless,Pant,rankfour}. In particular, Pant and
+Singh obtain a stronger multiplier inequality on the sign-restricted
+real bipartite class; the arbitrary complex phases here need not
+satisfy their termwise-positivity hypothesis.
+Schubr~\cite{Schubr} proved the strong self-inequality for complex
+bipartite supports for which one of the two sides has at most five
+vertices (and additional nonbipartite classes). Our result retains the
+strong inequality and allows both sides to have arbitrary size.
+The unrestricted strong inequality is false~\cite{Drury}.
+
+Let $C$ be an $n\times n$ correlation matrix, that is, $C\succeq0$
+is Hermitian and has diagonal one. Its off-diagonal support is bipartite
+if, after simultaneous row and column permutation,
+\[
+ C=C(X)=\begin{pmatrix} I_p& X\\ X^*& I_q\end{pmatrix},\qquad p+q=n.
+\]
+Positive semidefiniteness is equivalent to $\|X\|_{\rm op}\le1$
+by the Schur complement. Set $s_i=\sum_{j=1}^q|x_{ij}|^2$ and
+$S=\sum_i s_i$; each $s_i\in[0,1]$.
+
+\begin{theorem}\label{main}
+For every such $X$ one has
+\[
+ Q(C):=\per(C\circ\overline C)\ \le\ P(C):=\per C,
+ \qquad P(C)\ge4^{S/3}.
+\]
+Equality $Q(C)=P(C)$ holds exactly when, up to permutation, $C$ is a
+direct sum of singleton identity blocks and rank-one two-by-two
+correlation matrices. In particular $Q(C)/P(C)^2\le4^{-S/3}$.
+\end{theorem}
+
+\begin{corollary}
+If $A,B$ are positive semidefinite with bipartite off-diagonal support
+(the two bipartitions may differ), then $\per(A\circ B)\le\per A\per B$.
+For correlation matrices there is the additional factor
+$4^{-(S_A+S_B)/6}$ on the right.
+\end{corollary}
+\begin{proof}
+Cauchy--Schwarz gives
+$|\per(A\circ B)|\le\sqrt{\per(A\circ\overline A)\per(B\circ\overline B)}$.
+Use Theorem~\ref{main} in the normalized setting. For general matrices
+with positive diagonals use diagonal congruences on the two factors
+separately; if either has a zero diagonal entry it has a zero row, and
+both sides vanish.
+\end{proof}
+
+\section{The Gram permanent as an occupation expectation}
+Use the product standard complex Gaussian measure on $\mathbb C^d$ for
+the polynomial inner product $\langle f,g\rangle=\E[\overline f g]$.
+The monomials are orthogonal and have squared norm
+$\|z^\alpha\|^2=\alpha!=\prod_k\alpha_k!$. For linear forms $L_j$
+with Gram matrix $A=(\E\overline{L_i}L_j)$, Wick's pairing formula gives
+$\|\prod_j L_j\|^2=\per A$; this also follows by comparing
+coefficients in the complex Gaussian exponential moment.
+
+Realize the forms for $C$ as $z_1,\ldots,z_p,L_1,\ldots,L_q$
+in dimension at most $p+q$, extending the first orthonormal family to
+an orthonormal basis. The $L_j$ are orthonormal, and
+$L_j(z)=\sum_i u_{ij}z_i$ with $u_{ij}=x_{ij}$ for $i\le p$.
+Put $P=\prod_{j=1}^qL_j=\sum_\alpha c_\alpha z^\alpha$.
+Then $\|P\|^2=\per I_q=1$; hence
+$\mathbb P(N=\alpha)=\alpha!|c_\alpha|^2$ is a probability distribution.
+Adding one factor $z_i$ increments its monomial exponent, whence
+\begin{equation}\label{fock}
+ \per C=\|z_1\cdots z_p P\|^2=\E\prod_{i=1}^p(1+N_i).
+\end{equation}
+
+For $i\le p$ the squared norms of $\partial_i P$ and $\partial_i^2 P$
+are $\E N_i$ and $\E[N_i(N_i-1)]$: differentiate monomials and use
+their norms. Products of distinct subsets of the $L_j$ are orthonormal
+for distinct subsets, since these forms are coordinates in another
+orthonormal basis. Differentiating the factored expression therefore yields
+\begin{align}
+ \E N_i&=\sum_j|x_{ij}|^2=s_i,\nonumber\\
+ \E N_i(N_i-1)&=4\sum_{j<k}|x_{ij}|^2 |x_{ik}|^2
+              =2\left(s_i^2-\sum_j|x_{ij}|^4\right)\le2s_i^2.
+ \label{mom}
+\end{align}
+These identities do not assert independence of the occupations.
+
+For a nonnegative integer variable $N$ with mean $s>0$, its size-biased
+law assigns mass $k\mathbb P(N=k)/s$ to $k$. The function
+$g(u)=\log(1+u)/u=\int_0^1(1+tu)^{-1}\,dt$ (continuously extended
+at zero) is decreasing and convex. Jensen under the size-biased law
+and \eqref{mom} give
+\[
+ \E\log(1+N_i)\ge s_i\,g(\E N_i^2/s_i)
+ \ge s_i g(1+2s_i)\ge s_i g(3)=s_i\log(4)/3 .
+\]
+The zero-mean case is immediate. Taking log in \eqref{fock} and using
+ordinary Jensen proves $P(C)\ge4^{S/3}$. Keeping the exact fourth
+moment $q_i=\sum_j|x_{ij}|^4$ in \eqref{mom} also yields
+\begin{equation}\label{lb}
+ \log P(C)\ge\sum_{i:s_i>0} s_i g(1+2s_i-2q_i/s_i).
+\end{equation}
+
+\section{The squared-entry permanent}
+For every rectangular matrix $Y$, partitioning a permutation by the
+sets $I,J$ of moved vertices on the two sides gives
+\[
+ \per C(Y)=\sum_{|I|=|J|}|\per Y[I,J]|^2 .
+\]
+Indeed each of the two cross directions is a bijection between the
+selected sets; all remaining vertices must be fixed.
+Apply this to $W=(|x_{ij}|^2)$. Put $G=WW^{\mathsf T}$, a real
+nonnegative matrix. For each row set $I$, expansion of
+$\per G[I,I]$ includes every contribution to
+$\sum_{J:|J|=|I|}(\per W[I,J])^2$: for each permutation of $I$,
+expand its product of row inner products, first allowing only distinct
+intermediate columns, then all choices. Distinct choices give exactly
+the terms where the two bijections to $J$ use the same column set.
+Thus $Q(C)\le\sum_I\per G[I,I]=\per(I_p+G)$.
+Moreover $G_{ii}=q_i$ and $\sum_k G_{ik}\le s_i$, since every
+column of $W$ has sum at most one.
+
+Divide row $i$ of $I+G$ by $1+q_i$ and put
+$r_i=(s_i-q_i)/(1+q_i)$. The resulting matrix is
+$I+\operatorname{diag}(r_i)T$, where $T$ is zero-diagonal,
+nonnegative, and row substochastic: take $T_{ik}=G_{ik}/(s_i-q_i)$
+for $k\ne i$ when its denominator is positive, and zero on a null
+row. Independently for every vertex $i$, choose a successor $k$ with
+probability $T_{ik}$, or choose a cemetery symbol with the remaining
+probability. The permanent of this matrix is
+\[
+ \E\prod_{D}\left(1+\prod_{i\in D}r_i\right),
+\]
+where $D$ ranges over directed cycles present in the random map.
+Indeed the expansion selects disjoint directed cycles, each occurring
+with probability equal to the product of its specified transitions;
+vertices outside such cycles are fixed in the corresponding permutation.
+For a cycle of length $k\ge2$, generalized H\"older and monotonicity
+of finite-dimensional sequence norms give
+$1+\prod_D r_i\le\prod_{i\in D}(1+r_i^k)^{1/k}
+\le\prod_{i\in D}(1+r_i^2)^{1/2}$.
+The cycles are disjoint, so multiplication and restoration of the row
+factors show
+\begin{equation}\label{ub}
+ Q(C)\le\prod_i\sqrt{(1+q_i)^2+(s_i-q_i)^2}.
+\end{equation}
+
+\section{The scalar comparison}
+For $s=s_i>0$ put $t=q_i/s_i^2\in[0,1]$. We prove
+\[
+ \tfrac12\log A(s,t)\ \le\ s\,g(1+2s(1-t)),
+ \qquad A=(1+s^2t)^2+s^2(1-st)^2 .
+\]
+First, $\log A(s,t)/s$ is strictly increasing for $0<s\le1$ at
+fixed $t$. Here is a short integer certificate for the only algebraic
+inequality needed. Write $A_s=\partial A/\partial s$ and
+$D=((sA_s)^2-A(A-1)^2)/s^4$, a polynomial of bidegree $(8,6)$.
+The coefficients of
+\[
+ (1+u)^8(1+v)^6 D\big(u/(1+u),v/(1+v)\big)
+\]
+in increasing powers of $u$ (rows) and $v$ (columns), obtained by
+binomial expansion, are the following integers:
+\[
+\begin{pmatrix}
+3&30&117&228&237&126&27\\
+24&220&796&1464&1456&748&156\\
+83&688&2299&4024&3913&2008&425\\
+162&1194&3684&6260&6186&3330&752\\
+195&1250&3587&6100&6389&3746&925\\
+148&800&2180&3840&4412&2912&812\\
+69&300&813&1520&1971&1524&491\\
+18&58&172&340&514&490&184\\
+2&4&16&32&58&76&28
+\end{pmatrix}.
+\]
+Thus $D>0$ on the closed unit square: in the equivalent Bernstein form
+$D=\sum_{i,j}d_{ij}s^i(1-s)^{8-i}t^j(1-t)^{6-j}$ at least one
+nonzero term remains at each boundary point. Since $A_s$ is positive
+for small positive $s$ and cannot vanish on $(0,1]$, we have
+$sA_s>\sqrt A(A-1)$. Finally $\log A\le(A-1)/\sqrt A$ for
+$A\ge1$ (use $2\sinh(x/2)\ge x$ at $x=\log A$).
+It follows that $sA_s/A>\log A$, as claimed.
+
+It remains to show $g(3-2t)\ge\tfrac12\log(2+2t^2)$.
+For $0\le t\le1/2$ the left hand side is at least $\log(4)/3$ and
+the right hand side at most $\log(5/2)/2$; the former is strictly
+larger since $16>(5/2)^3$.
+For $1/2\le t\le1$ use the tangent to the convex function $g$ at
+argument $1$. This lower bound for $g(3-2t)$ is affine in $t$,
+equals $1/2$ at $t=1/2$, and equals $\log2$ at $t=1$.
+The function $\tfrac12\log(2+2t^2)$ is convex on this interval, lies
+strictly below $1/2$ at the left endpoint ($5/2<e$), and equals
+$\log2$ at the right. The affine bound therefore suffices and is
+strict for $t<1$. Combining both steps,
+\[
+ \frac{\log A(s,t)}{2s}\le
+ \frac{\log A(1,t)}2\le g(3-2t)
+ \le g(1+2s(1-t)).
+\]
+Equality requires $s=t=1$. Combining \eqref{ub} and \eqref{lb} proves
+$Q(C)\le P(C)$. Equality forces every nonzero row of $W$ to have
+$s_i=t_i=1$, hence exactly one entry, equal to one. These entries lie
+in distinct columns by the column sum bound. Conversely the resulting
+blocks give equality directly.
+
+\section{Scope and limits}
+When $X$ is a unitary matrix of order $d$, the theorem applies to
+the union of any two orthonormal bases and gives
+$\per(C\circ\overline C)/(\per C)^2\le 4^{-d/3}$.
+The Fourier matrices exhibit unbounded separation from scaled diagonal
+dominance: $|X_{ij}|=d^{-1/2}$ and the off-diagonal absolute part of
+$C$ has spectral radius $\sqrt d$. Nontrivial Fourier phases cannot be
+removed by multiplying rows and columns by phases because the phases on
+a four-cycle are invariant in product. The bounds are not sharp: for
+$X=I_d$ both permanents are $2^d$. The lower bound uses orthonormality
+on each side in two distinct places, the normalization of $P$ and the
+orthogonality of distinct derivative summands. Neither property holds for
+unrestricted positive semidefinite matrices. The result concerns the
+self-conjugate pair, or two covered factors, not an arbitrary second
+factor. We have not established priority for this special case.
+
+\begin{thebibliography}{9}
+\bibitem{Chollet} J. Chollet, Is there a permanental analogue to Oppenheim's inequality?,
+\emph{Amer. Math. Monthly} 89 (1982), 57--58.
+\href{https://doi.org/10.1080/00029890.1982.11995380}{doi:10.1080/00029890.1982.11995380}.
+\bibitem{Wanless} G.-S. Cheon and I. M. Wanless, An update on Minc's survey of open problems
+involving permanents, \emph{Linear Algebra Appl.} 403 (2005), 314--342.
+\bibitem{Pant} P. Pant and R. Singh, Structural classes for Chollet's permanent conjecture,
+\href{https://arxiv.org/abs/2604.24192}{arXiv:2604.24192v2} (2026).
+\bibitem{Schubr} S. Schubr, Strong permanent inequalities on structured supports,
+with an application to graph Laplacians, independent preprint (Nov. 21, 2026),
+\href{https://doi.org/10.5281/zenodo.24409106}{doi:10.5281/zenodo.24409106}.
+\bibitem{Drury} S. W. Drury, A counterexample to a question of Bapat and Sunder,
+\emph{Electron. J. Linear Algebra} 31 (2016), 69--70.
+\bibitem{rankfour} Y. Ma, Quantitative Chollet inequalities for matrices of rank at most four,
+\href{https://arxiv.org/abs/2609.37461}{arXiv:2609.37461} (2026).
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,12 @@
+U degree-3 Bernstein: 0 to 1 ; positive: 50 /64
+V degree-3 Bernstein: 0 to 1 ; positive: 50 /64
+W degree-3 Bernstein: 0 to 1 ; positive: 50 /64
+(0, 0, 0) degree-3 Bernstein: 0 to 2 ; positive: 51 /64
+(0, 0, 1) degree-3 Bernstein: 0 to 2 ; positive: 51 /64
+(0, 1, 0) degree-3 Bernstein: 0 to 3 ; positive: 45 /64
+(0, 1, 1) degree-3 Bernstein: 0 to 2 ; positive: 51 /64
+(1, 0, 0) degree-3 Bernstein: 0 to 2 ; positive: 51 /64
+(1, 0, 1) degree-3 Bernstein: 0 to 3 ; positive: 45 /64
+(1, 1, 0) degree-3 Bernstein: 0 to 2 ; positive: 51 /64
+(1, 1, 1) degree-3 Bernstein: 0 to 2 ; positive: 51 /64
+PASS: all Bernstein basis functions are positive on the open unit cube.

@@ -1,0 +1,45 @@
+m=3 shapes=1 strict=0
+m=4 shapes=2 strict=0
+m=5 shapes=2 strict=2
+m=6 shapes=3 strict=3
+m=7 shapes=4 strict=4
+m=8 shapes=6 strict=6
+m=9 shapes=7 strict=7
+m=10 shapes=10 strict=10
+m=11 shapes=13 strict=13
+m=12 shapes=17 strict=17
+m=13 shapes=21 strict=21
+m=14 shapes=28 strict=28
+m=15 shapes=35 strict=35
+m=16 shapes=46 strict=45
+m=17 shapes=57 strict=57
+m=18 shapes=73 strict=73
+m=19 shapes=91 strict=91
+m=20 shapes=116 strict=116
+m=21 shapes=143 strict=143
+m=22 shapes=180 strict=180
+m=23 shapes=222 strict=222
+m=24 shapes=277 strict=277
+m=25 shapes=340 strict=340
+m=26 shapes=422 strict=422
+m=27 shapes=516 strict=516
+m=28 shapes=636 strict=636
+m=29 shapes=775 strict=775
+minimum margin at least 3802261298032/1125899906842624 nats (m=20, d=10)
+m=30 shapes=949 strict=949
+m=31 shapes=1152 strict=1152
+m=32 shapes=1405 strict=1405
+m=33 shapes=1698 strict=1698
+m=34 shapes=2059 strict=2059
+m=35 shapes=2481 strict=2481
+m=36 shapes=2997 strict=2997
+m=37 shapes=3597 strict=3597
+m=38 shapes=4326 strict=4326
+m=39 shapes=5177 strict=5177
+minimum margin at least 40502346246684/1125899906842624 nats (m=32, d=5)
+m=40 shapes=6201 strict=6201
+m=41 shapes=7396 strict=7396
+m=42 shapes=8828 strict=8828
+m=43 shapes=10495 strict=10495
+m=44 shapes=12483 strict=12483
+minimum margin at least 29625169198710/1125899906842624 nats (m=44, d=10)

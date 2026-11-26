@@ -8,6 +8,7 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Bipartite self-permanent inequality** | Theorem | Proves strong self-permanent contraction for all complex correlation matrices with bipartite support, with equality characterized. No width restriction. | [Details](26-bipartite-self-permanents/) · [PDF](26-bipartite-self-permanents/paper.pdf) · [LaTeX](26-bipartite-self-permanents/paper.tex) |
 | **Zamir–Erez universal input** | Complete answer | The guaranteed fraction of additive-noise channel capacity tends to zero, even when the input distribution can depend on the noise variance. | [Details](20-zamir-erez-universal-input/) · [PDF](20-zamir-erez-universal-input/paper.pdf) · [LaTeX](20-zamir-erez-universal-input/paper.tex) |
 | **Bapat’s real $q$-permanent** | Complete answer for real symmetric matrices | An integer positive definite matrix of order $10^{35}$, specified by formula, violates monotonicity on $[-1,1]$. | [Details](19-bapat-q-permanent/) · [PDF](19-bapat-q-permanent/paper.pdf) · [LaTeX](19-bapat-q-permanent/paper.tex) |
 | **Generalized Hillar–Johnson matrix words** | Complete answer | Classifies spectral positivity for words in arbitrary real powers of positive definite matrices by reversal symmetry after cyclic reduction. Garbe and Wei established the ordinary-word classification. | [Details](16-positive-matrix-words/) · [PDF](16-positive-matrix-words/matrix-words.pdf) · [LaTeX](16-positive-matrix-words/matrix-words.tex) |
@@ -21,6 +22,9 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Cubic transport under controlled edge averaging** | Theorem | A sharp cubic cost law for serial pairwise averaging on arbitrary graphs, including transport to a specified distant vertex. | [Details](27-controlled-edge-averaging/) · [Proof](27-controlled-edge-averaging/TRANSPORT.md) |
+| **Six-bit binary quantization** | Partial | Coordinate readout is optimal for all maps with up to nine input bits, and for balanced maps with ten or eleven input bits, at all crossover rates. | [Details](28-six-bit-quantization/) · [Nine-input proof](28-six-bit-quantization/exact-nine.md) · [Eleven-input proof](28-six-bit-quantization/exact-eleven.md) |
+| **Fractional planks for packed triangles** | Partial | Proves the sharp $2/3$ bound for every packed triangle in the three-cube, with independently reproduced exact certificates. | [Details](29-fractional-planks/) · [PDF](29-fractional-planks/triangle-planks.pdf) · [LaTeX](29-fractional-planks/triangle-planks.tex) |
 | **Optimal binary quantization after dropping two bits** | Theorem | Reading $n-2$ coordinates is optimal at every crossover probability, including against unequal cells. The certified proof does not settle arbitrary six-bit quantization. | [Details](24-binary-quantization-drop-two/) · [PDF](24-binary-quantization-drop-two/paper.pdf) · [LaTeX](24-binary-quantization-drop-two/paper.tex) |
 | **Consecutive log-concavity violations in trees** | Complete answer | Diameter-seven trees can have arbitrarily long runs of consecutive strict log-concavity violations. | [Details](22-tree-independence-polynomials/) · [PDF](22-tree-independence-polynomials/paper.pdf) · [LaTeX](22-tree-independence-polynomials/paper.tex) |
 | **Width of thin lattice simplices** | Complete answer | Proves Kurylenko’s Conjectures 1.5 and 1.6 and answers both parts of Question 1.4. | [Proof](01-thin-simplices/Thin-simplex-proofs.md) · [PDF](01-thin-simplices/manuscript.pdf) · [LaTeX](01-thin-simplices/manuscript.tex) |
@@ -41,6 +45,9 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Sidorenko bounds for odd Möbius ladders** | Partial | Covers all regular hosts with negative-semidefinite centered operator, plus other structured classes. The general ten-vertex case remains open here. | [Details](30-mobius-ladders/) · [PDF](30-mobius-ladders/mobius-follow-up.pdf) · [LaTeX](30-mobius-ladders/mobius-follow-up.tex) |
+| **Five-word filters for Werner states** | Partial | Rules out witnesses with at most five product-basis strings on one side up to $t=0.4979$ at every copy number; reduces the endpoint to 18 cases. | [Details](31-werner-states/) · [Proof and reduction](31-werner-states/five-words.md) |
+| **Distinct subset sums: reflected-layer constant** | Partial | Improves a prior construction’s leading constant to below $0.737$ without improving the exponent or determining the extremal order. | [Details](32-distinct-subset-sum-constant/) · [Proof](32-distinct-subset-sum-constant/RESULT.md) |
 | **Elementary-positive spider graphs** | Partial | Proves finiteness for fixed shortest leg at least two other than three. The exact classification and shortest-leg-three finiteness remain open. | [Details](12-spider-graphs/) · [PDF](12-spider-graphs/spider.pdf) · [LaTeX](12-spider-graphs/spider.tex) |
 | **Distinct covering systems** | Partial | Exact conditional optima of 84 and 68 uncovered residues at periods 10,080 and 15,120 under fixed-prefix constraints. Global exclusion of either period remains open. | [Report](06-covering-systems/report.md) · [PDF](06-covering-systems/manuscript.pdf) · [LaTeX](06-covering-systems/manuscript.tex) |
 

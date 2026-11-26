@@ -1,0 +1,129 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,microtype,xcolor}
+\usepackage[letterpaper,margin=.80in]{geometry}
+\usepackage{titling}\setlength{\droptitle}{-2.4em}\posttitle{\par\end{center}\vspace{-0.6em}}\postdate{\par\end{center}\vspace{-1.3em}}
+\usepackage[colorlinks=true,urlcolor=teal,citecolor=teal,linkcolor=teal]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\La}{\mathcal L}
+\title{\textbf{The ten-vertex M\"obius ladder\\ in structured hosts}}
+\author{Leo Gao}
+\date{AI-assisted research note \enspace$\vert$\enspace 26 November 2026}
+\begin{document}\pdfmapfile{+cm.map}\pdfmapfile{+symbols.map}
+\maketitle
+\begin{abstract}
+We establish the Sidorenko lower bound for the ten-vertex M\"obius ladder in several classes of hosts, including all regular graphons whose centered operator is negative semidefinite, with no limit on its rank. The same spectral proof treats every odd bipartite M\"obius ladder and gives a strict quantitative inequality. We also give exact coefficient certificates for every regular three-equal-block host and for all weighted additive hosts on groups of order at most four. A separate consequence of the log-supermodular cover theorem gives the Sidorenko inequality against every rank-at-most-two nonnegative host, for every bipartite pattern. These results do not establish the unrestricted ten-vertex inequality.
+\end{abstract}
+
+Let $\La_m$ have vertices $L_i,R_i$, with $i\in\mathbb Z/m\mathbb Z$, and edges $L_iR_{i-1},L_iR_i,L_iR_{i+1}$. The odd lengths are the bipartite M\"obius ladders. In particular, $\La_5=K_{5,5}\setminus C_{10}$, a classical open test case \cite{rossman,green}. For a bounded nonnegative kernel $W$ on the unit probability space, $t(H,W)$ denotes the integral of one factor $W(x_i,x_j)$ per edge. A graphon is a symmetric $[0,1]$-valued kernel, and it is $p$-regular if $\int W(x,y)\,dy=p$ for almost every $x$. We use homogeneity to normalize the density to $1$ when $p>0$. All the statements below apply to the fixed ten-vertex pattern, in contrast to the preceding research note's sufficiently-long result for arbitrary bounded-away-from-zero host densities.
+
+\section{All regular hosts with nonpositive centered spectrum}
+\begin{theorem}\label{neg}
+Suppose that $W$ is a $p$-regular graphon, $p>0$, and the operator of $W-p$ is negative semidefinite. Set
+\[
+ X=\frac{t(C_4,W)}{p^4}-1 .
+\]
+For every odd $m\ge5$,
+\[
+ \frac{t(\La_m,W)}{p^{3m}}\ge (1+X)^m-X-4X^2\ge1,
+\]
+with equality in the Sidorenko lower bound only if $W=p$ almost everywhere.
+\end{theorem}
+\begin{proof}
+Normalize $p=1$ and first take a step kernel on a finite weighted space with atom masses $\mu_i>0$. Write its operator $A=J-V$, with $J$ orthogonal projection onto constants. The positive semidefinite $V$ annihilates constants. Its eigenvalues on mean-zero functions are $x_i\ge0$, including zeros if desired. Nonnegativity of $W_{ii}=1-V_{ii}$ bounds the diagonal values of the kernel of $V$ by $1$. Therefore $\sum_i x_i=\sum_i\mu_i V_{ii}\le1$, and the pointwise PSD estimate $|V_{ij}|^2\le V_{ii}V_{jj}$ gives $0\le W\le2$. Set $X=\sum_i x_i^4\le1$; this equals $\Tr A^4-1$.
+
+On ordered pairs let $Z$ be multiplication by $z=\sqrt{W}$ and $P$ interchange the two coordinates. As in Rossman \cite{rossman}, the operator $B=Z(A\otimes A)PZ$ satisfies $\Tr B^m=t(\La_m,W)$. Its largest eigenvalue is at least $\langle z,Bz\rangle/\|z\|^2=t(C_4,W)=1+X$. Here $B$ has nonnegative entries as a kernel, but need not be positive semidefinite. The operators $Z$, $P$, and $A\otimes A$ commute with $P$, so we bound the negative eigenvalues separately on symmetric and antisymmetric functions on pairs.
+
+Write $f_i$ for orthonormal eigenfunctions of $V$ on the mean-zero subspace and $e$ for the constant function $1$. On the symmetric subspace the negative spectral terms of $(A\otimes A)P$ arise only from $(f_i\otimes e+e\otimes f_i)/\sqrt2$, with eigenvalue $-x_i$. The weighted vectors
+\[
+ g_i(x,y)=z(x,y)\frac{f_i(x)+f_i(y)}{\sqrt2}
+\]
+have Gram entries $\langle g_i,g_j\rangle=(1-x_i)\delta_{ij}$ by $1$-regularity and $A f_i=-x_i f_i$. The symmetric block of $B$ is bounded below in Loewner order by $-\sum_i x_i |g_i\rangle\langle g_i|$. Consequently the sum of the $m$th powers of the magnitudes of its negative eigenvalues is at most
+\[
+ \sum_i [x_i(1-x_i)]^m\le X.
+\]
+
+On antisymmetric functions, the negative terms arise only from $(f_i\otimes f_j-f_j\otimes f_i)/\sqrt2$, $i<j$, with eigenvalue $-x_ix_j$. If $C$ is the positive semidefinite operator with eigenvalues $x_ix_j$ on these vectors and zero on their orthogonal complement, this block of $B$ is bounded below by $-ZCZ$. The nonzero eigenvalues of $ZCZ$ are the same as those of $C^{1/2}Z^2C^{1/2}\le2C$. The min--max principle thus gives for the negative contribution
+\[
+ \sum_{i<j}(2x_ix_j)^m
+ \le 8\sum_{i<j}x_i^4x_j^4\le4X^2 .
+\]
+Here $2x_ix_j\le\frac12$, because $x_i+x_j\le1$, and $m\ge5$. Keeping the Perron eigenvalue and subtracting both bounds proves the first inequality. For $X>0$, $(1+X)^m>1+mX$ and $X+4X^2\le5X$ give strictness.
+
+For a general graphon take conditional averages over the same finite dyadic partition in each variable. The averaged operator is a compression and preserves $1$-regularity and the sign of $A-J$. Boundedness and $L^1$ convergence give convergence of all fixed graph densities, so the same quantitative estimate holds. Finally $X=\Tr(A-J)^4$ by regularity; it vanishes only when $A=J$, i.e.\ the kernel is constant almost everywhere. The zero-density case is automatically constant.
+\end{proof}
+The hypothesis allows arbitrary rank, for example the normalized kernels of balanced complete multipartite graphs and any equal-density convex mixture of them. It excludes no range of edge densities, but it does not cover a general centered spectrum with both signs.
+
+\section{All hosts of operator rank at most two}
+\begin{theorem}\label{rank}
+Let $H$ be a bipartite graph and $W$ any bounded nonnegative kernel of ordinary operator rank at most two. Then $t(H,W)\ge p^{e(H)}$, where $p=\int W$. The claim does not require regularity of the host. For a nonsymmetric kernel, the two sides of $H$ use the two prescribed arguments of $W$.
+\end{theorem}
+\begin{proof}
+We may assume $p>0$ and discard isolated vertices. We give the finite weighted proof first. A nonnegative rank-two matrix $M$ has a factorization
+$M_{ij}=a_i b_j+c_i d_j$ with all four vectors nonnegative. Indeed, the cone spanned by its columns in their two-dimensional real span is pointed, lies in the nonnegative orthant, and has at most two extreme rays. In rank one a single product suffices.
+
+For any $k$-fold cover $H'$ of $H$, expand each edge weight as the sum of these two products, introducing a binary state on each edge. After summing the host labels, the resulting binary partition function has one factor at each original vertex. A left vertex of degree $D$ with $s$ incident bits of the second type has factor
+\[
+ \psi(s)=\sum_i\mu_i a_i^{D-s}c_i^s
+\]
+where $\mu_i$ are the left host label probabilities. Its right-hand counterpart uses $\nu_j,b_j,d_j$. The sequence $\psi$ is log-convex by H\"older, and hence its value as a function of a binary vector is log-supermodular: intersections have at most the smaller of the two counts, unions at least the larger, and the combined count is unchanged. One may first add a positive constant to each feature vector entry and then pass to the limit to avoid zero-valued factors. The ordinary cover of $H$ gives a cover of this binary incidence factor graph (an edge variable has degree two). Therefore Ruozzi's graph-cover theorem for log-supermodular factors \cite[Theorem 4.1]{ruozzi} gives $t(H',M)\le t(H,M)^k$.
+
+For completeness, lower-bound the expectation over independent uniformly random matchings between the $k$ copies across each edge of $H$. Set $\rho_{ij}=\mu_i\nu_j M_{ij}/p$ and write $\rho_L,\rho_R$ for its marginals. Keep just assignments with these empirical vertex marginals and with each edge empirical pair law $\rho$. We may approximate $\rho$ by rational tables on its positive support and use multiples of their denominators. For fixed vertex assignments with matching marginal counts, the probability that one random edge matching has the specified pair counts is
+\[
+ \frac{\prod_i(k\rho_L(i))!\prod_j(k\rho_R(j))!}
+ {k!\prod_{ij}(k\rho_{ij})!}.
+\]
+There are $k!/\prod_i(k\rho_L(i))!$ labelings of each left vertex fibre, and the analogous expression on the right. The assignment weight is the product of the $\mu,\nu$ masses and the edge weights. Stirling's formula shows that the exponential rate of this contribution is
+\[
+ e(H)\log p+\sum_{v\in V(H)}
+ (\deg_H v-1)D_{\mathrm{KL}}(\rho_v\|\mu_v).
+\]
+Here $\rho_v$ denotes the corresponding edge marginal, $\mu_v$ the base label law on that side, and $D_{\mathrm{KL}}(\pi\|\mu)=\sum_i\pi_i\log(\pi_i/\mu_i)$. Indeed,
+$H(\rho)+\mathbb E_\rho\log M=\log p-\mathbb E_{\rho_L}\log\mu-\mathbb E_{\rho_R}\log\nu$, where $H(\rho)$ in this identity denotes Shannon entropy. The empirical-table expression is continuous on the support of $\rho$, justifying the rational limit. Remove isolated vertices so that every coefficient of the divergence is nonnegative. Since the cover upper bound holds for every cover, this proves the desired lower bound and, in the finite case, also supplies the stated nonregularity surplus.
+
+For general bounded kernels, conditional averages over finite partitions preserve nonnegativity and have ordinary rank at most two: their operators are finite compressions on the two sides of $W$. Pass to the $L^1$ limit. If $p=0$ the claim is immediate.
+\end{proof}
+This theorem is a consequence of a known graph-cover inequality, not a claim to have discovered that general cover method. It includes irregular hosts and is not limited to the ten-vertex pattern.
+
+\section{An exact certificate for three equal blocks}
+\begin{theorem}\label{three}
+For every regular graphon $W$ constant on the cells of a partition into three sets of equal measure, $t(\La_5,W)\ge p^{15}$, with equality only when $W=p$ a.e.
+\end{theorem}
+\begin{proof}
+Normalize $p=1$ and write the three off-diagonal cell weights multiplied by two as $x,y,z$. Relabel so that $0\le x\le y\le z$ (vertex permutations on a triangle permute all three edges). Regularity makes the three doubled diagonal weights $6-x-y,6-x-z,6-y-z$. Nonnegativity is equivalent to $y+z\le6$, in addition to the order constraint. Thus the admissible region is the simplex with vertices $(0,0,0),(3,3,3),(0,3,3),(0,0,6)$. The constant host $(2,2,2)$ lies on its first edge; split into the two simplices with vertex list
+\[
+ ((2,2,2),(u,u,u),(0,3,3),(0,0,6)),\qquad u=0,3.
+\]
+On each simplex use barycentric variables $a_0,a_1,a_2,a_3$. Let $D_{ij}(a)$ be the linear form given by the doubled cell weights interpolated over its four vertices. Define $C_{ijk}(a)=\sum_{\ell=1}^3D_{i\ell}D_{j\ell}D_{k\ell}$. The required homogeneous difference, multiplied by $2^{15}3^{10}$ when $\sum a_i=1$, is the integer-coefficient polynomial
+\[
+ \sum_{i_1,\ldots,i_5=1}^3 \prod_{r=1}^5 C_{i_{r-1},i_r,i_{r+1}}(a)
+ -2^{15}3^{10}(a_0+a_1+a_2+a_3)^{15}.
+\]
+On each simplex the accompanying exact script \texttt{three\_state.py} expands this formula by integer convolution of monomial tables. Each of the 816 possible degree-15 coefficients is accounted for: 790 are strictly positive and 26 are zero. In particular the three coefficients of $a_i^{15}$, $i=1,2,3$, are strictly positive. Nonnegative barycentric coordinates prove the inequality, and strictness holds off the constant vertex.
+\end{proof}
+This proof uses an exact, finite arithmetic certificate, not a numerical grid. It includes both signs of centered spectrum and, unlike Theorem~\ref{rank}, can include ordinary rank three. The assumptions of equal part masses and regularity are used.
+
+\section{The additive special case and a Fourier obstruction}
+Ben Green's Problem~12 \cite{green} asks for the same inequality for $W(x,y)=1_S(x+y)$ on a finite abelian group, with the group uniformly measured. It also makes sense to allow any nonnegative weight $f$ in place of $1_S$. Exact coefficient certificates in \texttt{weighted\_green.py} prove this weighted statement for all groups of order at most four. The method is the same as above: normalize $\mathbb Ef=1$, order the coordinates of $f$, and decompose into normalized upper level sets, i.e.\ vertices $f=\frac{n}{k}1_T$ for nested sets $T$ of size $k$. Use affine symmetries of the group to reduce equivalent orders. On the resulting simplexes, all homogeneous coefficients of the difference are nonnegative and every nonconstant vertex has a strictly positive pure-power coefficient. This finite computation does not cover larger groups.
+
+One arbitrary-size class is covered analytically: if the nonzero Fourier support of $f-\mathbb Ef$ has no three (not necessarily distinct) characters summing to zero, every leafless term in the expansion about the mean has vertex degrees two only. Indeed, in an edge Fourier expansion the incidences at any vertex sum to zero, so nonzero frequency cannot flow through a vertex of degree one or three. The remaining even cycles have nonnegative counts (their surviving terms are even powers of Fourier magnitudes). This proves the weighted inequality in these hosts for all subcubic bipartite patterns. For example, over an elementary abelian two-group, if $S$ is a transversal of a fixed nonzero direction $u$, then $1_S(x+u)=1-1_S(x)$, so the nonconstant frequencies lie in the affine hyperplane $\{\chi:\chi(u)=-1\}$.
+
+The same approach hits a genuine obstruction without a support restriction. On an elementary abelian two-group, the two crossed edge frequencies on adjacent pair positions can be written as $v_i,v_i+h$ with a single global difference $h$. Conservation then forces the rung frequency at $i$ to be $v_i+v_{i-1}+h$. The total Fourier expression is
+\[
+ \sum_{h}\sum_{v_1,\ldots,v_5}
+          \prod_i a(v_i)a(v_i+h)a(v_i+v_{i-1}+h),
+ \qquad a=\widehat f .
+\]
+When $h=0$ this is a trace of a fifth power of a PSD matrix with entries $|a(v)|\,a(v+w)\,|a(w)|$; the convolution matrix is PSD because $f\ge0$. It is at least $a(0)^{15}$ by Jensen on the diagonal of the fifth power. However the other sectors are not individually nonnegative. On $\mathbb F_2^2$ take $f=(0,2,3,2)$ with unnormalized Walsh coefficients $(7,-1,-3,-3)$. For $h=1$ the exact corresponding numerator is $-1{,}383{,}937{,}024$ (denominator $4^{15}$), verified in \texttt{fourier\_witness.py}. This refutes the sector-by-sector proof attempt, not Green's inequality, which follows in this example from the weighted coefficient certificate and can also be checked directly.
+
+\section{Scope}
+The negative-centered theorem is a structured-host result, not an unrestricted proof of Sidorenko's inequality for any previously open odd ladder. The strongest open step is to control the formerly separated negative contributions when the host has a substantial positive centered spectrum, especially when both signs occur. The equal-three-block calculation and the weighted additive certificates are exact but have the stated structural limits. No claim of external review, priority certification, or public posting is made. AI assisted the exploration, derivations, computations and drafting.
+
+{\small
+\begin{thebibliography}{9}
+\bibitem{rossman} B. Rossman, \href{https://users.cs.duke.edu/~br148/sidorenko-mobius.pdf}{On Sidorenko's Conjecture for Bipartite M\"obius Ladders}, preprint, May 2025.
+\bibitem{green} B. Green, \href{https://people.maths.ox.ac.uk/greenbj/papers/open-problems.pdf}{100 Open Problems in Additive Combinatorics}, Problem 12.
+\bibitem{ruozzi} N. Ruozzi, \href{https://arxiv.org/abs/1202.6035}{The Bethe partition function of log-supermodular graphical models}, NeurIPS, 2012.
+\end{thebibliography}}
+\end{document}

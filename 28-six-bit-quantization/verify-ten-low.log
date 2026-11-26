@@ -1,0 +1,1 @@
+Exact size-only check for arbitrary ten-to-six maps succeeded on 0 <= p <= 2^-16; m=16 handled separately by the balanced certificate.

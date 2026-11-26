@@ -1,0 +1,14 @@
+trial 0 cover 224
+trial 15 cover 228
+trial 15 B 5.8515625 cover 228
+trial 17 B 5.890625 cover 228
+trial 97 B 5.93322336265885 cover 225
+trial 99 cover 230
+trial 158 cover 232
+trial 388 B 5.93507018579624 cover 226
+trial 538 cover 234
+trial 3928 B 5.94600038633242 cover 229
+trial 5602 B 5.94742310385693 cover 226
+trial 14988 B 5.95415993388283 cover 228
+trial 15197 cover 236
+Finished 50000 trials; covering record 236; any valid projection 21670; refined 4511; best 5.95415993388283; best strict below 5.95415993388283

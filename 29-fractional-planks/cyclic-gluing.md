@@ -1,0 +1,10 @@
+# Gluing cyclic laws across distinct diagonal levels
+**Leo Gao · AI-assisted.** This new sufficient condition is not the general cyclic case.
+
+Let K be a cyclically invariant convex subset of the unit three-cube. Suppose it contains p=(0,a,b) and q=(1,c,e) with h_1-h_0 ≥ 1/3, where h_0=(a+b)/3 and h_1=(1+c+e)/3. Then K supports a measure of mass ≥2/3 whose coordinate marginals are dominated by Lebesgue measure. In particular the AHKM fractional bound holds, including when K is full dimensional. Equivalently, this criterion on the chosen contacts is c+e ≥ a+b.
+
+Indeed, the orbit of p spans a triangle of coordinate width W_0=max(a,b) at level h_0. The cyclic planar theorem (previous round) supplies a probability with each marginal uniform on the interval centered at h_0 of radius W_0/3. The analogous orbit of q has width W_1=max(1-c,1-e) and radius W_1/3 centered at h_1. The cases W_i=0 only require zero mass there. Write D=h_1-h_0 and R_i=W_i/3. Contracting either triangle and its measure about its own diagonal center, we can realize any smaller prescribed radius 0<r_i≤R_i with mass 2r_i and marginal density one on its interval.
+
+Choose 0≤r_i≤R_i with r_0+r_1=min(D,R_0+R_1). The intervals do not overlap in their interiors. The diagonal segment from h_0 to h_1 belongs to K by orbit averaging and convexity. Use its ordinary one-dimensional Lebesgue measure to fill the gap between the two intervals. Thus all three marginals exactly equal Lebesgue measure restricted to the common interval of length D+min(D,R_0+R_1). Now R_0≥h_0/2 and R_1≥(1-h_1)/2, since a maximum is ≥ the average. Consequently the length is at least min(2D,(1+D)/2)≥2/3.
+
+This proof does not handle D<1/3 by assertion. The hypothesis includes genuine nonsymmetric contact chords, for example p=(0,1/2,1/4), q=(1,1/4,3/4), for which the two directed off-diagonal differences have opposite signs. Full dimensionality follows since a nontrivial cyclic orbit spans a two-dimensional plane of constant sum, while q has another sum. The threshold is sufficient, not asserted to be necessary.

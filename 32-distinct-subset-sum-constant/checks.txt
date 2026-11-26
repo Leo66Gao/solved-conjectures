@@ -1,0 +1,10 @@
+52 exact-chain/spectral checks; all r<=10 tested by determinant & modular cardinality layers.
+Exact rational certificate C(2/15)<0.737 verified (using pi>3.1415).
+20 53 0.7143473
+50 333 0.7269389
+100 1333 0.73150247
+200 5333 0.73387231
+500 33333 0.73532481
+1000 133333 0.73581428
+numerical optimum only 0.1327811829946105 0.7363036891782553
+60 exact alternating-adjacent-sweep vs reflected-chain identifications.
