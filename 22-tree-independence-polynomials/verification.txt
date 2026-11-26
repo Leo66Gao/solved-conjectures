@@ -1,0 +1,2 @@
+Verified: eight consecutive violations.
+Rooted-tree dynamic program agrees on degree 7402 and the top 99 coefficients.

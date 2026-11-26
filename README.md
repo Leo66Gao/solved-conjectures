@@ -41,6 +41,19 @@ The exact conditional optima are 84 and 68 uncovered residues at periods 10,080 
 **[Elementary-positive spider graphs](12-spider-graphs/)** · [PDF](12-spider-graphs/spider.pdf) · [LaTeX](12-spider-graphs/spider.tex)  
 Finiteness for fixed shortest leg at least two other than three. The exact classification and shortest-leg-three finiteness are not settled.
 
+## Research drafts for review
+
+These six manuscripts are available for independent review. The Tuza draft treats the line-graph case.
+
+| Result | Scope of the manuscript | Files |
+| --- | --- | --- |
+| **Tuza’s conjecture for line graphs** | Triangle packing and covering for line graphs of finite simple graphs, with equality and asymptotic ratio results. | [Details](17-tuza-line-graphs/) · [PDF](17-tuza-line-graphs/paper.pdf) · [LaTeX](17-tuza-line-graphs/paper.tex) |
+| **Normalized algebraic-connectivity Nordhaus–Gaddum bound** | A universal deficit of order $n^{-1/2}$ for the sum of second normalized Laplacian eigenvalues of a graph and its complement. | [Details](18-normalized-nordhaus-gaddum/) · [PDF](18-normalized-nordhaus-gaddum/paper.pdf) · [LaTeX](18-normalized-nordhaus-gaddum/paper.tex) |
+| **Bapat’s real q-permanent monotonicity conjecture** | An explicit integer positive definite witness of order $10^{35}$ for a monotonicity violation on $[-1,1]$. | [Details](19-bapat-q-permanent/) · [PDF](19-bapat-q-permanent/paper.pdf) · [LaTeX](19-bapat-q-permanent/paper.tex) |
+| **The Zamir–Erez universal-input problem** | A vanishing worst-case fraction of additive-noise channel capacity, even with known noise variance. | [Details](20-zamir-erez-universal-input/) · [PDF](20-zamir-erez-universal-input/paper.pdf) · [LaTeX](20-zamir-erez-universal-input/paper.tex) |
+| **Betti numbers of numerical-semigroup tangent cones** | A finite simplicial homology formula for the Betti numbers of numerical-semigroup tangent cones. | [Details](21-numerical-semigroup-betti/) · [PDF](21-numerical-semigroup-betti/paper.pdf) · [LaTeX](21-numerical-semigroup-betti/paper.tex) |
+| **Consecutive log-concavity violations in trees** | Diameter-seven trees with arbitrarily long consecutive runs of strict log-concavity violations. | [Details](22-tree-independence-polynomials/) · [PDF](22-tree-independence-polynomials/paper.pdf) · [LaTeX](22-tree-independence-polynomials/paper.tex) |
+
 ## Reproducing the computations
 
 - **Spectral spread:** run `sh 04-spectral-spread/reproduce.sh` with C++17, GMP, and Python 3. The certificates cover 12,451,530 exact positive-definiteness checks and the rational interpolation inequalities.

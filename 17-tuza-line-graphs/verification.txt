@@ -1,0 +1,2 @@
+Exact certificates passed on all 1253 atlas graphs (82 predicted equality cases).
+Exact certificates passed on 100 seeded random graphs and local degrees 0–200.

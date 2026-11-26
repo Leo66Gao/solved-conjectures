@@ -1,0 +1,380 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,array}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\title{Consecutive log-concavity violations in independence sequences of trees}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every positive integer $L$, we construct infinitely many trees of diameter seven whose independence sequences contain $L$ consecutive strict violations of log-concavity. An explicit tree on 14,662 vertices exhibits eight consecutive violations, verified by exact computation.
+\end{abstract}
+\section{Background}
+
+For a finite graph \(G\), its independence polynomial is
+
+\[
+I(G;x)=\sum_{j=0}^{\alpha(G)}i_j(G)x^j,
+\]
+
+where \(i_j(G)\) counts independent vertex sets of cardinality \(j\), and \(\alpha(G)\) is the independence number.
+
+The coefficient sequence is log-concave if
+
+\[
+i_j^2\geq i_{j-1}i_{j+1}
+\]
+
+at every interior index.
+
+Previous results include the following.
+
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.17\linewidth}>{\raggedright\arraybackslash}p{.78\linewidth}@{}}
+Year & Development \\
+\hline
+1987 & Alavi, Malde, Schwenk and Erdős conjecture unimodality for trees. \\
+2023 & Counterexamples to the stronger log-concavity conjecture are identified~\cite{KL}. \\
+2025 & David Galvin establishes violations arbitrarily far from the terminal coefficient~\cite{Galvin}. \\
+2025 & César Bautista-Ramos establishes arbitrarily many violations, without requiring consecutiveness~\cite{BR}. \\
+June 2026 & Bautista-Ramos, Guillén-Galván and Gómez-Salgado establish examples with up to five consecutive violations~\cite{BGG}. \\
+
+\end{tabular}
+\end{center}
+
+\section{Main theorem}
+
+\textbf{Theorem.} For every positive integer \(L\), there exist infinitely many pairwise non-isomorphic trees \(T\) of diameter seven such that, for some integer \(r\),
+
+\[
+\boxed{
+i_j(T)^2<i_{j-1}(T)i_{j+1}(T)
+}
+\]
+
+simultaneously for every
+
+\[
+j=r,r+1,\ldots,r+L-1.
+\]
+
+Consequently, no universal upper bound exists on the length of a consecutive run of log-concavity violations in the independence sequences of trees.
+
+\section{The construction}
+
+Define \(T(m,n,k,h)\) using two adjacent central vertices, \(u\) and \(v\).
+
+\begin{itemize}
+\item Attach \(m\) subdivided \(k\)-edge stars to \(u\), joining their centers to \(u\).
+\item Attach \(n\) identical subdivided stars to \(v\).
+\item Attach \(h\) additional paths of length two to \(u\).
+\item Attach two additional leaves to \(v\).
+
+\end{itemize}
+Every subdivided star consists of a center and \(k\) paths of length two emanating from it.
+
+The additional paths at $u$ control the relative contributions of the cases in which $u$ is selected and in which neither central vertex is selected.
+
+The total number of vertices is
+
+\[
+|V(T)|=(m+n)(2k+1)+2h+4.
+\]
+
+For \(m,n\geq 2\), its independence number is
+
+\[
+\alpha=(m+n)(k+1)+h+2.
+\]
+
+Its diameter is exactly seven.
+
+\section{Proof}
+
+\subsection{Lemma 1 --- Exact polynomial identity}
+
+Define the reversed independence polynomial
+
+\[
+R_T(y)=y^\alpha I(T;1/y)
+\]
+
+and let
+
+\[
+H_k(y)=(1+y)^k+y(2+y)^k.
+\]
+
+Partition independent sets according to whether they contain \(u\), contain \(v\), or contain neither. Since \(u\) and \(v\) are adjacent, these are the only possibilities.
+
+This gives the exact identity
+
+\[
+\begin{aligned}
+R_T(y)={}&H_k(y)^{m+n}(2+y)^h(1+y)^2\\
+&+y^{m-1}H_k(y)^n
+(2+y)^{km}(1+y)^{h+2}\\
+&+y^{n+1}H_k(y)^m(2+y)^{kn+h}.
+\end{aligned}
+\tag{1}
+\]
+
+To verify the identity, a subdivided star has ordinary independence polynomial
+
+\[
+(1+2x)^k+x(1+x)^k.
+\]
+
+If its center is forbidden, the polynomial becomes \((1+2x)^k\).
+
+The three cases in (1) have maximum independent-set sizes \(\alpha\), \(\alpha-m+1\), and \(\alpha-n-1\), respectively. Reversing their polynomials therefore produces the stated powers of \(y\).
+
+This also verifies the claimed independence number. \(\square\)
+
+\subsection{Lemma 2 --- A limiting polynomial family}
+
+Fix integers \(m,n\geq2\) and an integer \(\ell\). Set
+
+\[
+h=k-\ell.
+\]
+
+For sufficiently large \(k\), this is nonnegative.
+
+Define the rescaled polynomial
+
+\[
+Q_k(y)=2^{-h}R_T(2^{-k}y).
+\]
+
+Then, coefficientwise as \(k\to\infty\),
+
+\[
+\boxed{
+Q_k(y)\longrightarrow
+(1+y)^{m+n}
++2^\ell y^{m-1}(1+y)^n.
+}
+\tag{2}
+\]
+
+\textbf{Proof.} First observe that
+
+\[
+\begin{aligned}
+H_k(2^{-k}y)
+={}&(1+2^{-k}y)^k\\
+&+y(1+2^{-k-1}y)^k
+\end{aligned}
+\]
+
+converges coefficientwise to \(1+y\).
+
+Similarly, the other normalized binomial factors in (1) converge coefficientwise to 1.
+
+The multiplicative scalar in the second term becomes
+
+\[
+2^{-k(m-1)}2^{km-h}
+=2^\ell,
+\]
+
+while the scalar in the third term becomes
+
+\[
+2^{-k(n+1)}2^{kn}=2^{-k},
+\]
+
+which converges to zero.
+
+Substitution into (1) proves (2). \(\square\)
+
+\subsection{Lemma 3 --- The limiting family contains arbitrarily long strictly log-convex intervals}
+
+Consider
+
+\[
+F_{M,\ell}(y)
+=(1+y)^{2M}+2^\ell y^{M-1}(1+y)^M.
+\]
+
+Take \(M\) even and set
+
+\[
+J=\frac{3M}{2}.
+\]
+
+Write its coefficients as
+
+\[
+f_j=A_j+2^\ell B_j,
+\]
+
+where
+
+\[
+A_j=\binom{2M}{j},
+\qquad
+B_j=\binom{M}{j-M+1}.
+\]
+
+Choose
+
+\[
+\ell=
+\left\lfloor
+\log_2\frac{A_J}{B_J}
+\right\rfloor.
+\]
+
+Consequently,
+
+\[
+t_M=\frac{2^\ell B_J}{A_J}
+\in(1/2,1].
+\tag{3}
+\]
+
+For every fixed integer offset \(s\), the standard ratios of consecutive binomial coefficients give
+
+\[
+\frac{A_{J+s}}{A_J}\longrightarrow 3^{-s},
+\]
+
+and
+
+\[
+\frac{B_{J+s}}{B_J}\longrightarrow 1.
+\]
+
+Thus,
+
+\[
+\frac{f_{J+s}}{A_J}
+=3^{-s}+t_M+o(1).
+\tag{4}
+\]
+
+The error tends uniformly to zero over any fixed finite collection of offsets.
+
+Now define
+
+\[
+g_s=3^{-s}+t,
+\qquad t\in[1/2,1].
+\]
+
+A direct calculation gives
+
+\[
+\begin{aligned}
+g_{s-1}g_{s+1}-g_s^2
+&=\left(3+\frac13-2\right)t3^{-s}\\
+&=\frac43t3^{-s}\\
+&>0.
+\end{aligned}
+\tag{5}
+\]
+
+For any prescribed finite interval of offsets, this expression has a strictly positive lower bound uniform in \(t\in[1/2,1]\).
+
+Equations (3)--(5) imply that, for every positive integer \(L\) and all sufficiently large even \(M\),
+
+\[
+f_{J+s-1}f_{J+s+1}>f_{J+s}^2
+\]
+
+for all \(s=0,\ldots,L-1\). \(\square\)
+
+\subsection{Completion of the theorem}
+
+Given \(L\), choose \(M\) and \(\ell\) as in Lemma 3.
+
+Apply Lemma 2 with \(m=n=M\). Because the required inequalities are strict and depend continuously on finitely many coefficients, they persist in \(Q_k\) for every sufficiently large \(k\).
+
+Finally, log-concavity and its strict violation are invariant under geometric coefficient rescaling:
+
+\[
+b_j=ca^j r_j
+\]
+
+implies
+
+\[
+b_{j-1}b_{j+1}-b_j^2
+=c^2a^{2j}(r_{j-1}r_{j+1}-r_j^2).
+\]
+
+Reversal of the coefficients also preserves consecutive violations, merely reversing their positions.
+
+Therefore the original independence polynomial \(I(T;x)\) has at least \(L\) consecutive log-concavity violations.
+
+Increasing \(k\) produces trees of strictly increasing order, giving infinitely many pairwise non-isomorphic examples, all of diameter seven.
+
+\[
+\boxed{\text{Q.E.D.}}
+\]
+
+\section{An explicit tree}
+
+We tested finite realizations of the limiting polynomial family using exact integer arithmetic.
+
+A successful parameter choice is
+
+\[
+\boxed{
+m=46,\quad n=96,\quad k=51,\quad h=16.
+}
+\]
+
+The tree has 14,662 vertices, 14,661 edges, and independence number 7,402. The run consists of eight violations.
+
+Define the violation ratio
+
+\[
+V_j=\frac{i_{j-1}i_{j+1}}{i_j^2}.
+\]
+
+Every value strictly above 1 constitutes a violation.
+
+\section{Measured coefficient curvature}
+
+\begin{center}
+\small
+\begin{tabular}{ll}
+Coefficient index \(j\) & Violation ratio \(V_j\) \\
+\hline
+7,304 & 0.983700096 \\
+\textbf{7,305} & \textbf{1.000070050} \\
+\textbf{7,306} & \textbf{1.022410490} \\
+\textbf{7,307} & \textbf{1.046287768} \\
+\textbf{7,308} & \textbf{1.061621514} \\
+\textbf{7,309} & \textbf{1.059551860} \\
+\textbf{7,310} & \textbf{1.042087410} \\
+\textbf{7,311} & \textbf{1.019666129} \\
+\textbf{7,312} & \textbf{1.000749025} \\
+7,313 & 0.987902454 \\
+\end{tabular}
+\end{center}
+
+The displayed ratios are rounded for readability. All eight inequalities were verified using exact integers, without floating-point comparisons.
+
+An independent computation constructed the graph in memory and applied a rooted-tree dynamic programming algorithm. Its independence number and the 99 highest-degree coefficients agreed exactly with the explicit polynomial calculation.
+
+\section{Reproduction}
+The accompanying \texttt{verify.py} uses exact integer arithmetic to check the eight strict inequalities for this tree.
+
+\section*{Disclosure}
+This manuscript was prepared with AI assistance. The arguments and priority claims are open to independent review.
+
+\begin{thebibliography}{9}
+\bibitem{KL} A. Kadrawi and V. E. Levit, The independence polynomial of trees is not always log-concave starting from order 26, arXiv:2305.01784 (2023). \href{https://arxiv.org/abs/2305.01784}{Source.}
+\bibitem{Galvin} D. Galvin, Trees with non log-concave independent set sequences, arXiv:2502.10654 (2025). \href{https://arxiv.org/abs/2502.10654}{Source.}
+\bibitem{BR} C. Bautista-Ramos, Multiple breaks of log-concavity in the independence polynomials of trees, arXiv:2511.00334 (2025). \href{https://arxiv.org/abs/2511.00334}{Source.}
+\bibitem{BGG} C. Bautista-Ramos, C. Guillén-Galván and P. Gómez-Salgado, Linear recurrences for non-log-concave independence polynomials of trees, Graphs and Combinatorics (2026). \href{https://doi.org/10.1007/s00373-026-03054-4}{Source.}
+\end{thebibliography}
+\end{document}

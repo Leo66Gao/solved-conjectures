@@ -1,0 +1,266 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\inv}{\operatorname{inv}}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\title{An explicit real positive definite counterexample to Bapat's $q$-permanent monotonicity conjecture}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 26, 2026 \quad$\cdot$\quad Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+We construct a real symmetric positive definite integer matrix whose $q$-permanent has strictly negative derivative at $q=1$. Thus the real-symmetric restriction of Bapat's monotonicity conjecture on $[-1,1]$ is false. The matrix is defined by a rank-four Gram construction and a positive diagonal perturbation. A factorial-norm identity expresses the endpoint derivative through exterior polynomials. Spherical logarithmic averaging, angular discretization, and a suitable ordering of real vectors give a rigorous lower bound for the exterior norm. The construction is explicit, though its dimension is very large. No numerical approximation is used to certify the sign of the derivative.
+\end{abstract}
+
+\section{Introduction and main result}
+For a matrix $A$ of order $n$, let
+\[
+ P_q(A)=\sum_{\sigma\in S_n}q^{\inv(\sigma)}\prod_{i=1}^n A_{i,\sigma(i)},\qquad
+ \inv(\sigma)=\#\{(i,j):i<j,\ \sigma(i)>\sigma(j)\}.
+\]
+This interpolates between the determinant at $q=-1$ and the permanent at $q=1$. Bapat's conjecture \cite{bapat,bapatlal} asserts strict monotonicity on $[-1,1]$ for every non-diagonal Hermitian positive definite matrix. The complex case has been disproved by Kitamura's order-144 construction \cite{kitamura}. Da Fonseca and Goyal's real counterexamples to a proposed extension of the interval concern $q>1$ and do not decide the original real-symmetric case \cite{fg}. We address that remaining restriction.
+
+\begin{theorem}\label{main}
+There exists a real symmetric, positive definite, non-diagonal integer matrix $A$ with $P'_1(A)<0$. In particular there exist rational $q_1,q_2\in[-1,1]$, $q_1<q_2$, such that $P_{q_1}(A)>P_{q_2}(A)$. The explicit construction below has order $10^{35}$.
+\end{theorem}
+
+Here and throughout, the derivative is with respect to $q$. Define constants
+\[
+ T=100,\quad N=10^5,\quad M=10^{14},\quad n=100NM^2=10^{35},\quad B=1+T^2=10001,\quad C_n=\binom n2.
+\]
+For $j=1,\ldots,N$ put $a_j=\min(T,\sqrt{(N-j)/j})$ and for $k,\ell=0,\ldots,M-1$ put $\theta_k=2\pi k/M$ and $\phi_\ell=2\pi\ell/M$. For each label $(c,j,k,\ell)$ with $1\le c\le100$, define $b=a_j$ for $c\le99$ and $b=0$ for $c=100$. The row and ordering key are
+\[
+ v=(\cos\theta_k,\sin\theta_k,b\cos\phi_\ell,b\sin\phi_\ell),\qquad x=b\cos(\phi_\ell-\theta_k).
+\]
+Order all labels by increasing $x$, breaking ties lexicographically, to form the $n\times4$ real matrix $V$ of ordered rows. Let
+\[
+ K=10^6 n\,[2(B+1)]^n,\qquad W_{ia}=\lfloor K V_{ia}\rfloor,\qquad A=WW^{\mathsf T}+I_n.
+\]
+The proposed comparison points are $q_2=1$ and
+\[
+ q_1=1-\frac1{100 C_n[2(B+1)]^n}.
+\]
+These formulas specify a single integer matrix and rational comparison points without any existential choice. All trigonometric values are algebraic, so ordering and flooring are exact algebraic operations. The remainder of the paper proves the asserted inequality.
+
+\section{The endpoint identity}
+For real rows $v_i\in\R^r$ let $H=VV^{\mathsf T}$, $L_i(z)=v_i\cdot z$ (bilinear dot product), and
+\[
+ p(z)=\prod_i L_i(z),\qquad
+ F_{ab}(z)=\sum_{i<j}(v_{ia}v_{jb}-v_{ib}v_{ja})\prod_{k\ne i,j}L_k(z)\quad (a<b).
+\]
+For a homogeneous polynomial $f=\sum_\gamma f_\gamma z^\gamma$, set $\|f\|_F^2=\sum_\gamma \gamma!|f_\gamma|^2$.
+
+\begin{lemma}\label{endpoint}
+For any such real Gram matrix,
+\[
+ \per(H)=\|p\|_F^2,\qquad 2P'_1(H)=C_n\|p\|_F^2-\sum_{a<b}\|F_{ab}\|_F^2.
+\]
+\end{lemma}
+\begin{proof}
+For products of real linear forms $p=\prod_i(v_i\cdot z)$ and $q=\prod_j(w_j\cdot z)$ of equal degree, their factorial inner product is the permanent of $(v_i\cdot w_j)_{ij}$. Indeed, applying $\prod_j(w_j\cdot\nabla)$ to $p$ at zero yields that permanent by the product rule, and yields the factorial inner product by monomial differentiation. Taking $w_i=v_i$ gives the first identity. Expanding the exterior norms, and using the elementary inner product of two exterior products, gives
+\[
+ \sum_{a<b}\|F_{ab}\|_F^2=
+ \sum_{i<j,\ k<\ell}(H_{ik}H_{j\ell}-H_{i\ell}H_{jk})\per H[\widehat{i,j},\widehat{k,\ell}].
+\]
+The hats denote deletion of the specified rows and columns. For each permutation $\sigma$ and each fixed pair $i<j$, its product occurs once with sign $+1$ if $\sigma(i)<\sigma(j)$ and once with sign $-1$ instead if $\sigma(i)>\sigma(j)$. Thus its net coefficient is $C_n-2\inv(\sigma)$. This proves the second identity.
+\end{proof}
+
+Let $\mu$ be normalized surface measure on the unit sphere of $\C^4$. For degree $d$ homogeneous polynomials,
+\begin{equation}\label{sphere}
+ \|f\|_F^2=\frac{(d+3)!}{3!}\int |f(z)|^2\,d\mu(z).
+\end{equation}
+Indeed, independent standard complex Gaussian coordinates have monomial moments $\E|G^\gamma|^2=\gamma!$, and distinct monomials of the same degree are orthogonal by phase invariance. Their squared radius has gamma distribution of shape four and is independent of the uniform direction, with $d$-th moment $(d+3)!/3!$. This gives \eqref{sphere}.
+Define the probability measure $d\nu=|p|^2d\mu/\int|p|^2d\mu$. On the zero set of $p$ the quotient below can be defined arbitrarily; that zero set has $\mu$-measure zero. By \eqref{sphere},
+\begin{equation}\label{ratio}
+ R:=\frac{\sum_{a<b}\|F_{ab}\|_F^2}{C_n\|p\|_F^2}
+ =\frac{\E_\nu\sum_{a<b}|F_{ab}(z)/p(z)|^2}{C_n(n+3)(n+2)}.
+\end{equation}
+We shall prove $R>11/10$ for the specified $V$.
+
+\section{Angular logarithmic averages}
+All angular integrals below use normalized uniform measure. For $c,d,w\in\C$ write
+\[
+ \Phi_{c,d}(w)=\frac1{2\pi}\int_0^{2\pi}\log|ce^{i\theta}+de^{-i\theta}+w|\,d\theta.
+\]
+We allow the value $-\infty$ for identically zero expressions.
+
+\begin{lemma}\label{radial}
+For every $c,d,w\in\C$, the function $t\mapsto\Phi_{c,d}(tw)$ is nondecreasing for $t\ge0$.
+\end{lemma}
+\begin{proof}
+By reversing $\theta$ assume $|c|\ge|d|$. If $c=0$ the assertion is immediate. Otherwise write $cz^2+twz+d=c(z-r_1)(z-r_2)$. The elementary Jensen formula for a linear factor on the unit circle gives
+\[
+ \Phi_{c,d}(tw)=\log|c|+\log\max(1,|r_1|,|r_2|),
+\]
+since $|r_1r_2|=|d/c|\le1$. For every $\rho>1$, the locus where the largest root modulus equals $\rho$ is precisely the ellipse
+\[
+ tw=-c\rho e^{i\theta}-(d/\rho)e^{-i\theta}.
+\]
+The other root has modulus at most $1/\rho$. This ellipse is nondegenerate and centered at zero because $|c|\rho>|d|/\rho$. Each ray from zero meets its boundary once. At $t=0$ both root moduli are at most one, and if $w\ne0$ the largest modulus tends to infinity as $t\to\infty$. Continuity of the largest root modulus and the unique boundary intersection therefore show that the superlevel set above $\rho$ on each ray is a terminal interval. This holds for every $\rho>1$, proving monotonicity. If $w=0$ the function is constant.
+\end{proof}
+
+\begin{lemma}\label{grid}
+For every positive integer $M$ and $\omega=e^{2\pi i/M}$,
+\[
+ \frac1M\sum_{k=0}^{M-1}\log|c\omega^k+d\omega^{-k}+w|\le\Phi_{c,d}(w)+\frac{2\log2}{M}.
+\]
+\end{lemma}
+\begin{proof}
+Multiply the argument by $\omega^k$ and factor the polynomial $cz^2+wz+d$. For each root $r$, the product over grid points of $|\omega^k-r|$ equals $|r^M-1|\le2\max(1,|r|^M)$. Taking logarithms and using the same Jensen formula gives the bound, with at most two roots. Lower-degree cases follow identically. If the polynomial is zero identically or some grid factor is zero, the inequality is interpreted in the extended-real sense.
+\end{proof}
+
+\section{Global bound for the product polynomial}
+Put
+\[
+ z_0=(1,i,0,0)/\sqrt2,\qquad u_0=(0,0,1,i)/\sqrt2,
+\]
+and let $\rho(z)=\max(|\langle z_0,z\rangle|,|\langle\bar z_0,z\rangle|)$, where the brackets here are the Hermitian inner product. The dot product in $L_i$ remains bilinear. Set $\alpha=1/100$.
+
+\begin{lemma}\label{global}
+For every complex unit vector $z$,
+\[
+ \frac1n\log|p(z)|\le-\frac12\log2+\alpha\log\rho(z)+\frac{4\log2}{M},
+ \qquad |p(z_0)|=2^{-n/2}.
+\]
+\end{lemma}
+\begin{proof}
+Let $s$ be uniform on $(0,1)$ and let $\theta,\phi$ be independent uniform angles. Then
+\[
+ Y=(\sqrt{s}\cos\theta,\sqrt{s}\sin\theta,\sqrt{1-s}\cos\phi,\sqrt{1-s}\sin\phi)
+\]
+is uniform on the real unit sphere in $\R^4$, as follows by normalizing four independent real Gaussian coordinates: the two squared planar radii have independent exponential distributions and their ratio to their sum is uniform. For every complex unit $z$, a scalar phase makes its real and imaginary parts orthogonal. A real orthogonal transformation then expresses $|Y\cdot z|^2$ in distribution as $hY_1^2+(1-h)Y_2^2$ for some $h\in[0,1]$. By concavity of the logarithm and interchange symmetry of the two coordinates, its expected logarithm is maximized at $h=1/2$. Consequently
+\[
+ \E\log|Y\cdot z|\le\frac12\E\log(s/2)=-\frac12-\frac12\log2.
+\]
+The logarithms are integrable: the argument is bounded above, and after rotation its absolute value is bounded below by $|Y_1|/\sqrt2$ in distribution, whose logarithm is integrable. Upon dividing $Y$ by $\sqrt{s}$, the average logarithm increases by $1/2$. Thus the unnormalized row
+\[
+ v_s=(\cos\theta,\sin\theta,a(s)\cos\phi,a(s)\sin\phi),\quad a(s)=\sqrt{(1-s)/s},
+\]
+satisfies $\E\log|v_s\cdot z|\le-\frac12\log2$.
+
+Replace $s$ by the upper endpoint $j/N$ of its quantile interval and cap the radius at $T$. The new radius $a_j$ is no greater than $a(s)$. For each fixed $\phi$ and $z$, the $\theta$-averaged logarithm is nondecreasing in this radius by Lemma~\ref{radial}; hence the new averaged logarithm is still at most $-\frac12\log2$. Apply Lemma~\ref{grid} first to the $\theta$ grid at each fixed $\phi$, then to the $\phi$ grid at each fixed $\theta$ and integrate. The ordinary rows, those with $c\le99$, therefore have average logarithm at most $-\frac12\log2+4\log2/M$. The logarithms of bounded linear forms are bounded above, so these averages and integrations also make sense at zeros via extended-real integration.
+
+For the anchor rows ($c=100$), the continuous angular mean is
+\[
+ \log\max\left(\left|\frac{z_1-iz_2}{2}\right|,\left|\frac{z_1+iz_2}{2}\right|\right)
+ =-\frac12\log2+\log\rho(z)
+\]
+by the elementary Jensen formula, and the grid mean is at most this plus $2\log2/M$. Mixing the ordinary and anchor rows in proportions $1-\alpha$ and $\alpha$ proves the claimed bound. Finally $|v_i\cdot z_0|=1/\sqrt2$ for every row, so the equality at $z_0$ is immediate.
+\end{proof}
+
+\section{The effect of ordering}
+Define $t_i=(v_i\cdot u_0)/(v_i\cdot z_0)=b_i e^{i(\phi_i-\theta_i)}$. The sorting key is precisely $\Re t_i$. Set
+\[
+ J(z)=\sum_{a<b}(z_{0a}u_{0b}-z_{0b}u_{0a})\frac{F_{ab}(z)}{p(z)}.
+\]
+The coefficient vector in this contraction has squared Hermitian norm one, since $z_0,u_0$ are orthogonal unit vectors. Hence $|J(z)|^2\le\sum_{a<b}|F_{ab}(z)/p(z)|^2$. At $z_0$,
+\begin{equation}\label{J}
+ J(z_0)=\sum_{i<j}(t_j-t_i),\qquad \frac{\Re J(z_0)}{n^2}=\frac12\E|X-X'|,
+\end{equation}
+where $X,X'$ are independent uniform samples from the multiset of real ordering keys. The first identity follows by expanding the exterior contraction, and the second by the prescribed sorting.
+
+Before radial truncation and discretization the random complex quantity $t=a(s)e^{i(\phi-\theta)}$ is isotropic and has $\Prb(|t|>r)=1/(1+r^2)$ for $r\ge0$. Its planar density is $1/[\pi(1+|t|^2)^2]$. The real part $X_0$ has density and cumulative distribution
+\[
+ f(x)=\frac1{2(1+x^2)^{3/2}},\qquad G(x)=\frac12\left(1+\frac{x}{\sqrt{1+x^2}}\right).
+\]
+Direct integration gives $\E|X_0|=1$ and, for independent $X_0'$, the standard tail-integral identity gives
+\[
+ \E|X_0-X_0'|=2\int_{-\infty}^{\infty}G(x)(1-G(x))\,dx=\pi/2.
+\]
+For the mixture with an atom at zero of mass $\alpha$, the half mean difference is $(1-\alpha)^2\pi/4+\alpha(1-\alpha)$.
+
+Couple this mixture to the finite multiset by rounding $s$ upward to $j/N$ and both angles downward to grid points. The expected loss from capping $a(s)$ at $T$ is $\int_T^\infty (1+r^2)^{-1}dr<1/T$. The additional average radius loss from the right-endpoint quantile sum is at most $T/N$ by monotonicity and telescoping upper and lower sums. Since $\E a(s)=\pi/2<2$, the angle changes contribute at most $32/M$ to the expected absolute complex error, using $|e^{ix}-e^{iy}|\le|x-y|$. The atom at zero remains zero. Thus the expected absolute error of the real parts is less than
+\[
+ 1/T+T/N+32/M<0.012.
+\]
+By coupling two independent samples and applying the triangle inequality, the half mean difference changes by at most this error. In particular, using $\pi>3.14$,
+\begin{equation}\label{ginibound}
+ \frac{\Re J(z_0)}{n^2}>(0.99)^2\frac{3.14}{4}+0.0099-0.012>0.767.
+\end{equation}
+Also $n^{-1}\sum_i|t_i|\le\E a(s)=\pi/2<2$, since the discretized radii only decrease.
+
+Put $\delta=10^{-5}$. If $\|z-z_0\|\le\delta$, let $r_i=L_i(z)/L_i(z_0)$. The rows have norm at most $\sqrt B$, so $|r_i-1|\le\sqrt{2B}\delta<0.0015$. In particular none of the $L_i(z)$ vanish. The contraction has the exact expression $J(z)=\sum_{i<j}(t_j-t_i)/(r_ir_j)$. For $\eta=0.0015$,
+\[
+ |(r_ir_j)^{-1}-1|\le\frac{2\eta+\eta^2}{(1-\eta)^2}<0.004.
+\]
+Consequently $|J(z)-J(z_0)|\le0.004(n-1)\sum_i|t_i|<0.008n^2$. By \eqref{ginibound}, $|J(z)|>(3/4)n^2$. A common phase on $z$ changes the quotient $F_{ab}/p$ only by a unit-modulus factor. Since all coefficients are real, conjugation also preserves the sum of squared quotient magnitudes. Thus, on the union $U$ of the $\delta$-neighborhoods of the phase circles through $z_0$ and $\bar z_0$,
+\begin{equation}\label{local}
+ \sum_{a<b}|F_{ab}(z)/p(z)|^2>\frac9{16}n^4.
+\end{equation}
+
+\section{Concentration and the negative derivative}
+The distance from $z$ to the phase circle through a unit vector $w$ is $\sqrt{2(1-|\langle w,z\rangle|)}$. Outside $U$, therefore, $\rho(z)\le1-\delta^2/2$. Lemma~\ref{global}, $\log(1-x)\le-x$, and the chosen constants yield
+\[
+ \frac1n\log|p(z)|\le-\frac12\log2-\alpha\delta^2/2+4\log2/M
+ <-\frac12\log2-g,\quad g=10^{-13}.
+\]
+So the integral of $|p|^2$ outside $U$ is at most $2^{-n}e^{-2gn}$.
+
+For a lower bound on its total integral, consider the tube of radius $s_0=10^{-17}$ around the phase circle through $z_0$. After a phase adjustment, all linear factors differ relatively from their values at $z_0$ by at most $150s_0$. Using $\log(1-x)\ge-2x$ for $0\le x\le1/2$ gives
+\[
+ \frac1n\log|p(z)|\ge-\frac12\log2-300s_0>-\frac12\log2-g/10.
+\]
+Under $\mu$, the variable $|\langle z_0,z\rangle|^2$ has beta distribution of parameters $(1,3)$, again by normalizing four independent standard complex Gaussians. Its tail at $t\in[0,1]$ is $(1-t)^3$. The tube thus has measure at least $(s_0^2/2)^3=s_0^6/8$. Combining the two bounds,
+\[
+ \nu(U^c)\le 8s_0^{-6}e^{-9gn/5}<8\cdot10^{102}e^{-gn}<1/100.
+\]
+The last inequality follows already from $gn>400$, $e>2$, and $2^{400}>10^{120}$.
+
+Substituting \eqref{local} into \eqref{ratio} proves
+\[
+ R>\frac{99}{100}\frac{(9/16)n^4}{C_n(n+3)(n+2)}>\frac{11}{10}.
+\]
+For example the last inequality follows from $C_n\le n^2/2$, $n\ge1000$, and $(n+3)(n+2)<1.01n^2$. Lemma~\ref{endpoint} now implies
+\begin{equation}\label{margin}
+ P'_1(H)<-\frac1{20}C_n\per(H),\qquad H=VV^{\mathsf T}.
+\end{equation}
+
+\section{The integer positive definite witness}
+The matrix $H$ is only positive semidefinite. We certify the rounding and positive diagonal perturbation specified in Section 1. Let $\widetilde A=A/K^2$. Each coordinate of $W/K$ differs from the corresponding coordinate of $V$ by at most $1/K$. Each original coordinate is bounded by $100$ in magnitude. Expanding dot products and including the diagonal perturbation gives
+\[
+ |\widetilde A_{ij}-H_{ij}|\le 800/K+5/K^2<1000/K.
+\]
+All entries of $H$ have magnitude at most $B$, and all entries of $\widetilde A$ have magnitude at most $B+1$. By telescoping the $n$ factors of each permutation product and using $\inv(\sigma)\le C_n$,
+\[
+ |P'_1(\widetilde A)-P'_1(H)|\le n!C_n n\frac{1000}{K}(B+1)^{n-1}
+ =\frac{C_n n!2^{-n}}{1000(B+1)}.
+\]
+The factorial Cauchy--Schwarz inequality and the multinomial theorem give
+\[
+ |p(z_0)|^2\le \|p\|_F^2\sum_{|\gamma|=n}|z_0^\gamma|^2/\gamma!=\frac{\per(H)}{n!}.
+\]
+Since $|p(z_0)|^2=2^{-n}$, we have $\per(H)\ge n!2^{-n}$. Combining with \eqref{margin} yields
+\[
+ P'_1(\widetilde A)<-\frac1{25}C_n n!2^{-n}<0.
+\]
+Positive scaling preserves the sign, so $P'_1(A)<0$. Also $A=WW^{\mathsf T}+I_n$ is an integer symmetric positive definite matrix. There are repeated nonzero rows of $W$ (take identical labels except for $c=1,2$ with $k=0$); their dot product is positive, so $A$ is not diagonal.
+
+Finally, for $0\le q\le1$,
+\[
+ |P''_q(\widetilde A)|\le n!C_n^2(B+1)^n
+\]
+by differentiating each permutation term, with terms of inversion count zero or one having zero second derivative. Put $h=1/(100C_n[2(B+1)]^n)$. For $q\in[1-h,1]$, the mean value bound gives
+\[
+ P'_q(\widetilde A)<-\frac1{25}C_n n!2^{-n}+\frac1{100}C_n n!2^{-n}<0.
+\]
+It follows that $P_{1-h}(A)>P_1(A)$. Both comparison points belong to $[-1,1]$, proving Theorem~\ref{main}.
+
+\section{Verification and limitations}
+The proof is analytic; neither the matrix nor its permanent is materialized. The accompanying \texttt{verify.py} checks the finite rational inequalities and compares Lemma~\ref{endpoint} against exact permutation enumeration on 72 small integer Gram matrices. The complete witness has deliberately conservative constants and is not intended as a practically stored matrix. No claim about minimal dimension is made. This manuscript was prepared with AI assistance. The argument and priority are open to independent review.
+
+\begin{thebibliography}{9}
+\bibitem{bapat} R. B. Bapat, Interpolating the determinant and permanent Hadamard inequality, Linear and Multilinear Algebra 32 (1992), 335--337.
+\bibitem{bapatlal} R. B. Bapat and A. K. Lal, Inequalities for the $q$-permanent, Linear Algebra and its Applications 197--198 (1994), 397--409. DOI: 10.1016/0024-3795(94)90497-9.
+\bibitem{kitamura} K. Kitamura, Lean 4 disproof of $q$-permanent monotonicity (order 144), public formalization (2026), \href{https://github.com/KitaKen1/bapat-lal-q-permanent-lean}{Formalization repository}.
+\bibitem{fg} C. M. da Fonseca and D. D. Goyal, Real positive definite counterexamples to a monotonicity conjecture for the $q$-permanent, \href{https://arxiv.org/abs/2611.14694}{arXiv:2611.14694} (2026).
+\end{thebibliography}
+\end{document}
