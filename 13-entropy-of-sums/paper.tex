@@ -1,0 +1,230 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\Bin}{\operatorname{Bin}}
+\title{Sharp entropy of finite-alphabet sums with symmetric summands}
+\author{Leo Gao\\{\small AI-assisted research note}}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $n$ independent integer-valued random variables have common alphabet
+$\{0,\ldots,r\}$. We prove Kova\v{c}evi\'c's conjectured sharp upper bound on the
+Shannon entropy of their sum provided that all but at most one of the
+summands are symmetric, even about different centers. Both $n$ and $r$ are unrestricted.
+The maximizer uses fair endpoints for $n-1$ variables and one variable
+mixing the endpoints with the interior. A cube-diameter inequality controls
+the tails of the nonendpoint signs; a separate estimate handles exactly
+those sums falling on lattice boundaries. General nonsymmetric summands are not settled.
+\end{abstract}
+
+\section{The bound}
+Use natural logarithms. Let $B_d\sim\Bin(d,1/2)$, let
+$b_d(k)=2^{-d}\binom dk$, and write $h_d=H(B_d)$, including $h_0=0$.
+For $n,r\ge1$ put
+\[
+ Z=e^{h_n}+(r-1)e^{h_{n-1}},\qquad w=e^{h_n}/Z.
+\]
+Define a probability law $Q$ on $\{0,\ldots,nr\}$ by
+\begin{align}
+ Q(rk)&=e^{h_n} b_n(k)/Z &&(0\le k\le n),\label{eq:grid}\\
+ Q(rk+a)&=e^{h_{n-1}}b_{n-1}(k)/Z &&(0\le k<n,\ 1\le a<r).\label{eq:inter}
+\end{align}
+
+\begin{theorem}
+Suppose $X_1,\ldots,X_n$ are independent and $\{0,\ldots,r\}$-valued.
+If at least $n-1$ of their laws are invariant under $x\mapsto r-x$,
+then for $P=\mathcal L(\sum_i X_i)$,
+\[
+ H(P)+D(P\Vert Q)\le \log Z.
+\]
+The entropy maximum is $\log Z$. The maximizing sum has the unique law
+$Q$, and the maximizing input laws are unique up to permutation.
+\end{theorem}
+
+To attain $Q$, take $n-1$ independent fair draws from $\{0,r\}$.
+For the remaining draw use the uniform endpoint law with probability $w$
+and the uniform law on $\{1,\ldots,r-1\}$ otherwise.
+For $r=1$ use only the endpoint law. Conditioning on the residue gives
+\eqref{eq:grid}--\eqref{eq:inter}, and averaging its negative logarithm gives $H(Q)=\log Z$.
+This is the extremizer proposed in \cite{K21}. For $r=2$ the bound for
+arbitrary laws is known \cite{K26}, as is the case $n=2$ for all $r$
+\cite{K21}. The continuous symmetric analogue was proved by Ordentlich
+\cite{O06}, with a short proof by Yu \cite{Y08}. Its step density gives no separate
+price to a boundary of measure zero; such boundaries carry positive probability here.
+
+\section{A tail comparison for shortened signs}
+\begin{lemma}\label{lem:tail}
+Let $m\ge1$, $0\le a_i<1$, and let $\varepsilon_i$ be independent uniform
+signs. Put $Y=(m+\sum_i a_i\varepsilon_i)/2$, so $0<Y<m$.
+Associate to $Y$ the index $J\in\{0,\ldots,m-1\}$ of the interval
+between consecutive integers containing it. On a tie at an integer,
+choose the adjacent interval farther from $m/2$, with either choice at the
+center. If $g$ on $\{0,\ldots,m-1\}$ is symmetric about $(m-1)/2$ and
+nondecreasing with distance from that center, then $\E g(J)\le \E g(B_{m-1})$.
+\end{lemma}
+\begin{proof}
+For every integer $1\le j<m/2$,
+\[
+ \Prb(Y\le j)\le 2^{-(m-1)}\sum_{i=0}^{j-1}\binom{m-1}i
+ =\Prb(B_{m-1}\le j-1).
+\]
+Indeed let $A$ be the signs for which $\sum_i a_i\varepsilon_i\le -(m-2j)$.
+If $u,v\in A$ differ on $d$ coordinates, then
+\[
+ 2(m-2j)\le-\sum_i a_i(u_i+v_i)
+ \le 2\sum_{i:u_i=v_i}a_i < 2(m-d).
+\]
+The strict inequality uses that at least one coordinate agrees:
+if none agrees, the middle sum vanishes, impossible since $m-2j>0$.
+Thus $d\le 2j-1$. The odd-diameter theorem on the Boolean cube
+\cite[Theorem 1.1]{HKP} gives $|A|\le2\sum_{i=0}^{j-1}\binom{m-1}i$.
+By symmetry the same bound applies to $\Prb(Y\ge m-j)$.
+The two outer $j$-cell tails for $J$ are exactly these two events. Summing
+the tail bounds against successive nonnegative increments of $g$ proves
+the lemma. The low-dimensional cases with no nontrivial shells follow as well.
+\end{proof}
+
+\section{Proof of the theorem}
+Define the centered costs
+\[
+ c_d(k)=-\log b_d(k)-h_d,\qquad \E c_d(B_d)=0.
+\]
+Then $C(s)=-\log Q(s)-\log Z$ equals $c_n(k)$ at $s=rk$ and
+$c_{n-1}(k)$ at $rk<s<r(k+1)$. It suffices to prove $\E C(S)\le0$ for
+$S=\sum_i X_i$. Since $C(nr-s)=C(s)$, the one possibly asymmetric
+variable can first be averaged with its reflection: the other summands
+are symmetric, so this preserves $\E C(S)$. Hence assume full midpoint
+symmetry.
+
+Condition independently on each distance $|2X_i/r-1|$. A variable
+with distance $a$ now has normalized value $(1+a\varepsilon_i)/2$ for a
+fair, independent sign, with a dummy sign when $a=0$. There are $t$
+endpoint variables with $a=1$ and $m=n-t$ with $a<1$.
+The scaled sum has conditional law $S/r=T+Y$, where $T\sim B_t$ is
+independent of the $Y$ in Lemma~\ref{lem:tail}. If $m=0$, the expected
+cost is zero. Otherwise define
+\[
+ g(k)=\E c_{n-1}(T+k),\qquad 0\le k<m.
+\]
+The sequence $c_{n-1}$ is symmetric and discretely convex by the
+binomial coefficient ratios. Averaging translates preserves convexity,
+and symmetry of $T$ makes $g(k)=g(m-1-k)$, hence $g$ satisfies the lemma.
+
+For $k<Y<k+1$, conditional expected cost over $T$ is exactly $g(k)$.
+For $Y=k$ with $1\le k\le m/2$, compare with the outward cell $k-1$:
+\begin{align*}
+ \E c_n(T+k)-g(k-1)
+ &=\E\log\!\left(\frac{2(T+k)}{n}\right)-(h_n-h_{n-1})\\
+ &\le\log\!\left(\frac{t+2k}{n}\right)-(h_n-h_{n-1})
+ \le -(h_n-h_{n-1})\le0 .
+\end{align*}
+The identity uses $b_{n-1}(u-1)/b_n(u)=2u/n$. Jensen gives the first
+inequality; adding an independent fair bit cannot decrease entropy,
+so $h_n\ge h_{n-1}$. For $k\ge m/2$, reflection gives the same
+comparison with the other outward cell. Either choice works at the center.
+We conclude
+\[
+ \E[C(S)\mid\text{distances}]\le\E g(J)\le\E g(B_{m-1})=0,
+\]
+where the last expectation convolves an independent $B_{m-1}$ with
+$T$ to get $B_{n-1}$. Averaging over distances proves the claim by
+$\E[-\log Q(S)]=H(P)+D(P\Vert Q)$.
+\hfill$\square$
+
+
+\paragraph{Rigidity of the inputs.}
+Equality in the entropy bound forces $D(P\Vert Q)=0$, so $P=Q$.
+For $r\ge 2$ the generating polynomial of $Q$ is divisible by
+$(1+z^r)^{n-1}$ by its construction. Let $\zeta=e^{i\pi/r}$.
+A probability generating polynomial $f(z)=\sum_{k=0}^r p_kz^k$
+vanishes at $\zeta$ only if $p_1=\cdots=p_{r-1}=0$: all interior
+monomials have strictly positive imaginary part there. Its real part
+then forces $p_0=p_r=1/2$. This polynomial has a simple zero at $\zeta$.
+Consequently at least $n-1$ input polynomials equal $(1+z^r)/2$;
+division determines the last one. For $r=1$ the polynomial of $Q$
+is $((1+z)/2)^n$, giving the same conclusion.
+
+\paragraph{Summands with different symmetry centers.}
+More generally let all but the last input be symmetric about their
+own centers $d_i$, not necessarily $r/2$. The same entropy bound $\log Z$
+holds. To see this, replace $X_i$ for $i<n$ by $X'_i=X_i+r/2-d_i$:
+each $X'_i$ still takes values in $[0,r]$ since the support was
+symmetric and had diameter at most $r$. The translated sum $S'$ has the
+same entropy and lives on a coset of $\mathbb Z$ in $[0,nr]$.
+Because the inputs were integer-valued, $2d_i$ is integral, so this
+coset is either the integers or the half-integers. In the first case
+the preceding argument applies without change: it used the lattice
+only for the sum, not for the conditioned signs. In the half-integer
+case use instead the symmetric probability law
+\[
+ Q'(rk+j+1/2)=b_{n-1}(k)/r,\qquad 0\le j<r,\quad 0\le k<n.
+\]
+There are no boundary values. Averaging the last input with its reflection
+again preserves expected cost; the case $m=0$ is impossible, since then
+$S'$ would lie on $r\mathbb Z$. Lemma~\ref{lem:tail} applied exactly
+as above gives $H(S')+D(\mathcal L(S')\Vert Q')\le\log r+h_{n-1}$
+by using $c_{n-1}(k)$ on each open cell. This is strictly smaller than
+$\log Z$, since convolution with a fair bit strictly increases the entropy
+of a nonempty finitely supported law (strict concavity for the two distinct
+translates).
+If equality holds in the integral case, the translated sum has law $Q$
+and hence has full diameter $nr$. Each original input must therefore have
+diameter $r$; its endpoints are $0,r$ and its center, if symmetric, was
+$r/2$ all along. The preceding rigidity argument applies.
+\paragraph{Stability and the role of the hypothesis.}
+The theorem controls the full law, not only its entropy: the entropy
+deficit dominates $D(P\Vert Q)$ (and hence twice the squared total
+variation distance in nats). For fully symmetric summands, the proof
+even yields
+\[
+ \log Z-H(P)-D(P\Vert Q)
+ \ \ge (h_n-h_{n-1})\Prb\{r\mid S,\ \text{some }0<X_i<r\}.
+\]
+The same symmetric linear certificate cannot handle general marginals:
+when all $X_i=0$ and $n\ge2$, the centered cost is
+$c_n(0)=n\log2-h_n>0$. This is not a counterexample to Kova\v{c}evi\'c's
+entropy conjecture; it pinpoints where the method ends.
+
+
+\paragraph{Why independent symmetrization is not a reduction.}
+Even for two quaternary inputs, replacing each input law by its midpoint
+symmetrization can \emph{decrease} the entropy of the sum. Take
+$p=(3,27,33,1)/64$ and its reversal as the independent marginal laws.
+The original and separately symmetrized convolution laws have the
+following integer masses (each divided by $4096$):
+\[
+ u=(3,126,1005,1828,1005,126,3),\qquad
+ v=(4,120,1020,1808,1020,120,4).
+\]
+One has $\prod_j u_j^{u_j}<\prod_j v_j^{v_j}$ by direct integer
+multiplication, hence $H(u/4096)>H(v/4096)$ (difference $0.0007921$
+bits). This check is included in the accompanying integer verifier.
+Thus a reduction to symmetric inputs by this natural operation fails
+even when the original convolution itself is symmetric; the example
+does not violate the conjectured maximum.
+
+\begin{thebibliography}{9}
+\bibitem{K21} M. Kova\v{c}evi\'c, On the maximum entropy of a sum of independent
+discrete random variables, \emph{Theory Probab. Appl.} 66 (2021), 482--487.
+\href{https://doi.org/10.1137/S0040585X97T99054X}{doi:10.1137/S0040585X97T99054X}.
+\bibitem{K26} M. Kova\v{c}evi\'c, Maximum entropy of sums of independent ternary
+random variables, \emph{Statist. Probab. Lett.} 238 (2026), 110867.
+\href{https://doi.org/10.1016/j.spl.2026.110867}{doi:10.1016/j.spl.2026.110867}.
+\bibitem{O06} E. Ordentlich, Maximizing the entropy of a sum of independent bounded random
+variables, \emph{IEEE Trans. Inform. Theory} 52 (2006), 2176--2181.
+\href{https://doi.org/10.1109/TIT.2006.872858}{doi:10.1109/TIT.2006.872858}.
+\bibitem{Y08} Y. Yu, Maximum entropy for sums of symmetric and bounded random variables:
+a short derivation, \emph{IEEE Trans. Inform. Theory} 54 (2008), 1818--1819.
+\href{https://doi.org/10.1109/TIT.2008.917660}{doi:10.1109/TIT.2008.917660}.
+\bibitem{HKP} H. Huang, O. Klurman and C. Pohoata,
+On subsets of the hypercube with prescribed Hamming distances,
+\emph{J. Combin. Theory Ser. A} 171 (2020), 105156.
+\href{https://arxiv.org/abs/1812.05989}{arXiv:1812.05989}.
+\end{thebibliography}
+\end{document}

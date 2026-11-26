@@ -25,7 +25,12 @@ Proofs, LaTeX manuscripts, and reproduction files. Each result is stated at the 
 | **q-Stirling coefficient limits** | A boundary classification and uniform local Gaussian limit, plus an explicit sign-reversing involution for two known identities. | [Details](10-q-stirling/) · [PDF](10-q-stirling/result.pdf) · [LaTeX](10-q-stirling/result.tex) |
 | **Ehrhart roots of arbors** | All roots are real for singleton arbors of height at most two; at height three the number of distinct nonreal pairs can grow at least as the square root of the dimension. | [Details](11-ehrhart-roots/) · [PDF](11-ehrhart-roots/paper.pdf) · [LaTeX](11-ehrhart-roots/paper.tex) |
 
+| **Entropy under coordinate noise** | Classifies independent finite-coordinate refresh chains whose Shannon entropy deficit is completely monotone for every initial law. | [Details](14-entropy-under-noise/) · [PDF](14-entropy-under-noise/paper.pdf) · [LaTeX](14-entropy-under-noise/paper.tex) |
+
 ## Partial results
+
+**[Entropy of finite-alphabet sums](13-entropy-of-sums/)** · [PDF](13-entropy-of-sums/paper.pdf) · [LaTeX](13-entropy-of-sums/paper.tex)  
+Kovačević’s sharp bound and uniqueness hold when all but at most one summand are symmetric. Arbitrary nonsymmetric inputs are not settled.
 
 **[Distinct covering systems](06-covering-systems/report.md)** · [PDF](06-covering-systems/manuscript.pdf) · [LaTeX](06-covering-systems/manuscript.tex)  
 The exact conditional optima are 84 and 68 uncovered residues at periods 10,080 and 15,120 under the stated fixed-prefix constraints. Neither period is excluded globally.

@@ -1,0 +1,203 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,booktabs}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newcommand{\E}{\mathbb E}
+\newcommand{\CM}{\mathrm{CM}}
+\title{Which independent refresh chains have completely monotone Shannon entropy deficit?}
+\author{Leo Gao\\{\small AI-assisted research}}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+Consider a finite product space in which coordinate $i$ is independently
+redrawn from its stationary law at rate $r_i>0$. Relative entropy to
+stationarity decreases, but need not have alternating derivatives of all
+orders. We classify the chains for which it does so for every starting law.
+After deterministic factors are deleted, the only nontrivial possibilities
+are one fair bit, or two fair bits refreshed at equal rates.
+The positive two-bit theorem uses a coefficient bound for a pair of
+quadratic polynomials. Even an arbitrarily small inequality of the two rates
+destroys the universal property. A three-bit example has a certified
+negative signed nineteenth derivative. This is a finite-channel result,
+not a resolution of the Gaussian heat-flow conjecture.
+\end{abstract}
+\section{Problem and result}
+On $\Omega=\prod_i\Omega_i$ let $\pi=\bigotimes_i\pi_i$, with finite
+alphabets and full support. Independently in coordinate $i$, a rate-$r_i$
+Poisson clock replaces the current symbol by a fresh $\pi_i$ draw. Thus the
+one-coordinate semigroup at time $t$ is
+$e^{-r_it}I+(1-e^{-r_it})\Pi_i$, where $\Pi_i$ averages over the coordinate.
+For an arbitrary starting law $\mu$ write
+\[
+ D_\mu(t)=\sum_{x\in\Omega}\mu_t(x)\log\frac{\mu_t(x)}{\pi(x)}.
+\]
+With natural logarithms, $D_\mu(t)$ is nonnegative and nonincreasing.
+Complete monotonicity means $(-1)^kD_\mu^{(k)}(t)\ge0$ for all integers
+$k\ge0$ and $t>0$.
+\begin{theorem}\label{class}
+Every initial law has completely monotone entropy deficit if and only if,
+after deletion of one-point coordinates, the space is empty, consists of
+one fair bit, or consists of two fair bits with $r_1=r_2$.
+\end{theorem}
+For uniform stationary bits, the channel is precisely independent binary
+symmetric noise with coordinate crossover probabilities $(1-e^{-r_it})/2$.
+Entropy under this channel has an extensive literature, including
+Samorodnitsky~\cite{sam}; usual comparisons at a fixed noise level do not
+settle signs of all time derivatives. Complete monotonicity for several
+linear and quadratic observables of reversible chains follows from spectral
+positivity~\cite{af}. The nonlinear continuous heat-flow question of
+Cheng and Geng~\cite{cg} was disproved by Gu and Sellke~\cite{gs}; the
+continuous theorem neither states nor implies the discrete classification
+above. We make no claim of identifying the first failing derivative.
+
+\section{A coefficient test}
+\begin{lemma}\label{spec}
+Suppose $D(t)=\sum_{\lambda}d_\lambda e^{-\lambda t}$ at all sufficiently
+large $t$, with distinct nonnegative frequencies, and absolute convergence
+at $T$. If $d_{\lambda_0}<0$ for some $\lambda_0>0$, then $D$ is not
+completely monotone. Conversely, if all coefficients are nonnegative and
+the expansion converges for every $t>0$, it is completely monotone.
+\end{lemma}
+\begin{proof}
+Differentiate termwise for $t>T$ by exponential domination. Evaluate the
+signed $k$th derivative at $T+k/\lambda_0$ and multiply by
+$(e/\lambda_0)^k$. The result is
+\[
+ \sum_\lambda d_\lambda e^{-T\lambda}
+ \left[(\lambda/\lambda_0)e^{1-\lambda/\lambda_0}\right]^k.
+\]
+The bracket is in $[0,1]$, equal to one only at $\lambda_0$.
+Dominated convergence gives $d_{\lambda_0}e^{-T\lambda_0}<0$.
+The converse follows directly by termwise differentiation.
+\end{proof}
+
+\section{Why two fair bits work at equal rates}
+Normalize the common rate to one and put $z=e^{-t}$. Write the initial
+density relative to uniform as $1+ax+by+cxy$, $x,y\in\{-1,1\}$.
+The evolved density is $1+azx+bzy+cz^2xy$. Let $\phi(w)=w\log w$.
+Its uniform spatial average after this substitution is $D(t)$; the average
+is even in $z$. Flipping one input sign if necessary, suppose $c\ge0$.
+For $c=0$ the nonnegative coefficients of even degree are immediate
+from $\phi(1+u)=u+\sum_{j\ge2}(-1)^ju^j/[j(j-1)]$ and the symmetry
+of $ax+by$. Now take $c>0$ and put $w=\sqrt c\,z$. Pairing opposite signs
+reduces each even coefficient to half the sum of the corresponding
+coefficients of
+\[
+ \phi(1-Aw+w^2),\quad \phi(1-Bw-w^2),
+ \qquad A=(a+b)/\sqrt c,\quad B=(a-b)/\sqrt c.
+\]
+For even $n\ge4$, the coefficient of $w^n$ in
+$\phi((1-rw)(1-sw))$, multiplied by $n(n-1)(n-2)/2$, is
+\begin{equation}\label{roots}
+ \tfrac12\big[(n-2)(r^n+s^n)-nrs(r^{n-2}+s^{n-2})\big].
+\end{equation}
+This follows by multiplying the two Taylor series for
+$\log(1-rw)+\log(1-sw)$ by the quadratic.
+For the minus quadratic $rs=-1$, the roots in this factorization have
+absolute values $e^y,e^{-y}$, so \eqref{roots} is
+$(n-2)\cosh(ny)+n\cosh((n-2)y)\ge2n-2$.
+For the plus quadratic $rs=1$. If its factors are complex conjugates,
+\eqref{roots} is $(n-2)\cos(n\theta)-n\cos((n-2)\theta)\ge-(2n-2)$.
+If they are real, it is $(n-2)\cosh(ny)-n\cosh((n-2)y)\ge-2$:
+this is even in $y$ and increasing for $y\ge0$, by differentiation.
+Thus the paired even coefficients are nonnegative. Degree two in $z$ is
+$(a^2+b^2)/2$, and the constant is zero.
+
+The series indeed converges for every $|z|<1$: the original four
+quadratics in $z$ are strictly positive for real $-1<z<1$ because the
+channel with crossover $(1-z)/2$ has positive entries.
+Nonreal zeros can occur only in the positive-quadratic case, and have
+modulus $1/\sqrt c\ge1$, since $|c|=|\E_\mu XY|\le1$.
+This gives analytic logarithms on the open disk. Apply Lemma~\ref{spec}.
+A single fair bit is a marginal case obtained by adjoining an independent
+stationary fair bit; the empty product has identically zero deficit.
+
+\section{Obstructions}
+The class of counterexamples is closed under adjoining independent
+stationary coordinates. First suppose one site admits an event of
+probability $p\ne1/2$, $0<p<1$. Then $h=\mathbf1_A-p$ has zero mean
+and third moment $p(1-p)(1-2p)\ne0$. For the single-site starting density
+$1+\epsilon h$, choose small $\epsilon$ so that $\epsilon^3\E h^3>0$.
+The coefficient at frequency $3r$ is
+$-\epsilon^3\E h^3/6<0$. This applies to all nontrivial sites other than
+fair binary sites, since at least one singleton then has probability
+different from $1/2$.
+
+For three fair bits of equal rate one, put
+$g=xy+xz+yz$ (here $x,y,z$ are signs). It is $3$ with probability
+$1/4$, $-1$ otherwise. The semigroup sends $g$ to $e^{-2t}g$.
+For $0<\epsilon<1$, $1+\epsilon g$ is a positive density and
+the frequency-six coefficient is $-\epsilon^3\E g^3/6=-\epsilon^3$.
+This gives failures arbitrarily close to equilibrium. The verification
+script also certifies
+\[
+ -.095<2^{-19}(-1)^{19}D^{(19)}(\log 16)<-.094
+ \quad(\epsilon=1/2).
+\]
+
+It remains to analyze two unequal bit rates $r<s$. Use
+$X=e^{-rt},Y=e^{-st}$ and the starting law $1+ax+by+vabxy$.
+Expand the resulting $D$ in powers of $(aX,bY)$ near the origin.
+Independent sign symmetry kills odd degrees in each variable.
+For $j\ge2$ even, the coefficient of $(bY)^j$ is
+\[
+ \frac1{j(j-1)}\E_x\frac{(1+vaXx)^j}{(1+aXx)^{j-1}}.
+\]
+Indeed condition on $x$, expand $\phi$ about $1+aXx$, and average over $y$.
+Consequently for even $i$ the coefficient $d_{ij}$ of $(aX)^i(bY)^j$
+is $[w^i](1+vw)^j(1+w)^{1-j}/[j(j-1)]$.
+For $j=0$ and $i\ge2$ even it is $1/[i(i-1)]$.
+In particular,
+\[
+ d_{44}=\frac{(v-1)^2(v^2-10v+15)}{12}=-45/64
+ \quad\text{at }v=5/2.
+\]
+Fix this $v$. If $s/r$ is irrational, the coefficient
+$d_{44}a^4b^4$ is alone at frequency $4r+4s$.
+If $r:s=p:q$ in lowest terms with $q\ge3$, collisions must have
+$(i,j)=(4+2qk,4-2pk)$ with integer $k$. Nonnegative $i$ forces $k\ge0$.
+For fixed $0<b<1/4$ and sufficiently small $a>0$ the frequency therefore
+has coefficient $d_{44}a^4b^4+O(a^{4+2q})<0$.
+All four initial density values are positive for sufficiently small $a$.
+These power series converge absolutely at sufficiently large $t$,
+so aggregating coincident frequencies is legitimate.
+
+The remaining unequal ratio is $1:2$. In units where $r=1$,
+put $a=1/8$, $b=(3/2)a^2=:Ka^2$; since $a+b+vab<1$, the density
+is positive. The frequency-twelve coefficient divided by $a^{12}$ is
+\[
+ d_{12,0}+d_{8,2}K^2+d_{4,4}K^4+d_{0,6}K^6
+ =\frac1{132}+\frac98K^2-\frac{45}{64}K^4+\frac1{30}K^6
+ =-\frac{108313}{168960}.
+\]
+Lemma~\ref{spec} finishes the proof of Theorem~\ref{class}.
+\section{Scope and verification}
+The theorem concerns independent full redraws in continuous time and
+universal quantification over starting laws. It does not classify
+general reversible chains, Boolean functions maximizing mutual information,
+or the Gaussian heat equation. For independent inputs the deficit adds
+across coordinates, so higher-dimensional failure for fair bits genuinely
+uses dependence. The checker \texttt{verify.py} uses exact rational
+arithmetic to verify the $1:2$ witness by two independent expansions,
+test low-degree coefficients on a finite two-bit grid, and bound the
+nineteenth-derivative witness with a geometric-series tail. These checks
+supplement, not replace, the proof. A targeted literature search found
+no matching full classification; that is not a priority determination.
+\begin{thebibliography}{9}
+\bibitem{af} D. Aldous and J. A. Fill, \emph{Reversible Markov Chains
+and Random Walks on Graphs}, Ch.~3, \S3.5,
+\href{https://www.stat.berkeley.edu/~aldous/RWG/Book_Ralph/Ch3.S5.html}{Complete monotonicity}.
+\bibitem{cg} F. Cheng and Y. Geng, Higher order derivatives in Costa's
+entropy power inequality, \emph{IEEE Transactions on Information Theory}
+61 (2015), 5892--5905. \href{https://arxiv.org/abs/1409.5543}{arXiv:1409.5543}.
+\bibitem{gs} Y. Gu and M. Sellke, A counterexample to the Gaussian
+completely monotone conjecture (2026),
+\href{https://arxiv.org/abs/2605.11656}{arXiv:2605.11656}.
+\bibitem{sam} A. Samorodnitsky, On the entropy of a noisy function (2015),
+\href{https://arxiv.org/abs/1508.01464}{arXiv:1508.01464}.
+\end{thebibliography}
+\end{document}
