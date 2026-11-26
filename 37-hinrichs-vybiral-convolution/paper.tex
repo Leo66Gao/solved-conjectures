@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,longtable,array}
+\usepackage[hidelinks]{hyperref}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\title{A counterexample to Hinrichs--Vyb\'iral's convolution conjecture}
+\author{Leo Gao\\\small AI-assisted research}
+\date{}
+\begin{document}
+\pdfmapfile{+cm.map}\pdfmapfile{+symbols.map}
+\maketitle
+\textbf{Result.} Hinrichs and Vybíral's proposed inequality for discrete convolution of a nonnegative sequence with a finitely supported signed sequence is false. Both sequences can be even and integer-valued, have the same 35-point support in the integers, and have just one exceptional coefficient each. No positive constant times the proposed lower bound works universally. The same obstruction occurs for smooth, compactly supported autocorrelation kernels of nonnegative functions on the real line.
+
+\subsection{The conjecture}\label{the-conjecture}
+
+For a finitely supported sequence on the integers put \[
+ (g*\alpha)(m)=\sum_j g(m-j)\alpha(j),\qquad D=\sum_m g(m)^2.
+\] Conjecture 6, displayed equation (14) in the \href{https://kmlinux.fjfi.cvut.cz/~vybirja2/publ/Vybiral19.pdf\#page=11}{authors' manuscript, §2.3, printed p.~11}, proposed, for nonnegative \(g\) and a nonzero finitely supported \(\alpha\), \[
+ \|g*\alpha\|_2^2 \ \ge\  D\,\frac{|\sum_j\alpha(j)|^2}{|\operatorname{supp}\alpha|}.
+ \tag{C6}
+\] The paper appeared in the \href{https://doi.org/10.1016/j.jco.2011.01.002}{\emph{Journal of Complexity} 27 (2011), 264--272}. The parenthesized equation number and conjecture number here refer specifically to the author-hosted text. The conjecture and its subsequent Toeplitz-matrix restatement both use the square of the signed total mass.
+
+\subsection{A 35-point witness}\label{a-35-point-witness}
+
+Write \(\delta_0\) for a unit impulse. Let \[
+ S=\{\pm5^j:0\le j<17\},\qquad h=\mathbf1_S,\qquad
+ g=11\delta_0+h,\qquad \alpha=-4\delta_0+h.
+\] Then \(D=155\), \(\sum\alpha=30\), and the support size of \(\alpha\) is 35. To compute the left side, expand \[
+ g*\alpha=h*h+7h-44\delta_0.
+\] Every sum of two signed powers from \(S\) has a balanced base-five digit vector with entries in \(\{-2,-1,0,1,2\}\). Such vectors represent distinct integers: reduce the difference of two vectors modulo five; the least digit difference lies in \([-4,4]\) and hence vanishes; divide by five and repeat. Thus the complete convolution is:
+
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+Position & Number of positions & Coefficient of \(g*\alpha\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+zero & 1 & \(34-44=-10\) \\
+\(\pm5^j\) & 34 & 7 \\
+\(\pm2\cdot5^j\) & 34 & 1 \\
+\(\pm5^i\pm5^j,\ i<j\) & \(4\binom{17}{2}=544\) & 2 \\
+\end{longtable}
+
+At zero the 34 ordered pairs are opposite terms. A doubled term has one ordering; distinct powers have two. Every other coefficient is zero. It follows that \[
+ \|g*\alpha\|_2^2=100+34\cdot49+34+544\cdot4
+ =3976<\frac{27900}{7}=\frac{155\cdot30^2}{35}.
+\] The deficit is \(68/7\), with no approximation. This refutes (C6).
+
+For a small-diameter version, the 17 positive powers may be replaced by the integers \texttt{1,\ 4,\ 10,\ 17,\ 29,\ 52,\ 67,\ 89,\ 132,\ 164,\ 205,\ 259,\ 303,\ 350,\ 405,\ 505,\ 529}, retaining their negatives as well. Direct integer convolution of two dense arrays supported on \([-529,529]\) gives the very same coefficient counts and squared norm. The optional last test in \texttt{verify.py} checks this compact example using a separate dense implementation; it is not needed for the base-five proof.
+
+\subsection{No uniform multiple survives}\label{no-uniform-multiple-survives}
+
+For any pair with nonzero mass define the dimensionless ratio \[
+ R(g,\alpha)=\frac{|\operatorname{supp}\alpha|\,\|g*\alpha\|_2^2}
+ {\|g\|_2^2\,|\sum\alpha|^2}.
+\] For the example above, \(R=6958/6975<1\). The statistic is multiplicative under tensor products: the convolution of the tensor powers is the tensor power of the convolution; squared norms, support sizes, and sums all factor.
+
+This observation gives a result \textbf{on the integers}, not merely on groups of growing rank. For the example with \(r=17\) powers, take \(B=5^r\), and map a \(k\)-tuple \((x_0,\ldots,x_{k-1})\) to \(\sum_{i=0}^{k-1}B^ix_i\). Each coordinate of a support point or a sum of support points has a block of \(r\) balanced digits, all in \([-2,2]\). Concatenation causes no carry, so the encoding is injective on these sets by the digit argument above. The encoding is additive, and every sum of two encoded input points is the encoding of the corresponding vector sum. It follows that pushing the tensor powers onto \(\mathbb Z\) preserves the complete convolution and all statistics. For each \(k\) there is therefore an integer-line example with \(n=35^k\) and \(R=(6958/6975)^k\to0\). There is no uniform positive prefactor in (C6).
+
+\textbf{A polynomial-rate strengthening.} For any \(r\ge1\) repeat the construction with \(S=\{\pm5^j:0\le j<r\}\), \(d=2r\), \(g=s\delta_0+h\), and \(\alpha=-t\delta_0+h\). The table gives \[
+ L=\|g*\alpha\|_2^2=(d-st)^2+d(s-t)^2+d+2d(d-2),\qquad
+ R=\frac{(d+1)L}{(s^2+d)(d-t)^2}.
+\] For \((r,s,t)=(256,40,18)\) this is \(R=2601/3211\). The integer inequality \(513\cdot2601^{30}<3211^{30}\) implies \(R<513^{-1/30}\). The same embedding applied to \(k\) copies has support \(n=513^k\) and satisfies \[
+ \frac{\|g_k*\alpha_k\|_2^2}{\|g_k\|_2^2\, |\sum\alpha_k|^2}
+ =\frac{(2601/3211)^k}{n}=o(n^{-31/30})
+ \quad(k\to\infty).
+\] In particular even a universal lower bound \(c/n^{31/30}\) in place of \(1/n\) fails for every \(c>0\). No optimal exponent or minimal support is claimed.
+
+\subsection{One-dimensional smooth positive-definite kernels}\label{one-dimensional-smooth-positive-definite-kernels}
+
+For any of the finite integer examples choose a nonzero, nonnegative smooth test function \(\phi\) supported in \((-1/3,1/3)\). Put \[
+ u(x)=\sum_m g(m)\phi(x-m),\qquad
+ f(t)=\|u\|_2^{-2}\int_{\mathbb R}u(x)u(x-t)\,dx.
+\] Then \(f\in C_c^\infty(\mathbb R)\), \(f\ge0\), \(f(0)=1\), and \(f\) is positive definite because every kernel matrix is the Gram matrix of translates of \(u/\|u\|_2\). The integer translates of \(\phi\) have disjoint supports. Consequently \(\|u\|_2^2=D\|\phi\|_2^2\) and \[
+ \sum_{i,j}\overline{\alpha(i)}\alpha(j) f(i-j)
+ =\frac{\|\sum_j\alpha(j)u(\cdot-j)\|_2^2}{\|u\|_2^2}
+ =\frac{\|g*\alpha\|_2^2}{D}.
+\] The full range of failures just proved therefore carries to one-dimensional smooth kernels that actually have a nonnegative autocorrelation factor. This is not the different condition \(f=|v|^2\) for a normalized positive-definite function \(v\).
+
+\subsection{Context, scope and verification}\label{context-scope-and-verification}
+
+\href{https://arxiv.org/html/2609.21733v1}{Vybíral, September 2026, Theorem 1} disproves the broader positive-definite-kernel Conjecture 2 at eight sites in seven dimensions via a trigonometric polynomial. A counterexample for the larger class does not itself give the nonnegative convolution factor required in (C6). We do not claim the first disproof of the general kernel conjecture or challenge \href{https://people.fjfi.cvut.cz/vybirja2/TUM-IBC/Vybiral_Advances.pdf}{Vybíral's theorem for pointwise squares and Novak's particular kernel}. The 2011 author's manuscript states (C6) separately and reports that it too was tested extensively.
+
+Searches for the conjecture number, its convolution/Toeplitz and signed-translate formulations, both authors, subsequent publications and AI-assisted claims located the 2011 problem and 2026 general-kernel result but did not identify an earlier proof or counterexample for (C6). This bounded search does \textbf{not} establish historical priority. The status of the theorem in this note rests on the finite calculation, not on the status of that search.
+
+The proof is independent of software. Running \texttt{python3\ verify.py} enumerates all ordered pairs of integers directly and checks both examples using exact arithmetic, as well as a small independent test of digit encoding. The captured output is in \texttt{verification.txt}.
+\end{document}

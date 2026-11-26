@@ -1,0 +1,5 @@
+r=17, s=11, t=4: support=35, convolution norm squared=3976, required lower bound=27900/7, deficit=68/7, normalized ratio=6958/6975
+r=256, s=40, t=18: support=513, convolution norm squared=813824, required lower bound=9042176/9, deficit=1717760/9, normalized ratio=2601/3211
+513 * (2601/3211)^30 < 1 (exact)
+Exact independent 2-block digit-convolution check passed.
+Compact dense realization on [-529,529]: squared norm 3976.
