@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\title{Optimal binary quantization after dropping two bits}
+\author{Leo Gao\\\small AI-assisted research}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a uniform binary $n$-vector observed through independent binary symmetric
+noise, transmitting $n-2$ coordinates is optimal among deterministic
+quantizers with at most $2^{n-2}$ labels, at every crossover probability.
+The proof permits unequal cell sizes. A dimension-independent reduction
+leaves 214 compressed shapes of sizes at most 16, and exact rational
+certificates verify the only finite entropy comparisons.
+\end{abstract}
+
+\section{Main statement}
+Work in nats and write $h(p)=-p\ln p-(1-p)\ln(1-p)$ and
+$C(p)=\ln 2-h(p)$. Let $X$ be uniform on $\{0,1\}^n$ and
+$Y=X\oplus Z$, with independent Bernoulli$(p)$ noise independent of $X$.
+\begin{theorem}
+For $n\ge2$, $0\le p\le1/2$ and every deterministic $U=f(X)$ with at
+most $2^{n-2}$ labels, $I(U;Y)\le(n-2)C(p)$. Reading $n-2$ coordinates
+attains the bound.
+\end{theorem}
+For a nonempty cell $A$ of size $m$, let $J(A)$ be the information between a
+uniform input on $A$ and its noisy output. We show
+\[
+ J(A)\ge\left(\frac72-\frac6m\right)C(p),
+ \qquad J(A)\ge\frac72 C(p)\quad(m\ge16).
+\]
+The first bound is vacuous for $m=1$. For $m=2$ a differing coordinate alone
+gives $C(p)$. For $m>16$, the uniform law is a mixture of uniform laws on
+16-point subsets, so concavity of output entropy proves the second bound
+from $m=16$. If there are $K$ nonempty cells, averaging gives
+$I(X;Y\mid U)\ge (7/2-6K/2^n)C(p)\ge2C(p)$. Subtract this from
+$I(X;Y)=nC(p)$, using that $U$ is deterministic. The rest of the proof
+establishes the finite cell comparisons.
+
+\section{Polarization and finite faces}
+Reflect by flipping one bit or by swapping two coordinates $i<j$. The
+preferred sides are, respectively, the bit-zero half-cube and the $(1,0)$
+side of the swap. Sort each reflected pair of input masses toward the
+preferred side. For two points $x,y$ on that side,
+$d(x,y)\le d(\sigma x,y)$; hence the binary symmetric transition
+probabilities obey $K(x,y)\ge K(\sigma x,y)$. The sum of the two output
+masses at $y,\sigma y$ is unchanged. The difference after sorting is a sum
+of nonnegative factors $K(x,y)-K(\sigma x,y)$ times absolute input
+differences, and therefore dominates the absolute difference before sorting.
+A fixed-sum pair of masses has decreasing entropy as its absolute difference
+increases. Thus polarization cannot increase output entropy.
+
+For a uniform cell, any nontrivial move decreases the sum of the binary
+encodings, and termination gives a shifted downset. A used coordinate
+numbered $j$ forces the empty word and at least $j$ singletons. Thus the
+support dimension $d$ is at most $m-1$. Fixed coordinates make no net
+contribution to $J$. The companion verifier builds sets in increasing word
+order, adding masks whose immediate predecessors (remove the lowest bit
+when it is bit zero, or shift a bit one position down into a vacancy) are
+present. Every stable family satisfies the tested predecessor rules. Any
+nonzero mask arises from an immediate predecessor by the reverse move.
+Hence this enumeration cannot omit a compressed extremizer. At sizes
+3 through 16 it gives counts
+\[
+ 1,2,2,3,4,6,7,10,13,18,23,31,40,54.
+\]
+For each shape let $t=7/2-6/m$ if $m<16$, and $t=7/2$ if $m=16$.
+The comparison is $H(P_A)\ge t\ln2+(d-t)h(p)$, where $P_A$ is the noisy
+output law. A four-point coordinate square has $J=2C$ exactly.
+
+\section{Certified entropy comparisons}
+\paragraph{High noise.}
+Set $\rho=1-2p$ and write the output density as $1+u$ relative to uniform
+on the $d$-cube. Every Walsh coefficient of the input density has magnitude
+at most one; its nonconstant squared mass is $2^d/m-1$ by Parseval.
+The degree-one mass is $B_A=\sum_i(\mathbb E_A(-1)^{X_i})^2$.
+After the channel the coefficients of degree $j$ are multiplied by $\rho^j$.
+Thus $\lVert u\rVert_\infty\le(1+\rho)^d-1$ and
+$\mathbb E u^2\le\rho^2 B_A+\rho^4(2^d/m-1)$. Taylor's theorem applied to
+$(1+u)\ln(1+u)$ bounds the divergence from uniform by
+\[
+ D(P_A\|\mathrm{unif})\le
+ \tfrac12\rho^2\frac{B_A+(2^d/m-1)\rho^2}{2-(1+\rho)^d}.
+\]
+The verifier checks the ratio is at most $d-t$ at $\rho=2^{-15}$ for
+each nonexceptional cell. It remains so at smaller $\rho$. The entropy
+series gives $C(p)\ge\rho^2/2$, proving the comparison on this end cap.
+
+\paragraph{Low noise.}
+The noisy output is a mixture of translates of the uniform cell, so
+$H(P_A)\ge\ln m$. The verifier checks this suffices at $p\le2^{-20}$
+except for the four-point shapes. For the nonsquare shape, a three-dimensional
+star, each point has on average $3/2$ outgoing unit edges. For outputs $y$
+outside $A$, $4P_A(y)\le3p$: starting at $y$ the symmetric channel must make
+at least one error to reach $A$. The probability of exiting by exactly one
+error is $(3/2)p(1-p)^2$. Hence
+$H(P_A)-\ln4\ge(3/2)p(1-p)^2(\ln(1/p)-\ln3)>h(p)$
+on that cap: use $\ln(1/p)\ge13$, $\ln3<1.1$, and
+$h(p)\le p(\ln(1/p)+1)$.
+
+\paragraph{Middle interval.}
+Entropy of the noisy output and $h(p)$ both increase with $p$ on
+$[0,1/2]$, by the binary channel semigroup and concavity. Thus on a closed
+interval $[a,b]$ it is sufficient to certify
+$H(P_A(a))>t\ln2+(d-t)h(b)$. At incidence $p=v/D$, $D=2^{40}$, use
+$w_y=\sum_{x\in A} v^{d(x,y)}(D-v)^{d-d(x,y)}$ and
+$H(P_A)=\ln m+\sum_y w_y\ln(D^d/w_y)/(mD^d)$.
+Logarithms are enclosed by extracting powers of two and using 21 terms
+of $\ln r=2\operatorname{arctanh}((r-1)/(r+1))$ for $1\le r\le2$;
+the positive tail is bounded by $2z^{43}/[43(1-z^2)]$.
+All arithmetic for these bounds rounds outwards at scale $2^{80}$.
+The supplied script certifies 52,760 dyadic intervals in aggregate,
+joining the two end caps. At $p=1/2$ both information quantities are
+zero; the noiseless endpoint follows by continuity.
+
+\paragraph{Reproduction and scope.}
+Run \texttt{python3 unbalanced2-all-p.py}, or split the optional inclusive
+size ranges into 3--10, 11--14, 15, and 16. The script uses only Python's
+standard library; the recorded log reports each completed range.
+The $n-1$ endpoint and related compression ideas are due to
+\href{https://arxiv.org/abs/1701.03119}{Huleihel and Ordentlich}.
+The context is the \href{https://arxiv.org/abs/2609.26444v2}{fixed-output
+quantization problem}; this theorem is not an assertion about six output
+bits with arbitrary input dimension. No external peer review or priority
+certification is claimed.
+\end{document}

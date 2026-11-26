@@ -1,0 +1,7 @@
+alpha = 1/20 maximizing r = 13 D = 2097/3380
+alpha = 1/9 maximizing r = 6 D = 31/54
+alpha = 11/90 maximizing r = 5 D = 17/30
+alpha = 1/3 maximizing r = 2 D = 1/2
+alpha = 1/2 maximizing r = 1 D = 1/2
+alpha = 1 maximizing r = 1 D = 1
+r=5/6 intersection, limiting ratio: 79/51

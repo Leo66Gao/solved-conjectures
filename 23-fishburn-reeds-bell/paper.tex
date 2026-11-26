@@ -1,0 +1,121 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}\usepackage{amsmath,amsthm,amssymb,booktabs,microtype}\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\R}{\mathbb R}\newcommand{\LL}{\mathcal L}
+\title{The classical values of the Fishburn--Reeds Bell matrices}
+\author{Leo Gao\\{\small AI-assisted research manuscript}}
+\date{November 26, 2026}
+\begin{document}\maketitle
+\begin{abstract}
+We compute the classical value of the diagonally modified projective $D_k$ root-system Bell matrix $P-\lambda I$ in every dimension $k\ge3$ for $0\le\lambda\le1$. The formula verifies the conjectured violation ratio $(3k-5)/(2k-3)$ at the Fishburn--Reeds shift $2/3$, previously tested by independent computations through $k=10$. It also distinguishes that fixed-shift statement from optimality of the shift: at $k=7,8$, shift one gives respectively $35/24$ and $28/19$, strictly better than the ratios at $2/3$. Our method replaces binary strategies on roots by orientations of a complete graph, then pays for ties in tournament scores with lengths of backward edges. For shifts proportional to $k$, a one-dimensional variational argument gives the exact limiting classical value and the optimal asymptotic violation $79/51$, at shift $11k/90$. These ratios characterize a family of Bell inequalities, not the Grothendieck constants themselves.
+\end{abstract}
+\section{Statement and context}
+Put $m=k(k-1)$, and let $U$ be the $m\times k$ matrix with one row $e_i+e_j$ and one row $e_i-e_j$ for each $1\le i<j\le k$. The Gram matrix of the corresponding unit vectors is $P=UU^\mathsf{T}/2$. For a real $m\times m$ matrix $M$ write
+\[
+ L(M)=\max_{a,b\in\{\pm1\}^m}a^\mathsf{T}Mb,\qquad
+ Q_d(M)=\max_{u_s,v_t\in\mathbb{S}^{d-1}}\sum_{s,t}M_{st}\langle u_s,v_t\rangle .
+\]
+Here $L$ is the local deterministic correlation bound and $Q_d$ its real vector analogue; $Q_d/L$ is a lower bound on the real Grothendieck constant of order $d$. The projective $D_k$ construction of Fishburn and Reeds~\cite{FR} supplied an early explicit violation above $\sqrt2$. Diagonal modification of Gram matrices has since been studied in independent work on Platonic Bell inequalities and finite-order Grothendieck constants~\cite{PV,DVP}. Recent branch-and-bound calculations~\cite{IBB} reported exact integer bounds 2160 and 3060 at $k=9,10$ (for the normalization $6P-4I$) and described the all-$k$ ratio as conjectural.
+\begin{theorem}\label{main}
+Let $k\ge3$, $b=\binom{k}{2}$, $s=\sum_{j=0}^{k-1} j^2$, and $h=\lfloor k/3\rfloor$. For every $0\le\lambda\le1$,
+\[
+ \boxed{L(P-\lambda I)=2\bigl(s-\lambda b+h(3\lambda-2)_+\bigr),\qquad
+ Q_k(P-\lambda I)=m(k-1-\lambda).}
+\]
+The vector formula also holds for the unrestricted real vector dimension.
+\end{theorem}
+At $\lambda=2/3$ the ratio is $(3k-5)/(2k-3)$. At $\lambda=1$ it is
+\[
+ \frac{3m(k-2)}{2m(k-2)+6h}.
+\]
+For $k=7,8$ this yields $35/24>16/11$ and $28/19>19/13$, respectively. Thus the statement in Section III.2 of Designolle, V\'ertesi and Pokutta~\cite{DVP} identifying $2/3$ as optimal among diagonal modifications for $k=7,8$ does not hold with the unit-root Gram normalization defined there. The values of the fixed-shift matrices in their Table I are reproduced, not contradicted. Theorem~\ref{asym} below determines the optimum over all shifts asymptotically, not at fixed $k$. We do not assert an improved record for $K_G(k)$. Both displayed ratios tend to $3/2$, but their deficits have order $1/k$ and $1/k^2$, respectively.
+\section{From two sign strings to one tournament}
+For an edge $e=\{i,j\}$, $i<j$, two Alice signs $(a_e^+,a_e^-)$ correspond bijectively to a signed endpoint vector
+\[
+ x_e=\tfrac12(a_e^++a_e^-)e_i+\tfrac12(a_e^+-a_e^-)e_j\in\{\pm e_i,\pm e_j\}.
+\]
+Write $y_e$ for the analogous Bob choice. Then $U^\mathsf{T}a=2\sum_e x_e$ and $a^\mathsf{T}b=2\sum_e\langle x_e,y_e\rangle$. With $p=\sum_e x_e$, exact optimization over Bob gives
+\[
+ \tfrac12L(P-\lambda I)=\max_x\sum_{e=\{i,j\}}\max\bigl( |p_i-\lambda x_{e,i}|,\,|p_j-\lambda x_{e,j}|\bigr). \tag{1}
+\]
+Independently reverse each coordinate throughout all $x_e$ to arrange $p_i\ge0$; each absolute coefficient is invariant. Suppose $x_e=-e_i$ and change it to $+e_i$. On this edge the absolute coefficient at $i$ changes from $p_i+\lambda$ to $p_i+2-\lambda$, no smaller for $\lambda\le1$. For a different edge incident to $i$, write $t=p_i-\lambda x_{f,i}\ge-1$. Its coefficient changes from $|t|$ to $|t+2|\ge|t|$. All other coefficients are unchanged. Repetition therefore leaves a maximizing assignment with all choices positive, for the entire interval under study.
+Choosing endpoint $i$ on $\{i,j\}$ now means $i$ wins the game against $j$, defining a tournament $T$; $d_i=p_i$ is the number of wins. If $i$ wins, its coefficient is $d_i-\lambda\ge0$, while the other is $d_j$. Their maximum equals $\max(d_i,d_j)-\lambda\mathbf1_{d_i>d_j}$, since degrees are integers. Consequently (1) becomes
+\[
+ \tfrac12L(P-\lambda I)=\max_T\left[\sum_{i<j}\max(d_i,d_j)-\lambda N(T)\right],\tag{2}
+\]
+where $N(T)$ counts games won by the vertex with strictly higher score.
+\section{Paying for score ties}
+Order vertices by nonincreasing score and write $r_i=k-i$. For the transitive tournament in this order the objective in (2) is $s-\lambda b$. Write $T_0$ for the number of pairs of equal score and $B$ for the number of games won by the strictly lower-score vertex. Then $N=b-T_0-B$. Since $\sum_{i<j}\max(d_i,d_j)=\sum_i r_i d_i$, the deficit of an arbitrary tournament below the transitive value is
+\[
+ D-\lambda(T_0+B),\qquad D=\sum_i r_i(r_i-d_i).
+\]
+Each game won by the later vertex $j$ instead of the earlier $i$ moves one win from $i$ to $j$ relative to the transitive tournament. Thus it contributes $r_i-r_j=j-i$ to $D$; these are all the contributions. Randomize the order uniformly and independently within each tied-score block. The quantities $D,T_0,B$ themselves are invariant. In a block of size $a$, the expected sum of internal backward lengths is $a(a-1)(a+1)/12$: for any game the two ranks are exchangeable, giving half the unordered absolute distance on average, and the sum of distances between all position pairs is $a(a-1)(a+1)/6$. The block therefore contributes
+\[
+ g_\lambda(a)=\frac{a(a-1)(a+1-6\lambda)}{12}
+\]
+to the expected deficit. A cross-block upset contributes $\ell-\lambda$, where $\ell$ is the distance between the centers of the two blocks. For block sizes $a,b'$, $\ell\ge(a+b')/2$.
+An even-sized tie block must be incident to a cross-block upset: otherwise all its vertices beat exactly the same set outside the block, and hence have equal internal score $(a-1)/2$, an impossibility. At $\lambda\le1$, every cross-block upset has enough surplus to assign $(a-1)/2$ to one endpoint block and $(b'-1)/2$ to the other, since their sum is at most $\ell-1$. This charging will only be used when a block needs it.
+\begin{itemize}
+\item At $\lambda=0$, $D\ge0$.
+\item At $\lambda=2/3$, the only negative internal contribution is $g(2)=-1/6$. At least one incident upset supplies $1/2$ to every such block. The total deficit is nonnegative.
+\item At $\lambda=1$, internal contributions for sizes $2,3,4$ are $-1/2,-1,-1$, respectively, and all others are nonnegative. Sizes two and four are paid for by incident upsets. Only size-three blocks can leave a deficit, at most one per such block. The total deficit is at least $-h$.
+\end{itemize}
+The transitive tournament attains its value at $0$ and $2/3$. For the interval from $2/3$ to $1$, divide the ordered vertices into $h$ consecutive triples and $k-3h$ singletons. Let earlier blocks beat later blocks and orient each triple cyclically. Scores are equal exactly within each triple; each triple contributes $g_\lambda(3)=2-3\lambda$ and there are no cross-block upsets. It attains the asserted values at both endpoints. Since (2) is a maximum of affine functions of $\lambda$, it is convex. On each of the two intervals it is bounded above by the chord through its endpoint values and bounded below by the affine value of the displayed common maximizing tournament. This proves the classical formula.
+\section{Quantum value and checks}
+The frame identity $U^\mathsf{T}U=2(k-1)I_k$ gives $P^2=(k-1)P$. Hence $\|P-\lambda I\|=k-1-\lambda$ for $k\ge3$ and $0\le\lambda\le1$. For arbitrary unit-vector strategies encoded by row matrices $X,Y$, Cauchy--Schwarz in Frobenius norm gives $|\langle X,(P-\lambda I)Y\rangle_F|\le m\|P-\lambda I\|$. Choosing both sets of vectors as rows of $U/\sqrt{2}$ attains equality.
+\section{Optimal asymptotic diagonal modification}
+The exact finite theorem concerns bounded shifts. Shifts proportional to $k$ have a different limit. Write $P_k=P$ to show the dimension.
+\begin{theorem}\label{asym}
+For $\alpha>0$,
+\[
+ \lim_{k\to\infty}\frac{L(P_k-\alpha k I)}{k^3}
+ =D(\alpha):=\frac23-\alpha+2\max_{r\in\mathbb N}
+             \left(\frac{\alpha}{r}-\frac{1}{3r^2}\right).
+\]
+At $\alpha=0$ this holds with the supremum in place of the maximum. Moreover
+\[
+ \lim_{k\to\infty}\sup_{\lambda\in\R}
+ \frac{Q_k(P_k-\lambda I)}{L(P_k-\lambda I)}
+ =\frac{79}{51}.
+\]
+The shift $\lambda=11k/90$ attains this limit. The same optimization limit holds with unrestricted vector dimension.
+\end{theorem}
+\begin{proof}
+Put $p=\sum x_e$, $q=\sum y_e$. Half the sign-strategy value is $p\cdot q-\lambda\sum_e x_e\cdot y_e$. Define a relaxation $R_k$ by replacing $p\cdot q$ by $\|(p+q)/2\|^2$. For any optimizing collection of endpoint pairs in the relaxation, independently swap the two endpoints' \emph{roles} $(x_e,y_e)\leftrightarrow(y_e,x_e)$ with probability $1/2$. The relaxation objective is unchanged while $\mathbb E\|p-q\|^2=\sum_e\|x_e-y_e\|^2\le4b$. Thus
+\[
+ R_k-b\le L(P_k-\lambda I)/2\le R_k.\tag{3}
+\]
+The variational identity $\|z\|^2=\max_w(2w\cdot z-\|w\|^2)$ permits separate edge maximization in $R_k$. For an edge whose two absolute test coordinates are $s,t\ge0$, the maximum of $w\cdot(x_e+y_e)-\lambda x_e\cdot y_e$ is
+\[
+ K_\lambda(s,t)=\max(2\max(s,t)-\lambda,s+t,\lambda)
+ =\max(s+t,\lambda)+\max(|s-t|,\lambda)-\lambda
+\]
+by the cases of identical signed endpoint, different endpoints, or opposite signs on the same endpoint. With $u_i=|w_i|/k$ and $\lambda=\alpha k$ this gives
+\[
+ R_k/k^3 =\sup_{u_i\ge0}\left\{-k^{-1}\sum_i u_i^2+
+ k^{-2}\sum_{i<j}K_\alpha(u_i,u_j)\right\}.
+\]
+Let $Z$ take the values $\pm u_i$ with respective probability $1/(2k)$ each and let $Z'$ be an independent copy. Including $i=j$ in the double sum shows the expression inside braces equals
+\[
+ J_\alpha(Z)-\alpha/2-\frac1{2k^2}\sum_iK_\alpha(u_i,u_i),
+ \qquad J_\alpha(Z)=\mathbb E\max(|Z-Z'|,\alpha)-\mathbb E Z^2 .
+\]
+The diagonal error is nonnegative and $O(1/k)$ when the $u_i$ are uniformly bounded. We now solve the variational problem over all finitely supported laws, even without symmetry.
+
+If two distinct atoms of a law are at distance at most $\alpha$, keeping their sum of masses fixed and redistributing it between those positions makes $J_\alpha$ affine: all four self and mutual kernel entries equal $\alpha$. Move their combined mass to the better endpoint; repeat until all distances exceed $\alpha$. For sorted atoms $z_j$ of masses $p_j$, set $v_j=2\sum_{i<j}p_i+p_j-1$. Then $\mathbb E|Z-Z'|=2\sum_j p_j z_jv_j$, so
+\[
+ \mathbb E|Z-Z'|-\mathbb E Z^2\le\sum_j p_jv_j^2=(1-\sum_jp_j^3)/3.
+\]
+The last equality follows by partitioning the uniform law on $[-1,1]$ into adjacent intervals of lengths $2p_j$: $v_j$ is the midpoint and the within-interval variance is $p_j^2/3$. For separated atoms the remaining kernel correction is $\alpha\sum p_j^2$. Hence it suffices to maximize $\sum g(p_j)$ with $g(x)=\alpha x^2-x^3/3$. For a given finite number of allowed atoms pick a maximizer with fewest positive entries. Since $g(x)+g(y)=g(x+y)+xy(x+y-2\alpha)$, unequal positive entries cannot occur: either merge them, or strictly improve by equalizing them. Thus the upper bound on $J_\alpha$ is $1/3+\sup_{r\ge1}(\alpha/r-1/(3r^2))$. Conversely use $r$ equal masses at $v_j=(2j-r-1)/r$. This yields \emph{at least} the displayed value for that $r$, because the diagonal correction is $\alpha/r$ even if other atoms are close. The maximum is attained for $\alpha>0$ (positive terms tending to zero). These laws are symmetric and bounded. Choosing the empirical magnitudes $u_i$ to approximate their absolute-value laws proves the matching lower limit; (3) completes the classical evaluation.
+
+For $0\le\alpha<1/2$ the root vectors attain the vector norm bound for all sufficiently large $k$, giving limiting numerator $1-\alpha$ after normalization by $k^3$. For $\alpha\ge1/2$ the maximizing integer in $D$ is $r=1$, so $D(\alpha)=\alpha$; the norm bound $Q_k\le m\max(|k-1-\lambda|,|\lambda|)$ and $Q_k\ge L$ give ratio one in the limit. On the interval with active $r$, the derivative of $(1-\alpha)/D(\alpha)$ has the sign of $r^2-6r+2$, by direct differentiation. The switch between $r$ and $r+1$ occurs at $\alpha=(1/r+1/(r+1))/3$: the expression maximized is a concave quadratic in $1/r$. Thus the maximum is at the switch $r=5,6$, namely $11/90$, with ratio $79/51$. For $\lambda<0$ the classical bound is at least $2s-\lambda m$ by the transitive strategy, and the spectral upper bound is $m(k-1-\lambda)$, yielding no improvement over shift zero. For $\lambda/k\to+\infty$ the reverse triangle inequality for $L$ and the norm bound give ratio tending to one, since $L(P_k)=2s$ and $L(I)=m$. Finally $L(P_k-\alpha k I)/k^3$ is uniformly $1$-Lipschitz in $\alpha$ by the triangle inequality and $m\le k^2$. Hence any sequence of shifts with bounded normalized shifts has the same subsequential limit as its convergent normalized parameter. These observations justify the claimed optimized limit, also for unrestricted dimension.
+\end{proof}
+
+\section{Verification and limits}
+The scripts accompanying this paper check small cases directly by sign enumeration and tournament enumeration, including a separate integer implementation checking all $2^{21}$ tournaments for $k=7$. These are checks of, not assumptions in, the analytic proof. A search of primary literature found no earlier all-order proof; lack of search results does not certify priority. The work was derived and checked with assistance from OpenAI AI systems; no external review or publication is asserted.
+\begin{thebibliography}{4}
+\bibitem{FR} P. C. Fishburn and J. A. Reeds, Bell inequalities, Grothendieck's constant, and root two, SIAM J. Discrete Math. 7 (1994), 48--56. \href{https://doi.org/10.1137/S0895480191219350}{doi:10.1137/S0895480191219350}.
+\bibitem{PV} K. F. P\'al and T. V\'ertesi, Platonic Bell inequalities for all dimensions, Quantum 6 (2022), 756. \href{https://doi.org/10.22331/q-2022-07-07-756}{doi:10.22331/q-2022-07-07-756}.
+\bibitem{DVP} S. Designolle, T. V\'ertesi and S. Pokutta, Better bounds on finite-order Grothendieck constants, \href{https://arxiv.org/html/2409.03739v3}{arXiv:2409.03739v3}, Section III.2 and Table I (2026).
+\bibitem{IBB} \emph{Exact classical bounds of bipartite correlation Bell inequalities using improved branch-and-bound}, \href{https://arxiv.org/html/2611.22893v1}{arXiv:2611.22893v1}, Section 4.1 (2026).
+\end{thebibliography}\end{document}

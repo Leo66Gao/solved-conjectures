@@ -1,0 +1,14 @@
+m= 3 candidates=1 dyadic_intervals=40 min_high_noise_slack=5/18
+m= 4 candidates=2 dyadic_intervals=159 min_high_noise_slack=1/4
+m= 5 candidates=2 dyadic_intervals=269 min_high_noise_slack=13/50
+m= 6 candidates=3 dyadic_intervals=415 min_high_noise_slack=5/18
+m= 7 candidates=4 dyadic_intervals=573 min_high_noise_slack=29/98
+m= 8 candidates=6 dyadic_intervals=816 min_high_noise_slack=1/4
+m= 9 candidates=7 dyadic_intervals=1106 min_high_noise_slack=53/162
+m=10 candidates=10 dyadic_intervals=1502 min_high_noise_slack=17/50
+m=11 candidates=13 dyadic_intervals=1957 min_high_noise_slack=85/242
+m=12 candidates=18 dyadic_intervals=2600 min_high_noise_slack=13/36
+m=13 candidates=23 dyadic_intervals=3370 min_high_noise_slack=125/338
+m=14 candidates=31 dyadic_intervals=4506 min_high_noise_slack=37/98
+m=15 candidates=40 dyadic_intervals=5759 min_high_noise_slack=173/450
+m=16 candidates=54 dyadic_intervals=29688 min_high_noise_slack=1/64

@@ -8,6 +8,7 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Fishburn–Reeds Bell matrices** | Complete answer at the original shift | Gives the conjectured classical bound in every size and the optimized asymptotic ratio $79/51$ over diagonal shifts for this family. | [Details](23-fishburn-reeds-bell/) · [PDF](23-fishburn-reeds-bell/paper.pdf) · [LaTeX](23-fishburn-reeds-bell/paper.tex) |
 | **Zamir–Erez universal input** | Complete answer | The guaranteed fraction of additive-noise channel capacity tends to zero, even when the input distribution can depend on the noise variance. | [Details](20-zamir-erez-universal-input/) · [PDF](20-zamir-erez-universal-input/paper.pdf) · [LaTeX](20-zamir-erez-universal-input/paper.tex) |
 | **Bapat’s real $q$-permanent** | Complete answer for real symmetric matrices | An integer positive definite matrix of order $10^{35}$, specified by formula, violates monotonicity on $[-1,1]$. | [Details](19-bapat-q-permanent/) · [PDF](19-bapat-q-permanent/paper.pdf) · [LaTeX](19-bapat-q-permanent/paper.tex) |
 | **Generalized Hillar–Johnson matrix words** | Complete answer | Classifies spectral positivity for words in arbitrary real powers of positive definite matrices by reversal symmetry after cyclic reduction. Garbe and Wei established the ordinary-word classification. | [Details](16-positive-matrix-words/) · [PDF](16-positive-matrix-words/matrix-words.pdf) · [LaTeX](16-positive-matrix-words/matrix-words.tex) |
@@ -20,6 +21,7 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Optimal binary quantization after dropping two bits** | Theorem | Reading $n-2$ coordinates is optimal at every crossover probability, including against unequal cells. The certified proof does not settle arbitrary six-bit quantization. | [Details](24-binary-quantization-drop-two/) · [PDF](24-binary-quantization-drop-two/paper.pdf) · [LaTeX](24-binary-quantization-drop-two/paper.tex) |
 | **Consecutive log-concavity violations in trees** | Complete answer | Diameter-seven trees can have arbitrarily long runs of consecutive strict log-concavity violations. | [Details](22-tree-independence-polynomials/) · [PDF](22-tree-independence-polynomials/paper.pdf) · [LaTeX](22-tree-independence-polynomials/paper.tex) |
 | **Width of thin lattice simplices** | Complete answer | Proves Kurylenko’s Conjectures 1.5 and 1.6 and answers both parts of Question 1.4. | [Proof](01-thin-simplices/Thin-simplex-proofs.md) · [PDF](01-thin-simplices/manuscript.pdf) · [LaTeX](01-thin-simplices/manuscript.tex) |
 | **Reconstruction from substring compositions** | Partial | Exact maximum ambiguity class sizes at lengths $pq-1$, $p^2q-1$, and $4p-1$ for the specified primes, with a full classification at length $pq-1$. | [Details](08-substring-reconstruction/) · [PDF](08-substring-reconstruction/equicomposable.pdf) · [LaTeX](08-substring-reconstruction/equicomposable.tex) |
