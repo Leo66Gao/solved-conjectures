@@ -1,0 +1,17 @@
+Exact radial-cutoff multisets/exponents: 9000
+Sampled one-disk boundary points, worst radius ratio: (75705, 1.0000000000207696)
+Sampled regular-star disk intersections: 7500
+Finite comb certificate (lower bounds for h(star)^k/h(base); limit k):
+  k=2, M=   625: h(base)=0.4992000, h(star)>=0.8888889, ratio>=1.5827794
+  k=2, M= 10000: h(base)=0.4999500, h(star)>=0.9705882, ratio>=1.8842715
+  k=2, M=160000: h(base)=0.4999969, h(star)>=0.9925373, ratio>=1.9702730
+  k=3, M=   625: h(base)=0.3330457, h(star)>=0.8135593, ratio>=1.6168280
+  k=3, M= 10000: h(base)=0.3333163, h(star)>=0.9473684, ratio>=2.5509392
+  k=3, M=160000: h(base)=0.3333323, h(star)>=0.9864030, ratio>=2.8792921
+  k=4, M=   625: h(base)=0.2495994, h(star)>=0.7272727, ratio>=1.1208454
+  k=4, M= 10000: h(base)=0.2499750, h(star)>=0.9166667, ratio>=2.8245495
+  k=4, M=160000: h(base)=0.2499984, h(star)>=0.9779412, ratio>=3.6585891
+  k=6, M=   625: h(base)=0.1661336, h(star)>=0.5581395, ratio>=0.1819698
+  k=6, M= 10000: h(base)=0.1666333, h(star)>=0.8389831, ratio>=2.0929422
+  k=6, M=160000: h(base)=0.1666646, h(star)>=0.9545455, ratio>=4.5387511
+Unconditional order-three cost upper bound: 1.9806466615475387

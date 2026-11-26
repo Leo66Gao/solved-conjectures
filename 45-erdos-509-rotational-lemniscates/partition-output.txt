@@ -1,0 +1,1 @@
+Independent finite partition/circumdisk checks: 47 (k=2..8); maximum error: 1.11e-16
