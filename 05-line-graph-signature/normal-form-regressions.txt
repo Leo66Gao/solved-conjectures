@@ -1,0 +1,2 @@
+125 deterministic decorated paths and pendant forests: all exact normal-form comparisons passed.
+Order limits of sampled original and reconstructed graphs: 87 31

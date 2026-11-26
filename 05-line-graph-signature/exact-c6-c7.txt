@@ -1,0 +1,6 @@
+c=6 exact kernel counts by n: 9:1496 10:388; candidate states checked=344996; no violation
+c=7 exact kernel counts by n: 11:13343 12:2592; candidate states checked=5194264; no violation
+927dac6a12e8bff5e1c7098c035ce4219ca3be5c2ef250dc875b6d68ee0ff019  cubic_kernels.py
+98beda4471e7b1edae4275238636bb1cd7a94ed1835ebdb770bda7714e0488ae  find_violation.cpp
+9b8728b81cecf8a98dc351cf4bceabe827a35584e606d5a1cf1ba298f079312b  k6-large.txt
+48d28f1e4298169883f99eef279ad2ae3566c1d2f3adcb5db9a63221af60513f  k7-large.txt

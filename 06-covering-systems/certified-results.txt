@@ -1,0 +1,7 @@
+Exhaustive oracle agrees on 500 seeded small instances.
+L=10080, fixed=25, tail=40, initial holes=1122, witness elements=821, weight=1552, capacity=1539, max weight=2: at least 7 holes
+L=10080, fixed=35, tail=30, initial holes=577, witness elements=456, weight=456, capacity=391, max weight=1: at least 65 holes
+Exact conditional optimum=84 holes; proof nodes=1985
+L=15120, fixed=32, tail=41, initial holes=1256, witness elements=885, weight=7602, capacity=7596, max weight=10: at least 1 holes
+L=15120, fixed=44, tail=29, initial holes=520, witness elements=438, weight=438, capacity=380, max weight=1: at least 58 holes
+Exact conditional optimum=68 holes; proof nodes=1931

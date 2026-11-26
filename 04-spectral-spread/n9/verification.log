@@ -1,0 +1,12 @@
+Exact scalar checks: all 16 interior tangent inequalities and the left/right boundary inequalities passed.
+left endpoint: 988 exact PD tests passed; remaining forms have at most two sign runs
+near-one certified for 131050 patterns; 18 canonical and 4 two-cluster patterns proved analytically
+node 0 a=-9/10 U=12360407/1000000: 262100 exact PD tests passed
+node 1 a=-3/7 U=11080761/1000000: 262100 exact PD tests passed
+node 2 a=3/35 U=10191914/1000000: 262100 exact PD tests passed
+node 3 a=12/35 U=9801375/1000000: 262100 exact PD tests passed
+node 4 a=3/5 U=9454216/1000000: 262100 exact PD tests passed
+node 5 a=319/400 U=9221351/1000000: 262100 exact PD tests passed
+node 6 a=717/800 U=9112118/1000000: 262100 exact PD tests passed
+node 7 a=1513/1600 U=9058420/1000000: 262100 exact PD tests passed
+node 8 a=199/200 U=9005344/1000000: 262100 exact PD tests passed

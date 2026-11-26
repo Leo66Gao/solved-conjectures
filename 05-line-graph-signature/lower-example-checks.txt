@@ -1,0 +1,7 @@
+c=1, order=5, size=5, line-graph signature=1
+c=2, order=9, size=10, line-graph signature=1
+c=3, order=14, size=16, line-graph signature=2
+c=4, order=18, size=21, line-graph signature=2
+c=5, order=23, size=27, line-graph signature=3
+c=6, order=27, size=32, line-graph signature=3
+c=7, order=32, size=38, line-graph signature=4
