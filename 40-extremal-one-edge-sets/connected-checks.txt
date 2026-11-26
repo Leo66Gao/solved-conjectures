@@ -1,0 +1,7 @@
+n = 2 connected labeled graphs = 1
+n = 3 connected labeled graphs = 4
+n = 4 connected labeled graphs = 38
+n = 5 connected labeled graphs = 728
+n = 6 connected labeled graphs = 26704
+direct-subset and generating-function comparisons: 148
+Checked exact strict ordering of both groups for k=1..14 at three orders each.

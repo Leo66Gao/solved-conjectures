@@ -1,0 +1,8 @@
+n = 2 graphs = 1 max = 2 maximizers = [[[1], [0]]]
+n = 3 graphs = 2 max = 2 maximizers = [[[1, 2], [0], [0]], [[1, 2], [0, 2], [0, 1]]]
+n = 4 graphs = 6 max = 12/5 maximizers = [[[1, 2], [0, 3], [0], [1]]]
+n = 5 graphs = 21 max = 8/3 maximizers = [[[1, 2, 3], [0, 4], [0], [0], [1]]]
+n = 6 graphs = 112 max = 3 maximizers = [[[1, 2, 3, 4], [0, 5], [0], [0], [0], [1]], [[1, 2, 3], [0, 4], [0, 5], [0], [1], [2]]]
+n = 7 graphs = 853 max = 38/11 maximizers = [[[1, 2, 3, 4, 5, 6], [0, 6], [0], [0], [0], [0], [0, 1]]]
+n = 8 candidate values {(1, 0): Fraction(171, 43), (1, 1): Fraction(158, 39), (2, 0): Fraction(123, 32), (2, 1): Fraction(227, 59), (2, 2): Fraction(214, 55)}
+n = 9 candidate values {(1, 0): Fraction(32, 7), (1, 1): Fraction(14, 3), (2, 0): Fraction(253, 58), (2, 1): Fraction(480, 109), (2, 2): Fraction(58, 13)}

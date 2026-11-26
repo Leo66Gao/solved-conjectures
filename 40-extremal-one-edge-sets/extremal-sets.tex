@@ -1,0 +1,140 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newcommand{\av}{a}
+\newcommand{\E}{\mathbb E}
+\DeclareMathOperator{\supp}{supp}
+\title{Extremal mean orders of vertex sets inducing\texorpdfstring{\\}{ }a prescribed number of edges}
+\author{Leo Gao\\\small AI-assisted research}\date{}
+\begin{document}\pdfmapfile{+cm.map}\pdfmapfile{+symbols.map}\maketitle
+\begin{abstract}
+Which tree maximizes the mean size of a uniformly chosen vertex set inducing exactly one edge? We prove the conjecture of Dossou-Olory and Andriantiana: the extremizer is obtained by subdividing one edge of a star. We identify all equality cases and the runner-up at every order. More generally, when $n\ge18k+3$, we order the first $2k+3$ connected $n$-vertex graphs for the same statistic conditioned on $k$ induced edges. The highest two groups are separated from every other graph by an explicit forbidden-support bound. The proof needs only the deficit in expected occupancy of an edge or a three-vertex path in a uniformly chosen independent set.
+\end{abstract}
+\section{Results}
+For a finite simple graph $G$, let $\av_k(G)$ be the expected size of a uniformly chosen subset of $V(G)$ inducing precisely $k$ edges. Graphs admitting no such subset are omitted. For $k=0$, Andriantiana, Misanantenaina and Wagner determined the extremal trees~\cite{AMW}. For $k=1$, Dossou-Olory and Andriantiana~\cite{DA} determined the minimum over trees and upper and lower bounds on the maximum. They conjectured that the maximum is attained by a once-subdivided star. The problem of maximizing the \emph{number} of such subsets is different~\cite{AS}.
+  
+Let $S(n,r)$ be the tree with one hub, $r$ arms of length two, and $n-2r-1$ arms of length one. Let $W(n,r,t)$ be obtained by joining the hub to the far endpoints of $t$ of the length-two arms. Thus $W(n,r,0)=S(n,r)$ and $W(n,r,r)$ consists of $r$ triangles sharing one vertex, together with pendant leaves at that vertex.
+\begin{thm}\label{one}
+For each $n\ge4$, $S(n,1)$ maximizes $\av_1$ among trees. For $n\ge5$ the unique best tree after $S(n,1)$ is excluded is $S(n,2)$. The first two trees tie at $n=6$ and nowhere else.
+
+Among connected graphs, the unique maximizer for each $n\ge7$ is instead $W(n,1,1)$. At $4\le n\le6$ the connected-graph maximizers are precisely the maximizing trees.
+\end{thm}
+In particular the first assertion proves Conjecture~1 of~\cite{DA}.
+\begin{thm}\label{main}
+If $k\ge1$ and $n\ge18k+3$, the first $2k+3$ connected graph types in descending order of $\av_k$, all comparisons strict, are
+\[
+\begin{array}{llll}
+W(n,k,k),& W(n,k,k-1),&\ldots,& W(n,k,0),\\
+W(n,k+1,k+1),&W(n,k+1,k),&\ldots,&W(n,k+1,0).
+\end{array}
+\]
+Put $U=(n+2k-1)/2$. Members of the first row have means within $1/6$ of $U$, and those of the second within $1/6$ of $U-1/3$; the errors are exponentially small as quantified in~\eqref{err}. Every other graph has mean at most $U-1/2$. In particular the top two trees are $S(n,k)$ and $S(n,k+1)$.
+\end{thm}
+\section{The support deficit}
+For a graph $F$ on $f$ vertices put $d(F)=f/2-\av_0(F)$. When an independent set is chosen uniformly, each vertex is selected with probability at most $1/2$, by conditioning off that vertex. Thus $d(F)\ge0$.
+\begin{lem}\label{gap}
+If $F$ contains an edge then $d(F)\ge1/3$. If $F$ contains two or more edges then $d(F)\ge1/2$.
+\end{lem}
+\begin{proof}
+Condition on the configuration off the endpoints of a fixed edge. On the pair, the available configurations are empty and at most two singletons. Hence its mean occupancy is at most $2/3$. The other vertices each have marginal occupancy at most $1/2$; this proves the first bound and gives a loss of $2/3$ for two disjoint edges.
+
+If two edges meet, condition off their three endpoints. With all endpoints available their induced graph is a path or a triangle. On the path the independent sets have sizes $0,1,1,1,2$, and on the triangle they have sizes $0,1,1,1$. In either case the conditional mean is at most $1$. If outside selections block any of the three vertices, at most two remain available and the conditional mean is still at most $1$. This costs at least $1/2$ against the three-vertex benchmark.
+\end{proof}
+Let $X$ be uniform conditioned on $k$ induced edges in connected $G$, where $n>2k\ge2$. Partition these subsets according to the nonisolated vertex set $H$ of $G[X]$. Write $h=|H|$, let $B$ be the set of neighbors of $H$ outside $H$, and put $b=|B|$, $F=G-(H\cup B)$. We have $h\le2k$ and $b\ge1$. Conditional on $H$, the set $X$ is $H$ together with a uniform independent set of $F$. Therefore
+\begin{equation}\label{loss}
+U-\E(|X|\mid H)=\frac{2k-h+b-1}{2}+d(F).
+\end{equation}
+
+If the first term is nonzero, it is at least $1/2$. Otherwise $G[H]$ consists of $k$ disjoint edges, and $B=\{w\}$. By connectivity, each of these pairs attaches to $w$ at one or both ends. Likewise each component of $F$ attaches to $w$, since $F$ has no edges to $H$. An edgeless $F$ thus forces $G=W(n,k,t)$; if $F$ has one edge then $G=W(n,k+1,t)$. Taking averages in~\eqref{loss} and using Lemma~\ref{gap} shows that every graph outside the first row of Theorem~\ref{main} loses at least $1/3$, and every graph outside both rows loses at least $1/2$. Only the tree with $t=0$ in either row is acyclic.
+
+\section{Ordering the candidates}
+Take $r\in\{k,k+1\}$, $0\le t\le r$, and put $m=n-2r-1$. With the hub absent exactly $k$ of the $r$ pairs have both endpoints selected. The other pairs have three possible configurations each, of mean size $2/3$. There are thus
+\[
+A=\binom{r}{k}3^{r-k}2^m
+\quad\text{sets of mean}\quad
+L=2k+\frac{2(r-k)}3+\frac m2=U-\frac{r-k}3.
+\]
+With the hub present the number of sets is
+\begin{equation}\label{coeff}
+C_t=[x^k](1+x)^m O(x)^{r-t} J(x)^t,\quad
+O(x)=2+x+x^2,\quad J(x)=1+2x+x^3.
+\end{equation}
+The two polynomials enumerate edge counts for the four subsets of the ends of an ordinary or triangular pair, respectively. Since $O(1/8),J(1/8)<9/4$, positivity gives
+\begin{equation}\label{err}
+0\le L-\av_k(W(n,r,t))\le n C_t/A
+   \le n\frac94\,18^k\left(\frac9{16}\right)^m < \frac16
+   \qquad(n\ge18k+3).
+\end{equation}
+Indeed the lower bound follows from~\eqref{loss} and the structural characterization of its first tier (the hub is the unique vertex of degree greater than two, so deleting it distinguishes the two rows). For the last bound $m\ge n-2k-3\ge16k$; the product $n(9/16)^{n-2k-3}$ decreases for $n\ge2$. Finally $18(9/16)^{16}<1/512$ and $(9/4)(18k+3)/512^k<1/6$. Together with the structural bounds these estimates strictly separate the first row, the second row, and every other graph.
+
+For comparisons within a row consider replacing one ordinary pair with a triangular one. Write the other factors from~\eqref{coeff} as $H(x)=(1+x)^m Q(x)$ with $Q$ having nonnegative coefficients, and put $h_j=[x^j]H(x)$, zero at negative indices. The consecutive binomial coefficient ratio, followed by convolution with $Q$, gives for $1\le j\le k$
+\[
+h_{j-1}\le \frac{j}{m-j+1} h_j\le h_j/15.
+\]
+Consequently $C_t\ge2h_k$, while
+$C_{t+1}=h_k+2h_{k-1}+h_{k-3}\le(1+2/15+1/15^3)h_k<(8/7)h_k$.
+If the hub is present the conditional mean $B_t$ is at most $2k+2$: at most $k$ of its neighbors are selected and there are at most $r\le k+1$ non-neighbors. Here $L\ge10k$. The positive loss $D_t=L-\av_k$ equals $(L-B_t)C_t/(A+C_t)$. Hence
+\[
+\frac{D_t}{D_{t+1}}
+\ge\frac{L-2k-2}{L}\frac{C_t}{C_{t+1}}\frac{A}{A+C_t}
+> \frac35\frac74\frac{1}{1+1/(6n)}>1.
+\]
+This proves Theorem~\ref{main}.
+
+\section{The case of one edge}
+For the tree $S(n,1)$ put $m=n-3$. With the hub absent, $2^m$ sets have mean $2+m/2$. With it present, selecting a direct leaf gives $2m$ sets of mean $5/2$, and selecting the intermediate vertex gives one set of size two. Thus, as in equation~(3) of~\cite{DA},
+\[
+\av_1(S(n,1))=\frac{5n-13+(n+1)2^{n-4}}{2n-5+2^{n-3}}.
+\]
+This exceeds $U-1/3$ for $n\ge10$: clearing denominators reduces to $2^{n-2}>P(n)=6n^2-43n+73$. It holds at $10$, and $2P(n)-P(n+1)=6n^2-55n+110>0$ thereafter.
+
+For $S(n,2)$ put $m=n-5$. Without the hub, there are $6\cdot2^m$ sets of mean $n/2+1/6$. With it present, a selected direct leaf gives $4m$ sets of mean $3$ and a selected intermediate vertex gives four sets of mean $5/2$. Therefore
+\[
+\av_1(S(n,2))=\frac n2+\frac{2^m-2m^2}{6\cdot2^m+4m+4}.
+\]
+This exceeds $U-1/2=n/2$ when $m\ge7$, since $2^7>2\cdot7^2$ and the inequality persists by doubling. Thus~\eqref{loss} proves both tree rankings for $n\ge12$.
+
+For the connected-graph maximizer, let $m=n-3$. Relative to $U$ the loss for $S(n,1)$ and $W(n,1,1)$ is, respectively,
+\[
+\frac{m(2m-1)}{2(2^m+2m+1)},\qquad\frac{m(m+2)}{2(2^m+m+2)}.
+\]
+Indeed the latter graph has $m+2$ hub-present configurations, each of size two. The first loss exceeds the second for $m\ge4$, since $(m-3)2^m>2m+4$. For $n\ge10$ the tree already exceeds the $U-1/3$ cap on all graphs outside the first row. For $n=8,9$, the five two-row candidates, ordered as $(r,t)=(1,0),(1,1),(2,0),(2,1),(2,2)$, have means
+\[
+\begin{array}{c|ccccc}
+n=8 &171/43&158/39&123/32&227/59&214/55\\
+n=9 &32/7&14/3&253/58&480/109&58/13.
+\end{array}
+\]
+The winner in both cases lies strictly above $U-1/2$, excluding all others.
+
+The finite cases completing Theorem~\ref{one} are listed in Table~\ref{tab}. They can be reproduced using the accompanying standard-library Python scripts. For trees, start from a single vertex, attach a leaf at every possible vertex, and retain one representative per canonical code. This generates every tree by the leaf-deletion property. The code is the minimum over roots of the rooted parenthetical encoding obtained by sorting the child strings, which characterizes isomorphism by induction. Try every vertex subset, count its induced edges, and add its cardinality to the corresponding exact total. The script independently constructs the same trees by enumerating multisets of rooted children, and independently computes all totals by a subtree recurrence that tracks root membership, induced edge count, family size and total cardinality. In each row the best tree after removing $S(n,1)$ is unique: the star for $n=4$ and $S(n,2)$ thereafter.
+\begin{table}[ht]\centering\small
+\caption{Finite tree ranking; graph counts and maxima in the last two columns are for \emph{all} connected graph types.}\label{tab}
+\begin{tabular}{@{}rrrrrr@{}}
+\toprule
+$n$ & Trees & Tree maximum & Best after exclusion & Graphs & Graph maximum\\
+\midrule
+4&2&$12/5$&$2$&6&$12/5$\\
+5&3&$8/3$&$13/5$&21&$8/3$\\
+6&6&$3$&$3$&112&$3$\\
+7&11&$86/25$&$61/18$&853&$38/11$\\
+8&23&$171/43$&$123/32$&---&---\\
+9&47&$32/7$&$253/58$&---&---\\
+10&106&$57/11$&$59/12$&---&---\\
+11&235&$526/91$&$1129/206$&---&---\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For the connected graph column, add one vertex to a smaller connected graph with every nonempty choice of neighborhood. Every connected graph arises since deleting a leaf of a spanning tree preserves connectivity. Deduplicate by isomorphism: refine degree classes by neighbor-color multisets, order the stabilized classes canonically by their signatures, and minimize the adjacency bit string over all permutations within classes. Direct subset enumeration gives exactly the maximizing trees when $4\le n\le6$ and the unique maximizer $W(7,1,1)$ at $n=7$. For completeness the single edge at $n=2$, and both connected graphs at $n=3$, have mean two. This completes the finite verification.
+
+\begin{thebibliography}{9}\small
+\bibitem{DA} A. A. V. Dossou-Olory and E. O. Andriantiana, \emph{On the average size of $1$-nearly independent vertex sets in graphs}, 2025, \href{https://arxiv.org/abs/2510.23670}{arXiv:2510.23670}.
+\bibitem{AS} E. O. D. Andriantiana and Z. B. Shozi, \emph{The number of $1$-nearly independent vertex subsets}, Quaest. Math. \textbf{47} (2024), 2353--2373. \href{https://doi.org/10.2989/16073606.2024.2367714}{doi:10.2989/16073606.2024.2367714}.
+\bibitem{AMW} E. O. D. Andriantiana, V. R. Misanantenaina and S. Wagner, \emph{The average size of independent sets of graphs}, Eur. J. Math. \textbf{6} (2020), 561--576. \href{https://arxiv.org/abs/1807.08290}{arXiv:1807.08290}.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,10 @@
+n | tree count | highest mean (multiplicity) | highest mean excluding top shape (multiplicity)
+4 | 2 | 12/5 (1) | 2 (1)
+5 | 3 | 8/3 (1) | 13/5 (1)
+6 | 6 | 3 (2) | 3 (1)
+7 | 11 | 86/25 (1) | 61/18 (1)
+8 | 23 | 171/43 (1) | 123/32 (1)
+9 | 47 | 32/7 (1) | 253/58 (1)
+10 | 106 | 57/11 (1) | 59/12 (1)
+11 | 235 | 526/91 (1) | 1129/206 (1)
+All checks passed.
