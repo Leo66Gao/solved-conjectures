@@ -1,0 +1,10 @@
+k=1: tested 1; weird 1; max abundance 4
+k=2: tested 3; weird 1; max abundance 8
+k=3: tested 42; weird 5; max abundance 56
+k=4: tested 79; weird 3; max abundance 80
+k=5: tested 461; weird 10; max abundance 736
+k=6: tested 1724; weird 23; max abundance 3272
+k=7: tested 8806; weird 29; max abundance 17732
+k=8: tested 18374; weird 53; max abundance 26732
+direct subset-sum tested: 29490
+generalized certificate triples: 2036458
