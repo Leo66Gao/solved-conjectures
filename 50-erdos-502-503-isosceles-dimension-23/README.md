@@ -6,6 +6,6 @@ The maximum two-distance set in dimension 23 has **277 points**, and the maximum
 
 [Ge, Koolen and Munemasa](https://arxiv.org/abs/2504.18110) give the 277-point construction. [Yi](https://arxiv.org/html/2611.05421v2) gives the isosceles reduction and a dimension-23 two-distance upper bound of 299. The new upper bound uses mod-two rank on an even integral lattice and a quadratic refinement that excludes 278.
 
-[Paper](isosceles-dimension-23.pdf) · [LaTeX](isosceles-dimension-23.tex) · [Rank check](check_mod2.py) · [Quadratic-refinement check](check_refinement.py)
+[Paper](isosceles-dimension-23.pdf) · [LaTeX](isosceles-dimension-23.tex) · [Lean 4 supplement](lean/) · [Rank check](check_mod2.py) · [Quadratic-refinement check](check_refinement.py)
 
 The proof is analytic; the scripts check its binary identities in exact arithmetic. These exact dimensions do not resolve the all-dimensional Erdős #502 or #503. No external peer review or historical priority determination is claimed.
