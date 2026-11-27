@@ -1,0 +1,145 @@
+---
+title: "How large can the restricted order of an additive basis be?"
+author: "Leo Gao"
+date: "27 November 2026 · AI-assisted research manuscript"
+geometry: margin=1in
+fontsize: 11pt
+colorlinks: true
+urlcolor: teal
+---
+
+**Abstract.** Erdős and Graham asked whether there is a function of ordinary order bounding the finite restricted order of an asymptotic additive basis. We give an affirmative answer. More precisely, let $F(h)$ be the maximum finite restricted order among bases of ordinary order exactly $h$. We prove $\log\log F(h)=\Theta(h)$ as $h\to\infty$. The upper bound combines a finite-group lemma on disjoint subset sums with quantitative inputs of Hegyvári, Hennecart and Plagne and of Chen, Yang and Zhao. For the lower bound, an eventually periodic mixed-radix basis has ordinary order $h$ but requires at least $2^{2^{h-5}+h-4}$ distinct summands for $h\ge5$. The problem of characterizing when ordinary and restricted orders are equal is not addressed here.
+
+## 1. The extremal question
+
+For $A\subseteq\mathbb N_0$, write $S_j(A)$ for sums of at most $j$ members of $A$, with repetition allowed, and $R_j(A)$ for sums of at most $j$ distinct members. Both sets include $0$. The ordinary order $\operatorname{ord}(A)$, respectively restricted order $\operatorname{ord}_R(A)$, is the least $j\ge1$ for which $S_j(A)$, respectively $R_j(A)$, is cofinite; a nonexistent order is infinite.
+
+Erdős and Graham [1, p. 206; 2, p. 52] asked whether the finite restricted order can be bounded in terms of the ordinary order. Hegyvári, Hennecart and Plagne [4, Theorem 4] constructed bases of order $h\ge3$ with restricted order at least $2^{h-2}+h-1$. Chen, Yang and Zhao [5] have recently proved two related results: the ordinary finite-deletion hypothesis implies finite restricted order, and a basis has finite restricted order if and only if its finite subset sums cover every residue class modulo every positive integer. Those results give the existence criterion. The question here asks instead for a bound uniform across different bases of the same ordinary order.
+
+**Theorem 1.** There is an effectively specified function $f$ such that $\operatorname{ord}_R(A)\le f(h)$ whenever $\operatorname{ord}(A)\le h$ and $\operatorname{ord}_R(A)<\infty$. If $F(h)$ denotes the largest finite restricted order among bases of ordinary order exactly $h$, then for $h\ge5$
+$$
+2^{\,2^{h-5}+h-4}\ \le\ F(h)\ \le\ \exp\!\bigl(O(16^h h\log(2h))\bigr).
+$$
+In particular $\log\log F(h)=\Theta(h)$. The lower-bound examples remain bases after every finite deletion.
+
+The point of the upper bound is to select a single budget for residue corrections before the modulus that requires those corrections is known.
+
+## 2. A finite-group lemma
+
+Let $I$ be a set of labels, each assigned a value in a finite abelian group $G$ of order $q$. Different labels may have the same value, and $I$ need not be finite. Write $R_j$ for sums of at most $j$ distinct labels, with $R_0=\{0\}$, and $\Sigma=\bigcup_{j\ge0}R_j$.
+
+**Lemma 2.** Given $h\ge1$ and $0<\delta<1$, there is a number $b=b(h,\delta)$ independent of $G$ and $I$ such that
+$$
+|R_h|\ge\delta q,\qquad \Sigma=G\qquad\Longrightarrow\qquad R_b=G.
+$$
+One choice is given by $\alpha_h=\delta$ and the downward recursion
+$$
+L_r=\left\lceil4\alpha_r^{-2}\right\rceil,\qquad
+Q_r=(2r+1)L_r+1,\qquad
+\alpha_{r-1}=\frac{\alpha_r^2}{16rQ_r}\quad(r=h,\ldots,1),
+$$
+with $b=\max\{\lceil1/\alpha_0\rceil,\max_{1\le r\le h}(2r+1)L_r\}$.
+
+*Proof.* In any group of order $g$, a shortest subset representation of a reachable value uses at most $g-1$ labels. Otherwise two of its ordered partial sums, counting the initial zero, coincide, allowing deletion of a zero-sum subsequence. This also applies in every quotient. It proves the lemma for $q\le1/\alpha_0$.
+
+For larger $q$, choose the least $r\ge1$ such that $|R_r|\ge\alpha_r q$. Let $X=R_r$, $M=|X|$, and $e=|R_{r-1}|$. Then $e\le\alpha_{r-1}q$, by minimality when $r>1$ and by $e=1$ when $r=1$. For $x\in X$ fix one set $U_x$ of at most $r$ labels representing $x$, using $U_0=\varnothing$. Any one label of value $v$ can occur in at most $e$ of these sets: the corresponding $x-v$ are distinct members of $R_{r-1}$.
+
+Let $D$ consist of $0$ and those residues with $Q_r$ pairwise label-disjoint nonempty representations of length at most $2r$. For $z\in G$ let $p_z$ count ordered pairs $(x,y)\in X^2$ with $x+y=z$ and $U_x\cap U_y=\varnothing$. At most $rMe$ pairs fail this disjointness condition, and $p_z\le M$. For $z\notin D$, take a maximal family of counted pairs with mutually disjoint unions $U_x\cup U_y$. Each union is nonempty since $z\ne0$. The union $W$ of the whole family has at most $2r(Q_r-1)$ labels and hits every counted pair. Each label in $W$ can occur on the first side of at most $e$ pairs of sum $z$ (fixing $x$ fixes $y$), and likewise on the second side. Thus $p_z\le4r(Q_r-1)e$ for $z\notin D$. Consequently
+$$
+M^2-rMe\le\sum_zp_z\le |D|q+4r(Q_r-1)eq,\qquad
+\frac{|D|}{q}\ge \alpha_r^2-(r+4r(Q_r-1))\alpha_{r-1}
+\ge\frac{\alpha_r^2}{2}.
+$$
+
+Let $J=\langle D\rangle$. Its index in $G$ is at most $2/\alpha_r^2$. We have $L_rD=J$, where this sumset allows repetitions. Indeed, if $L_rD\ne J$, let $U$ be its stabilizer inside $J$. Then $D$ meets $k\ge2$ cosets of $U$ since $0\in D$ and $D$ generates $J$. By the finite abelian addition theorem of Kneser [6],
+$$
+|L_rD|\ \ge\ (L_r(k-1)+1)|U|\ >\ (L_r/2)|D|\ \ge\ q,
+$$
+which is impossible. The strict inequality uses $k-1\ge k/2$ and $|D|\le k|U|$.
+
+To represent $z\in G$, choose a set $E$ of labels representing its coset in $G/J$, with $|E|\le [G:J]-1\le L_r-1$, using $\Sigma=G$ and the partial-sum observation. The difference between $z$ and the sum of $E$ lies in $J=L_rD$. Express it as $L_r$ terms of $D$. For each nonzero term in turn, choose one of its $Q_r$ disjoint representations avoiding $E$ and all labels used so far. There are at most $(L_r-1)+2r(L_r-1)<Q_r$ forbidden labels; the zero term needs none. The resulting representation uses at most $(2r+1)L_r\le b$ distinct labels. $\square$
+
+## 3. Transfer from the quotients to the integers
+
+Write $\underline d$ for lower asymptotic density. Hegyvári, Hennecart and Plagne [3; 7, Theorem 4.8] give
+$$
+\underline d(R_h(A))\ge c_h,\qquad
+c_h=h^{-h}\exp(-\pi\sqrt{2h/3})
+$$
+if $\operatorname{ord}(A)\le h$. To see the convention explicitly, apply their exact-$h$ density inequality to $B=(A\cup\{0\})+1$. The ordinary sumset $hB$ is cofinite. An exact distinct $h$-sum from $B$, translated by $-h$, is a distinct sum from $A\cup\{0\}$; zero may be omitted.
+
+Set $\delta=c_h/2$. For every $q\ge1$, the residues of $R_h(A)$ cover at least $\delta q$ classes, since a set contained in $t$ classes has upper density at most $t/q$. If $\operatorname{ord}_R(A)<\infty$, its arbitrary finite subset sums occupy every class. Apply Lemma 2 with $I=A$, assigning to each element its value modulo $q$. Then
+$$
+R_b(A)\bmod q=\mathbb Z/q\mathbb Z\qquad\text{for every }q\ge1,
+\qquad b=b(h,\delta).
+$$
+The same conclusion holds if the modular completeness condition alone is assumed.
+
+We use the quantitative content of Chen, Yang and Zhao [5, Lemma 4, proof, eq. (2)]. Given $\underline d(R_h(A))>\delta$ and the above budget $b$, set $\beta_h=\delta$, and for $r=h,\dots,1$ put
+$$
+T_r=\lceil 8\beta_r^{-2}\rceil,\quad
+V_r=b+\sum_{j=r+1}^h 2jT_j+2r(T_r-1)+1,\quad
+\beta_{r-1}=\frac{\beta_r^2}{64rV_r},\quad K=\sum_{j=1}^h2jT_j.
+$$
+Their lemma gives integers $g,N_0\ge1$ and a residue $a\bmod g$ such that all $n\ge N_0$ with $n\equiv a\bmod g$ lie in $R_K(A\setminus E)$ for **every** $E\subseteq A$ with $|E|\le b$. The period $g$ and the onset $N_0$ can depend on $A$; the displayed $K$ cannot.
+
+For each residue $v\bmod g$, use Lemma 2 to choose $E_v\subseteq A$ of size at most $b$ with sum $e_v\equiv v-a\bmod g$. Given $n\ge N_0+\max_v e_v$, set $v=n\bmod g$. Then $n-e_v$ belongs to the progression and is represented by at most $K$ distinct members outside $E_v$. Adjoining $E_v$ proves the universal bound $f(h)=K+b$.
+
+For its growth, put $x_r=1/\alpha_r$. From $L_r\le5x_r^2$ and $Q_r\le16h x_r^2$ we have $x_{r-1}\le256h^2x_r^4$. It follows by iteration that
+$$
+\log b=O\bigl(4^h(\log(1/\delta)+\log(2h))\bigr).
+$$
+Similarly $y_r=1/\beta_r$ increases as $r$ decreases and $T_j\le9y_r^2$ for $j\ge r$. Thus $V_r\le b+19h^2y_r^2+1$, whence $y_{r-1}\le Ch^3(b+1)y_r^4$ for some absolute $C$. Iteration gives
+$$
+\log(K+b)=O\bigl(16^h(\log(1/\delta)+\log(2h))\bigr)
+=O\bigl(16^h h\log(2h)\bigr).
+$$
+
+## 4. A periodic mixed-radix construction
+
+Fix $h\ge5$ and put $d=h-4$. Define
+$$
+P_0=1,\qquad P_i=2^{\,2^{i-1}+i}\ (1\le i\le d),\qquad
+P=P_d,\qquad u_i=P_i/P_{i-1},\qquad w_i=P/P_i.
+$$
+Index $1$ denotes the highest digit. The radices are integers: $u_1=4$ and $u_i=2^{2^{i-2}+1}$ for $i\ge2$. Take the denominations
+$$
+C=\{P\}\cup\{kw_i:1\le i\le d,\ 1\le k<u_i\}.
+$$
+Set $m=8P$ and form the integer basis
+$$
+A=\{2c:c\in C\}\ \cup\ \{mn,mn+1:n\ge1\}.
+$$
+The finite exceptions are below $m$. A number $0\le t<4P$ is a sum of at most three copies of $P$ and one denomination for each nonzero mixed digit. For a sufficiently large target congruent to $2t+\epsilon\bmod m$, with $\epsilon\in\{0,1\}$, take those doubled denominations and one tail term in residue $\epsilon$. This proves $\operatorname{ord}(A)\le 1+3+d=h$.
+
+To prove equality, consider $n\equiv m-1\bmod m$. A representation contains an odd number $2v+1$ of tail terms of residue $1$. At the level of residues, discard all residue-zero terms, keep one $1$, and replace the other $2v$ ones by $v$ copies of the smallest doubled denomination, $2$. This cannot increase length. After subtracting the remaining $1$ and dividing the even sum by $2$, we obtain a nonnegative $t\equiv4P-1\bmod 4P$ in denominations $C$. Any representation of $t$ uses at least $\lfloor t/P\rfloor+s(t\bmod P)$ coins, where $s$ counts nonzero digits. Indeed, normalize from low to high. At a place of radix $u$, the digits of $c>0$ coins sum to $ku+v'$ with $k\le c-1$ and $0\le v'<u$. Replace them by $k$ units at the next place and at most one digit at the current place without increasing length. The normalized length has the asserted value. Now $\lfloor t/P\rfloor\ge3$ and all $d$ digits are nonzero, which gives $\operatorname{ord}(A)=h$.
+
+In a distinct representation the exceptions contribute at most $2S$, where
+$$
+\frac{S}{P}=\frac{1}{P}\sum_{c\in C} c
+=1+\frac12\sum_{i=1}^d\frac{u_i-1}{P_{i-1}}.
+$$
+The first digit contributes $3/2$. For $i\ge2$ we have $u_i/P_{i-1}=2^{2-i}$, so the remaining contribution is strictly less than $\frac12\sum_{i=2}^{\infty}2^{2-i}=1$. Thus $2S<7P$. For $n\equiv8P-1\bmod 8P$, the exception sum plus the **number** of residue-one tail terms is nonnegative and is congruent to $8P-1$. Hence at least $8P-1-2S\ge P$ tail terms are required.
+
+Finally, for each residue modulo $m$ choose its representative $k\in\{1,\ldots,m\}$. Every sufficiently large integer $n$ in that class is a sum of $k$ distinct residue-one tail members: fix $k-1$ distinct such members and use their complement in $n$ for the last. The same argument avoids any prescribed finite deletion. Therefore $\operatorname{ord}_R(A)$ exists and is at least $P=2^{2^{h-5}+h-4}$, proving Theorem 1. $\square$
+
+**Finite checks.** As a separate verification, the accompanying Python program computes both orders of the first four examples exactly. Each modular representation must contain a tail member; conversely, any fixed representation meeting this requirement lifts to every sufficiently large target in its residue, also with distinct tail members when required. Breadth-first search allows repetitions, while a subset dynamic program allows each exception at most once and then fills residues with additional tail ones.
+
+| Ordinary order $h$ | Period $m$ | Sum of exceptions | Exact restricted order |
+|---:|---:|---:|---:|
+| 5 | 32 | 20 | 15 |
+| 6 | 128 | 92 | 42 |
+| 7 | 1,024 | 792 | 245 |
+| 8 | 32,768 | 26,336 | 6,476 |
+
+## References
+
+1. P. Erdős and R. L. Graham. [On bases with an exact order](https://www.renyi.hu/~p_erdos/1980-22.pdf). *Acta Arith.* **37** (1980), 201–207.
+2. P. Erdős and R. L. Graham. [Old and New Problems and Results in Combinatorial Number Theory](https://mathweb.ucsd.edu/~ronspubs/80_11_number_theory.pdf). Monographies de L'Enseignement Mathématique **28** (1980).
+3. N. Hegyvári, F. Hennecart and A. Plagne. [A proof of two Erdős' conjectures on restricted addition and further results](https://doi.org/10.1515/crll.2003.055). *J. Reine Angew. Math.* **560** (2003), 199–220.
+4. N. Hegyvári, F. Hennecart and A. Plagne. [Answer to a question by Burr and Erdős on restricted addition, and related results](https://www.cmls.polytechnique.fr/perso/plagne/Erdos-Burr.pdf). *Combin. Probab. Comput.* **16** (2007), 747–756.
+5. S.-Q. Chen, Q.-H. Yang and L. Zhao. [On a problem of Erdős and Graham related to restricted order](https://arxiv.org/html/2611.33191v1). arXiv:2611.33191v1 (2026). Preprint.
+6. M. Kneser. [Abschätzung der asymptotischen Dichte von Summenmengen](https://doi.org/10.1007/BF01174162). *Math. Z.* **58** (1953), 459–484.
+7. N. Hegyvári. [Topics in Combinatorial Number Theory](https://real-d.mtak.hu/1038/7/dc_1260_16_doktori_mu.pdf). Doctoral dissertation, Hungarian Academy of Sciences (2017), Chapter 4, Theorem 4.8, p. 63. Quantitative form of the density theorem in [3].
+
+*Disclosure.* The finite disjoint-pair counting argument adapts [5, Lemma 3]; the progression lemma is taken from [5], not claimed as a new result here. This draft was developed with AI assistance. It has not been peer reviewed.

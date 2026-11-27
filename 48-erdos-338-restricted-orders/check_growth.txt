@@ -1,0 +1,5 @@
+h M sum_exceptions ordinary restricted restricted_at_M-1
+5 32 20 5 15 15
+6 128 92 6 42 42
+7 1024 792 7 245 245
+8 32768 26336 8 6476 6476
