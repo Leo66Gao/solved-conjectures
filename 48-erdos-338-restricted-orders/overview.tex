@@ -3,7 +3,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage[hidelinks]{hyperref}
 \title{Restricted order of asymptotic bases\\
-\large A candidate resolution of Erd\H{o}s Problem \#338}
+\large Lean proofs for the original Erd\H{o}s Problem \#338 questions}
 \author{Leo Gao\\\small AI-assisted research and formalization}
 \date{27 November 2026}
 \newcommand{\N}{\mathbb N}
@@ -15,11 +15,11 @@
 For any ordinary basis of order $h$, a rank-two reflected-intersection
 test characterizes equality with the restricted order. Its local
 inputs are ordinary good-element pair sums and a bounded conflict
-graph of fringe labels. Companion proofs address existence, uniform
-bounds, and both finite-deletion variants. This is a candidate
-answer to all the questions as worded in 1980. The formal files
-certify specific mathematical steps; they do not certify historical
-priority or the adequacy of the proposed characterization.
+graph of fringe labels. The Lean package checks this criterion, uniform boundedness, and
+Chen--Yang--Zhao's existence and both finite-deletion results.
+The proof of the sharp growth rate is on paper. The kernel checks
+the stated theorems, not priority or the adequacy of the proposed
+equality characterization.
 \end{abstract}
 
 \section{The four questions}
@@ -44,8 +44,8 @@ restricted order is bounded by a function of $h$ alone.
 The companion \emph{Sharp boundedness} proof gives
 $F(h)\le \exp(O(2^h h\log(2h)))$, and a mixed-radix construction
 gives $\log\log F(h)=h\log2+O(\log h)$.
-The rank-two manuscript also gives an independent, weaker
-double-exponential bound.
+The Lean proof supplies a separate, coarser explicit bound.
+A non-strict bound suffices for the original strict formulation by adding one.
 \item \textbf{Equality.} The rank-two criterion below is necessary
 and sufficient for arbitrary bases. It eliminates the use of
 higher-rank restricted representation functions.
@@ -100,26 +100,27 @@ The criterion is not a restatement using $R_h$ or its
 representation count as input. It uses only rank-two reflected
 intersections, ordinary sums, and compatibility of a uniformly
 bounded number of fringe labels at each decomposition. It discards
-all endpoint data at immune weights. This is a mathematically
-substantive necessary-and-sufficient condition in the literal
-wording of item (iii).
+all endpoint data at immune weights. It gives a necessary-and-sufficient condition in
+terms of lower-rank data, rather than taking the full restricted
+sumset as an input.
 
-The criterion still has an eventual quantifier over targets
-and may use actual weak endpoint labels at arbitrarily large
-weights. It does not classify the global distribution of the
+The criterion still has an eventual quantifier over targets.
+For a positive all-fringe basis with unique two-term sums and no
+singleton--pair coincidences, every occupied positive weight has one
+weak witness. The test then keeps the actual endpoints and checks
+disjointness. It does not classify the global distribution of
 obstructions in arbitrary bases. An exact equivalence can be
 kernel-checked; whether the criterion is satisfactory for the
 historical question is a distinct judgment. No acceptance,
 peer review, or priority is claimed here. The accompanying
-formalization map specifies exactly which parts of the argument
-compile in Lean and which remain mathematical dependencies.
+proof map identifies the five checked declarations and the
+separate paper proof of the sharp bound.
 
 \section{Files for review}
 The full LaTeX proofs of the equality criterion, its more general
 blocker formulation, and the quantitative growth theorem are
-included. The source bundle also includes a checked Lean 4
-project, its pinned build dependencies, an axiom audit, other
-results from the research runs, and the finite audit scripts.
+included. The source bundle also includes a checked Lean 4 project,
+a fixed dependency revision, a build script, and an axiom audit.
 The scripts provide reproducibility checks, not proofs of
 the infinite statements.
 \end{document}

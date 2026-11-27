@@ -37,7 +37,7 @@ theorem fresh_of_good {A : ℕ → Prop} {h a : ℕ} (hg : Good A h a) :
 theorem canonical_repair (A : ℕ → Prop) (h : ℕ) : Pair.Repair A (fringe A h) h := by
   classical
   intro xs hl hA hclean
-  have hmem : ∀ x ∈ (xs : Multiset ℕ), A x := by simpa using hA
+  have hmem : ∀ x ∈ (xs : Multiset ℕ), A x := by simpa [Pair.All] using hA
   have hrep : ∀ x, 1 < (xs : Multiset ℕ).count x → Fringe.Fresh A h x := by
     intro x hx
     apply fresh_of_good
@@ -50,7 +50,7 @@ theorem canonical_repair (A : ℕ → Prop) (h : ℕ) : Pair.Repair A (fringe A 
   obtain ⟨v,hv,hvA,hvN,hvS⟩ := Fringe.repair (↑xs : Multiset ℕ) hl hmem hrep
   obtain ⟨ys,rfl⟩ := Quot.exists_rep v
   have heq : ys.length = xs.length := by simpa using hv
-  exact ⟨ys, heq ▸ hl, by simpa using hvA, by simpa using hvN, by simpa using hvS⟩
+  exact ⟨ys, heq ▸ hl, by simpa [Pair.All] using hvA, by simpa using hvN, by simpa using hvS⟩
 
 /-- Unconditional pointwise version of the ZIP's exact rank-two criterion,
 with automatically selected canonical fringe. -/

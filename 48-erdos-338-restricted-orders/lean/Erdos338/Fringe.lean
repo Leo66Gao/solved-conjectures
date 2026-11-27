@@ -98,10 +98,10 @@ theorem repair {A : ℕ → Prop} {h : ℕ} (s : Multiset ℕ)
         have hc0 : c ∉ u := by simpa using hcU
         by_cases xb : x = b
         · subst x
-          simp [v, Multiset.count_cons_of_ne hbc, Multiset.count_eq_zero_of_not_mem hb0] at hx
+          simp [v, Multiset.count_cons_of_ne hbc, (Nat.eq_zero_of_not_pos (fun p => hb0 (Multiset.count_pos.mp p)))] at hx
         by_cases xc : x = c
         · subst x
-          simp [v, Multiset.count_cons_of_ne hbc.symm, Multiset.count_eq_zero_of_not_mem hc0] at hx
+          simp [v, Multiset.count_cons_of_ne hbc.symm, (Nat.eq_zero_of_not_pos (fun p => hc0 (Multiset.count_pos.mp p)))] at hx
         change 1 < (b ::ₘ c ::ₘ u).count x at hx
         rw [Multiset.count_cons_of_ne xb, Multiset.count_cons_of_ne xc] at hx
         apply repeatFresh x
@@ -116,7 +116,7 @@ theorem repair {A : ℕ → Prop} {h : ℕ} (s : Multiset ℕ)
         change (b ::ₘ c ::ₘ u).toFinset.card = _
         rw [Multiset.toFinset_cons, Multiset.toFinset_cons]
         have hh : b ∉ insert c u.toFinset := by simp [hbc, hbU]
-        rw [Finset.card_insert_of_not_mem hh, Finset.card_insert_of_not_mem hcU]
+        rw [Finset.card_insert_of_notMem hh, Finset.card_insert_of_notMem hcU]
       have vc := v.toFinset_card_le
       have smaller : h - v.toFinset.card < d := by omega
       obtain ⟨t,ht,hmA,hn,hsum⟩ := ih _ smaller v (cardv ▸ hs) memv repv rfl

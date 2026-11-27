@@ -1,8 +1,311 @@
-Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)
-✔ [577/580] Built Erdos338.Pair
-✔ [578/580] Built Erdos338.Equality
-✔ [579/580] Built Erdos338
-Build completed successfully.
+Lean (version 4.34.0, x86_64-unknown-linux-gnu, commit 293d5d0c0c3f3dded4688b3ccd6a33939ac5102b, Release)
+Build completed successfully (3121 jobs).
+
+CHECK Erdos338/Growth
+Erdos338/Growth.lean:27:46: warning: This simp argument is unused:
+  Classical.not_imp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Avoid, Classical.not_forall, Classical.not_not] at h
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Erdos338/Growth.lean:85:12: warning: This simp argument is unused:
+  natSumAppend
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [List.sum_cons, hsum, hgs]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Erdos338/Growth.lean:151:19: warning: `List.Sublist.cons₂` has been deprecated: Use `List.Sublist.cons_cons` instead
+Erdos338/Growth.lean:445:49: warning: `if_false` has been deprecated: Use `ite_false` instead
+Erdos338/Growth.lean:861:25: warning: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+
+CHECK Erdos338/Pair
+Erdos338/Pair.lean:25:32: warning: This simp argument is unused:
+  or_imp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Avoid, List.mem_append, forall_and]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Erdos338/Pair.lean:145:49: warning: This simp argument is unused:
+  natSumApp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ls, rs]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Erdos338/Pair.lean:156:48: warning: This simp argument is unused:
+  natSumApp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ls, rs]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Erdos338/Pair.lean:276:66: warning: `if_false` has been deprecated: Use `ite_false` instead
+Erdos338/Pair.lean:280:66: warning: `if_false` has been deprecated: Use `ite_false` instead
+Erdos338/Pair.lean:317:51: warning: `if_true` has been deprecated: Use `ite_true` instead
+Erdos338/Pair.lean:321:74: warning: `if_false` has been deprecated: Use `ite_false` instead
+Erdos338/Pair.lean:552:54: warning: `if_false` has been deprecated: Use `ite_false` instead
+Erdos338/Pair.lean:548:48: warning: This simp argument is unused:
+  d
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [fromKey, key, Nat.min_eq_left le, u, hc, Nat.ne_of_gt cp]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+
+CHECK Erdos338/Fringe
+Erdos338/Fringe.lean:30:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+Erdos338/Fringe.lean:61:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+
+CHECK Erdos338/Blockers
+
+CHECK Erdos338/Equality
+
+CHECK UniformLocal
+UniformLocal.lean:79:19: warning: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+UniformLocal.lean:125:41: warning: This simp argument is unused:
+  Classical.not_imp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Approx, Classical.not_forall] at no
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'Erdos338.Existence.robust_modular_cylinder' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.uniform_of_ordinary_and_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.of_uniform_and_robust' depends on axioms: [propext, Quot.sound]
+'Erdos338.Existence.local_to_global_of_progressions' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK RobustLayers
+RobustLayers.lean:148:54: warning: This simp argument is unused:
+  natSumAppend
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [weight, plan, r, qq, dd, nb, List.map_replicate, sum_rep]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+RobustLayers.lean:148:67: warning: This simp argument is unused:
+  sum_rep
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [weight, plan, r, qq, dd, nb, List.map_replicate, natSumAppend]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'Erdos338.Existence.Analytic.total_counts_eventual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.Analytic.robust_of_density' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.Analytic.headline_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK PopularityCounting
+PopularityCounting.lean:155:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+PopularityCounting.lean:228:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'Erdos338.Popularity.strip_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Popularity.global_noncollision_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Popularity.packing_from_conflict_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Popularity.fixed_sum_packing_from_fibers' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Popularity.fixed_sum_fiber' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Popularity.fixed_sum_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK CollisionBridge
+CollisionBridge.lean:29:42: warning: `if_true` has been deprecated: Use `ite_true` instead
+CollisionBridge.lean:155:10: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+CollisionBridge.lean:165:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+'Erdos338.Existence.CollisionBridge.collisionBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'_private.CollisionBridge.0.Erdos338.Existence.CollisionBridge.source_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+CHECK CatalogueAdapter
+'Erdos338.CatalogueAdapter.stableDeletion_of_variable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.CatalogueAdapter.equality_variant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.CatalogueAdapter.necessity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.CatalogueAdapter.statement_from_list_sufficiency' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK HHPFinite
+HHPFinite.lean:21:64: warning: This simp argument is unused:
+  and_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [pref, Finset.mem_range, Nat.lt_succ_iff, and_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+HHPFinite.lean:195:26: warning: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+HHPFinite.lean:206:28: warning: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+'Erdos338.HHP.uniform_positive_lower_density' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.HHP.iterate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.HHP.positive_lower_density' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK DensityBridge
+DensityBridge.lean:13:28: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+'Erdos338.Existence.Analytic.hhpDensity_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.Analytic.hhpDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK CatalogueResult
+'Erdos338.CatalogueAdapter.catalogue_of_mixed_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.CatalogueAdapter.basis_after_finite_removal_of_mixed_ray' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+CHECK CoinBox
+CoinBox.lean:23:15: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+CoinBox.lean:31:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+CoinBox.lean:23:15: warning: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'Erdos338.Coin.progression_box' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK DilationCount
+'Erdos338.Dilation.count_compress_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Dilation.aggregate_count_compress' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK MixedDyson
+'Erdos338.MixedDyson.mixed_prefix_density' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.MixedDyson.cover_initial' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK MixedWindow
+'Erdos338.MixedDyson.cofinite_of_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.MixedDyson.cofinite_of_long_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK MixedStable
+MixedStable.lean:242:2: warning: Try this:
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+'Erdos338.MixedStable.mixed_progression_core_bounded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.MixedStable.Reach.mass_loss' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.MixedStable.minimize_active' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.MixedStable.stable_all' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.MixedStable.progress_box' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.MixedStable.mixed_progression_core' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK Compression
+Compression.lean:17:0: warning: automatically included section variable(s) unused in theorem `Erdos338.Compression.compress_stable_family`:
+  [DecidableEq ι]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq ι] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+'Erdos338.Compression.compress_stable_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK FiniteRay
+FiniteRay.lean:30:4: warning: Unused tactic linter: `push_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+'Erdos338.FiniteRay.eventual_ray_of_stabilization' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK ListMixedBridge
+'Erdos338.Existence.Analytic.mixedKneserRay_of_fin' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK Erdos338Solution
+'Erdos338.erdos_338' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.erdos_338.variants.basis_after_finite_removal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.erdos_338.variants.same_order_after_finite_removal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.erdos_338.variants.eq_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK BoundedCatalogue
+'Erdos338.Boundedness.bounded_catalogue' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK BoundedGlue
+BoundedGlue.lean:43:12: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'Erdos338.Existence.Bounded.fillsSet_append' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.Bounded.fills_repeated' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK UniformPopularity
+'Erdos338.Existence.Bounded.active_eventually' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.Bounded.schedule_entry_budget' depends on axioms: [propext, Quot.sound]
+'Erdos338.Existence.Bounded.schedule_lengths_nondecreasing' depends on axioms: [propext, Quot.sound]
+
+CHECK RecurrentLayers
+'Erdos338.Existence.Bounded.recurrent_suffix_of_eventual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.Bounded.eventual_weight_of_active' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Existence.Bounded.safe_reserve_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK ModulusShrink
+'_private.ModulusShrink.0.Erdos338.Shrink.copies_eq_stab' depends on axioms: [propext, Classical.choice, Quot.sound]
+'_private.ModulusShrink.0.Erdos338.Shrink.dense_residues' depends on axioms: [propext, Classical.choice, Quot.sound]
+'_private.ModulusShrink.0.Erdos338.Shrink.cyclic_subgroup_lattice' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Erdos338.Shrink.shrink_eventual_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Shrink.mem_copies_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK Full338
+'Erdos338.Existence.Bounded.uniform_robust' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.erdos_338.variants.bounded_by_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+CHECK ReflectedBridge
+'Erdos338.ReflectedCatalogueAudit.equality_variant_reflected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.ReflectedCatalogueAudit.existing_answer_iff_reflected' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+CHECK Erdos338/Density
+
+CHECK Erdos338/QAdic
+
+CHECK Erdos338
+
+Erdos338.erdos_338 (A : Set ℕ) :
+  (∃ h, Erdos338.CatalogueAdapter.HasOrder A h) →
+    ((∃ t, Erdos338.CatalogueAdapter.HasRestrictedOrder A t) ↔ Erdos338.erdos_338.answer A)
+Erdos338.erdos_338.variants.bounded_by_order :
+  ∃ f,
+    ∀ (A : Set ℕ) (h : ℕ),
+      Erdos338.CatalogueAdapter.HasOrder A h →
+        (∃ t, Erdos338.CatalogueAdapter.HasRestrictedOrder A t) → Erdos338.CatalogueAdapter.HasRestrictedOrder A (f h)
+Erdos338.erdos_338.variants.eq_order (A : Set ℕ) (base : ∃ h, Erdos338.CatalogueAdapter.HasOrder A h) :
+  Erdos338.CatalogueAdapter.restrictedOrder A = Erdos338.CatalogueAdapter.basisOrder A ↔
+    Erdos338.erdos_338.variants.eq_order.answer A
+Erdos338.erdos_338.variants.basis_after_finite_removal (A : Set ℕ)
+  (robust : ∀ (F : Set ℕ), F.Finite → ∃ h, Erdos338.CatalogueAdapter.HasOrder (A \ F) h) :
+  ∃ t, Erdos338.CatalogueAdapter.HasRestrictedOrder A t
+Erdos338.erdos_338.variants.same_order_after_finite_removal (A : Set ℕ)
+  (same : ∃ h, ∀ (F : Set ℕ), F.Finite → Erdos338.CatalogueAdapter.basisOrder (A \ F) = ↑h) :
+  ∃ t, Erdos338.CatalogueAdapter.HasRestrictedOrder A t
+'Erdos338.erdos_338' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.erdos_338.variants.bounded_by_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.erdos_338.variants.eq_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.erdos_338.variants.basis_after_finite_removal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.erdos_338.variants.same_order_after_finite_removal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.ReflectedCatalogueAudit.existing_answer_iff_reflected' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'Erdos338.Fringe.repair' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Erdos338.Pair.immune_iff_reflected_count' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Erdos338.canonical_sumset_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -19,7 +322,8 @@ Build completed successfully.
 'Erdos338.Density.tailDecision_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Erdos338.Density.endpoint_density_discrepancy' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Erdos338.Density.endpoint_orders' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Erdos338.Density.oneException_orders' depends on axioms: [propext, Quot.sound]
+'Erdos338.Density.oneException_orders' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Erdos338.QAdic.tail_orders' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Erdos338.QAdic.maximal_obstruction' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Erdos338.QAdic.squares_not_restricted_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+PASS: five main declarations, the reflected bridge, and 20 supplemental audits use only standard Lean axioms.

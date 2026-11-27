@@ -157,11 +157,11 @@ private theorem bound_by_universe (xs u : List Nat) (hn : xs.Nodup)
   | cons a xs ih =>
     have hau := hsub a (by simp)
     obtain ⟨hna,hnt⟩ := List.nodup_cons.mp hn
-    have rec := ih (u.erase a) hnt (by
+    have recStep := ih (u.erase a) hnt (by
       intro x hx
       exact (List.mem_erase_of_ne (show x ≠ a by intro h; subst x; exact hna hx)).mpr
         (hsub _ (List.mem_cons_of_mem _ hx)))
-    rw [List.length_erase_of_mem hau] at rec
+    rw [List.length_erase_of_mem hau] at recStep
     have := List.length_pos_of_mem hau
     simp only [List.length_cons]; omega
 

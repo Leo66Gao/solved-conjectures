@@ -318,7 +318,7 @@ theorem blocker_count (F : Family α) {k} (rk : Rank F k) (pos : 0 < k) (t : Nat
         refine ⟨x,cov sx,List.mem_map.mpr ?_⟩
         exact ⟨Remove x E,(lcov x).2 (blocker_remove eh ex),insert_remove ex⟩
     · have pospow : 0 < k^(t+1) := Nat.pow_pos pos
-      refine ⟨[Empty], by simpa using pospow, ?_⟩
+      refine ⟨[Empty], by simp only [List.length_singleton]; omega, ?_⟩
       intro E eh
       have h0 : Hits F (Empty : Support α) := fun S s => False.elim (any ⟨S,s⟩)
       have sub : Sub E Empty := eh.2.2 (fun _ he => he.elim) h0
@@ -563,7 +563,7 @@ theorem virtual_unique {F : Family α} {k t} (rk : Rank F k) (pos : 0 < t)
       by_cases yes : X a
       · exact yes
       · let D : Support α := fun y => y=a
-        have bound : Small D t := ⟨[a],by simpa using pos,fun _ h => List.mem_singleton.mpr h⟩
+        have bound : Small D t := ⟨[a],by simp only [List.length_singleton]; omega,fun _ h => List.mem_singleton.mpr h⟩
         have av : Avoid (Virtual k t F) D :=
           ⟨X,vx,fun y xy (d : y=a) => yes (d ▸ xy)⟩
         obtain ⟨T,ft,dis⟩ := (exact_interface rk D bound).mpr av

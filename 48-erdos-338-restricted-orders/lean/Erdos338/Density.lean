@@ -36,9 +36,9 @@ theorem le_cap_iff {A q u k h} :
     exact ⟨fun hk => ⟨hk, hk ▸ has_zero A q u⟩, And.left⟩
   | succ h ih =>
     by_cases HH : Has A q u (h+1)
-    · simp only [cap, if_pos HH]
+    · simp only [cap, HH, ite_true]
       exact ⟨fun hk => ⟨hk, HH.down hk⟩, And.left⟩
-    · simp only [cap, if_neg HH, ih]
+    · simp only [cap, HH, ite_false, ih]
       constructor
       · exact fun ⟨hle, hf⟩ => ⟨by omega, hf⟩
       · intro ⟨hle, hf⟩
@@ -76,13 +76,13 @@ private theorem split_weight (f : Nat → Nat) (p : Nat → Bool) (xs : List Nat
   induction xs with
   | nil => simp [weight]
   | cons x xs ih =>
-    cases hp : p x <;> simp [weight, List.filter_cons, hp, ih, Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
+    cases hp : p x <;> simp [weight, hp, ih, Nat.add_assoc, Nat.add_left_comm]
 
 private theorem split_length (p : Nat → Bool) (xs : List Nat) :
     xs.length = (xs.filter p).length + (xs.filter (fun x => !(p x))).length := by
   induction xs with
   | nil => simp
-  | cons x xs ih => cases hp : p x <;> simp [List.filter_cons, hp, ih, Nat.add_assoc,
+  | cons x xs ih => cases hp : p x <;> simp [hp, ih, Nat.add_assoc,
       Nat.add_comm, Nat.add_left_comm]
 
 /-- Exact support criterion before reduction: bounded residue populations are
@@ -286,7 +286,7 @@ private theorem endpoint_distinct_modwt (xs : List Nat) (hn : xs.Nodup)
     · subst x
       simp [weight, hx] at hb ⊢
       omega
-    · simp [weight, Ne.symm h, h]
+    · simp [weight, Ne.symm h]
       omega
 
 private theorem mode5_no_low_ordinary (n : Nat) (e : n % 6 = 5) {k : Nat} (hk : k < 3) :
@@ -561,8 +561,8 @@ private theorem count_one_le {xs : List Nat} (hn : xs.Nodup) : xs.count 1 ≤ 1 
     obtain ⟨h,hn⟩ := List.nodup_cons.mp hn
     specialize ih hn
     by_cases e : a=1
-    · subst a; simp [List.count_cons,List.count_eq_zero.mpr h]
-    · simp [List.count_cons, e, ih]
+    · subst a; simp [List.count_eq_zero.mpr h]
+    · simp [e, ih]
 
 theorem oneException_orders {q : Nat} (hq : 3 ≤ q) :
     IsOrder (Ordinary (OneException q)) q ∧

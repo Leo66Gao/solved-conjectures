@@ -379,7 +379,7 @@ theorem popular_iff_reflected_count (apos : ∀ x, A x → 0 < x) :
     let K := keys A B s
     let f := fromKey B s
     have nd : K.Nodup := List.nodup_range.sublist List.filter_sublist
-    refine ⟨K.map f,by simpa [K],?_,?_⟩
+    refine ⟨K.map f,by simpa only [List.length_map,K] using hl,?_,?_⟩
     · rw [List.pairwise_map]
       apply nd.imp_of_mem
       intro k k' hk hk' ne x hx hy
@@ -445,7 +445,7 @@ private theorem cert_add_immune_list (c : Cert A B h e j q u)
   | nil => simpa using c
   | cons s ps ih =>
     have cs := Cert.immune (pa s (by simp)) (ih (fun x hx => pa x (by simp [hx])))
-    simpa only [List.length_cons,List.sum_cons,Nat.add_assoc,Nat.succ_add,Nat.add_succ] using cs
+    simpa only [List.length_cons,List.sum_cons,Nat.add_assoc,Nat.succ_add,Nat.add_succ,Nat.add_zero] using cs
 
 theorem cert_iff_sumset_rhs : (∃ u, Cert A B h e m n u) ↔ SumsetRHS A B h m e n := by
   constructor
@@ -545,7 +545,7 @@ theorem Alt.normalize (apos : ∀ x, A x → 0 < x) (v : Alt A B s p) :
     by_cases le : b ≤ c
     · have u : b+c-b=c := by omega
       have d : b ≠ b+c := by omega
-      simp [fromKey,key,Nat.min_eq_left le,u,hc,d]
+      simp [fromKey,key,Nat.min_eq_left le,u,hc,d,Nat.ne_of_gt cp]
     · have u : b+c-c=b := by omega
       have d : c ≠ b+c := by omega
       simpa only [fromKey,key,Nat.min_eq_right (by omega : c ≤ b),d,

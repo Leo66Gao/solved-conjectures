@@ -39,7 +39,7 @@ Suppose $\lowd(R_h(A))>\delta$, where $0<\delta<1$ and $\lowd$ denotes lower asy
 The implicit constant is absolute. The onset $N_0$ may depend on $A$, but not on $E$.
 \end{theorem}
 
-The supplied audit obtains a $3^h$ in this exponent by a single popularity threshold per rank. We replace it by $2^h$ using several thresholds, following the disjoint-representation method of \cite[Lemmas~3--4]{CYZ}. A preliminary construction in \cite{Gao} supplied the lower bound and an earlier $16^h$ upper estimate. Neither that lower construction nor the underlying density and addition theorems is new here.
+We use several popularity thresholds per rank to obtain the $2^h$ in the exponent, building on the disjoint-representation method of \cite[Lemmas~3--4]{CYZ}. A preliminary construction in \cite{Gao} supplied the lower bound and an earlier $16^h$ upper estimate. Neither that lower construction nor the underlying density and addition theorems is new here.
 
 \section{One active popularity scale at each length}
 Set $D=64h^2$, $L_j=2^j$, $Q_j=D L_j$. Starting from $\alpha_h=\delta$, for $r=h,\ldots,1$ define
@@ -49,7 +49,7 @@ Set $D=64h^2$, $L_j=2^j$, $Q_j=D L_j$. Starting from $\alpha_h=\delta$, for $r=h
 \end{equation}
 Only the finitely many pairs $1\le r\le h$, $0\le j\le J_r$ are used. Let $B_{r,j}$ consist of positive integers admitting $Q_j$ mutually disjoint representations, each a nonempty subset of $A$ with at most $2r$ elements. Write $C_{r,j}=B_{r,j}\cup\{0\}$.
 
-At every sufficiently large integer $N$, choose the smallest $r$ with
+Take $N$ beyond the density onset and large enough that $N\ge\max_{0\le s\le h}1/\alpha_s$. Choose the smallest $r$ with
 \[
  M=|R_r(A)\cap[1,N]|\ge\alpha_rN.
 \]
@@ -133,13 +133,13 @@ The modulus $U(h)$ exists, and $\displaystyle\lim_{h\to\infty}h^{-1}\log\log\log
 \begin{proof}
 One admissible modulus is $\lcm(1,\ldots,L_{J_1})$ with $\delta=c_h/2$. Indeed any $g$ from the theorem divides it; completeness modulo the larger modulus guarantees corrections modulo $g$. Conversely, a cofinite restricted sumset meets every residue. The bound for $L_{J_1}$ and $\log\lcm(1,\ldots,b)\le b\log b$ give $\log\log\log U(h)\le h\log 2+O(\log(2h))$ once $U(h)$ is sufficiently large.
 
-For the lower bound, use the denominations from \cite{Gao}, now with a different tail. Set $d=h-4$, $P_0=1$, $P_i=2^{2^{i-1}+i}$ for $1\le i\le d$, $P=P_d$, $u_i=P_i/P_{i-1}$, $w_i=P/P_i$, and
+For the lower bound ($h\ge5$), use the denominations from \cite{Gao}, now with a different tail. Set $d=h-4$, $P_0=1$, $P_i=2^{2^{i-1}+i}$ for $1\le i\le d$, $P=P_d$, $u_i=P_i/P_{i-1}$, $w_i=P/P_i$, and
 \[
  C=\{P\}\cup\{k w_i:1\le i\le d,\ 1\le k<u_i\},\qquad S_C=\sum_{c\in C}c .
 \]
 Then $2P\le S_C<7P/2$: in $S_C/P=1+\frac12\sum_i(u_i-1)/P_{i-1}$ the first place adds $3/2$, and for $i\ge2$ we have $u_i/P_{i-1}=2^{2-i}$, so the rest adds less than $1$. Also $\Sigma(C)=[0,S_C]\cap\Z$. To check the latter assertion, add the denominations from smallest upward. At the start of a place with unit $w_i$, the lower places already cover $[0,w_i-1]$ by their digit expansions. Adding $w_i,2w_i,\ldots,(u_i-1)w_i$ successively cannot create a gap: before adding $k w_i$ the previously covered interval has upper end at least $kw_i-1$. This also applies to the last coin $P$.
 
-Fix $S_C+2\le q\le4P$. Put $A_q=C\cup q\N_{>0}$. Every residue in $[0,q-1]$ uses at most three copies of $P$ and one coin at each digit, so an extra tail term gives $\ord(A_q)\le d+4=h$. But $q-1\notin\Sigma(A_q)\bmod q$. For any proposed universal modulus $M$ with $q\nmid M$, put $v=\gcd(q,M)\le q/2\le2P$. The subset sums of $C$ cover all classes modulo $v$, and the multiples of $q$ cover the subgroup $v\Z/M\Z$. The two sets of labels are disjoint. Thus $\Sigma(A_q)$ is complete modulo $M$, an incorrect test outcome. Every universal modulus is therefore divisible by \emph{every integer} $q$ in the indicated interval. By the prime number theorem the primes in $(7P/2+1,4P]$ alone imply $\log U(h)\gg P$ for all sufficiently large $h$. The claimed lower limit follows.
+Fix $S_C+2\le q\le4P$. Put $A_q=C\cup q\N_{>0}$. Every residue in $[0,q-1]$ uses at most three copies of $P$ and one coin at each digit, so an extra tail term gives $\ord(A_q)\le d+4=h$. But $q-1\notin\Sigma(A_q)\bmod q$. For any proposed universal modulus $M$ with $q\nmid M$, put $v=\gcd(q,M)\le q/2\le2P$. The subset sums of $C$ cover all classes modulo $v$. Every residue in the subgroup $v\Z/M\Z$ is represented by one positive multiple of $q$, choosing a sufficiently large multiple also when the residue is zero. This label is outside $C$ because $q>P$. Thus $\Sigma(A_q)$ is complete modulo $M$, an incorrect test outcome. Every universal modulus is therefore divisible by \emph{every integer} $q$ in the indicated interval. By the prime number theorem the primes in $(7P/2+1,4P]$ alone imply $\log U(h)\gg P$ for all sufficiently large $h$. The claimed lower limit follows.
 \end{proof}
 
 \section*{Verification of the earlier lower construction}

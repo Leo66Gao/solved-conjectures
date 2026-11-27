@@ -1,4 +1,18 @@
+import Full338
+import ReflectedBridge
 import Erdos338
+
+#check Erdos338.erdos_338
+#check Erdos338.erdos_338.variants.bounded_by_order
+#check Erdos338.erdos_338.variants.eq_order
+#check Erdos338.erdos_338.variants.basis_after_finite_removal
+#check Erdos338.erdos_338.variants.same_order_after_finite_removal
+#print axioms Erdos338.erdos_338
+#print axioms Erdos338.erdos_338.variants.bounded_by_order
+#print axioms Erdos338.erdos_338.variants.eq_order
+#print axioms Erdos338.erdos_338.variants.basis_after_finite_removal
+#print axioms Erdos338.erdos_338.variants.same_order_after_finite_removal
+#print axioms Erdos338.ReflectedCatalogueAudit.existing_answer_iff_reflected
 #print axioms Erdos338.Fringe.repair
 #print axioms Erdos338.Pair.immune_iff_reflected_count
 #print axioms Erdos338.canonical_sumset_identity
