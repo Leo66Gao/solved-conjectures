@@ -1,0 +1,222 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\DeclareMathOperator{\perma}{per}
+\DeclareMathOperator{\inv}{inv}
+\newtheorem{theorem}{Theorem}
+\title{An order-$8192$ counterexample to real $q$-permanent monotonicity}
+\author{Leo Gao\\[-1pt]{\small AI-assisted research}}
+\date{November 27, 2026 \quad$\cdot$\quad Research supplement}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give an explicit real symmetric positive definite integer matrix of order
+$8192$ whose $q$-permanent decreases between two rational points of $[-1,1]$.
+A finite arithmetic certificate bounds the endpoint derivative using a
+sparse product of ring polynomials and two pure coefficients of exterior
+polynomials. The ordered Gram factor and an integer-only checker accompany
+the proof.
+\end{abstract}
+
+\section{The matrix and endpoint identity}
+
+For an $n\times n$ matrix $A$, set
+\[
+ P_q(A)=\sum_{\sigma\in S_n}q^{\inv(\sigma)}\prod_i A_{i,\sigma(i)},
+ \qquad C=\binom n2 .
+\]
+\begin{theorem}
+Let $W$ be the ordered integer matrix constructed below and let
+$A=WW^{\mathsf T}+I_{8192}$. The matrix $A$ is non-diagonal and positive
+definite, and $P'_1(A)<0$. With $h=1/(16000C\,2048^n)$, one has
+$P_{1-h}(A)>P_{1-h/2}(A)$.
+\end{theorem}
+
+For real rows $v_i$, let $H=VV^{\mathsf T}$, $L_i(z)=v_i\cdot z$, and define
+\[
+ p=\prod_iL_i,\qquad
+ F_{ab}=\sum_{i<j}(v_{ia}v_{jb}-v_{ib}v_{ja})
+                  \prod_{k\ne i,j}L_k .
+\]
+The factorial norm is $\|f\|_F^2=\sum_\alpha \alpha!|f_\alpha|^2$ for
+$f=\sum_\alpha f_\alpha z^\alpha$. The factorial inner product of two
+products of linear forms is the permanent of their pairwise inner-product
+matrix, by applying the product of directional derivatives and evaluating
+at zero. Thus $\perma(H)=\|p\|_F^2$. Expanding the exterior norms by the
+two-by-two determinant identity counts each permutation's product with
+a positive sign for each ascending pair and a negative sign for each
+inversion. Therefore
+\begin{equation}\label{eq:endpoint}
+ 2P'_1(H)=C\perma(H)-\sum_{a<b}\|F_{ab}\|_F^2 .
+\end{equation}
+The checker tests this identity against direct permutation sums. Appending
+a row $v$ with form $L$ updates $p$ to $Lp$ and $F_{ab}$ to
+$LF_{ab}+v_b\partial_a p-v_a\partial_b p$, by collecting the pairs ending
+at the new row.
+
+Set $m=32$, $N=256$, $n=mN$, $s=49791/50000$, and $S=10^{12}$. For
+$0\le j<N$ and $0\le k<m$, define
+\[
+ u_j=\frac{2j+1}{2N},\qquad
+ a_j=\sqrt{\frac{2s^2u_j^2}{1-u_j^2}},\qquad
+ \theta_k=\frac{(2k+1)\pi}{m},\qquad
+ v_{jk}=(\cos\theta_k,\sin\theta_k,a_j/\sqrt 2).
+\]
+The routine \texttt{build} in \texttt{verify.py} rounds the reference
+rows at scale $S$. It bounds first-quadrant trigonometric values by
+Machin's formula for $\pi$, alternating arctangent series and cosine
+Taylor series. It bounds the heights by integer square-root intervals.
+It rounds the midpoint of each rational interval to the nearest integer
+at scale $S$ and checks that both endpoints are within $1/S$ of the
+scaled-back coordinate. It obtains the other quadrants by exact rotations.
+Starting with $j$ outermost and $k$ innermost, sort the integer rows
+$W_i=(x_i,y_i,b_i)$ stably by increasing $b_i x_i/(x_i^2+y_i^2)$, and
+apply the same permutation to the reference rows. The checker compares
+the reconstruction with the bundled JSON. Positive definiteness follows
+from $x^{\mathsf T}Ax=\|W^{\mathsf T}x\|^2+\|x\|^2$. Two neighboring
+angles from one ring have positive plane inner product, checked on the
+integer coordinates, and their height contribution is a square. This gives
+a nonzero off-diagonal entry.
+
+\section{A sparse upper bound for the reference permanent}
+
+The factorial norm is invariant under unitary substitutions, since it
+equals $\mathbb E|f(G)|^2$ for a standard complex Gaussian vector $G$.
+In the basis $z_0=(1,i,0)/\sqrt2$, $\overline z_0$, $e_3$, a linear
+factor in ring $j$ is $(xe^{i\theta_k}+ye^{-i\theta_k}+a_j w)/\sqrt2$.
+For $q=e^{i\theta_k}$, one has $q^m=-1$ and $\prod_k q=1$. Multiplying
+the unscaled factor by $q$ gives $xq^2+a_jwq+y$. If $r_1,r_2$ are the
+roots of this quadratic for $x\ne0$, the ring product is
+$x^m(r_1^m+1)(r_2^m+1)=x^m+y^m+x^m(r_1^m+r_2^m)$, an identity that
+extends polynomially to $x=0$. The power sums of $xr_1,xr_2$ satisfy
+$T_0=2$, $T_1=-a_jw$, and $T_\ell=-a_jwT_{\ell-1}-xyT_{\ell-2}$.
+The recurrence gives coefficients $(-1)^hc_h$ at degree $m$, where
+$c_h=\frac{m}{m-h}\binom{m-h}{h}$. The unitary substitution $y\mapsto-y$
+makes them nonnegative. The resulting unscaled ring polynomial is
+\[
+ Q_j=x^m+y^m+
+ \sum_{h=0}^{m/2}c_h(a_j^2)^{m/2-h}(xy)^h w^{m-2h}.
+\]
+It follows that $\perma(VV^{\mathsf T})=2^{-n}\|\prod_jQ_j\|_F^2$.
+
+Every monomial satisfies $\alpha_x-\alpha_y\equiv0\pmod m$. For a
+product of $t$ rings of degree $d=tm$, store the ordinary coefficients
+$c_\alpha$ as $B_\alpha=c_\alpha\sqrt{\alpha!/d!}$. A monomial with
+coefficient $q_\beta$ in the next ring contributes
+\[
+ B_\alpha q_\beta
+ \sqrt{\frac{d!}{(d+m)!}\prod_l\frac{(\alpha_l+\beta_l)!}{\alpha_l!}}
+ \quad\text{to } B^{\mathrm{new}}_{\alpha+\beta}.
+\]
+The normalized squared norm is $\sum_\alpha B_\alpha^2$. The final
+degree has $1{,}049{,}089$ allowed slots, all of which are included.
+
+For each needed $k$, the checker encloses $\sqrt{k}$ using the exact floor
+of $2^{40}\sqrt{k}$ and its successor, both divided by $2^{40}$. Products
+of lower endpoints bound the denominator from below, and products of
+upper endpoints bound the numerator from above. The $c_h$ are exact
+integers and the $a_j^2$ are rational. All coefficients are nonnegative,
+so directed rounding propagates coefficient upper bounds at every step.
+The final sum is rounded upward on the grid of spacing $2^{-40}$.
+
+The integer kernel stores a positive dyadic as $M2^e$ with
+$2^{55}\le M<2^{56}$. Addition aligns exponents by ceiling shifts and
+normalizes upward. Products use 128-bit integer intermediates and directed
+shifts. Reciprocals round upward by integer ceiling division. For these
+parameters, the square-root factors lie between $1/2$ and $128$, and
+$a_j^2$ lies between $2^{-20}$ and $2^{10}$. Each multiplication uses at
+most $32$ numerator roots, $32$ denominator roots, and $16$ powers of
+$a_j^2$, with an integer coefficient below $2^{64}$. Even allowing a
+factor of two for each mantissa rounding and sums over all slots, the
+exponent changes across the $256$ stages stay below $10^6$ in magnitude.
+The optional interval kernel uses hardware-directed rounding and checks
+its arithmetic environment. Final sign comparisons use exact fractions.
+
+\section{Exterior lower bound for the rounded rows}
+
+Let $\widehat H=(W/S)(W/S)^{\mathsf T}$, with polynomials
+$\widehat p$ and $\widehat F_{ab}$. Evaluations at $z_0$ and
+$\overline z_0$ select distinct pure coefficients of degree $n-2$ in
+the unitary coordinates above. The rows are real, so
+\[
+ \sum_{a<b}\|\widehat F_{ab}\|_F^2
+ \ge 2(n-2)!|\widehat p(z_0)|^2 E,
+ \qquad
+ E=\sum_{a<b}\left|\frac{\widehat F_{ab}(z_0)}{\widehat p(z_0)}\right|^2.
+\]
+Every rounded plane radius is at least $1-2/S$. By Bernoulli's inequality,
+$|\widehat p(z_0)|^2\ge 2^{-n}(1-2/S)^{2n}\ge 2^{-n}(1-4n/S)$.
+Set $D=\operatorname{lcm}_i(x_i^2+y_i^2)$ and
+$U_i=W_i(x_i-iy_i)D/(x_i^2+y_i^2)$. The rounded row divided by its
+linear evaluation at $z_0$ equals $\sqrt2\,U_i/D$. Thus each exterior
+quotient equals $2/D^2$ times the Gaussian integer sum
+$\sum_{i<j}(U_{ia}U_{jb}-U_{ib}U_{ja})$. Prefix sums calculate the
+three sums exactly in a linear number of row updates. Squared absolute
+values give $E$ as a fraction. The lower bound in units of $Cn!2^{-n}$ is
+\[
+ N_{\mathrm{lo}}=\frac{2(1-4n/S)E}{Cn(n-1)}.
+\]
+
+\newpage
+\section{Rounding, diagonal lift, and the sign}
+
+For real $v$ and homogeneous $f$ of degree $d$, rotate $v$ to the first
+coordinate. Multiplication by the first coordinate multiplies each
+monomial's squared factorial weight by $\alpha_1+1$. Consequently
+\[
+ \|v\|\|f\|_F\le\|(v\cdot z)f\|_F
+ \le\sqrt{d+1}\,\|v\|\|f\|_F .
+\]
+Each row error has norm at most $2/S$, while each original row has norm
+at least $1$. Replacing rows successively and using the triangle
+inequality increases the product norm by at most $(1+\delta)^n$, with
+$\delta=2\lceil\sqrt n\rceil/S$. Squaring and bounding the binomial
+expansion by a geometric series gives
+$\perma(\widehat H)\le\perma(VV^{\mathsf T})/(1-2n\delta)$.
+
+In $A/S^2=\widehat H+I/S^2$, expansion along the added diagonal gives
+the principal permanents of $\widehat H$ weighted by $S^{-2|J|}$ for
+deleted index sets $J$. Rounded row norms squared exceed $1/2$, so the
+lower multiplication estimate gives
+$\perma(\widehat H[J^c])\le2^{|J|}\perma(\widehat H)$. The lift
+therefore costs a factor at most $(1+2/S^2)^n\le (1-2n/S^2)^{-1}$.
+If $U$ is the computed upper bound for $\|\prod_j Q_j\|_F^2/n!$, then
+\[
+ \frac{\perma(A/S^2)}{n!2^{-n}}
+ \le P_{\mathrm{hi}}=\frac{U}{(1-2n\delta)(1-2n/S^2)}.
+\]
+The rows $(W_i/S,e_i/S)$ are a Gram factor for $A/S^2$. For wedges of
+the first three coordinates, setting the last $n$ variables to zero
+recovers $\widehat F_{ab}$. The omitted factorial-norm contributions
+are nonnegative. Combining with \eqref{eq:endpoint} yields
+\[
+ \frac{2P'_1(A/S^2)}{Cn!2^{-n}}\le P_{\mathrm{hi}}-N_{\mathrm{lo}}.
+\]
+The integer run gives $U=1103193316883/549755813888$, and the final
+rational comparison gives $N_{\mathrm{lo}}-P_{\mathrm{hi}}>1/4000$.
+The derivative is negative, and scaling from $A/S^2$ to $A$ preserves
+its sign by homogeneity.
+
+\section{Interior comparison and reproduction}
+
+The verifier establishes $\max_i\|W_i\|^2<1023 S^2$. By Cauchy--Schwarz
+every entry of $A/S^2$ has absolute value below $1024$. Differentiating
+the permutation sum twice gives, for $q\in[0,1]$,
+\[
+ |P''_q(A/S^2)|\le n!C^2 1024^n .
+\]
+With $h=1/(16000C\,2048^n)$, the change of the derivative on $[1-h,1]$
+is at most $Cn!2^{-n}/16000$, whereas the endpoint derivative is
+strictly below $-Cn!2^{-n}/8000$. This proves the asserted comparison.
+
+Run \texttt{python3 verify.py} from the
+\href{https://github.com/Leo66Gao/solved-conjectures/tree/main/19-bapat-q-permanent/order-8192}{certificate directory}.
+The checker reconstructs the bundled Gram factor, runs six small exact
+tests against $121{,}032$ permutation terms, and recomputes both bounds.
+The \href{https://github.com/Leo66Gao/solved-conjectures/blob/main/19-bapat-q-permanent/order-8192/verification-local.txt}{recorded integer run}
+completed in $13.68$ seconds. The argument certifies the sign by bounds.
+Minimality and independent specialist review remain open.
+\end{document}

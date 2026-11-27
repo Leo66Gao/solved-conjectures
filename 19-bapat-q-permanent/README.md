@@ -10,7 +10,7 @@ The manuscript specifies a real symmetric positive definite integer matrix of or
 
 The explicit integer matrix $A=WW^{\mathsf T}+I_{8192}$ violates monotonicity. The exact checker reconstructs the bundled Gram factor, bounds the normalized endpoint derivative strictly below $-1/8000$, and certifies a strict decrease at two interior points.
 
-[Certificate and run instructions](order-8192/) · [Proof](order-8192/proof.md) · [Recorded output](order-8192/verification-local.txt)
+[Certificate and run instructions](order-8192/) · [PDF](order-8192/proof.pdf) · [LaTeX](order-8192/proof.tex) · [Markdown proof](order-8192/proof.md) · [Recorded output](order-8192/verification-local.txt)
 
 ## Reproducing the checks
 

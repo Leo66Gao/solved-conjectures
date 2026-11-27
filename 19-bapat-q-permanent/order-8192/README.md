@@ -2,6 +2,8 @@
 
 This directory specifies **one fixed integer matrix** A = W W^T + I, with W supplied as an 8192-by-3 JSON array. It certifies P'_1(A)<0 with explicit finite coefficient arithmetic. It does not compute the full integer derivative; rigorous bounds on its two terms suffice. No numerical sphere sampling, asymptotic estimates, downloaded data, or precomputed permanent bounds are required.
 
+[PDF](proof.pdf) · [LaTeX](proof.tex) · [Markdown proof](proof.md)
+
 ## Running
 
 Requires Python 3.9+ (standard library, Unix resource module), a C++17 compiler available as `g++` with unsigned __int128 support. On a Unix-like system:
