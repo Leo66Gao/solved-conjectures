@@ -8,9 +8,9 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 ### Featured: Erdős Problem #338
 
-**Lean-checked proofs for the original questions.** The packet formalizes Chen–Yang–Zhao’s existence and finite-deletion results, proves a uniform bound, and checks Leo Gao’s exact rank-two equality criterion. The sharper growth rate is proved separately on paper. External acceptance and priority are not claimed.
+**Lean-checked proofs for the original questions.** The packet formalizes Chen–Yang–Zhao’s existence and finite-deletion results, proves a uniform bound, and gives a structural characterization of when the orders agree. The sharper growth rate is proved separately on paper. External acceptance and priority are not claimed.
 
-[Start here](48-erdos-338-restricted-orders/) · [Equality proof (PDF)](48-erdos-338-restricted-orders/rank-two-criterion.pdf) · [Lean 4 project](48-erdos-338-restricted-orders/lean/) · [Sharp boundedness (PDF)](48-erdos-338-restricted-orders/sharp-boundedness.pdf)
+[Start here](48-erdos-338-restricted-orders/) · [Structural equality proof](48-erdos-338-restricted-orders/structural-equality.md) · [Lean 4 project](48-erdos-338-restricted-orders/lean/)
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |

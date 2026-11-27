@@ -6,14 +6,14 @@ Quan-Hui Yang, and Lilu Zhao**. This is a formalization of their result,
 not a priority claim for discovering it, a journal referee report, or a
 record of acceptance by a problem catalogue.
 
-Let an *ordinary asymptotic basis* be a set (A\subseteq\mathbb N) for
-which every sufficiently large integer is a sum of at most (h) elements of
-(A), repetitions allowed, for some (h). Its *restricted order* is finite
+Let an *ordinary asymptotic basis* be a set $A\subseteq\mathbb N$ for
+which every sufficiently large integer is a sum of at most $h$ elements of
+$A$, repetitions allowed, for some $h$. Its *restricted order* is finite
 when an analogous bound exists using distinct elements.
 
 **Theorem.** For an ordinary asymptotic basis, finite restricted order
-exists if and only if, for every positive modulus (q), every residue
-modulo (q) is the sum of a finite subset of (A), each element used once.
+exists if and only if, for every positive modulus $q$, every residue
+modulo $q$ is the sum of a finite subset of $A$, each element used once.
 
 This is Theorem 2 of [Chen–Yang–Zhao, arXiv:2611.33191v1][cyz] and answers
 the existence biconditional used on the [Erdős Problem a Day page][day].
@@ -21,8 +21,8 @@ The existence theorem in `Erdos338Solution.lean`, and the uniform bound in
 `Full338.lean`, use the same at-most order
 predicates as the [Formal Conjectures statement][fc] (eventual membership,
 Multiset witnesses for ordinary order, and Finset witnesses for restricted
-order). The answer uses natural residue representatives (0\le r<q);
-for (q=0) the universal condition has no instances. This package is a
+order). The answer uses natural residue representatives $0\le r<q$;
+for $q=0$ the universal condition has no instances. This package is a
 standalone check at its own pinned toolchain, not a merged upstream
 Formal Conjectures pull request or a Palomar registration.
 
@@ -36,19 +36,24 @@ Formal Conjectures pull request or a Palomar registration.
 | `Erdos338.erdos_338.variants.eq_order` | Leo Gao's separate rank-two equality criterion, using the catalogue's exact least orders |
 | `Erdos338.erdos_338.variants.bounded_by_order` | A bound depending only on ordinary order, when restricted order is finite |
 
-No `sorry` or unproved analytic premise is used in these five declarations.
+For the new [structural answer to part (iii)](../structural-equality.md),
+start with `Erdos338.SparseTrace.equal_orders_iff_anchored_trace` in
+[`StructuralTrace.lean`](StructuralTrace.lean). It assumes only the finite
+ordinary order and tests ordinary sumsets of fixed disjoint sparse columns.
+The [thinning test](../thinning-test.md) gives a separate exact equivalence.
+
+No `sorry` or unproved analytic premise is used in the final declarations.
 Their axiom audit lists only `propext`, `Classical.choice`, and
 `Quot.sound`. See [proof map](PROOF-MAP.md) for which code proves each step.
 
 **Exact scope.** The uniform bound is an unconditional, explicit recursive
 function of ordinary order in Lean. It answers the original qualitative
 boundedness question; it is **not** the sharp growth-rate bound from Leo
-Gao's separate [mathematical write-up][bounds]. The equality answer here
-is an exact iff in terms of rank-two obstruction data. This build does
-not claim an additional intrinsic classification of arbitrary weak-fringe
-bases. Whether the equality criterion is satisfactory remains a matter
-for mathematical review; compiling it does not certify priority or
-external acceptance.
+Gao's separate [mathematical write-up][bounds]. Both equality approaches
+are checked: the older targetwise rank-two criterion and the global sparse
+trace criterion. Neither is a finite decision procedure for arbitrary
+infinite bases. Compiling the proofs does not certify priority or external
+acceptance.
 
 ## Replay
 
@@ -65,8 +70,8 @@ toolchain and Mathlib cache. To reuse a checkout set `ERDOS335_ROOT` to
 its directory. Set `ERDOS338_SKIP_DOWNLOAD=1` only if the external
 checkout already has its dependencies and compiled Mathlib cache. The
 script checks both dependency pins, compiles every supplied source into a
-fresh directory, then imports the final compiled object and audits all five
-declarations. The build may print deprecation warnings on Lean 4.34.0.
+fresh directory, then imports the compiled objects and audits the original
+declarations and structural extension. The build may print deprecation warnings on Lean 4.34.0.
 
 ## Credits and dependencies
 

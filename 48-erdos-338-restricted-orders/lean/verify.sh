@@ -63,3 +63,39 @@ for name, axioms in entries:
     assert cited <= standard, (name, cited - standard)
 print("PASS: five main declarations, the reflected bridge, and 20 supplemental audits use only standard Lean axioms.")
 PYTHON
+extra=(StructuralTrace ResidueCore FringeTrace TraceGauge DissociatedTrace ResidueExamples
+       Thinning Molecules Samples Quantized)
+for module in "${extra[@]}"; do
+  printf '\nCHECK %s\n' "$module"
+  lean -R "$src" -o "$cache/$module.olean" "$src/$module.lean"
+done
+audit=$(lean -R "$src" "$src/StructuralAudit.lean")
+printf '\n%s\n' "$audit"
+python3 - "$audit" <<'PY'
+import re, sys
+names = {
+    "Erdos338.SparseTrace.equal_orders_iff_sparse_trace",
+    "Erdos338.SparseTrace.equal_orders_iff_anchored_trace",
+    "Erdos338.SparseTrace.equal_orders_iff_anchored_fringe_trace",
+    "Erdos338.SparseTrace.equal_orders_iff_gauge_trace",
+    "Erdos338.SparseTrace.equal_orders_iff_digit_trace",
+    "Erdos338.SparseTrace.orthogonal_ideal",
+    "Erdos338.SparseTrace.simultaneous_escape",
+    "Erdos338.SparseTrace.thin_ordinary_trace",
+    "Erdos338.Structural.ResidueCore.equal_orders_iff_finite_profile",
+    "Erdos338.Structural.ResidueCore.Examples.example_ordinary",
+    "Erdos338.Structural.ResidueCore.Examples.example_equal",
+    "Erdos338.Structural.ResidueCore.Examples.example_strict",
+    "Erdos338.Structural.ResidueCore.Examples.example_same_tail",
+    "Erdos338.Structural.ResidueCore.Examples.example_nonperiodic",
+    "Erdos338.Thinning.equal_orders_iff_ordinary_thinning_panel",
+    "Erdos338.Thinning.observed_lattice",
+    "Erdos338.Thinning.restrictedOrder_transfer",
+}
+entries = re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", sys.argv[1])
+assert len(entries) == len(names) and {r[0] for r in entries} == names
+for name, axioms in entries:
+    found = set(re.split(r",\s*", axioms.strip())) if axioms.strip() else set()
+    assert found <= {"propext", "Classical.choice", "Quot.sound"}, (name, found)
+print("PASS: 17 structural-extension declarations audited; only standard axioms.")
+PY

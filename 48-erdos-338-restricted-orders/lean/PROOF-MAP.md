@@ -77,3 +77,16 @@ basis. The proof in `Full338.lean` supplies a separate route.
 
 This is an explicit, fully checked qualitative uniform bound, not an
 audit of the sharper growth rate in the separate paper.
+
+## Structural equality (part iii)
+
+- `StructuralTrace.lean` extracts disjoint sparse columns from any
+  unbounded sequence of covered targets, with fixed anchors and one
+  family of moving columns that survives every joint cutoff.
+- `FringeTrace.lean` localizes the probes to the old doubled fringe.
+  `TraceGauge.lean` and `DissociatedTrace.lean` give counting and
+  bounded-coefficient consequences.
+- `ResidueCore.lean` gives an exact finite residue profile in a subclass;
+  `ResidueExamples.lean` checks both outcomes on nonperiodic bases.
+- `Thinning.lean`, `Samples.lean`, `Quantized.lean`, and `Molecules.lean`
+  give the independent ordinary-count test and its stress checks.
