@@ -10,7 +10,7 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 **Lean-checked proofs for the original questions.** The packet formalizes Chen–Yang–Zhao’s existence and finite-deletion results, proves a uniform bound, and gives a structural characterization of when the orders agree. The sharper growth rate is proved separately on paper. External acceptance and priority are not claimed.
 
-[Start here](48-erdos-338-restricted-orders/) · [Structural equality proof](48-erdos-338-restricted-orders/structural-equality.md) · [Lean 4 project](48-erdos-338-restricted-orders/lean/)
+[Start here](erdos-338/) · [Structural equality proof](erdos-338/structural-equality.md) · [Lean 4 project](erdos-338/lean/)
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |

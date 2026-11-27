@@ -99,6 +99,6 @@ declarations and structural extension. The build may print deprecation warnings 
 [hhp]: https://doi.org/10.1515/crll.2003.055
 [dyson]: https://github.com/Ghuffy1/erdos-335/tree/29e64ce67b4999f76657bb4b51e306076f59e689
 [original]: https://www.renyi.hu/~p_erdos/1980-22.pdf
-[bounds]: https://github.com/Leo66Gao/solved-conjectures/tree/main/48-erdos-338-restricted-orders
+[bounds]: https://github.com/Leo66Gao/solved-conjectures/tree/main/erdos-338
 
 [attribution]: https://github.com/Ghuffy1/erdos-335/blob/29e64ce67b4999f76657bb4b51e306076f59e689/ATTRIBUTION.md
