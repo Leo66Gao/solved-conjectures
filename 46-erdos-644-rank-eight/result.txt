@@ -1,0 +1,4 @@
+Exceptional multisets: 87522 S7-orbits: 86 orbits requiring recursion: 51
+Completed regular spectrum configurations checked: 177
+Every bad configuration missing a pair has an XOR-zero triple.
+Construction: 2352 edges; 5005 complements of six-sets verified; tau=7.
