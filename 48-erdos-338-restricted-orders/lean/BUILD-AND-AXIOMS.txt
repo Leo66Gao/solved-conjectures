@@ -1,0 +1,25 @@
+Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)
+✔ [577/580] Built Erdos338.Pair
+✔ [578/580] Built Erdos338.Equality
+✔ [579/580] Built Erdos338
+Build completed successfully.
+'Erdos338.Fringe.repair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Pair.immune_iff_reflected_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.canonical_sumset_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.equal_order_iff_footprint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.canonical_reflected_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.canonical_immune_iff_deletions' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.equal_order_iff_reflected_footprint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.canonical_blocker_criterion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Blockers.blocker_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Blockers.virtual_label_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Growth.modCriterion_at_robust_class' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Growth.Mixed.exactPositiveMixedRadixGap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Density.periodicTail_equalOrder_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Density.tailDecision_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Density.endpoint_density_discrepancy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Density.endpoint_orders' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.Density.oneException_orders' depends on axioms: [propext, Quot.sound]
+'Erdos338.QAdic.tail_orders' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.QAdic.maximal_obstruction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Erdos338.QAdic.squares_not_restricted_four' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,376 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\N}{\mathbb N_0}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\ordR}{\operatorname{ord}_{R}}
+\newcommand{\ld}{\underline d}
+\title{Restricted orders of asymptotic bases:\\ rank-two obstruction criteria and quantitative bounds}
+\author{Leo Gao --- AI-assisted research draft}
+\date{27 November 2026}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\maketitle
+\begin{abstract}
+We revisit the four questions of Erd\H{o}s and Graham on restricted additive bases. We establish a pointwise canonical obstruction calculus for equality at arbitrary ordinary rank $h$: on a sparse fringe, truncated hypergraph duality gives bounded virtual support families, and exact budgeted composition reduces the test to additive fibers of ranks at most $\lceil h/2\rceil$. Each split is governed by bounded local deletion obstructions. We further give a nonrecursive arithmetic criterion using only reflected rank-two intersections and a matching obstruction with $O(h^2)$ alternatives per weight tuple, and an arithmetic improvement to the sufficient richness threshold. The proof also yields an overlap-count sufficient condition. We retain a quantitative bounded-modulus progression theorem giving the uniform bound $\exp(O(3^h h\log(2h)))$ and a single universal existence modulus, together with a canonical tail-gcd test and the doubly exponential lower construction. The equality theorem is a substantive candidate answer to item (iii), but we do not claim independent validation or acceptance of a complete historical resolution.
+\end{abstract}
+\section{Problem and conventions}
+Write $S_h(A)$ for sums of at most $h$ members of $A\subseteq\N$, allowing repeats, and $R_h(A)$ for sums of at most $h$ distinct members. Both contain zero. The orders $\ord(A)$ and $\ordR(A)$ are the least positive ranks at which the corresponding sets are cofinite (infinite if none). Removing zero changes neither order nor any at-most sumset. In proofs we assume $A\subseteq\N\setminus\{0\}$.
+
+The original four questions occur in concluding remark 3 of Erd\H{o}s and Graham's 1980 paper \cite[p. 206]{EG}, and in their monograph \cite[p. 52]{EGbook}: existence of restricted order, uniform boundedness by ordinary order, conditions for equality, and the two finite-deletion hypotheses implying existence. The recent preprint \cite{CYZ} answers existence and finite deletion through local completeness. The manuscript \cite{Gao} addresses boundedness, not equality. The indexed problem database \cite{database} lists the problem as open; direct access to the live entry was blocked during the final audit. Nothing in the original text requires an algorithmic characterization; nor does the wording establish that merely expanding the distinct-sum definition would be a satisfactory answer. We distinguish the precise results below from this outstanding interpretative and mathematical issue.
+
+\section{A bounded-modulus progression lemma}
+We use two classical forms of Kneser's addition theorem \cite{Kneser,CYZ}. In a finite abelian group, if $H$ is the stabilizer of a sumset $X_1+\cdots+X_t$, then its size is at least $\sum_i|X_i+H|-(t-1)|H|$. For infinite $X_i\subseteq\N$, $t\ge2$, if
+\[
+\ld(X_1+\cdots+X_t)<\liminf_{N\to\infty}\frac{\sum_i|X_i\cap[0,N]|}{N},
+\]
+the sumset is eventually periodic. Repeated sets are allowed. Here $\ld$ is lower asymptotic density.
+
+\begin{theorem}\label{progression}
+Suppose $\ld(R_h(A))>\delta$, where $0<\delta<1$. Set $\alpha_h=\delta$ and recursively, for $r=h,\ldots,1$, define
+\begin{align*}
+ L_r&=\lceil16/\alpha_r\rceil, & b_r&=\lceil4/\alpha_r\rceil,\\
+ Q_r&=b_r+1+\sum_{j=r}^h2jL_j, & \alpha_{r-1}&=\frac{\alpha_r^2}{64rQ_r}.
+\end{align*}
+Let $K=\sum_{r=1}^h2rL_r$. There exist $g\le b_1$, $a\bmod g$, and $N_0$, such that for every $E\subseteq A$ with $|E|\le g-1$, all $n\ge N_0$ in class $a$ belong to $R_K(A\setminus E)$. The parameters $K,b_1$ depend only on $h,\delta$.
+\end{theorem}
+\begin{proof}
+Let $D_r$ be the positive integers having $Q_r$ pairwise disjoint nonempty representations of length at most $2r$, and put $C_r=D_r\cup\{0\}$. For every sufficiently large $N$ choose the least $r$ with $M=|R_r(A)\cap[1,N]|\ge\alpha_rN$. Then $e=|R_{r-1}(A)\cap[0,N]|\le2\alpha_{r-1}N$, also for $r=1$ since $e=1$.
+
+For each of the $M$ sums choose one witnessing set of size at most $r$. A fixed element occurs in at most $e$ such sets, by subtraction. Let $p_n$ count ordered pairs of chosen sets that are disjoint and whose sums add to $n$. At least $M^2-rMe$ ordered pairs are disjoint and $p_n\le M$. If $n\notin D_r$, a maximal pairwise disjoint family of pair unions has at most $Q_r-1$ members; its union of at most $2r(Q_r-1)$ elements intersects every counted pair. At fixed $n$ each element accounts for at most $2e$ pairs. Hence $p_n\le4r(Q_r-1)e$ outside $D_r$. This is the counting mechanism of \cite[Lemma 3]{CYZ}. Keeping $M$, rather than replacing it by $N$, gives
+\begin{align*}
+ |D_r\cap[1,2N]|&\ge M-re-8r(Q_r-1)eN/M\\
+ &\ge\alpha_r N/2.
+\end{align*}
+Indeed $re\le\alpha_r N/32$ and the last subtracted term is at most $\alpha_r N/4$, by the recursion.
+
+Let $r_*$ be the largest rank selected infinitely often, and $I$ the indices $r\le r_*$ with $D_r$ infinite. For large $N$ the selected rank lies in $I$: any finite $D_r$ violates the displayed lower bound eventually. The sumset
+\[T=\sum_{r\in I}L_r C_r\]
+has total weighted counting functions at least $8N$ at $2N$ for all large $N$. Thus Kneser's infinite theorem applies (the lower density of $T$ is at most one), giving an eventual period $q$. Let $P$ be the residues modulo $q$ occurring infinitely in $D_{r_*}$. Along its infinite selected subsequence the latter set occupies at least $\alpha_{r_*}/4$ of $[1,2N]$. Finite exceptional residues contribute only finitely many elements, so $|P|\ge\alpha_{r_*}q/4$.
+
+Put $\alpha=\alpha_{r_*}$, $D=P\cup\{0\}$ and $J=\langle D\rangle\le\Z/q\Z$. Its index $g$ is at most $4/\alpha$. For $k=\lceil8/\alpha\rceil$, we claim $kD=J$. Otherwise the stabilizer $U$ of $kD$ in $J$ is proper; $D$ meets $t\ge2$ cosets of $U$ since it contains zero and generates $J$. Kneser implies
+\[|kD|\ge(k(t-1)+1)|U|>k|D|/2\ge q,\]
+a contradiction. Fix $p\in P$. Every class in $p+J$ has infinitely many representatives in $T$: express its difference from $p$ as $k$ terms of $D$, lift the nonzero terms to fixed members of $D_{r_*}$, and vary one member in the infinitely recurring class $p$. Pad with zero, using $k+1\le L_{r_*}$. Eventual periodicity of $T$ now gives an entire eventual progression modulo $g$, as $J=g\Z/q\Z$.
+
+Finally, any $t\in T$ is an ordinary sum of at most $L_r$ members of $C_r$ for each $r\in I$. Select the nonzero terms' witnessing sets greedily in descending rank. At rank $s$, the number of forbidden elements (including a deletion set of size at most $g-1$) is less than $Q_s$, since $s\le r_*$ and $b_s\ge g$. One of the $Q_s$ mutually disjoint witnesses therefore avoids all forbidden elements. The union has at most $K$ members. This proves the assertion, with a common onset for all deletions.
+\end{proof}
+
+\begin{corollary}\label{uniform}
+There are explicit functions $f(h)$ and $M(h)$ such that if $\ord(A)\le h$, then
+\[
+\ordR(A)<\infty\iff\Sigma(A)\bmod M(h)=\Z/M(h)\Z,
+\]
+where $\Sigma(A)=\bigcup_jR_j(A)$. In the affirmative case $\ordR(A)\le f(h)$, with
+\[f(h)\le \exp(O(3^h h\log(2h))).\]
+\end{corollary}
+\begin{proof}
+Use the Hegyv\'ari--Hennecart--Plagne inequality \cite{HHP,Heg},
+\[\ld(R_h(A))\ge c_h=h^{-h}\exp(-\pi\sqrt{2h/3}).\]
+For the at-most convention, apply their exact-rank inequality to $(A\cup\{0\})+1$, whose exact $h$-fold ordinary sumset is cofinite, then translate by $-h$ and omit zero. Set $\delta=c_h/2$ in Theorem~\ref{progression}, and take $M(h)=\operatorname{lcm}(1,\ldots,b_1)$, $f(h)=K+b_1$. Necessity is immediate from cofiniteness. Sufficiency follows because the progression modulus $g\le b_1$ divides $M(h)$. In a group of size $g$, a shortest reachable subset representation uses at most $g-1$ labels: otherwise two ordered partial sums coincide and a nonempty zero-sum subsequence can be removed. For every residue $v$ choose such a subset $E_v$ of $A$ summing to $e_v\equiv v-a\pmod g$. For large $n$ in residue $v$, represent $n-e_v$ by the progression theorem outside $E_v$ and adjoin $E_v$.
+
+For the bound let $x_r=1/\alpha_r$. Then $L_r\le17x_r$, $b_r\le5x_r$, and $Q_r\le C h^2x_r$ for an absolute $C$, since $x_j\le x_r$ for $j\ge r$. Hence $x_{r-1}\le C' h^3x_r^3$. Iteration gives $\log x_1=O(3^h(\log(1/\delta)+\log(2h)))$. Now $K+b_1\le C''h^2x_1$ and $\log(1/\delta)=O(h\log(2h))$.
+\end{proof}
+
+\section{Canonical modulus and finite deletion}
+\begin{theorem}\label{canonical}
+For any ordinary finite-order basis $A$, the tail gcd $g_N=\gcd(A\cap[N,\infty))$ eventually stabilizes to a positive integer $g$. Let $E=\{a\in A:g\nmid a\}$, a finite set. Then $\ordR(A)<\infty$ if and only if the subset sums of $E$ cover $\Z/g\Z$.
+\end{theorem}
+\begin{proof}
+If the tail gcd did not stabilize, extract a strictly increasing divisibility chain $d_1\mid d_2\mid\cdots$. Its inverse limit of cyclic groups is uncountable because each residue admits at least two extensions at each step. For an arbitrary coherent sequence $(z_i)$ choose integers tending to infinity congruent to $z_i$ modulo $d_i$. Represent each using $h$ ordinary summands padded by zeros. Extract subsequences until every coordinate is either constant or tends to infinity. For each fixed $j$, all diverging coordinates are eventually divisible by $d_j$. Thus the entire coherent sequence is the image of the single integer given by the sum of constant coordinates, a contradiction to uncountability.
+
+Necessity follows by reduction modulo $g$. Conversely fix any modulus $q$. The residues of infinitely recurring members of $A$ generate $d\Z/q\Z$, where $d=\gcd(g,q)$: after deleting finitely many elements, the recurring residues are exactly the tail residues and its gcd is $g$. Choose a subset of $E$ correcting the target modulo $d$. Its remaining residue lies in the generated subgroup. It is a nonnegative combination of recurring residues (a finite group turns negative multiples into positive ones), and each occurrence can be lifted to a new element avoiding the finite exceptional subset. Consequently $\Sigma(A)$ covers every modulus, in particular $M(h)$ in Corollary~\ref{uniform}.
+\end{proof}
+\begin{corollary}
+If $\ord(A\setminus F)<\infty$ for every finite $F\subseteq A$, then $\ordR(A)<\infty$. This also answers the stronger hypothesis of unchanged ordinary order.
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{canonical} to $A$. If $g>1$, deleting $E$ leaves only multiples of $g$, contradicting the hypothesis. If $g=1$, the criterion is automatic.
+\end{proof}
+The canonical modulus may depend on $A$, whereas Corollary~\ref{uniform} supplies a single, possibly enormous, universal test modulus. The latter does not assert that the canonical gcd itself is bounded or that the infinite input can be processed algorithmically.
+
+\section{Lower bound and quantitative audit}
+For completeness we reproduce the lower construction of \cite{Gao}, with attribution. Let $h\ge5$, $d=h-4$, $P_0=1$, $P_i=2^{2^{i-1}+i}$ for $1\le i\le d$, $P=P_d$, $u_i=P_i/P_{i-1}$ and $w_i=P/P_i$. The finite denomination set is
+\[C=\{P\}\cup\{kw_i:1\le i\le d,\ 1\le k<u_i\}.
+\]
+Set $m=8P$ and $A=2\cdot C\cup\{mn,mn+1:n\ge1\}$. Each $0\le t<4P$ needs at most three copies of $P$ and one coin per nonzero mixed digit. For large $n\equiv2t+\epsilon\pmod m$ add one appropriate tail term. This proves ordinary order at most $h$.
+
+For residue $m-1$, any representation contains an odd number of residue-one tails. At the residue level discard zero tails, retain one one, and convert each pair of remaining ones into one doubled unit coin. Divide the remaining even total by two. The resulting coin sum is $t\equiv4P-1\pmod{4P}$. Normalize coins from the least to highest digit, without increasing count: $c>0$ coins at radix $u$ have total digit value at most $c(u-1)$, and so give at most $c-1$ carries and one remaining coin. The final representation has at least three top units and all $d$ digits nonzero. With the retained tail, at least $h$ original summands were needed.
+
+In a distinct representation the exceptions have total at most $2\sum_{c\in C}c=2S$. The exact identity
+\[S/P=1+\tfrac12\sum_{i=1}^d (u_i-1)/P_{i-1}<7/2\]
+follows from $u_1=4$ and $u_i/P_{i-1}=2^{2-i}$ for $i\ge2$. Thus residue $8P-1$ requires at least $8P-1-2S\ge P$ residue-one tails. On the other hand every residue has a representative $k\in[1,m]$; fix $k-1$ distinct one-tails and let the last vary to represent all sufficiently large targets in the residue. This works also after finite deletion. Hence
+\[2^{2^{h-5}+h-4}\le F(h)\le \exp(O(3^h h\log(2h))),\]
+so $\log\log F(h)=\Theta(h)$. The lower construction and growth class predate this draft; the improved upper estimate is derived above.
+
+\paragraph{Audit of the earlier two-stage method.} The label argument in \cite{Gao} uses the same pair count in a finite group of size $q$ with $L_r=\lceil4/\alpha_r^2\rceil$, $Q_r=(2r+1)L_r+1$, and $\alpha_{r-1}=\alpha_r^2/(16rQ_r)$. Selecting the least rank of size $\ge\alpha_r q$ gives a robust set (with zero adjoined) of size at least $\alpha_r^2q/2$. Finite Kneser as above fills its generated subgroup in $L_r$ steps. A shortest quotient correction costs at most the subgroup index minus one, bounded by $L_r-1$. Its labels plus those of the preceding steps number fewer than $Q_r$. For $q\le1/\alpha_0$ the partial-sum argument alone suffices. The reciprocal recursion grows at most quartically at each step. In the subsequent CYZ progression lemma, the deletion budget is fixed before selecting the modulus and onset; the second quartic recursion yields the claimed $16^h$ scale. The correction uses one fixed set per residue and shifts the common onset by the maximum of their sums. We found no gap in this argument. Theorem~\ref{progression} bypasses it by bounding the progression modulus while protecting a rank-dependent number of labels.
+
+\section{Equality: genuine structural restrictions}
+\subsection{Canonical fringe and its limitations}
+For $h\ge2$, let $B_h$ consist of $a\in A$ with at most $h-2$ nontrivial symmetric pairs $(a-d,a+d)$ in $A$; set $G_h=A\setminus B_h$. The following repair fact is from the supplied archive \cite{archive}. In any ordinary representation of length $\le h$ that does not repeat a fringe element, replace two copies of a repeated good element by an unobstructed symmetric pair. There are at least $h-1$ pairwise disjoint pairs and at most $h-2$ surviving summands, so a pair avoiding all survivors exists. The number of distinct summands increases: even if exactly two copies of the center disappear, two previously unused elements replace one. No new repeated fringe element is created. Iteration terminates. In particular every defect lies in $2\cdot B_h+S_{h-2}(A)$.
+
+The fringe has zero upper Banach density. Indeed, in any finite subset of it, orient each centered three-term progression toward its center. There are at most $(h-2)$ times the vertex count progressions. The underlying hypergraph has a vertex of degree at most $3(h-2)$, as does every induced subgraph. Greedy coloring after removing such vertices gives a partition into at most $3(h-2)+1$ progression-free sets. Roth's theorem rules out a fixed positive relative density on intervals of unbounded length. This argument also shows why density zero alone cannot finish: the classical ternary-digit set with digits 0 and 1 is progression-free yet is an ordinary basis of order two, so its fringe is the whole set.
+
+At order two, the precise structural characterization is
+\[S_2(A)\setminus R_2(A)=(2\cdot B_2)\setminus A.\]
+Indeed the sole possible failed representation is a doubled midpoint without a distinct symmetric pair or a singleton. Hence equality holds exactly when this set is finite. This observation is closely related to \cite{Heg}; no priority claim is made. At higher orders, the fringe-localized logarithmic slice test in the supplied research and the Newton-identity test remain exact reductions, and motivate the obstruction calculus below.
+
+\subsection{A sharp obstruction to finite disjoint-class decompositions}
+Call a coloring of $A$ rainbow-complete on an interval if each target there has a sum of at most $h$ elements of distinct colors. Equivalently, the union of ordinary sums of different classes covers that interval. This definition refers only to ordinary sumsets of the pieces of a partition. It is a natural candidate for a global structural certificate of equality.
+\begin{theorem}\label{color}
+For each $h\ge2$ there exists a positive-lower-density basis $A$ with $\ord(A\setminus F)=\ordR(A\setminus F)=h$ for every finite $F\subseteq A$, but such that for every coloring of $A$ by finitely many colors, the targets not admitting rainbow sums of length at most $h$ have positive lower density. Moreover, for any fixed onset $N_0$ large enough for coverage, the least number of colors needed for rainbow coverage of $[N_0,N]$ is $\Theta_h(\sqrt N)$ for this basis. Every equal-order basis has an $O_h(\sqrt N)$ upper bound for these finite intervals.
+\end{theorem}
+\begin{proof}
+Put $m=2h-1$. Choose odd primes $p_j$ with $10p_j<p_{j+1}<20p_j$ by Bertrand's postulate. For each prime define
+\[C_j=\{20p_j^2+2p_j i+(i^2\bmod p_j):0\le i<p_j\},\qquad C=\bigcup_j C_j.\]
+Each $C_j$ lies in $[20p_j^2,22p_j^2)$ and has distinct unordered pair sums, including doubles. Equality of two pair sums first forces equality of the index sums because the small residue terms total less than $2p_j$. Reducing modulo $p_j$ then gives equality of the sums of squares, hence of the index products, and therefore of the unordered pairs. Sums of two members of $C_j$ cannot involve an earlier or later block: a later summand exceeds the maximum such sum, and a pair including an earlier block with neither summand later is smaller than the minimum such sum. Thus these pair sums are unique in all $C$.
+
+Define
+\begin{align*}
+ H&=\bigcup_j\{3(c+c'):c,c'\in C_j,\ c<c'\},\\
+ X&=3\cdot C\ \cup\ (3\N+1),\qquad Y=\N\setminus H,\\
+ A&=(mX+1)\ \cup\ (mY+2).
+\end{align*}
+The two tags 1 and 2 lie in different residue classes modulo $m$. In a sum of length at most $h$, the raw sum of tags is at most $2h=m+1$. For residue 2 the only possible raw sum is 2, so the target $mt+2$ is either a singleton from tag 2 ($t\in Y$) or a sum of two tag-1 members. If $t\in H$, the latter is the only option, and both indices in $X$ must be multiples of 3. The block uniqueness proves that precisely one unordered pair represents this target, with distinct summands.
+
+For all other residues use raw tag totals $1,3,4,\ldots,2h$, which together with 2 cover the residues (the total 1 can instead be $2h$). Every even total $2k\ge4$ uses $k\le h$ distinct tag-2 terms, since $Y$ contains the two nonzero classes modulo 3, whose pair sums cover all classes. After fixing $k-2$ additional anchors, choose a further fixed anchor in the necessary class and let the last term vary. Every odd total $2k+1\ge3$ uses one tag-1 term and $k$ tag-2 terms. For $k\ge2$ the same argument applies; for $k=1$, choose between two fixed tag-1 indices in distinct classes 0 and 1 modulo 3 to leave a nonzero class for the remaining index. All these arguments work after finite deletions; raw totals account for the fixed carry when the total exceeds $m-1$. In residue 2, deleting finitely many members removes only finitely many singleton targets and forced pairs, since each block is finite and each forced pair stays in one block. Therefore the restricted order is at most $h$, even after every finite deletion. The residue zero cannot have ordinary representations of length at most $h-1$, as its raw tags are positive and at most $2h-2<m$. Both orders are exactly $h$. The lower density is at least $2/(3m)$ from tag 2.
+
+The vertices $3mc+1$ for $c\in C_j$ form a clique of size $p_j$ in the graph of uniquely forced pairs. Every monochromatic pair in a coloring by $k$ colors yields a distinct failed target. There are at least $p_j^2/(2k)-p_j/2\ge p_j^2/(4k)$ such pairs for $p_j\ge2k$. All targets are at most $N_j=132mp_j^2+2$. For $N_j\le N<N_{j+1}$ we have $N<52800mp_j^2+2$. It follows that the lower density of missed targets is at least $1/(250000mk)$. This also defeats a finite list of colorings, by taking their product coloring.
+
+For coverage of a finite interval $[N_0,N]$, every whole block of forced pairs in the interval requires at least $p_j$ colors. The bounded ratios of consecutive primes imply a lower bound $\Omega_h(\sqrt N)$ for all large $N$ (with fixed onset). Conversely, in any equal-order basis choose one witnessing distinct set for each target in the interval. Make its elements a clique. The finite graph has at most $\binom h2 N$ edges. Every subgraph of minimum degree $d$ has at least $d(d+1)/2$ edges, so degeneracy is at most $\lfloor\sqrt{h(h-1)N}\rfloor$. Greedy coloring gives at most one more than this many colors. Extend the coloring arbitrarily outside $[1,N]$. Every chosen witness is rainbow.
+\end{proof}
+This is an obstruction to a whole class of decomposition criteria, even allowing a positive-density error tolerance smaller than the displayed lower bound. The finite-horizon exponent is optimal. It is not a proof that all conceivable structural equality criteria fail.
+
+\subsection{A two-level structural reduction}
+For completeness, a different way to isolate the remaining difficulty uses pair fibers $M_s=\{\{a,b\}:a,b\in A,\ a<b,\ a+b=s\}$. Each fiber is a matching. Call weights with at least $h-1$ edges rich, and those with between 1 and $h-2$ edges weak. Pair the summands in a potential representation, leaving at most one singleton. All rich pair weights can be handled last: a matching of size $h-1$ has an edge avoiding at most $h-2$ previously used vertices. Weak weights require only a finite matching-pattern compatibility test on their at most $h-2$ edges per weight, together with the possible singleton. More formally, if $U_{\ell,\epsilon}$ is the set of sums of $\ell$ weak weights and an optional singleton ($\epsilon\in\{0,1\}$) whose labeled weak fibers admit a choice of disjoint edges avoiding the singleton, and $P$ is the rich weight set, then
+\[
+R_h(A)=\bigcup_{2(\ell+t)+\epsilon\le h}(U_{\ell,\epsilon}+tP).
+\]
+The forward implication is pairing a witness; the reverse is greedy completion. The finite types of the weak graph depend only on $h$, not on the sizes of the elements. This reduces the distinctness interaction to pair-level geometry and ordinary sums of rich weights. For bases in which most relevant fibers are weak, it still requires exact compatibility at infinitely many weights. We do not present it as a complete substantive answer.
+
+\section{An arbitrary-rank obstruction calculus}\label{sec:cores}
+The canonical fringe and pair-fiber arguments suggest a more general principle: two additive fibers interact through their small deletion obstructions, not through the full lists of their representations. We give a symmetric, rank-budgeted duality theorem. Its output is a canonical family of virtual supports, bounded in size by the rank budget. The supports need not themselves sum to the fiber weight. This distinction is essential.
+
+\subsection{Truncated blockers and canonical virtual supports}
+For a finite family $\mathcal F$ of finite subsets of a ground set $B$, a transversal is a set meeting every member of $\mathcal F$. Write $b_t(\mathcal F)$ for the inclusion-minimal transversals of cardinality at most $t$. We use the conventions $b_t(\varnothing)=\{\varnothing\}$ and $b_t(\mathcal F)=\varnothing$ if $\varnothing\in\mathcal F$. For positive integers $k,t$ and $|F|\le k$ for all $F\in\mathcal F$, put
+\[
+\mathcal C_{k,t}(\mathcal F)=b_k\bigl(b_t(\mathcal F)\bigr).
+\]
+This is a double transversal with truncation at both stages. Minimal transversals are classical hypergraph duality objects; the bounded branching argument below is standard in the hitting-set literature. Blocker involution is classical (Edmonds--Fulkerson \cite{EF}). Disjointness-preserving compression and products of representative families were studied by Fomin--Lokshtanov--Panolan--Saurabh \cite{FLPS,FLPSprod}. Our virtual supports need not be a subfamily of the original witnesses; the particular truncated double blocker and its application to the sparse additive fringe are the contributions examined here. Priority for this combination has not been established.
+
+\begin{lemma}[Exact finite interface]\label{lem:interface}
+Let $\mathcal F$ have rank at most $k$, let $D=b_t(\mathcal F)$, and let $V=\mathcal C_{k,t}(\mathcal F)$. Then:
+\begin{enumerate}
+\item $|D|\le k^t$, $|V|\le t^k$; each member of $V$ has size at most $k$ and the union of its labels has size at most $\min(tk^t,kt^k)$.
+\item Each $F\in\mathcal F$ contains some $X\in V$.
+\item For every $E\subseteq B$ with $|E|\le t$,
+\begin{equation}\label{eq:avoid}
+ (\exists F\in\mathcal F:F\cap E=\varnothing)
+ \quad\Longleftrightarrow\quad
+ (\exists X\in V:X\cap E=\varnothing).
+\end{equation}
+\item $b_t(V)=D$. Two families of rank at most $k$ have the same answers to all deletion queries of size at most $t$ if and only if their truncated blocker families agree, equivalently if their virtual families agree. The virtual family is thus a canonical complete invariant for this limited interaction, not a choice of a representative subfamily.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+For the first bound, branch on the elements of any edge not met by the current partial transversal. Stop when all edges are met or the depth reaches $t$. Each branch has at most $k$ children. Any minimal transversal of size at most $t$ can be followed along a branch contained in it, and cannot stop at a proper transversal subset. There are at most $k^t$ leaves. The case of an empty edge or empty family obeys the same bound. Apply the bound again with the ranks interchanged to obtain $|V|\le t^k$. Every label in $V$ belongs to the union of $D$: an element outside that union is removable from a minimal transversal. The label bounds follow.
+
+Every $F\in\mathcal F$ meets every edge of $D$, so it contains an inclusion-minimal transversal $X$ of $D$, with $|X|\le k$. This proves (2) and one direction of \eqref{eq:avoid}. Conversely, if $E$ meets all $F\in\mathcal F$, it contains a minimal transversal in $D$; hence no transversal of $D$ can avoid $E$. This proves the other direction. Finally the minimal deletion sets of size at most $t$ for which the avoidance answer is negative are exactly $D$. They are determined by those answers and determine all of them. The conclusions in (4) follow. In particular this compression is idempotent for the same budgets.
+\end{proof}
+
+\begin{lemma}[Budgeted composition]\label{lem:composition}
+Suppose $p,q\ge1$, $e\ge0$, and $\mathcal F,\mathcal G$ are finite families of rank at most $p,q$ respectively. Let
+\[
+ U=\mathcal C_{p,q+e}(\mathcal F),\qquad V=\mathcal C_{q,p+e}(\mathcal G).
+\]
+For every $E$ of cardinality at most $e$, there are disjoint $F\in\mathcal F$, $G\in\mathcal G$ both avoiding $E$ if and only if there are disjoint $X\in U$, $Y\in V$ both avoiding $E$.
+\end{lemma}
+\begin{proof}
+For necessity take $X\subseteq F$, $Y\subseteq G$ as in Lemma~\ref{lem:interface}. For sufficiency, first use that lemma on $\mathcal F$ to choose $F$ avoiding $E\cup Y$, which has size at most $e+q$ and avoids $X$. Then use it on $\mathcal G$ to choose $G$ avoiding $E\cup F$, which has size at most $e+p$ and avoids $Y$. The resulting $F,G$ are disjoint and avoid $E$. This two-stage lifting is why virtual supports, despite not being representations, suffice for actual compatibility.
+\end{proof}
+
+\subsection{The rank-halving equality criterion}
+Fix $h\ge2$ and let $B=B_h$ and $G=G_h$ be the fringe and its complement. The following recursion uses only membership in $A$, the three-term progression counts specifying $B$, ordinary addition of weights, and finite hypergraph transversal operations. The number $0$ represents an unused summand and is never a fringe label.
+
+For $s\in\N$ set
+\[
+ V_1(s)=\begin{cases}
+ \{\varnothing\},&s=0\text{ or }s\in G,\\
+ \{\{s\}\},&s\in B,\\
+ \varnothing,&\text{otherwise}.
+ \end{cases}
+\]
+For $2\le k<h$, put $i=\lfloor k/2\rfloor$, $j=k-i$ and define
+\begin{align*}
+ W_k(s)&=\bigcup_{u+v=s}\{X\cup Y:X\in V_i(u),\ Y\in V_j(v),\ X\cap Y=\varnothing\},\\
+ V_k(s)&=\mathcal C_{k,h-k}(W_k(s)).
+\end{align*}
+All weights are nonnegative. In the equality criterion we need only the states with $k\le\lceil h/2\rceil$ (indeed only the descendants in the balanced recursion). No restricted representation function is used as an input. Every computation at weight at most $n$ needs only membership of $A$ up to $2n$, because the symmetric-pair counts at labels at most $n$ are determined there.
+
+\begin{theorem}[Canonical obstruction criterion]\label{thm:equality}
+Let $p=\lfloor h/2\rfloor$ and $q=\lceil h/2\rceil$. For every $A\subseteq\N\setminus\{0\}$ and $n\ge0$,
+\begin{equation}\label{eq:maincrit}
+ n\in R_h(A)\quad\Longleftrightarrow\quad
+ \exists u+v=n,\ X\in V_p(u),\ Y\in V_q(v): X\cap Y=\varnothing.
+\end{equation}
+Each $V_k(s)$ contains at most $(h-k)^k$ virtual supports of size at most $k$, all drawn from $B_h$. The resulting family is canonical independently of the choice of binary splittings in its recursive computation. If $\ord(A)=h$, then $\ordR(A)=h$ if and only if the set
+\begin{multline*}
+ \{n\in 2\cdot B_h+S_{h-2}(A):\text{every }u+v=n\text{ has incompatible}\\[-2pt]
+ \text{virtual families }V_p(u),V_q(v)\}
+\end{multline*}
+is finite. Here incompatible means there is no disjoint choice from the two families. For $h=1$, equality is automatic.
+\end{theorem}
+\begin{proof}
+For the proof only, let $\mathcal H_k(s)$ consist of the sets of fringe elements used by ordinary multisets of at most $k$ elements of $A$ with sum $s$, subject to using each fringe element at most once. Good elements may occur repeatedly. These are finite families of rank at most $k$. We prove by induction that
+\begin{equation}\label{eq:canonical}
+ V_k(s)=\mathcal C_{k,h-k}(\mathcal H_k(s))\qquad(1\le k<h).
+\end{equation}
+The base case is immediate from the empty-family and empty-edge conventions. To split a multiset of length at most $k=i+j$ into two parts of lengths at most $i,j$, pad with unused positions if necessary. The fringe support is the union of two disjoint fringe supports, and every such union obtained from parts of weights summing to $s$ comes from an admissible multiset. For $E$ of size at most $h-k$, Lemma~\ref{lem:composition} applies to the two parts with $e=h-k$, since $h-i=e+j$ and $h-j=e+i$. Thus $W_k(s)$ and $\mathcal H_k(s)$ have identical avoidance answers for all such $E$. By Lemma~\ref{lem:interface} their double transversal compressions agree. This proves \eqref{eq:canonical}, the bounds, and independence of binary splitting.
+
+Apply the composition lemma once more with $p+q=h$ and $e=0$. Its conclusion is precisely that the right side of \eqref{eq:maincrit} is equivalent to the existence of an ordinary representation of length at most $h$ with no repeated fringe label. The fringe repair argument from the preceding section makes this representation distinct without increasing its length. Conversely a distinct representation is admissible. Finally every element of $2\cdot B_h+S_{h-2}(A)$ lies in $S_h(A)$, and any element of $S_h(A)\setminus R_h(A)$ belongs to this footprint: otherwise some ordinary representation would avoid repeating fringe elements and could be repaired. This proves the asserted exact defect test. Cofiniteness of $S_h(A)$ and $\ordR(A)\ge\ord(A)$ complete the equality assertion.
+\end{proof}
+
+\subsection{An explicit finite family of local obstructions}
+The preceding theorem has a dual form that does not require examining virtual supports directly. For a split $u+v=n$, define the canonical antichains
+\[
+ D=b_q(V_p(u)),\qquad F=b_p(V_q(v)).
+\]
+By Lemma~\ref{lem:interface}, these are the minimal fringe deletion blockers of the two lower-rank fibers, at the indicated budgets. Color some of the labels in $\bigcup D\cup\bigcup F$ red or blue, using at most $p$ red labels and at most $q$ blue labels, no label receiving both colors. Require that each edge of $D$ contain a red label and each edge of $F$ contain a blue label. Uncolored labels are permitted. An empty edge is an automatic impossibility, whereas an empty edge family imposes no requirements.
+
+The split is compatible if and only if this finite partial coloring exists: a feasible coloring contains minimal transversals of $D$ and $F$ within the respective budgets, and those are exactly the virtual supports. Thus one can enumerate a universal list of local obstruction templates for any fixed $h$ by enumerating pairs of antichains on at most
+\[q p^q+p q^p\]
+vertices, with at most $p^q$ and $q^p$ edges respectively, of sizes at most $q$ and $p$. Retain the infeasible pairs and, if desired, only inclusion-minimal infeasible edge subfamilies. The enumeration is entirely finite and independent of $A$ and of the target. Relabeling gives the exact obstruction test for each split. It is not necessary to assert that every abstract template is realized by arithmetic fibers.
+
+If both lower weights are present, incompatibility requires the two critical label sets to intersect; otherwise any two virtual supports are disjoint. Moreover if either blocker antichain is empty, that side's virtual support is empty, so presence of the other side suffices. Hence a genuine collision between available fibers is precisely a joint finite deletion obstruction, not simply a shortage of ordinary sums. Every label that can matter lies in the uniformly sparse set $B_h$. The obstruction to a target is that \emph{all} of its splits are absent or exhibit such an obstruction. This distinction between a finite local template and the unbounded arithmetic locations of its occurrences is important.
+
+\begin{corollary}[A quantitative sufficient test]\label{cor:overlap}
+Put $P_k=\{s:V_k(s)\ne\varnothing\}$ and $P_{k,b}=\{s:b\in\bigcup V_k(s)\}$ for $b\in B_h$. Let $r_{U,V}(n)$ count ordered splits $u+v=n$, $u\in U$, $v\in V$. If
+\[
+ r_{P_p,P_q}(n)>\sum_{b\in B_h}r_{P_{p,b},P_{q,b}}(n),
+\]
+then $n\in R_h(A)$. If this holds for all sufficiently large $n$ in the fringe footprint, the two orders of an ordinary order-$h$ basis coincide.
+\end{corollary}
+\begin{proof}
+The sum on the right counts split-label incidences, hence bounds above the number of splits with intersecting critical label sets. Strict inequality yields a present split with disjoint critical sets. Theorem~\ref{thm:equality} and the fringe footprint assertion give the result.
+\end{proof}
+
+\subsection{Adversarial examples and what is gained}
+The distinction between $\varnothing$ and $\{\varnothing\}$ is substantive: the first denotes an unavailable weight, whereas the second denotes a weight immune to all deletions within the relevant budget. The latter can represent arbitrarily many distinct arithmetic witnesses and need not include the empty sum as an actual witness.
+
+For example, for $h\ge3$ let $A$ be the positive integers with base-$(h+1)$ digits only zero or one. There are no nontrivial centered three-term progressions in $A$ (the two sides of $a+c=2b$ have no carries), so $B_h=A$. This is an ordinary basis of order $h$: distribute the digits of each integer among $h$ summands, and the infinitely many targets $h(h+1)^L$ need $h$ summands. At those targets every ordinary representation with at most $h$ terms repeats the single digit $(h+1)^L$, so the virtual compatibility test fails. On the other hand a weight with $L$ digits all one has $2^{L-1}-1$ unordered two-term witnesses, plus its singleton. Their supports are pairwise disjoint, and for large $L$ their number exceeds $h-2$. The rank-two virtual support is then just $\varnothing$. Thus the compression can discard unboundedly many arithmetic witnesses even in an entirely fringe basis. It is not based on positive density.
+
+Individual mandatory labels alone do not characterize incompatibility. In the finite progression-free set
+\[A=\{30,33,37,56,60,76,77,81\},\]
+weights $146$ and $166$ at rank three have exactly the following supports, allowing at most three terms:
+\begin{align*}
+ 146:&\ \{30,56,60\},\quad\{33,37,76\},\\
+ 166:&\ \{30,60,76\},\quad\{33,56,77\}.
+\end{align*}
+Each side has two disjoint witnesses and no mandatory individual label, but every cross choice intersects. The budget-three minimal blockers retain this joint obstruction. This is an example of failure of a \emph{particular split}, not a claim about all representations of the sum 312. It also shows why intersecting sets of obligatory elements or counting disjoint witnesses is insufficient for the general composition problem.
+
+The archive's prescribed-defect constructions allow independently chosen missing targets, even with stable ordinary order and fixed background statistics. Theorem~\ref{thm:equality} is pointwise for arbitrary sets, including those constructions, regardless of computability, density or deletion stability. Its dependence on exact weights and on labeled critical sets is indispensable to its compatibility test; in particular it does not contradict the compact-fiber obstruction to a fixed logarithmic detector or the obstruction to finite global color partitions. The finite templates describe \emph{how} lower-order fibers can obstruct joining, not \emph{where} the templates occur in the integer line.
+
+This calculus has concrete compression advantages over a generating-function restatement or a recursive listing of all restricted sums: the local states forget arithmetic witnesses, are canonical for deletion interaction, have size uniformly bounded in the rank, compose exactly despite using unrealizable virtual supports, and can be formed at half the target rank. It also gives an independently meaningful obstruction classification for each split and the overlap bound of Corollary~\ref{cor:overlap}. On the other hand the final criterion still quantifies over exact integer splits, and the labeled profiles must be known at unbounded weights. It does not classify the global distribution of obstruction templates, provide an algorithm for eventual equality on arbitrary computable bases, or supply a closed-form test for all polynomial-value bases. We offer it as a substantive arbitrary-rank candidate answer to the original necessary-and-sufficient-conditions question, not as evidence that the historical problem has already been accepted as solved.
+
+\paragraph{Reproducibility.} The companion \texttt{prometheus-core-checks.py} compares the recursion with independent multiset enumeration and direct exhaustive minimal-transversal enumeration. It checks all 256 subsets of $[1,8]$ at ranks 2 through 6 (1,280 set/rank cases), plus 320 cases with independently varied capacity sets, for a total of 137,056 canonical states and 2,002,592 deletion queries. It checks the joint obstruction above, all-fringe digit examples, and 364 critical-residue targets in twelve truncated prescribed-defect examples. These checks supplement, not replace, the proofs.
+
+\section{A nonrecursive arithmetic criterion using rank two alone}\label{sec:pairdirect}
+The general interfaces of Section~\ref{sec:cores} admit a particularly explicit specialization because two-summand fibers in the integers are matchings. This combines the preceding pair-fiber and fringe arguments, and eliminates all recursive construction of higher-rank profiles. It also separates the additive part of the theorem from the general representative-family machinery.
+
+Fix $h\ge2$, retain $B=B_h$ and $G=G_h$, and put $m=\lfloor h/2\rfloor$, $\epsilon=h-2m\in\{0,1\}$. For $s\ge0$ define the ordinary reflected intersections
+\[
+ I_s=B\cap(s-G),\qquad J_s=(B\cap(s-B))\setminus\{s/2\}.
+\]
+The latter exclusion means removal of an integer midpoint if one exists. Put
+\begin{align*}
+ \mu(s)&=\mathbf 1_B(s)+|I_s|+\tfrac12|J_s|,\\
+ \mathcal M(s)&=\{\{s\}:s\in B\}\ \cup\ \{\{b\}:b\in I_s\}\ \cup\ \{\{b,s-b\}:b\in J_s\}.
+\end{align*}
+All these intersections are finite. The family $\mathcal M(s)$ is a matching of nonempty sets of cardinality one or two, and $|\mathcal M(s)|=\mu(s)$: the singleton $s$ cannot be an endpoint of a positive pair summing to $s$, the sets $I_s,J_s$ are disjoint, and reflection on $J_s$ is a fixed-point-free involution.
+
+Define three disjoint classes of nonnegative weights:
+\begin{align*}
+ P&=S_2(G)\cup\{s:\mu(s)\ge h-1\},\\
+ W&=\{s\notin P:1\le\mu(s)\le h-2\},\\
+ Z&=\N\setminus(P\cup W).
+\end{align*}
+Thus $0\in P$. The associated canonical pair profile is $\{\varnothing\}$ on $P$, is $\mathcal M(s)$ on $W$, and is the empty family on $Z$.
+
+\begin{lemma}[Arithmetic deletion profiles]\label{lem:pairdeletion}
+For every $E\subseteq B$ with $|E|\le h-2$, the weight $s$ belongs to $R_2(A\setminus E)$ if and only if its pair profile has a member disjoint from $E$. In particular $P$ is exactly the set of weights immune to all such fringe deletions. The profile is the canonical truncated double blocker of the rank-two fringe-support family (with the zero-budget convention for $h=2$).
+\end{lemma}
+\begin{proof}
+For $s\in S_2(G)$ there is an ordinary representation with empty fringe support. The only possible repetition is $g+g$, $g\in G$. Its at least $h-1$ mutually disjoint symmetric pairs include one avoiding $E$, so it has a distinct realization after deletion. When $s\notin S_2(G)$, every available distinct representation of length at most two has one of the nonempty fringe supports in $\mathcal M(s)$, and each such support comes from such a representation. Distinct supports in that family are disjoint. Thus at most $h-2$ deleted fringe elements cannot kill $h-1$ members, whereas if $\mu(s)\le h-2$ one can kill them all by picking one label per member. In the weak case the family of minimal blockers consists of exactly these choices; all have size $\mu(s)\le h-2$. Its double blocker is precisely the original matching, by the elementary blocker involution or by direct inspection. In the immune case the truncated blocker is empty and the virtual support is empty; in the unavailable case the minimal blocker is empty and there is no virtual support. This also proves the assertions at $h=2$, for which the only query is $E=\varnothing$.
+\end{proof}
+
+For $0\le j\le m$ define $Q_{j,\epsilon}$ as follows. Choose $j$ weights $s_1,\ldots,s_j$ from $W$ (repeated weights are allowed, with occurrences separately indexed). If $\epsilon=1$, also choose $a\in A\cup\{0\}$; if $\epsilon=0$ set $a=0$. On the alternatives $(i,X)$ with $X\in\mathcal M(s_i)$ form a conflict graph: two alternatives from different indices are adjacent exactly when their supports intersect. If $a\in B$, discard all alternatives containing $a$. Keep the weight tuple precisely if the graph has an independent transversal of its $j$ index classes, that is, an independent vertex set containing one vertex in each class. An empty index class is a failure; the empty collection of classes succeeds. Let $Q_{j,\epsilon}$ be the set of all numbers $a+s_1+\cdots+s_j$ obtained from the kept tuples. This is a bounded finite graph test for each tuple of ordinary weights, not a computation of an unrestricted family of higher-rank representations. The graph has at most $j(h-2)$ vertices, its support labels lie in $B$, and each index class consists of disjoint sets of size at most two. A universal catalogue of its failing abstract colored graph types is finite for fixed $h$.
+
+\begin{theorem}[Rank-two criterion at every rank]\label{thm:pairdirect}
+For every $A\subseteq\N\setminus\{0\}$ and every $h\ge2$,
+\begin{equation}\label{eq:pairdirect}
+ R_h(A)=\bigcup_{j=0}^{m}\bigl((m-j)P+Q_{j,\epsilon}\bigr).
+\end{equation}
+Here $(m-j)P$ denotes an \emph{ordinary} iterated sumset, with $0P=\{0\}$. Consequently an ordinary order-$h$ basis has restricted order $h$ if and only if the union on the right covers all but finitely many points of $2\cdot B_h+S_{h-2}(A)$. Equivalently, apart from finitely many such points, at least one decomposition into $m$ pair weights and an optional singleton has no unavailable weight and avoids the finite conflict-graph obstruction. The only additive data used are $S_2(G)$, the reflected intersections $I_s,J_s$, and ordinary addition of weights. No recursive computation of restricted fibers of rank greater than two is required.
+\end{theorem}
+\begin{proof}
+Take a distinct representation of length at most $h$, pad with unused slots, and split it into $m$ pairs and $\epsilon$ singleton slots. The corresponding weights lie in $P\cup W$; for the weak weights its fringe supports give an independent transversal avoiding any fringe singleton. The immune weights have no constraint in the ordinary sumset on the right. This proves one inclusion.
+
+For the other inclusion, choose representatives for the weak alternatives realizing the independent transversal, and include the optional nonzero singleton. Their fringe labels are all distinct; their good labels may repeat. Now realize the immune pair weights successively. Before realizing each such weight, at most $h-2$ fringe labels have been used. By Lemma~\ref{lem:pairdeletion}, that weight admits a realization avoiding all of those fringe labels. After all weights have been handled we have an ordinary representation with no repeated fringe label and at most $h$ summands. Apply the symmetric-pair repair argument to eliminate the remaining repetitions without increasing the rank. The footprint assertion follows from the same repair argument and ordinary cofiniteness. All weights are nonnegative, and unused slots are encoded by zero, so no exact-length assumption is hidden in this argument.
+\end{proof}
+
+\paragraph{A genuine arithmetic restriction on obstruction templates.}
+There is extra structure not present for arbitrary rank-two hypergraphs. If two (possibly different) weights have at least two distinct members each in their nonempty matching profiles, then they admit disjoint choices. In fact, suppose every member of each family meets every member of the other. Since the supports have size at most two and each family is a matching, both families must consist of exactly two supports of size two on the same four labels, paired in different ways. Each support of size two consists of two fringe elements with sum equal to the corresponding weight. Summing the four labels gives twice each weight, so the weights coincide. But the reflection $b\mapsto s-b$ determines a unique partner at that weight. Two different pairings are impossible. The argument works for subfamilies obtained after excluding previously used labels as well. More generally an even cycle of two-element edges with weights $s_1,\ldots,s_{2k}$ forces $s_1-s_2+\cdots-s_{2k}=0$, by summing the endpoint equations alternately. Hence not every abstract matching obstruction is arithmetically realizable.
+
+\begin{corollary}[An arithmetic sufficient condition]\label{cor:pairrich}
+For $h\ge4$, put $P'=S_2(G)\cup\{s:\mu(s)\ge h-2\}$. Then
+\[
+ mP'+\epsilon(A\cup\{0\})\subseteq R_h(A),
+\]
+where the factor with $\epsilon=0$ means $\{0\}$. In particular cofiniteness of this ordinary sumset suffices for equality of the two orders at ordinary order $h$.
+\end{corollary}
+\begin{proof}
+Fix a weight tuple and reserve the fringe singleton, if any. Weights in $S_2(G)$ can be realized without using fringe labels. If at most one remaining weight needs a matching choice, it has at least $h-2\ge2$ alternatives and at most one reserved fringe label. Otherwise choose all but the final two remaining matching alternatives greedily, avoiding the used fringe labels. At most $2(m-2)+\epsilon=h-4$ labels have been reserved or chosen before the final two. Both remaining families still have at least two members. The arithmetic observation gives disjoint choices, and the global repair lemma finishes. The greedy choices before the final two are possible by the same bound on the number of forbidden labels.
+\end{proof}
+
+\paragraph{Scope and sharp distinction from a mere enumeration claim.}
+Theorem~\ref{thm:pairdirect} gives a direct reflected-intersection criterion of order two, independent of the original rank except for the threshold and the size of a finite compatibility graph. It discards all endpoint data at immune weights and all good labels at other weights. The local graph has $O(h^2)$ vertices, unlike the larger general interfaces. It also gives the arithmetic cycle restriction and the improved sufficient condition above. These are positive structural statements about integer pair fibers. It is not a claim that only finitely many weights need examination. In the worst case $B=A$ and every relevant weight is weak, so the remaining matching test can retain the actual pair witnesses. No theorem here constrains the global arithmetic positions of all such tuples beyond the exact footprint and coverage criterion.
+
+\paragraph{Boundary and independent finite checks.}
+The interface lemma was stated for positive $k,t$. At $t=0$, the only deletion query is the empty set: the virtual family is $\{\varnothing\}$ for a nonempty original family and is empty otherwise. Thus the bound $t^k$ must not be extended to this case without replacing it by $\max(1,t^k)$. The analogous convention holds at rank zero. The composition lemma uses positive block ranks even when $e=0$, so its actual truncation budgets remain positive. The direct pair criterion uses the zero-budget convention explicitly at $h=2$. The companion \texttt{prometheus-pair-audit.py} independently checks all 2,048 rank-two hypergraphs on four labels (98,304 avoidance queries), 40,960 composition queries, and 1,792 set/rank cases with 450,255 pair deletion queries against direct finite enumeration. All passed. The infinite-set assertions above rest on the proofs.
+
+\subsection{Why arbitrary defect distributions cannot be excluded}
+For context, the supplied archive's arbitrary-defect construction has a short direct proof, which we include to distinguish a limitation on global defect shapes from a limitation on characterization. Let $h\ge3$, $M=7h-2$, and let $U\subseteq\N$ be arbitrary. Take $A$ to consist of the constant 1, all $M(3j+1)+1$ for $j\ge0$, all $Mt+3$ except $M(3j+1)+3$ for $j\in U$, and every nonnegative index in the four full residue classes $4,5,6,7$ modulo $M$. In residue 3, the raw tag sum of at most $h$ summands is exactly 3 (the next option exceeds $7h$), so the only patterns are a singleton or three tag-1 summands. At a deleted singleton the triple must have exactly one nonconstant term since the nonconstant tag-1 indices are $1\bmod3$ and the target index is $1\bmod3$. The other two terms are both 1. Thus these targets are ordinary but not distinct sums, and every other large target in class 3 is a singleton. The integer intervals $[4k,7k]$, $1\le k\le h$, cover $[4,7h]$ and so their residues cover every class except 3. Each tag pattern can be realized by fixing distinct full-class elements except for one, which varies. At length $h-1$ no positive multiple of $M$ is covered because the positive raw tag sum is at most $7(h-1)<M$. Hence the ordinary order is exactly $h$. At length $h+1$ full-class patterns also cover class 3, so the restricted order is $h$ if $U$ is finite and $h+1$ otherwise. This construction, from \cite{archive}, proves that rank-$h$ defects can encode an arbitrary subset of a progression up to finite initial errors. It rules out universal restrictions on their distribution as a set, not every characterization in terms of $A$ itself. In particular it does not prove that the global arithmetic information in Theorem~\ref{thm:pairdirect} is optimal, or that no simpler intrinsic characterization is possible.
+
+\section{Adversarial audit and status}
+The archive's inverse constructions encode arbitrary prescribed defects at higher ranks, including examples in a fixed positive-density host and with strong deletion promises. The logarithmic slice result retains exact integer sums; the fixed-modulus counterexamples therefore do not contradict it. The compact-family result asserts $\Sigma^0_2$-completeness of the equality property on a specified fiber, and the effective note shows undecidability with promised ordinary and restricted orders. These rule out the specific detector classes and general algorithms covered by their hypotheses. They do not rule out mathematical characterizations using unbounded intrinsic information. The palette theorem is independent of computability and shows why even ordinary sumsets of finitely many freely chosen partition classes are insufficient. We have checked the archive manifest and run all five accompanying finite-test programs; this is not a line-by-line verification of every reflected-joining or lattice-switch construction, nor is it a replacement for proofs.
+
+\begin{center}\begin{tabular}{@{}p{0.29\linewidth}p{0.62\linewidth}@{}}\toprule
+Original question & Status in this draft\\\midrule
+Existence & Affirmative, both canonical and universal modulus criteria.\\
+Uniform boundedness & Affirmative proof, conditional only on stated published addition and density theorems. Improved exponent scale.\\
+Equality & Theorems~\ref{thm:equality} and \ref{thm:pairdirect}: exact arbitrary-rank finite local obstruction criteria, including direct rank-two input. Candidate substantive answer; weak-fiber global coverage remains the precise issue.\\
+Finite deletions & Both forms affirmative.\\\bottomrule\end{tabular}\end{center}
+
+The primary 2003 HHP article was not available in full in the audit; its quantitative theorem was checked against the author's dissertation \cite[Theorem 4.8]{Heg}. We have used Kneser's classical theorems and this density theorem as established inputs, not reproduced their proofs. The original 1980 page and monograph and the accessible CYZ preprint were consulted directly. No independent referee or separate research agent was used. The quantitative proof, palette construction and obstruction criteria were internally audited; no external referee participated and historical priority beyond the inspected sources is not established. The exact equality criteria are unconditional theorems. The specific unresolved issue for a definitive historical claim is their explanatory adequacy in the entirely weak-fringe regime: the graph condition then retains actual pair witnesses at unbounded weights, and the eventual coverage condition may remain as hard to analyze as the original problem. The original wording does not demand a global distribution theorem, and we do not assert such a theorem is necessary. Nor do the generic compression and inverse results establish that the arithmetic difficulty has been eliminated in this regime. We therefore classify this as a candidate full resolution with a specific interpretative issue, not an established complete resolution.
+
+\paragraph{Submission status.} Item (i) has the canonical and universal modulus characterizations (Theorem~\ref{canonical}, Corollary~\ref{uniform}); item (ii) has the explicit bound (Corollary~\ref{uniform}) and the lower construction; item (iv) follows from Theorem~\ref{canonical} and is already resolved in the recent work of Chen--Yang--Zhao. Item (iii) has the exact obstruction theorem (Theorem~\ref{thm:equality}) and direct arithmetic criterion (Theorem~\ref{thm:pairdirect}). The 1980 wording imposes no more restrictive notion of characterization; the specific adequacy issue is explained above. The present note is a proposed answer, not a report of consensus.\par
+\small\begin{thebibliography}{99}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
+\bibitem{EG} P. Erd\H{o}s and R. L. Graham, On bases with an exact order, \emph{Acta Arith.} 37 (1980), 201--207. \url{https://www.renyi.hu/~p_erdos/1980-22.pdf}.
+\bibitem{EGbook} P. Erd\H{o}s and R. L. Graham, \emph{Old and New Problems and Results in Combinatorial Number Theory}, Monographies de L'Enseignement Math\'ematique 28 (1980). \url{https://mathweb.ucsd.edu/~ronspubs/80_11_number_theory.pdf}.
+\bibitem{EF} J. Edmonds and D. R. Fulkerson, Bottleneck extrema, \emph{J. Combin. Theory} 8 (1970), 299--306. \url{https://doi.org/10.1016/S0021-9800(70)80083-7}.
+\bibitem{FLPS} F. V. Fomin, D. Lokshtanov, F. Panolan and S. Saurabh, Efficient computation of representative families with applications in parameterized and exact algorithms, \emph{J. ACM} 63 (2016), no. 4, Article 29. \url{https://doi.org/10.1145/2886094}.
+\bibitem{FLPSprod} F. V. Fomin, D. Lokshtanov, F. Panolan and S. Saurabh, Representative families of product families, \emph{ACM Trans. Algorithms} 13 (2017), no. 3, Article 36. \url{https://doi.org/10.1145/3039243}.
+\bibitem{HHP} N. Hegyv\'ari, F. Hennecart and A. Plagne, A proof of two Erd\H{o}s' conjectures on restricted addition and further results, \emph{J. Reine Angew. Math.} 560 (2003), 199--220. \url{https://doi.org/10.1515/crll.2003.055}.
+\bibitem{Heg} N. Hegyv\'ari, \emph{Topics in Combinatorial Number Theory}, doctoral dissertation, Hungarian Academy of Sciences (2017), Chapter 4. \url{https://real-d.mtak.hu/1038/7/dc_1260_16_doktori_mu.pdf}.
+\bibitem{Kneser} M. Kneser, Absch\"atzung der asymptotischen Dichte von Summenmengen, \emph{Math. Z.} 58 (1953), 459--484. \url{https://doi.org/10.1007/BF01174162}.
+\bibitem{CYZ} S.-Q. Chen, Q.-H. Yang and L. Zhao, On a problem of Erd\H{o}s and Graham related to restricted order, arXiv:2611.33191v1 (15 November 2026). \url{https://arxiv.org/html/2611.33191v1}.
+\bibitem{Gao} L. Gao, How large can the restricted order of an additive basis be?, AI-assisted research manuscript (27 November 2026). \url{https://github.com/Leo66Gao/solved-conjectures/tree/main/48-erdos-338-restricted-orders}.
+\bibitem{archive} L. Gao, \emph{Erd\H{o}s--Graham \#338: equality of ordinary and restricted order}, supplied research archive (27 November 2026); in particular \texttt{extremal/sparse-fringe.md}, \texttt{open/compact-fiber.md}, \texttt{open/logarithmic-slice-criterion.md}, and the inverse and effective-equality notes.
+\bibitem{database} Erd\H{o}s Problems, Problem 338. \url{https://www.erdosproblems.com/338}.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,125 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+\title{Restricted order of asymptotic bases\\
+\large A candidate resolution of Erd\H{o}s Problem \#338}
+\author{Leo Gao\\\small AI-assisted research and formalization}
+\date{27 November 2026}
+\newcommand{\N}{\mathbb N}
+\newcommand{\RR}{R}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\maketitle
+\begin{abstract}
+For any ordinary basis of order $h$, a rank-two reflected-intersection
+test characterizes equality with the restricted order. Its local
+inputs are ordinary good-element pair sums and a bounded conflict
+graph of fringe labels. Companion proofs address existence, uniform
+bounds, and both finite-deletion variants. This is a candidate
+answer to all the questions as worded in 1980. The formal files
+certify specific mathematical steps; they do not certify historical
+priority or the adequacy of the proposed characterization.
+\end{abstract}
+
+\section{The four questions}
+We use at most $h$ positive summands. Write $S_h(A)$ when repetition is
+allowed and $R_h(A)$ when summands must be distinct. The ordinary
+and restricted orders are the least positive $h$ for which the
+corresponding sumset contains all sufficiently large integers.
+The four questions are those in concluding remark 3 on p.~206 of
+\href{https://www.renyi.hu/~p_erdos/1980-22.pdf\#page=6}{Erd\H{o}s and Graham (1980)}.
+
+\begin{enumerate}
+\item \textbf{Existence.} A finite ordinary-order basis has finite
+restricted order exactly when distinct finite subset sums meet
+every residue class for every modulus.
+This is Theorem 2 of
+\href{https://arxiv.org/html/2611.33191v1}{Chen, Yang and Zhao}.
+The supplied manuscript also derives the canonical variant:
+the eventual tail gcd is $g$, and it suffices to check subset sums
+of the finitely many elements not divisible by $g$, modulo $g$.
+\item \textbf{Uniform bound.} For ordinary order at most $h$, finite
+restricted order is bounded by a function of $h$ alone.
+The companion \emph{Sharp boundedness} proof gives
+$F(h)\le \exp(O(2^h h\log(2h)))$, and a mixed-radix construction
+gives $\log\log F(h)=h\log2+O(\log h)$.
+The rank-two manuscript also gives an independent, weaker
+double-exponential bound.
+\item \textbf{Equality.} The rank-two criterion below is necessary
+and sufficient for arbitrary bases. It eliminates the use of
+higher-rank restricted representation functions.
+\item \textbf{Finite deletions.} Both variants are affirmative by
+Chen--Yang--Zhao, Theorem 1: if deleting any finite set preserves
+being an ordinary basis of some finite order, finite restricted
+order follows. Requiring the same ordinary order is stronger.
+\end{enumerate}
+
+\section{The proposed equality criterion}
+For $h\ge2$, let $B$ be the elements of $A$ centered in at most
+$h-2$ nontrivial symmetric pairs from $A$, and put $G=A\setminus B$.
+For a weight $s$, list the possible nonempty sets of fringe labels
+in a distinct representation by at most two terms: the singleton
+$\{s\}$ if $s\in B$, the singletons $\{b\}$ with $b\in B$ and
+$s-b\in G$, and the unordered pairs $\{b,s-b\}\subseteq B$
+of distinct terms. Denote the family by $M(s)$.
+It is a matching: no two of its members share any label.
+Declare $s$ immune if $s\in S_2(G)$ or $|M(s)|\ge h-1$.
+Every remaining weight is weak if $M(s)$ is nonempty, and is
+unavailable otherwise.
+
+Write $h=2m+e$, $e\in\{0,1\}$. Decompose a target into $m$
+pair weights and, when $e=1$, an optional ordinary singleton.
+Require no unavailable weight. Choose one fringe support per
+weak occurrence, with all these supports disjoint from each other
+and from the singleton if it is in $B$. There is no choice to record
+at immune weights. For each decomposition this is a finite
+conflict-graph test with at most $m(h-2)$ vertices.
+
+\paragraph{Why it works.}
+A distinct sum immediately gives an accepted decomposition by
+grouping its terms in pairs. Conversely realize the weak weights
+first. An immune weight can be realized while avoiding all used
+fringe labels: there are at most $h-2$ such labels, which cannot
+hit $h-1$ disjoint alternatives. If the weight is in $S_2(G)$
+and its ordinary good representation repeats a midpoint, an unused
+symmetric pair achieves the same sum. After gluing, only good
+summands can repeat. Replace a repeated good midpoint by a symmetric
+pair avoiding the surviving summands, increasing the number of
+distinct labels at every step. The process ends with a distinct
+sum of rank at most $h$.
+
+Thus the tested targets are exactly $R_h(A)$. If $S_h(A)$ is
+cofinite, it suffices to apply the test eventually on
+$2\cdot B+S_{h-2}(A)$, because any failed target with an ordinary
+representation must repeat a fringe element in that representation.
+Order one is immediate.
+
+\section{Why this is a candidate answer, and its limits}
+The criterion is not a restatement using $R_h$ or its
+representation count as input. It uses only rank-two reflected
+intersections, ordinary sums, and compatibility of a uniformly
+bounded number of fringe labels at each decomposition. It discards
+all endpoint data at immune weights. This is a mathematically
+substantive necessary-and-sufficient condition in the literal
+wording of item (iii).
+
+The criterion still has an eventual quantifier over targets
+and may use actual weak endpoint labels at arbitrarily large
+weights. It does not classify the global distribution of the
+obstructions in arbitrary bases. An exact equivalence can be
+kernel-checked; whether the criterion is satisfactory for the
+historical question is a distinct judgment. No acceptance,
+peer review, or priority is claimed here. The accompanying
+formalization map specifies exactly which parts of the argument
+compile in Lean and which remain mathematical dependencies.
+
+\section{Files for review}
+The full LaTeX proofs of the equality criterion, its more general
+blocker formulation, and the quantitative growth theorem are
+included. The source bundle also includes a checked Lean 4
+project, its pinned build dependencies, an axiom audit, other
+results from the research runs, and the finite audit scripts.
+The scripts provide reproducibility checks, not proofs of
+the infinite statements.
+\end{document}
