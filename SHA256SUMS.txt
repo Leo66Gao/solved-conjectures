@@ -500,4 +500,4 @@ cc0dd59f8b14f2b1293891272c4f81a70c1ddbb192d58862186a7dcbfed1f16c  52-erdos-217-e
 369cf1b1f161b54c2d057eff3d0d63adae706605e2f0dd811cfe5df6bbefedf3  52-erdos-217-eight-point-crescents/two_octagons.py
 d81dbb7be3317381b819e7c8e48337053cc3969a8c7e7ddb219b3e8769b4c14e  50-erdos-502-503-isosceles-dimension-23/mod2-check.out
 ece416b2cabb91e7df5dfb87f2e25a72c2322893cce6774970142c4de9392599  50-erdos-502-503-isosceles-dimension-23/refinement-check.out
-91e414e8444bcf43d1ef39782abd276b13e3570de178d328c973b93822ddf33a  README.md
+1b98ac7cce982c02b04fcc33607dd7b22135ed4b8c618295a010480f49f481e3  README.md
