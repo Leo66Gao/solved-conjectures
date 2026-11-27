@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,booktabs,geometry,xcolor,hyperref}
+\geometry{a4paper,margin=24mm}
+\definecolor{ink}{HTML}{17496B}
+\hypersetup{colorlinks=true,urlcolor=ink,linkcolor=ink,citecolor=ink,pdftitle={A binary rank bound for two-distance sets},pdfauthor={Leo Gao}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\F}{\mathbb F_2}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\iso}{\operatorname{iso}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\kk}{\mathcal K}
+\newcommand{\tbin}{\tbinom}
+\setlength{\parindent}{1.1em}
+\setlength{\emergencystretch}{2em}
+\title{A binary rank bound for two-distance sets\\and the isosceles maximum in dimension 23}
+\author{Leo Gao\\[-1pt]\small AI-assisted research note}
+\date{27 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The largest two-distance set in $\RR^{23}$ has 277 points, and the largest isosceles set has 278. We prove the upper bound by evaluating the second binary digit of half the squared distance on an even integral lattice. Alternation modulo two saves one coordinate in odd dimension; a quadratic refinement rules out equality in the resulting 278-dimensional rank bound. Combined with existing results, the argument also determines the isosceles maxima in eight further dimensions.
+\end{abstract}
+
+\section{Results and scope}
+An \emph{isosceles set} is a finite set of points in which every three distinct points determine at most two distances. This includes equally spaced collinear triples. Write $g(d)$ for the largest size of a two-distance set in $\RR^d$, $M(d)$ for its spherical counterpart, and $\iso(d)$ for the largest size of an isosceles set. Let $J(d)=\binom{d+1}{2}$.
+\begin{theorem}\label{th:main}
+One has $g(23)=277$ and $\iso(23)=278$. Moreover,
+\[
+\iso(d)=J(d)+1\quad(d\in\{25,29,31,33,37,39,41,45\}).
+\]
+\end{theorem}
+Ge, Koolen and Munemasa constructed 277 two-distance points in $\RR^{23}$ \cite{gkm}. Yi established $\iso(23)=\max\{278,g(23)\}$ and $g(23)\le299$ \cite{yi}. The new ingredient is an upper bound on arbitrary sets with squared-distance ratio $2:3$. Even the elementary rank estimate in Section~\ref{sec:rank}, without the equality obstruction, implies $\iso(23)=278$. We do not claim uniqueness of unrestricted 277-point two-distance sets or a solution of Erd\H{o}s Problem \#503 in every dimension.
+
+\begin{center}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+$d$ & 23 & 25 & 29 & 31 & 33 & 37 & 39 & 41 & 45\\
+\midrule
+$\iso(d)$ & 278 & 326 & 436 & 497 & 562 & 704 & 781 & 862 & 1036\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{A lattice rank bound}\label{sec:rank}
+Let $L$ be an even integral lattice of rank $h$, with half-norm $Q(x)=(x,x)/2\in\ZZ$. The induced bilinear form on $L/2L$ is alternating; denote its (even) rank by $r$.
+\begin{lemma}\label{lem:rank}
+If $X\subset L$ is finite and $Q(x-y)\equiv2,3\pmod4$ for $x\ne y$, then
+\[
+|X|\le D(h,r):=2+h+r+\binom r2 .
+\]
+\end{lemma}
+\begin{proof}
+Choose an integral basis of $L$ whose last $h-r$ elements reduce to a basis of the radical. A change of basis over $\F$ lifts to a unimodular integer change of basis by lifting elementary swaps and additions. The Gram matrix $B$ in this basis has its last $h-r$ rows and columns even.
+
+For any integer $a$ put $t(a)=\binom a2\bmod2$, and put $p_i(x)=x_i\bmod2$ and $q(x)=Q(x)\bmod2$. The following identities hold over $\F$, including for negative arguments:
+\[
+t(a+b)=t(a)+t(b)+ab,\quad t(-a)=t(a)+a,\quad t(ab)=b\,t(a)+a\,t(b).
+\]
+The product identity follows from $\binom{ab}{2}=a\binom b2+b^2\binom a2$.
+
+Fix $y$. Set $s=Q(y)$, $a_i=(By)_i$, $z=(x,y)=\sum_i a_i x_i$, and $\bar a_i=a_i\bmod 2$. Expanding $t(Q(x)+s-z)$ gives
+\begin{align*}
+t(Q(x-y))&=t(Q(x))+t(s)+t(z)+z+s q(x)+(q(x)+s)z,\\
+t(z)&=\sum_i\bigl(\bar a_i t(x_i)+t(a_i)p_i(x)\bigr)
+       +\sum_{i<j}\bar a_i\bar a_j p_i(x)p_j(x).
+\end{align*}
+Here $\bar a_i=0$ for $i>r$. The term $q(x)z$ groups with the $t(x_i)$ terms. Also $q(x)=\sum_i(B_{ii}/2)p_i(x)+\sum_{i<j\le r} B_{ij}p_i(x)p_j(x)$. Thus each column of $1+t(Q(x-y))$ lies in the span of the $D(h,r)$ functions
+\begin{equation}\label{eq:features}
+\begin{gathered}
+1,\ t(Q(x)),\quad p_i(x)\ (1\le i\le h),\\
+t(x_i)+q(x)p_i(x)\ (i\le r),\qquad p_i(x)p_j(x)\ (i<j\le r).
+\end{gathered}
+\end{equation}
+On $X$ the matrix is the identity: $t(0)=0$ and $t(2)=t(3)=1$ modulo two, with period four. The assertion follows by taking its rank.
+\end{proof}
+
+For squared distances $4,6$ in $\RR^{23}$, translate a point to zero and let $L$ be the integer span of the points. It is even and integral by polarization. It is discrete: choose a real basis from the points; all generators pair integrally with the basis, so $L$ lies in the discrete dual of its integer span. Consequently $h\le23$, $r\le22$, and the rank bound gives $|X|\le2+23+22+\binom{22}{2}=278$.
+
+\section{A quadratic obstruction to equality}
+\begin{lemma}\label{lem:refine}
+In Lemma~\ref{lem:rank}, if $D(h,r)$ is odd, then $|X|\le D(h,r)-1$. The same improvement holds if $D(h,r)\equiv2\pmod4$.
+\end{lemma}
+\begin{proof}
+Choose a basis with $B=H+2C$, where the first $r$ indices are partitioned into pairs and the symmetric $0$--$1$ matrix $H$ interchanges partners and vanishes on the radical indices. This is the normal form of an alternating binary bilinear form, lifted as in Lemma~\ref{lem:rank}. Write $i^*$ for the partner of $i\le r$ and $P$ for the set of partner pairs.
+
+Take a binary space $W$ of dimension $D(h,r)$ with slots $(o,\beta,u_i,p_i,m_e)$, where $i\le r$ for $u$, $i\le h$ for $p$, and $e$ ranges over pairs of distinct indices in $\{1,\ldots,r\}$. Let $V(x)$ denote the vector of evaluations \eqref{eq:features} in the corresponding order, so $o=1$, $\beta=t(Q(x))$, $u_i=t(x_i)+q(x)p_i$, and $m_{\{i,j\}}=p_ip_j$. Concatenate $z=(p_i,m_e)$; take the coefficient vector $a=(C_{ii}\bmod2,\,\mathbf1_{e\in P})$, so that $a^Tz(x)=q(x)$. Let $T$ permute pairs by $e\mapsto e^*=\{i^*,j^*\}$, and define
+\[
+ A=\operatorname{diag}(C+H,T)+aa^T\quad\text{over }\F.
+\]
+The diagonal of $\operatorname{diag}(C+H,T)$ is $a$, so $A$ is alternating. Define
+\[
+ F(v,v')=o\beta'+\beta o'+\sum_{i\le r}(u_i p'_{i^*}+u'_i p_{i^*})+z^TAz'.
+\]
+Then $F(V(x),V(y))=t(Q(x-y))$. To check, expand as in Lemma~\ref{lem:rank}: writing $b=x^THy$, one has $t(x^TBy)=t(b)+x^TCy$. Expanding $t(b)$ produces the pair permutation $T$ and the terms involving $t(x_i)$ or $t(y_i)$; the linear term $x^TBy$ reduces to $x^THy$, and $q(x)q(y)$ supplies $aa^T$. This gives the formula.
+
+The matrix for $oo'+F$ splits into the invertible block $\left(\begin{smallmatrix}1&1\\1&0\end{smallmatrix}\right)$ and an alternating matrix on the remaining slots. Its rank is even. Its restriction to the evaluations is the identity, proving the odd-$D$ claim.
+
+For the second claim define a quadratic form with polarization $F$:
+\begin{equation}\label{eq:R}
+ R(v)=o\beta+\sum_{i\le r}u_i p_{i^*}+\sum_{j<k}A_{jk}z_jz_k
+      +\sum_{i\le h} t(C_{ii})p_i+\sum_{e\in P}m_e .
+\end{equation}
+We claim $R(V(x))=0$ identically. Let $w_i=t(x_i)$, so $x_i\equiv p_i+2w_i\pmod4$ and $x_i^2\equiv p_i\pmod4$. With the evaluated bits interpreted as zeros or ones,
+\[
+ Q(x)\equiv\sum_i C_{ii}p_i+\sum_{e\in P}m_e
+       +2\sum_{i<j}C_{ij}p_ip_j+2\sum_{i\le r}w_i p_{i^*}\pmod4.
+\]
+Taking the second binary digit yields
+\begin{equation}\label{eq:beta}
+ \beta=\sum_i t(C_{ii})p_i+\sum_{j<k}a_j a_k z_jz_k
+       +\sum_{i<j} C_{ij}p_ip_j+\sum_{i\le r}w_i p_{i^*}.
+\end{equation}
+Indeed the first two terms come from the second digit of the sum of the unshifted terms, by the binomial sum law, and a summand $2b$ adds $b\bmod2$ to that digit.
+
+Substitute \eqref{eq:beta} into \eqref{eq:R}. The terms involving $aa^T$, $C_{ij}$, $t(C_{ii})$ and $w_i$ cancel. The extra $q(x)\sum_i p_i p_{i^*}$ vanishes because each pair occurs twice, and the off-diagonal contribution of $H$ cancels $\sum_{e\in P}m_e$. The off-diagonal contribution of $T$ is also zero: for any two distinct partner pairs, the four cross-pair indices make two transpositions under $T$, both contributing the same product of the four original coordinates. This proves the claim.
+
+Let $N=D(h,r)\equiv2\pmod4$ and suppose $|X|=N$. The $F$-Gram matrix on the evaluations is $I+J$ where $J$ is all ones; it is invertible since $N$ is even. Thus the evaluations form a basis of $W$ and $F$ is nondegenerate. Let $e_\beta$ have just its $\beta$ slot nonzero. For every $y\in X$,
+\[
+ F\left(\sum_{x\in X}V(x),V(y)\right)=N-1=1=F(e_\beta,V(y))\quad\text{in }\F.
+\]
+Therefore $\sum_x V(x)=e_\beta$. But $R(e_\beta)=0$, whereas polarization and the claim give
+\[
+ R\left(\sum_x V(x)\right)=\sum_x R(V(x))+\sum_{\{x,y\}\subset X}F(V(x),V(y))
+ =\binom N2=1\quad\text{in }\F.
+\]
+This contradiction proves the lemma.
+\end{proof}
+
+\section{The Euclidean conclusions}
+\begin{proof}[Proof of Theorem~\ref{th:main}]
+For more than 276 points in dimension 23, Larman--Rogers--Seidel \cite{lrs} leave squared-distance ratios $1:2$ or $2:3$; Bu et al.\ \cite{bu} exclude $1:2$ for this size (see also \cite[\S6]{yi}). In ratio $2:3$, scale to squared distances $4,6$ and apply the lattice argument. The only way the raw rank bound can reach 278 is $h=23$, $r=22$. Then $D=278\equiv2\pmod4$ and Lemma~\ref{lem:refine} gives at most 277. The construction in \cite{gkm} gives equality. Yi's reduction gives $\iso(23)=278$. For the lower bound explicitly, take the spherical McLaughlin 275-point set of radius $R$ in a hyperplane, with centre $c$, and add $c$ and the two points at normal offsets $\pm R$ from $c$. Any triangle with two hyperplane-set vertices has equal sides to the axial vertex. With one hyperplane-set vertex, the two poles are equidistant from it, and for a centre--pole pair two sides have length $R$. The three axial points themselves are equally spaced.
+
+For each of the eight further dimensions $d$ in the theorem, suppose $N>J(d)+1$. The ratio theorem gives squared distances in ratio $(\kappa-1):\kappa$. The case $\kappa=2$ gives at most $J(d)$ by \cite{bu}. For $\kappa\ge4$, put $\gamma=2\kappa-1\ge7$. The relative bound \cite[Prop.~4.1]{bu}, also \cite[Lemma~8.4]{yi}, gives
+\[
+ N\le\frac{(d+1)(\gamma^2-1)}{\gamma^2-d-1}\le\frac{48(d+1)}{48-d}\le J(d).
+\]
+The denominator is positive and $d(48-d)\ge96$ for $25\le d\le45$. For the remaining case $\kappa=3$, $d$ is odd, so the raw bound is at most $D(d,d-1)=J(d)+2$. If either rank is smaller it drops by at least one. At maximal ranks, $J(d)+2$ is odd for $d\equiv1\pmod4$ and equals $2\pmod4$ for $d\equiv7\pmod8$; together these cover the eight values. Lemma~\ref{lem:refine} therefore gives $g(d)\le J(d)+1$.
+
+Finally $M(j)=J(j)$ for $j=d,d-1$ in the eight cases, since neither is an exceptional dimension of the form $(2k+1)^2-3$ \cite{gy}. Yi's identity \cite{yi} (also \cite{cho}) is
+\[
+ \iso(d)=\max\{g(d),M(d)+1,M(d-1)+3\}.
+\]
+It now gives $\iso(d)=J(d)+1$. These values are attained by adjoining the centroid to the edge midpoints of a regular simplex.
+\end{proof}
+
+\paragraph{Verification and status.} No computation is needed for either upper bound. Included scripts test the binary identities and quadratic refinement by exact arithmetic on signed integer inputs. A targeted literature search found the prior bound 299 in dimension 23 and related modular distance bounds over prime ideals \cite{noz}; priority remains subject to specialist review. The all-dimensional extremal functions and uniqueness of the unrestricted extremizers in dimension 23 are not claimed here.
+
+\begin{thebibliography}{9}\small
+\bibitem{bu} B. Bu, C.-Y. Lee, Y.-H. Sheng, M.-T. Tsai, H. Yi and W.-H. Yu, \href{https://arxiv.org/abs/2610.40367}{Johnson optimality and uniqueness for distance ratio $1:\sqrt2$}, arXiv:2610.40367 (2026).
+\bibitem{cho} P. Chojecki, \href{https://www.ulam.ai/research/erdos503.pdf}{The Euclidean isosceles-set problem and Erd\H{o}s Problem 503}, research note (2026).
+\bibitem{gkm} H.-J. Ge, J. Koolen and A. Munemasa, \href{https://doi.org/10.1007/s00454-026-00843-9}{A 2-distance set with 277 points in the Euclidean space of dimension 23}, Discrete Comput. Geom. \textbf{76} (2026), 1679--1686.
+\bibitem{gy} A. Glazyrin and W.-H. Yu, \href{https://arxiv.org/abs/1611.09479}{Upper bounds for $s$-distance sets and equiangular lines}, Adv. Math. \textbf{330} (2018), 810--833.
+\bibitem{lrs} D. G. Larman, C. A. Rogers and J. J. Seidel, On two-distance sets in Euclidean space, Bull. London Math. Soc. \textbf{9} (1977), 261--267.
+\bibitem{noz} H. Nozaki, \href{https://doi.org/10.5802/alco.272}{Bounds for sets with few distances distinct modulo a prime ideal}, Algebr. Comb. \textbf{6} (2023), 539--545.
+\bibitem{yi} H. Yi, \href{https://arxiv.org/html/2611.05421v2}{Isosceles sets and two-distance sets in Euclidean space}, arXiv:2611.05421v2 (2026), Theorems 1.3 and 1.4.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,97 @@
+# The exact maximum for square-free hypercube graphs with quadratic direction rules
+**Leo Gao** · AI-assisted research, 27 November 2026. **The unrestricted Erdős problem #86 remains open.**
+
+Let $Q_n$ have vertex set $V=\mathbb F_2^n$ and basis directions $e_i$. A graph on the cube edges has direction indicators $f_i:V\to\{0,1\}$ satisfying $f_i(x+e_i)=f_i(x)$. Let $p_i=\mathbb{E} f_i$, let $p=n^{-1}\sum_i p_i$ denote its density in the cube, and write $b_i=2p_i-1$. The original question asks whether the largest square-free density tends to $1/2$.
+
+## Main theorem
+If the graph is square-free and **each direction indicator is a polynomial of degree at most two over $\mathbb F_2$**, then
+$$
+\sum_{i:\,b_i>0} b_i^2\le 1,\qquad
+p \le \frac12+\frac1{2\sqrt n}.
+$$
+There are no requirements on common factors, rank, symmetry, or where the coefficients of different direction rules come from. In fact, if $L=4^{\lfloor\log_4 n\rfloor}$ and $t=\lfloor(4L-n)/3\rfloor$, the **exact maximum density** in this subclass is
+$$
+p_{\rm quad}(n)=\frac12+\frac{n+t}{4n\sqrt L}.
+$$
+In particular $p_{\rm quad}(4^k)=1/2+1/(2^{k+1})$. The proof uses a four-ary prefix tree to build a matching example in every dimension. No unrestricted upper or lower record is claimed. Indeed $n=9$ separates the problems: the formula gives **1,504** edges, while Wang's fully frustrated result gives **1,532** selected edges ($2,304-772$). Thus in this dimension some nonquadratic rule is necessary to reach the known construction.
+
+### 1. A property of biased quadratics
+If $f$ is a quadratic Boolean function on a finite affine binary space, let $s=2f-1$. If $\mathbb E s>0$, then on **each nonempty affine hyperplane** the conditional mean of $s$ is nonnegative. This includes constant and affine functions.
+
+To prove it, choose an origin, write $B(h,x)=f(x+h)+f(x)+f(h)+f(0)$ for the polar bilinear form, and $K$ for its radical. For a linear functional $\ell$, write $\widehat s(\ell)=\mathbb E_x s(x)(-1)^{\ell(x)}$. Squaring and writing the two sample points as $x,x+h$ gives
+$$
+\widehat s(\ell)^2=
+\mathbb E_h{\bf1}_{h\in K}(-1)^{f(h)+f(0)+\ell(h)}.
+$$
+Indeed, the average of $(-1)^{B(h,x)}$ over $x$ vanishes outside $K$. The function $h\mapsto f(h)+f(0)$ is linear on $K$, so the answer is either $0$ or $|K|/|V|$. Hence a nonzero constant Fourier coefficient has magnitude at least that of every other coefficient. On $\ell(x)=a$, for nonzero $\ell$, the conditional mean is $\widehat s(0)+(-1)^a\widehat s(\ell)\ge0$. The same proof applies on affine slices.
+
+### 2. A missing square cannot occur in two above-half directions
+Fix distinct $i,j$ with $b_i,b_j>0$. Define
+$$
+D_i=\{x:f_i(x)=f_i(x+e_j)\},\qquad
+D_j=\{x:f_j(x)=f_j(x+e_i)\}.
+$$
+Each is the whole space or an affine hyperplane: the derivative of a quadratic is affine, and a derivative identically one would force balance by pairing translated points. On the complement of $D_i$ the translation $x\mapsto x+e_j$ pairs opposite signs of $s_i=2f_i-1$. Therefore its mean on $D_i$ is strictly positive. The same holds for $j$ on $D_j$.
+
+If $W=D_i\cap D_j$ is nonempty, it is either all of $D_i$ or a hyperplane therein, and likewise for $D_j$. Part 1, applied to the two restricted quadratics, gives $\mathbb E[s_i\mid W]\ge0$ and $\mathbb E[s_j\mid W]\ge0$. On $W$ an $i$-edge and its opposite agree, as do the $j$-edges. Thus the lack of a retained square gives $f_i+f_j\le1$ pointwise there (ordinary integers). The two conditional means sum to at least one for the indicators, so in fact $f_i+f_j=1$ everywhere on $W$. This rules out an entirely deleted square as well. If $W$ is empty neither kind of monochromatic square is possible.
+
+Consequently, deleting the directions of density at most one half leaves a two-coloring in which neither color contains a coordinate square, in every slice. The missing-color conclusion uses quadraticity; it does not follow from square-freeness alone.
+
+### 3. The weighted inequality
+For $i,j$ as above, average $s_i(x)s_j(x)$ over the four vertices of an $\{i,j\}$-square. Since $s_i$ is independent of $e_i$ and $s_j$ of $e_j$, this average is
+$$
+\tfrac14\big(s_i(x)+s_i(x+e_j)\big)\big(s_j(x)+s_j(x+e_i)\big).
+$$
+It vanishes unless $x\in W$, in which case it equals $-1$ by part 2. Hence $\mathbb E s_i s_j=-\Pr(W)\le0$. For $I=\{i:b_i>0\}$, set $Z=\sum_{i\in I} b_i s_i$. Jensen's inequality and $s_i^2=1$ give
+$$
+\Big(\sum_{i\in I}b_i^2\Big)^2=(\mathbb E Z)^2\le\mathbb E Z^2\le\sum_{i\in I}b_i^2.
+$$
+It follows that $\sum_{i\in I}b_i^2\le1$. Finally $2n(p-1/2)=\sum_i b_i\le\sqrt{n\sum_{i\in I} b_i^2}\le\sqrt n$.
+
+### 4. Optimizing the directional biases
+The Fourier calculation in part 1 shows that every positive quadratic bias equals $2^{-d}$ for an integer $d\ge0$: the polar form is alternating and has even rank $2d$, so $|K|/|V|=2^{-2d}$. Thus positive biases are the weights of at most $n$ leaves of respective depths $d$ in a rooted four-ary tree. Indeed part 3 gives $\sum 4^{-d}\le1$, precisely the four-ary Kraft condition. For completeness, sort the lengths increasingly and assign unused nodes at each depth; a leaf at depth $a$ precludes exactly $4^{b-a}$ choices at any deeper level $b$, and the condition guarantees enough free nodes. Each leaf of depth $d$ contributes $2^{-d}$ to the sum of weights. Replacing a leaf by two children preserves its total weight, so an upper bound for exactly $n$ leaves bounds codes using fewer nonzero biases as well.
+
+Among trees with exactly $n$ leaves there is an optimal one with no unary internal vertex: suppressing one increases the weights of all its descendants. Such trees have depth at most $n-1$, so a maximizing tree exists. Among maximizers choose one minimizing the sum of leaf depths. If a shallow leaf has depth $a$ and the deepest leaf depth is $b\ge a+2$, swap the shallow leaf with the parent of a deepest leaf. That parent has $q\ge2$ children, all leaves. Its contribution normalized at its own depth is $q/2\ge1$, versus $1$ for the shallow leaf. Moving it up cannot decrease weight, while the total depth decreases by $(q-1)(b-1-a)>0$. Hence all leaves of a maximizing tree occupy at most two adjacent levels.
+
+Write $k=\lfloor\log_4 n\rfloor$, $L=4^k$. For $n>L$, one cannot fit the leaves entirely at depths at most $k$. If all depths are at least $k+1$, the weight is at most $n/(2\sqrt L)$. Otherwise the two depths must be $k,k+1$; the number $u$ at depth $k$ satisfies $3u+n\le4L$, hence $u\le t$. The total weight is at most $(n+t)/(2\sqrt L)$. For $n=L$ the same bound follows immediately from Cauchy–Schwarz, as it equals $\sqrt n$. Conversely, there is a code with $t$ leaves at depth $k$ and $n-t$ at depth $k+1$ by the same capacity test. The maximum sum of positive biases allowed by the inequality is exactly $(n+t)/(2\sqrt L)$.
+
+### 5. Realizing the upper bound
+The explicit $Q_4$ system in the verification section has every direction bias $1/2$ and is square-free. Its faces have three selected edges *on average*, because its edge density is $3/4$; each face has at most three, so each has exactly three. Thus the product of its four signs $s_i=2f_i-1$ on every square is $-1$. Call this property full frustration.
+
+To substitute graphs into directions of this four-direction system, put a nonempty block of coordinates at each of its four leaves. The graph for each block has signs $s_a^{(i)}$; take the one-direction constant $+1$ system for a single leaf. At $x$ let $z_i$ be the parity of block $x_i$. Set
+$$
+S_{i,a}(x)=s_i^{\rm out}(z_1,z_2,z_3,z_4)\,s_a^{(i)}(x_i).
+$$
+Every edge rule is invariant in its own direction. On a within-block square the outer factor is constant (it ignores its own parity), so the square product is inherited from the inner graph. On a cross-block square the inner factors cancel in pairs and the two parities flip, so the product is inherited from the outer graph. Hence full frustration is preserved, in particular square-freeness. The Boolean indicator of the product is $1+f_i^{\rm out}(z)+f_a^{(i)}(x_i)$ in $\mathbb F_2$; parity substitution is linear, so its degree is still at most two. Finally $s_i^{\rm out}$ ignores its own block, and all other nonempty block parities are uniform independent bits. The bias of each resulting direction is the product of its two constituent biases.
+
+Iterate this operation on a full four-ary tree (all internal nodes have four children). A leaf at depth $d$ has bias $2^{-d}$. Complete the optimal code from part 4 by including every child at level $k+1$ of each non-leaf at level $k$. There are $4L-3t$ total leaves; this exceeds $n$ by at most two. Designate the unused leaves as dummy directions and fix their bits. Averaged over all dummy assignments, the sum of biases of the retained directions remains $(n+t)/(2\sqrt L)$. At least one fixed assignment attains this value or better; restriction preserves both degree at most two and square-freeness, so the upper bound forces equality. This gives the claimed finite formula. In fact every such assignment attains the same total by the upper bound and the exact average.
+
+## A different restricted theorem: a small translation quotient
+Suppose a square-free edge set is invariant under translations by a binary linear subspace $H$ of index $N=2^r=O(n)$. Then its cube-edge density is **$o(1)$**, even if individual rules have high degree.
+
+Write $G=V/H$ and $a_i=e_i+H$. The indicator for direction $i$ descends to $G$ and is invariant under $+a_i$. Within every class of directions with the same $a_i=a$, the active sets are pairwise disjoint: simultaneous activity at one quotient point would give a lifted square since both directions are also active at the opposite quotient point. This holds also for $a=0$. Thus $t_a=\sum_{i:a_i=a}p_i\le1$.
+
+For each nonzero represented $a$, pick the direction of largest density; let $m_a$ be the class size. Put $(x,x+a)$ in $D\subset G^2$ when this representative is active at $x$. This is a symmetric set disjoint from the diagonal. Its density is at least
+$$
+N^{-1}\sum_{a\ne0:\,m_a>0}t_a/m_a\ \ge\ (np-1)_+^2/(nN).
+$$
+For the second inequality use $t_0\le1$ and Cauchy–Schwarz: $(\sum_{a\ne0}t_a)^2\le n\sum_{a\ne0}t_a^2/m_a\le n\sum_{a\ne0} t_a/m_a$, omitting empty classes. If $p$ were bounded below on a subsequence, then $D$ would have positive density bounded away from zero, and $N\ge np$ would give $r\to\infty$.
+
+Identify $G^2$ with length-$r$ words on the alphabet $\{00,01,10,11\}$. The density Hales–Jewett theorem supplies a combinatorial line in $D$. Its four pairs are $(x,y),(x+t,y),(x,y+t),(x+t,y+t)$ with $t\ne0$ the indicator of the variable coordinates. There are no loops, so $a=x+y$ and $b=x+y+t$ are nonzero and distinct. The four edges alternate the chosen directions for $a,b$. Lifting from any preimage of $x$ gives a forbidden coordinate square. This proves the claim.
+
+## Where the proof breaks for cubics
+The two-color implication itself fails already on $Q_5$ for cubics. In coordinates $(x_1,x_2,s,v,w)$, set $h=(1+v)(1+w)$ over $\mathbb F_2$ and retain only the first two directions, with
+$$
+f_1=1+s+s x_2+(1+s)h,\qquad f_2=s+(1+s)x_1+h x_1.
+$$
+When $h=0$, the pair of functions is $(1,x_1)$ if $s=0$ and $(x_2,1)$ if $s=1$. When $h=1$, it is $(0,0)$ or $(x_2,1+x_1)$ respectively. Thus no retained square exists, whereas the face at $s=v=w=0$ is entirely deleted. Both direction densities equal $5/8$. This does not disprove the density conjecture for cubic rules; it pinpoints the failed implication.
+
+## Verification and scope
+Run the included Python 3 standard-library script, **verify.py**. Truth-table bits are indexed by $x=0,\dots,2^n-1$ in binary coordinate order. In dimension four, all 2,048 possible quadratics were checked. All 5,046 pairs of above-half own-direction-invariant functions were tested for the six direction pairs; the 576 compatible pairs obey the two-color conclusion. The four quadratic truth tables **cff3, f5af, bbdd, 7e7e** (hexadecimal) define a graph with 24 of 32 edges and $b_i=1/2$ for all four directions. A direct scan confirms square-freeness and equality in the main theorem. The script also checks the tree optimum by independent dynamic programming and the dimension-$16$ iterated sign construction. Enumeration is a check; the proof gives the arbitrary-dimensional statement.
+
+- [Erdős problem #86](https://www.erdosproblems.com/86) and [original references](https://www.erdosproblems.com/latex/86).
+- Brass, Harborth and Nienborg, [On the maximum number of edges in a $C_4$-free subgraph of $Q_n$](https://doi.org/10.1002/jgt.3190190104), unrestricted lower constructions of excess order $n^{-1/2}$. Baber, [Turán densities of hypercubes](https://arxiv.org/abs/1201.3587), asymptotic unrestricted upper bound 0.60318.
+- Bialostocki previously obtained the unweighted $1/2+1/(2\sqrt n)$ estimate when **both** color classes are initially required to avoid squares; see the [1983 journal record](https://combinatorialpress.com/ars/vol16a/) and [Conlon’s statement of the corollary](https://www.its.caltech.edu/~dconlon/HypercubeCycle.pdf). The distinctive step here is that quadraticity plus the one-sided prohibition force precisely that two-color condition on the above-half directions. The Walsh and weighted second-moment arguments are not claimed as new machinery.
+- Wang, [The frustration index of fully frustrated hypercubes](https://arxiv.org/abs/2611.14906), Nov. 11, 2026, treats a distinct fully frustrated subclass. Zhou et al., [The four-cycle extremal number of the seven-cube](https://arxiv.org/abs/2611.27284), Nov. 20, 2026, proves the unrestricted finite value 304 for $n=7$, not the asymptotic conjecture.
+- Polymath, [A new proof of the density Hales–Jewett theorem](https://arxiv.org/abs/0910.3926), used only in the translation-quotient theorem.
+- A targeted search did not locate the quadratic-direction implication or exact restricted formula; no priority or publication claim is made. For cubic rules the derivative-zero locus need not be affine, and a positively biased cubic need not have nonnegative conditional bias on every hyperplane. Extending the argument even to all cubics needs a new idea.

@@ -1,0 +1,4 @@
+d,r,n, tested evaluation pairs: 4 4 32 496
+d,r,n, tested evaluation pairs: 7 4 40 780
+d,r,n, tested evaluation pairs: 23 22 50 1225
+PASS: R(e_beta)=R(V(x))=0 and polar R(V(x),V(y))=t(Q(x-y)).

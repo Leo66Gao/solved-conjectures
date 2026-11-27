@@ -8,6 +8,7 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Exact dimension-23 maxima for two-distance and isosceles sets** | Exact dimensions | A binary rank bound and quadratic refinement give 277 two-distance points and 278 isosceles points in dimension 23, as well as isosceles maxima in eight further dimensions. | [Proof and checks](50-erdos-502-503-isosceles-dimension-23/) |
 | **Bapat’s real $q$-permanent** | Complete answer for real symmetric matrices | An integer positive definite matrix of order 8,192, built from a rank-three Gram factor and a diagonal lift, violates monotonicity on $[-1,1]$. The exact checker reproduces the certificate. | [Details](19-bapat-q-permanent/) · [PDF](19-bapat-q-permanent/paper.pdf) · [LaTeX](19-bapat-q-permanent/paper.tex) · [Order-8,192 PDF](19-bapat-q-permanent/order-8192/proof.pdf) · [Order-8,192 LaTeX](19-bapat-q-permanent/order-8192/proof.tex) · [Order-8,192 certificate](19-bapat-q-permanent/order-8192/) · [Rank-three supplement](19-bapat-q-permanent/rank-three.pdf) |
 | **Iannucci’s abundance conjecture for weird numbers** | Complete proof of equation (6) | An elementary modular argument proves the conjectured bound for every weird number of the form $2^kpq$. This does not settle the infinitude question in Erdős #470. | [Overview](47-iannucci-weird-number-abundance/) · [PDF](47-iannucci-weird-number-abundance/paper.pdf) · [LaTeX](47-iannucci-weird-number-abundance/paper.tex) |
 | **Uniform restricted order of additive bases (Erdős #338)** | Complete answer to the quantitative question | Finite restricted order is bounded in terms of ordinary order alone, and the largest possible value grows doubly exponentially. The equality question is separate. | [Overview](48-erdos-338-restricted-orders/) · [PDF](48-erdos-338-restricted-orders/restricted-orders.pdf) · [LaTeX](48-erdos-338-restricted-orders/restricted-orders.tex) |
@@ -28,6 +29,8 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Quadratic square-free hypercubes (Erdős #86)** | Exact in a subclass | Determines the maximum density in every dimension for quadratic Boolean direction indicators. | [Proof and checks](49-erdos-86-quadratic-hypercubes/) |
+| **Property B at ranks 7–12 (Erdős #901)** | Finite lower bounds | Exact certificates give 132, 269, 547, 1,118, 2,287 and 4,678. | [Proof and checks](51-erdos-901-property-b/) |
 | **Optimal binary quantization after dropping two bits** | Theorem | Reading $n-2$ coordinates is optimal at every crossover probability, including against unequal cells. The certified proof does not settle arbitrary six-bit quantization. | [Details](24-binary-quantization-drop-two/) · [PDF](24-binary-quantization-drop-two/paper.pdf) · [LaTeX](24-binary-quantization-drop-two/paper.tex) |
 | **Consecutive log-concavity violations in trees** | Complete answer | Diameter-seven trees can have arbitrarily long runs of consecutive strict log-concavity violations. | [Details](22-tree-independence-polynomials/) · [PDF](22-tree-independence-polynomials/paper.pdf) · [LaTeX](22-tree-independence-polynomials/paper.tex) |
 | **Width of thin lattice simplices** | Complete answer | Proves Kurylenko’s Conjectures 1.5 and 1.6 and answers both parts of Question 1.4. | [Proof](01-thin-simplices/Thin-simplex-proofs.md) · [PDF](01-thin-simplices/manuscript.pdf) · [LaTeX](01-thin-simplices/manuscript.tex) |
@@ -62,6 +65,7 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |
+| **Two further eight-point crescents (Erdős #217)** | Explicit constructions | Two conjugate configurations are distinct from three earlier examples and neither has a six-point crescent subset. | [Proof and checks](52-erdos-217-eight-point-crescents/) |
 | **Sidorenko bounds for odd Möbius ladders** | Partial | Covers all regular hosts with negative-semidefinite centered operator, plus other structured classes. The general ten-vertex case remains open here. | [Details](30-mobius-ladders/) · [PDF](30-mobius-ladders/mobius-follow-up.pdf) · [LaTeX](30-mobius-ladders/mobius-follow-up.tex) |
 | **Five-word filters for Werner states** | Partial | Rules out witnesses with at most five product-basis strings on one side up to $t=0.4979$ at every copy number; reduces the endpoint to 18 cases. | [Details](31-werner-states/) · [Proof and reduction](31-werner-states/five-words.md) |
 | **Elementary-positive spider graphs** | Partial | Proves finiteness for fixed shortest leg at least two other than three. The exact classification and shortest-leg-three finiteness remain open. | [Details](12-spider-graphs/) · [PDF](12-spider-graphs/spider.pdf) · [LaTeX](12-spider-graphs/spider.tex) |

@@ -1,0 +1,5 @@
+Q4 quadratic polynomials, above-half, restricted fibers: (2048, 589, 14280)
+Q4 high-direction pairs, compatible pairs, Q4 24-edge witness tables: (5046, 576, ['0xcff3', '0xf5af', '0xbbdd', '0x7e7e'])
+Q5 cubic boundary: fractions 20/32 and 20/32; no retained square; 1 empty coordinate-(1,2) square.
+Four-ary tree DP: formula confirmed for every n=1..64
+Q16 tensor: all direction rules quadratic by Möbius transform; all 1,966,080 faces odd; 327,680 / 524,288 edges.

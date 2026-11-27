@@ -1,0 +1,5 @@
+d= 3, r= 2: exact kernel rank   8, bound   8, tested pairs 1600
+d= 5, r= 2: exact kernel rank  10, bound  10, tested pairs 1600
+d= 6, r= 6: exact kernel rank  28, bound  29, tested pairs 2304
+d=23, r=22: exact kernel rank 278, bound 278, tested pairs 96100
+PASS: all signed-integer identities and all column factorizations agree.

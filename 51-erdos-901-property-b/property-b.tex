@@ -1,0 +1,102 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,microtype,xcolor}
+\usepackage[margin=26mm]{geometry}
+\usepackage[colorlinks=true,urlcolor=blue!50!black,linkcolor=black,citecolor=black]{hyperref}
+\usepackage{fancyhdr}
+\fancyhf{}\lhead{Finite-rank lower bounds for Property B}\rhead{Gao}\cfoot{\thepage}
+\pagestyle{fancy}\setlength{\headheight}{14pt}
+\newtheorem{theorem}{Theorem}\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pb}{\mathbb P}
+\newcommand{\N}{\binom}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\hypersetup{pdftitle={Lower bounds for Property B in uniformities seven through twelve},pdfauthor={Leo Gao}}
+\title{Lower bounds for Property B in uniformities\\ seven through twelve}
+\author{Leo Gao}
+\date{27 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $m(r)$ be the least number of edges in a non-two-colorable $r$-uniform hypergraph. We prove $m(7)\ge132$, $m(8)\ge269$, $m(9)\ge547$, $m(10)\ge1118$, $m(11)\ge2287$, and $m(12)\ge4678$. The key observation is that splitting shared vertices in the link of a pivot cannot reduce its probability of being both first and last in edges of a random vertex order. We combine the resulting degree bound with a position bound for the same event. An accompanying integer-arithmetic verifier checks all allowable vertex counts.
+\end{abstract}
+\section{The finite-rank problem}
+A hypergraph has Property B if its vertices admit a red--blue coloring with no monochromatic edge. Erd\H os and Lov\'asz asked for estimates on the minimum size $m(r)$ of a three-chromatic $r$-uniform hypergraph \cite{el}. This equals the minimum size of a non-two-colorable one for $r\ge2$: in an edge-minimal example, two-color after deleting one edge, then give one vertex of the deleted edge a third color. Grill and Linzmayer \cite{gl} obtained the lower bounds $128,263,538$ in uniformities $7,8,9$. A subsequent institutional report \cite{sii} lists bounds for all six ranks studied here.
+\begin{theorem}\label{th:main}
+The following bounds hold, without a restriction on the vertex count or edge intersections.
+\end{theorem}
+\begin{center}
+\begin{tabular}{lrrrrrr}\toprule
+Uniformity $r$&7&8&9&10&11&12\\\midrule
+Reported lower bound \cite{sii}&131&267&543&1112&2275&4664\\
+Theorem~\ref{th:main}&132&269&547&1118&2287&4678\\\bottomrule
+\end{tabular}
+\end{center}
+The comparisons are to the specified report. The bounds do not determine any of the six values or the asymptotic order of $m(r)$.
+\paragraph{Reduction.} Suppose that an $r$-graph with at most $M$ edges lacks Property B. Identify two vertices in no common edge, deleting duplicate edges. No edge shrinks and a proper coloring of the quotient would lift. Iterate until every pair lies in an edge. On the resulting $v$ vertices put $a=\lfloor v/2\rfloor$, $b=\lceil v/2\rceil$. Counting pairs and monochromatic edges of a uniformly random $a\mid b$ partition gives
+\begin{equation}\label{eq:v}
+\N v2\le M\N r2,\qquad \N vr\le M\left(\N ar+\N br\right).
+\end{equation}
+Here $v\ge2r-1$, since otherwise a balanced partition is proper. We use zero for an infeasible binomial coefficient. For the surviving orders the verifier checks $\binom vr\ge M$; add distinct edges to reach exactly $M$. Let $s=r-1$. The degrees satisfy
+\begin{equation}\label{eq:d}
+\ell=\left\lceil\frac{v-1}{s}\right\rceil\le d\le u=\min\{M,rM-(v-1)\ell\},\qquad \sum d=rM .
+\end{equation}
+\newpage
+\section{Critical vertices in a random order}
+Give the vertices independent uniform $[0,1]$ weights. Starting with all vertices red, process them in increasing order, flipping a vertex to blue if it is last in a still all-red edge. No red edge remains. If a blue edge is produced, its first vertex was last in another edge. Such a vertex is called \emph{critical}; the two witnessing edges meet only there. If the expected number of critical vertices is less than one, some order has none and yields a proper coloring. We use two upper bounds on this same expectation.
+\paragraph{A bound by position.} Let $g$ bound the number of ordered pairs of edges meeting at a single vertex. Write $A_i=\binom{i}{s}$, $B_i=\binom{v-1-i}{s}$, $C=\binom{v-1}{s}$, $D=\binom{v-r}{s}$. The position estimate of \cite[Eq.~(8)]{gl} is
+\begin{equation}\label{eq:pos}
+P(v)=\frac{1}{vC}\sum_{i=0}^{v-1}\min\left\{rM A_i,\;rM B_i,\; g A_iB_i/D\right\}.
+\end{equation}
+At position $i+1$, each designated last vertex of an edge contributes probability $A_i/(vC)$; the reverse event gives $B_i/(vC)$. For each ordered pair with a unique common vertex, the probability that its two disjoint sets of partners fall on opposite prescribed sides of this position equals $A_iB_i/(vCD)$. Taking the three union bounds proves \eqref{eq:pos}.
+
+Construct the graph on the $M$ edges in which two are adjacent if they meet once. In a clique of size $h$, the incidence vectors have Gram matrix $(r-1)I+J$, so $h\le v$. If all members contain a common point then $h\le\lfloor(v-1)/s\rfloor$. Otherwise each point is contained in at most $r$ clique members: a member missing the point must meet all the others through the point at distinct vertices. Counting members meeting a fixed one gives $h\le1+r(r-1)$. Thus, putting
+\[
+w=\min\{v,\max\{\lfloor(v-1)/s\rfloor,1+r(r-1)\}\},\qquad M=wk+b,\quad 0\le b<w ,
+\]
+Tur\'an's theorem gives the valid choice $g=M^2-(w-b)k^2-b(k+1)^2$ in \eqref{eq:pos}. The use of simple intersections and clique bounds also appears in \cite{agl,sii}.
+
+\paragraph{A bound by degree.} Condition on the weight $x$ of a pivot. Its link is the family of $s$-sets obtained by removing it from the $d$ incident edges. Each other vertex has an independent Bernoulli$(x)$ bit indicating whether it is earlier. Criticality requires both an all-one and an all-zero link.
+\begin{lemma}[Splitting]\label{lem:spl}
+If a link vertex is replaced by two independent copies and each incident link uses one of the copies, the probability of having both witnesses does not decrease.
+\end{lemma}
+\begin{proof}
+Fix the bits at all other vertices. If the original event holds for either value of the shared bit, its value one gives an all-zero link avoiding it, and its value zero gives an all-one link avoiding it. Both persist. If only the value one succeeds, take such an unaffected all-zero link and an all-one witness. The latter still succeeds with probability at least $x$, since it uses at most one copy. The case where only zero succeeds is symmetric; if neither succeeds there is nothing to prove.
+\end{proof}
+\newpage
+\section{The degree certificate}
+Split shared vertices until the $d$ links are disjoint. Conditional on $x$, one link is all-one with probability $a=x^s$, all-zero with probability $b=(1-x)^s$, and neither otherwise. Inclusion--exclusion and Lemma~\ref{lem:spl} bound the unconditional pivot probability by
+\begin{equation}\label{eq:q}
+q_s(d)=\int_0^1\!\left[1-(1-a)^d-(1-b)^d+(1-a-b)^d\right]\,dx .
+\end{equation}
+Given upper bounds $u_d\ge q_s(d)$ on the integer interval $[\ell,u]$ from \eqref{eq:d}, let $F$ be their upper concave hull. The expected number of critical vertices is at most $\sum F(d)\le v F(rM/v)$ by Jensen's inequality. This optimizes over a superset of the feasible degree distributions.
+
+\paragraph{Certified quadrature.} For fixed weights in all the disjoint links, the set of thresholds $x$ which qualify is an interval, possibly empty: its lower endpoint is the smallest link maximum and its upper endpoint the largest link minimum. For any such interval its mass on the $H$ equally spaced cell midpoints differs from its length by at most $1/H$. Averaging, the integrand's midpoint mean plus $1/H$ is an upper bound for \eqref{eq:q}, uniform in $d$.
+
+At each midpoint the verifier rounds $1-a$ and $1-b$ down to multiples of $2^{-30}$ and $1-a-b$ up. Computing the three successive powers with rounding in the same directions preserves the needed inequalities at every multiplication. All grid arguments and the $1/H$ correction are rational. The sums use symmetry about $1/2$. Hull orientations, interpolation, the position bound, and final strict comparisons are evaluated with integers or fractions.
+
+\begin{center}
+\small
+\begin{tabular}{rrrrrr}\toprule
+$r$ & $M$ & eligible $v$ (count)&$H$ & position cap & splitting cap\\\midrule
+7&131&37&16384&0.999182370&0.982100042\\
+8&268&76&32768&0.999885438&0.996185123\\
+9&546&140&32768&0.999420816&0.996448097\\
+10&1117&250&32768&0.999899632&0.991190863\\
+11&2286&423&524288&0.999741949&0.999144688\\
+12&4677&692&131072&0.999987754&0.991526555\\\bottomrule
+\end{tabular}
+\end{center}
+For each row, the position cap is the largest $P(v)$ among orders passing $P(v)<1$; the splitting cap is the largest certified $vF(rM/v)$ over the remaining orders. Both are rounded up to nine places. All eligible orders pass one of the tests. This proves Theorem~\ref{th:main}. No exhaustive hypergraph enumeration is involved.
+\paragraph{Reproduction.} Run \code{python verify_final.py} with Python~3. NumPy is optional and accelerates the same integer recurrence. The supplied \code{certificate_final.txt} records the expected output. The verifier checks its 64-bit arithmetic bounds; its scalar fallback uses unbounded integers.
+\newpage
+\section*{Scope and remaining question}
+The six inequalities exclude non-two-colorable hypergraphs with at most the respective edge budgets $M$. They do not produce hypergraphs attaining the new bounds. At larger budgets, treating the degree distribution and the number of simple intersections as separate worst cases can give an estimate at least one, even if those cases cannot occur simultaneously. Relating these two parameters for one and the same hypergraph is a possible way to extend the argument.
+\paragraph{Research disclosure.} AI assistance was used to develop the argument, implement and run the verifier, and draft this manuscript. The note has not undergone independent expert or peer review.
+\begin{thebibliography}{9}
+\bibitem{el} P. Erd\H os and L. Lov\'asz, Problems and results on 3-chromatic hypergraphs and some related questions, \emph{Infinite and Finite Sets}, Vol. II, Colloquia Mathematica Societatis J\'anos Bolyai 10, 609--627 (1975). See also \href{https://www.erdosproblems.com/forum/thread/901}{Erd\H os Problem \#901}.
+\bibitem{agl} S. Aglave, V. A. Amarnath, S. Shannigrahi and S. Singh, \href{https://ajc.maths.uq.edu.au/pdf/76/ajc_v76_p073.pdf}{Improved bounds for uniform hypergraphs without property B}, \emph{Australasian Journal of Combinatorics} \textbf{76}(1), 73--86 (2020).
+\bibitem{gl} K. Grill and D. Linzmayer, \href{https://arxiv.org/abs/2403.05674}{Improved lower bounds for Property B}, arXiv:2403.05674v3 (2024).
+\bibitem{sii} Shanghai Innovation Institute, \href{https://www.sii.edu.cn/2026/1113/c27a1357/page.htm}{institutional research report on lower bounds for hypergraph coloring} (in Chinese), Table~2, 17 November 2026. The present certificates do not assume its claims.
+\end{thebibliography}
+\end{document}

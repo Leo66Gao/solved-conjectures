@@ -1,0 +1,18 @@
+PASS m(7) >= 132 : 37 eligible v; grid H=16384.
+   worst position v= 51 upper 999182370 /10^9
+   worst splitting v= 52 upper 982100042 /10^9
+PASS m(8) >= 269 : 76 eligible v; grid H=32768.
+   worst position v= 79 upper 999885438 /10^9
+   worst splitting v= 80 upper 996185123 /10^9
+PASS m(9) >= 547 : 140 eligible v; grid H=32768.
+   worst position v= 127 upper 999420816 /10^9
+   worst splitting v= 128 upper 996448097 /10^9
+PASS m(10) >= 1118 : 250 eligible v; grid H=32768.
+   worst position v= 200 upper 999899632 /10^9
+   worst splitting v= 201 upper 991190863 /10^9
+PASS m(11) >= 2287 : 423 eligible v; grid H=524288.
+   worst position v= 312 upper 999741949 /10^9
+   worst splitting v= 313 upper 999144688 /10^9
+PASS m(12) >= 4678 : 692 eligible v; grid H=131072.
+   worst position v= 496 upper 999987754 /10^9
+   worst splitting v= 497 upper 991526555 /10^9
