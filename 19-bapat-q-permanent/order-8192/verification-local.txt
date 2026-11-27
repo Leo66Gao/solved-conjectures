@@ -1,0 +1,20 @@
+rings 1/1 slots 5
+rings 1/1 slots 5
+rings 1/1 slots 5
+rings 2/2 slots 13
+rings 2/2 slots 13
+rings 2/2 slots 13
+Self-test: 6 integer ring matrices, 121032 direct permutation terms; exact norm and derivative agree, interval bounds enclose, pure exterior checks agree.
+rings 64/256 slots 65665
+rings 128/256 slots 262401
+rings 192/256 slots 590209
+rings 256/256 slots 1049089
+n 8192 m 32 N 256 scale 49791/50000 norm upper 1103193316883/549755813888 (display) 2.006696953472783
+pure exterior/n^4 (display) 0.5016205128688468 upper permanent normalized (display) 2.0067029372361915 lower exterior normalized (display) 2.0069719392043655 R certified lower (display) 1.0001340517139745
+Exact normalized derivative upper bound: < -1/8000 (in units C*n!*2**(-n)).
+Explicit interior comparison: h=1/(16000*C*2048**n), P(1-h)>P(1-h/2).
+CERTIFIED: A=W W^T+I positive definite, integer, non-diagonal; P_prime(1)<0.
+Exact final inequality R>1; time including norm (if evaluated) 12.575 s; Python max RSS 22704 KiB; child max RSS 370352 KiB
+real 13.68
+user 12.88
+sys 0.34

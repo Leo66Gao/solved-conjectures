@@ -1,0 +1,47 @@
+rings 1/1 slots 5 max 1.000000001
+norm upper bound = 2.66666666668085864; slots = 5
+rings 1/1 slots 5 max 1.154700539
+norm upper bound = 5.00000000002935625; slots = 5
+rings 1/1 slots 5 max 16.00000001
+norm upper bound = 280.000000001472397; slots = 5
+rings 2/2 slots 13 max 1.000000001
+norm upper bound = 4.00000000003460412; slots = 13
+rings 2/2 slots 13 max 16.00000001
+norm upper bound = 412.685714289387732; slots = 13
+rings 2/2 slots 13 max 16.00000001
+norm upper bound = 412.685714289387732; slots = 13
+Self-test: 6 integer ring matrices, 121032 direct permutation terms; exact norm and derivative agree, interval bounds enclose, pure exterior checks agree.
+rings 64/256 slots 65665 max 1.000000001
+rings 128/256 slots 262401 max 1.000000001
+rings 192/256 slots 590209 max 1.000000001
+rings 256/256 slots 1049089 max 1.000000001
+norm upper bound = 2.00669695344360477; slots = 1049089
+n 8192 m 32 N 256 scale 49791/50000 norm upper 1103193316867/549755813888 (display) 2.0066969534436794
+pure exterior/n^4 (display) 0.5016205128688468 upper permanent normalized (display) 2.0067029372070873 lower exterior normalized (display) 2.0069719392043655 R certified lower (display) 1.0001340517284798
+Exact normalized derivative upper bound: < -1/8000 (in units C*n!*2**(-n)).
+Explicit interior comparison: h=1/(16000*C*2048**n), P(1-h)>P(1-h/2).
+CERTIFIED: A=W W^T+I positive definite, integer, non-diagonal; P_prime(1)<0.
+Exact final inequality R>1; time including norm (if evaluated) 14.933 s; Python max RSS 100256 KiB; child max RSS 100016 KiB
+	Command being timed: "python verify.py --kernel interval"
+	User time (seconds): 16.46
+	System time (seconds): 1.05
+	Percent of CPU this job got: 102%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:17.17
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 100256
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 420022
+	Voluntary context switches: 54
+	Involuntary context switches: 145
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 248
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

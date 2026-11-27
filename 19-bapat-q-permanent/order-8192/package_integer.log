@@ -1,0 +1,40 @@
+rings 1/1 slots 5
+rings 1/1 slots 5
+rings 1/1 slots 5
+rings 2/2 slots 13
+rings 2/2 slots 13
+rings 2/2 slots 13
+Self-test: 6 integer ring matrices, 121032 direct permutation terms; exact norm and derivative agree, interval bounds enclose, pure exterior checks agree.
+rings 64/256 slots 65665
+rings 128/256 slots 262401
+rings 192/256 slots 590209
+rings 256/256 slots 1049089
+n 8192 m 32 N 256 scale 49791/50000 norm upper 1103193316883/549755813888 (display) 2.006696953472783
+pure exterior/n^4 (display) 0.5016205128688468 upper permanent normalized (display) 2.0067029372361915 lower exterior normalized (display) 2.0069719392043655 R certified lower (display) 1.0001340517139745
+Exact normalized derivative upper bound: < -1/8000 (in units C*n!*2**(-n)).
+Explicit interior comparison: h=1/(16000*C*2048**n), P(1-h)>P(1-h/2).
+CERTIFIED: A=W W^T+I positive definite, integer, non-diagonal; P_prime(1)<0.
+Exact final inequality R>1; time including norm (if evaluated) 54.003 s; Python max RSS 100232 KiB; child max RSS 96776 KiB
+	Command being timed: "python verify.py --kernel integer"
+	User time (seconds): 55.46
+	System time (seconds): 0.84
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:56.17
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 100232
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 414173
+	Voluntary context switches: 58
+	Involuntary context switches: 1043
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 296
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
