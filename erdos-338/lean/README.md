@@ -1,10 +1,11 @@
-# Erdős #338: Lean proofs for the original questions
+# Erdős #338: Lean 4 formalization
 
-**Lean formalization by Leo Gao, AI-assisted.** The mathematical existence
-criterion and the finite-deletion theorem are due to **Shi-Qiang Chen,
-Quan-Hui Yang, and Lilu Zhao**. This is a formalization of their result,
-not a priority claim for discovering it, a journal referee report, or a
-record of acceptance by a problem catalogue.
+**Leo Gao** · Research and Lean formalization with AI assistance
+
+This project checks a uniform bound for part (ii) and equality criteria
+for part (iii). It also formalizes the existence criterion and
+finite-deletion results of **Shi-Qiang Chen, Quan-Hui Yang, and Lilu Zhao**
+for parts (i) and (iv).
 
 Let an *ordinary asymptotic basis* be a set $A\subseteq\mathbb N$ for
 which every sufficiently large integer is a sum of at most $h$ elements of
@@ -36,7 +37,7 @@ Formal Conjectures pull request or a Palomar registration.
 | `Erdos338.erdos_338.variants.eq_order` | Leo Gao's separate rank-two equality criterion, using the catalogue's exact least orders |
 | `Erdos338.erdos_338.variants.bounded_by_order` | A bound depending only on ordinary order, when restricted order is finite |
 
-For the new [structural answer to part (iii)](../structural-equality.md),
+For the [structural criterion for part (iii)](../structural-equality.md),
 start with `Erdos338.SparseTrace.equal_orders_iff_anchored_trace` in
 [`StructuralTrace.lean`](StructuralTrace.lean). It assumes only the finite
 ordinary order and tests ordinary sumsets of fixed disjoint sparse columns.
@@ -48,12 +49,12 @@ Their axiom audit lists only `propext`, `Classical.choice`, and
 
 **Exact scope.** The uniform bound is an unconditional, explicit recursive
 function of ordinary order in Lean. It answers the original qualitative
-boundedness question; it is **not** the sharp growth-rate bound from Leo
-Gao's separate [mathematical write-up][bounds]. Both equality approaches
-are checked: the older targetwise rank-two criterion and the global sparse
-trace criterion. Neither is a finite decision procedure for arbitrary
-infinite bases. Compiling the proofs does not certify priority or external
-acceptance.
+boundedness question. The sharp growth rate has a separate
+[written proof](../sharp-boundedness.pdf) outside this formalization.
+Lean checks the earlier targetwise rank-two criterion and the global
+sparse-sumset criterion as equivalences. Both still involve infinite
+target data for general bases. Their adequacy as an answer to the historical
+equality question remains open to independent assessment.
 
 ## Replay
 

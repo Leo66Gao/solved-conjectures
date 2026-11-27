@@ -8,9 +8,9 @@ Proofs, LaTeX manuscripts, and reproduction files. The scope column distinguishe
 
 ### Featured: Erdős Problem #338
 
-**Lean-checked proofs for the original questions.** The packet formalizes Chen–Yang–Zhao’s existence and finite-deletion results, proves a uniform bound, and gives a structural characterization of when the orders agree. The sharper growth rate is proved separately on paper. External acceptance and priority are not claimed.
+**Lean-checked uniform boundedness for part (ii).** Leo Gao’s AI-assisted work also gives a Lean-checked equality criterion for part (iii), whose adequacy as an answer to the historical question remains open to independent assessment. The project formalizes Chen–Yang–Zhao’s results for parts (i) and (iv). A separate manuscript proves the sharper growth rate.
 
-[Start here](erdos-338/) · [Structural equality proof](erdos-338/structural-equality.md) · [Lean 4 project](erdos-338/lean/)
+[Project overview](erdos-338/) · [Uniform-bound theorem in Lean](erdos-338/lean/Full338.lean#L79) · [Structural equality proof](erdos-338/structural-equality.md) · [Sharp growth manuscript](erdos-338/sharp-boundedness.pdf)
 
 | Result | Scope | Contribution | Files |
 | --- | --- | --- | --- |

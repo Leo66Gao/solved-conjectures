@@ -228,5 +228,7 @@ it is not a finite table for general $A$. The finite table in Section 4
 uses its stated core and escape assumptions, not assumptions in the general
 Lean theorem. In the [separate stress test](thinning-test.md) we also show why even full
 **unthinned** ordinary representation counts at selected hard fibres can
-fail to notice a change of equality behavior. We make no claim about
-publication priority or external acceptance.
+fail to notice a change of equality behavior. Lean verifies the
+equivalence for every finite ordinary order. Whether this criterion gives
+a satisfactory answer to the historical question remains open to
+independent assessment, as does publication priority.

@@ -1,16 +1,25 @@
 # Erdős #338
 
-**Leo Gao** · AI-assisted research and formalization
+**Leo Gao** · Research and Lean formalization with AI assistance
 
-This packet gives Lean 4 proofs for the questions in
-[Erdős and Graham, p. 206, Remark 3][original]. It is not a claim of
-external acceptance or priority.
+**Lean 4 verifies a positive answer to Erdős #338(ii).** For every ordinary
+order $h$, the finite restricted order is bounded by a function of $h$ alone.
+For part (iii), I give a Lean-checked sparse-sumset criterion for equality
+of the two orders. The project also formalizes Chen–Yang–Zhao's results
+for parts (i) and (iv). The four questions appear in
+[Erdős and Graham, p. 206, Remark 3][original].
+
+[Uniform-bound theorem in Lean](lean/Full338.lean#L79) ·
+[Sharp growth manuscript (written proof)](sharp-boundedness.pdf) ·
+[Build and axiom audit](lean/BUILD-AND-AXIOMS.txt)
+
+Independent review of the results and historical priority are pending.
 
 | Original question | Result |
 | --- | --- |
 | When does a finite restricted order exist? | [Chen–Yang–Zhao][cyz]: every residue modulo every positive integer occurs as a finite subset sum. Formalized here. |
 | Is there a uniform bound in terms of ordinary order? | Yes. Lean checks an explicit bound; a [separate paper proof](sharp-boundedness.pdf) gives the sharper growth rate. |
-| When are the orders equal? | [Structural criterion and proof](structural-equality.md), checked for every finite ordinary order. Every unbounded set of targets must meet a single ordinary sum of fixed, disjoint, arbitrarily sparse subsets unboundedly. The same subsets work after cutting off the moving terms at any height. |
+| When are the orders equal? | [Structural criterion and proof](structural-equality.md), checked in Lean for every finite ordinary order. For each unbounded target set and prescribed sparsity, there must be fixed, disjoint subsets of the basis whose ordinary sumset meets the target set unboundedly, even after any cutoff on the nonsingleton subsets. The criterion's adequacy as an answer to the historical question remains open to independent assessment. |
 | What if ordinary order survives finite deletion? | [Chen–Yang–Zhao][cyz]: both variants imply finite restricted order. Both are formalized here. |
 
 ## Verify
